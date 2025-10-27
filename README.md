@@ -2,24 +2,24 @@
 
 A modern, elegant single-page CV portfolio website featuring glassmorphism design with fuchsia and blue tones. Built with FastAPI backend and vanilla HTML/CSS/JS frontend, containerized with Docker.
 
-## ✨ Features
+## Features
 
-- 🎨 **Glassmorphism Design** - Modern Apple-like aesthetic with blurred glass effects
-- 🌈 **Fuchsia & Blue Theme** - Vibrant color scheme with smooth gradients
-- 📱 **Fully Responsive** - Optimized for desktop, tablet, and mobile devices
-- 🚀 **Dynamic Content** - All content loaded from environment variables via API
-- 🐳 **Docker Deployment** - Easy deployment with Docker Compose
-- ⚡ **Fast Performance** - Lightweight and optimized for production
-- 🔒 **Security Headers** - Built-in security best practices
+- Glassmorphism Design - Modern Apple-like aesthetic with blurred glass effects
+- Fuchsia & Blue Theme - Vibrant color scheme with smooth gradients
+- Fully Responsive - Optimized for desktop, tablet, and mobile devices
+- Dynamic Content - All content loaded from environment variables via API
+- Docker Deployment - Easy deployment with Docker Compose
+- Fast Performance - Lightweight and optimized for production
+- Security Headers - Built-in security best practices
 
-## 🏗️ Architecture
+## Architecture
 
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript with Nginx
-- **Backend**: FastAPI + Gunicorn with Uvicorn workers
-- **Deployment**: Docker Compose with separate containers
-- **Styling**: Glassmorphism with CSS animations and transitions
+- Frontend: HTML5, CSS3, Vanilla JavaScript with Nginx
+- Backend: FastAPI + Gunicorn with Uvicorn workers
+- Deployment: Docker Compose with separate containers
+- Styling: Glassmorphism with CSS animations and transitions
 
-## 📋 Sections
+## Sections
 
 - Hero/About
 - Professional Experience (Timeline)
@@ -29,7 +29,7 @@ A modern, elegant single-page CV portfolio website featuring glassmorphism desig
 - Repositories
 - Contact Information
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -38,13 +38,13 @@ A modern, elegant single-page CV portfolio website featuring glassmorphism desig
 
 ### Installation
 
-1. **Clone the repository**
+1. Clone the repository
    ```bash
    git clone <repository-url>
    cd cv_project
    ```
 
-2. **Configure environment variables**
+2. Configure environment variables
    ```bash
    cd backend
    cp .env.example .env
@@ -52,13 +52,13 @@ A modern, elegant single-page CV portfolio website featuring glassmorphism desig
    nano .env
    ```
 
-3. **Build and run with Docker Compose**
+3. Build and run with Docker Compose
    ```bash
    cd ..
    docker-compose up -d --build
    ```
 
-4. **Access the website**
+4. Access the website
    - Open your browser and navigate to `http://localhost:3000`
    - The API is available at `http://localhost:3000/api/info`
 
@@ -66,14 +66,14 @@ A modern, elegant single-page CV portfolio website featuring glassmorphism desig
 
 For local development without Docker:
 
-1. **Backend**
+1. Backend
    ```bash
    cd backend
    pip install -r requirements.txt
    uvicorn main:app --reload --host 0.0.0.0 --port 8000
    ```
 
-2. **Frontend**
+2. Frontend
    - Open `frontend/index.html` in your browser
    - Or use a simple HTTP server:
      ```bash
@@ -81,7 +81,7 @@ For local development without Docker:
      python -m http.server 3000
      ```
 
-## ⚙️ Configuration
+## Configuration
 
 Edit `backend/.env` to customize your portfolio:
 
@@ -160,7 +160,7 @@ REPOSITORIES='[
 CONTACT='{"text": "Contact message", "email": "email@example.com", "linkedin": "https://linkedin.com/in/profile", "github": "https://github.com/user"}'
 ```
 
-## 🐳 Docker Commands
+## Docker Commands
 
 ```bash
 # Build and start containers
@@ -179,7 +179,7 @@ docker-compose up -d --build --force-recreate
 docker-compose ps
 ```
 
-## 🔄 Updating Content (Without Rebuilding)
+## Updating Content (Without Rebuilding)
 
 After editing your `.env` file, you don't need to rebuild the Docker images. Just reload the configuration:
 
@@ -195,9 +195,9 @@ docker-compose restart backend
 
 Then refresh your browser (hard refresh with Ctrl+F5 or Cmd+Shift+R to clear cache).
 
-**Note**: Only the backend needs to restart since it reads the .env file. The frontend will automatically display the new data from the API.
+Note: Only the backend needs to restart since it reads the .env file. The frontend will automatically display the new data from the API.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 cv_project/
@@ -217,7 +217,7 @@ cv_project/
 └── README.md              # Documentation
 ```
 
-## 🎨 Customization
+## Customization
 
 ### Colors
 Edit CSS variables in `frontend/styles.css`:
@@ -235,7 +235,7 @@ Modify animation timings in `frontend/styles.css` keyframes and transitions.
 ### Content Sections
 Add or remove sections by editing `frontend/index.html` and updating the API in `backend/main.py`.
 
-## 🔧 Production Deployment
+## Production Deployment
 
 ### Environment Variables
 - Store sensitive data in `.env` file (not committed to Git)
@@ -257,20 +257,20 @@ Add or remove sections by editing `frontend/index.html` and updating the API in 
 - Implement rate limiting if needed
 - Regular security audits
 
-## 📝 License
+## License
 
 This project is open source and available under the MIT License.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions, issues, and feature requests are welcome!
 
-## 👤 Author
+## Author
 
-**Danilo**
+Danilo
 - Role: Telephony & DevOps Engineer
 - Location: Colombia
 
 ---
 
-Built with ❤️ using FastAPI, Docker, and modern web technologies.
+Built with FastAPI, Docker, and modern web technologies.
