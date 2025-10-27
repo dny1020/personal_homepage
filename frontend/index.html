@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danilo | CV Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+  <div class="background-gradient"></div>
+  <div class="blur-orb orb-1"></div>
+  <div class="blur-orb orb-2"></div>
+  <div class="blur-orb orb-3"></div>
+
+  <nav class="navbar glass">
+    <div class="nav-content">
+      <div class="nav-logo" id="nav-name"></div>
+      <div class="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="about" class="hero-section">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title" id="name"></h1>
+          <p class="hero-subtitle" id="role"></p>
+          <p class="hero-location" id="location"></p>
+          <p class="hero-bio" id="bio"></p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">Get in Touch</a>
+            <a href="#projects" class="btn btn-secondary">View Projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="timeline" id="experience-list"></div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Education</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="education-grid" id="education-list"></div>
+    </section>
+
+    <section id="achievements" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Achievements</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="achievements-grid" id="achievements-list"></div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="projects-grid" id="projects-list"></div>
+    </section>
+
+    <section id="repositories" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Repositories</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="repos-grid" id="repos-list"></div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="glass-card contact-card">
+        <h2 class="section-title">Let's Connect</h2>
+        <p class="contact-text" id="contact-text"></p>
+        <div class="contact-info" id="contact-info"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p id="footer-text"></p>
+    </div>
+  </footer>
+
+  <div class="scroll-top" id="scrollTop">↑</div>
+
+  <script src="script.js?v=2"></script>
+</body>
+</html>
+

@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    env_file:
+      - backend/.env
+    expose:
+      - 8000
+    restart: unless-stopped
+    networks:
+      - traefik_net
+      - internal
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - traefik_net
+      - internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cv-portfolio.rule=Host(`home.danilocloud.me`)"
+      - "traefik.http.routers.cv-portfolio.entrypoints=websecure"
+      - "traefik.http.routers.cv-portfolio.tls.certresolver=myresolver"
+      - "traefik.http.services.cv-portfolio.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik_net"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  traefik_net:
+    external: true
+  internal:
+    driver: bridge
+    internal: true
+
