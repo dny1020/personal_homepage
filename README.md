@@ -265,11 +265,6 @@ This project is open source and available under the MIT License.
 
 Contributions, issues, and feature requests are welcome!
 
-## Author
-
-Danilo
-- Role: Telephony & DevOps Engineer
-- Location: Colombia
 
 ---
 
