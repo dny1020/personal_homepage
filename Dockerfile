@@ -1,22 +1,17 @@
-FROM python:3.11-slim as backend-build
-
-RUN apt-get update && apt-get install -y --no-install-recommends curl && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app/backend
-COPY backend/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY backend .
-
 FROM nginx:alpine
 
 # Install Python and supervisor
-RUN apk add --no-cache python3 py3-pip supervisor curl
+RUN apk add --no-cache python3 py3-pip supervisor curl && \
+    python3 -m venv /opt/venv
 
-# Copy backend dependencies and app
-COPY --from=backend-build /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
-COPY --from=backend-build /usr/local/bin/gunicorn /usr/local/bin/gunicorn
-COPY --from=backend-build /usr/local/bin/uvicorn /usr/local/bin/uvicorn
+# Activate virtual environment
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Copy and install Python dependencies
+COPY backend/requirements.txt /app/backend/requirements.txt
+RUN pip install --no-cache-dir -r /app/backend/requirements.txt
+
+# Copy backend app
 COPY backend /app/backend
 
 # Copy frontend files
@@ -34,8 +29,9 @@ logfile=/dev/stdout
 logfile_maxbytes=0
 
 [program:backend]
-command=gunicorn -w 2 -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:8000
+command=/opt/venv/bin/gunicorn -w 2 -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:8000
 directory=/app/backend
+environment=PATH="/opt/venv/bin:%(ENV_PATH)s"
 autostart=true
 autorestart=true
 stdout_logfile=/dev/stdout
