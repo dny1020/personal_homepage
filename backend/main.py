@@ -48,3 +48,19 @@ def info():
 def health():
     return {"status": "healthy"}
 
+@app.get("/api/debug/env")
+def debug_env():
+    """Debug endpoint to check environment variables"""
+    return {
+        "env_loaded": {
+            "NAME": bool(os.getenv("NAME")),
+            "ROLE": bool(os.getenv("ROLE")),
+            "BIO": bool(os.getenv("BIO")),
+            "EXPERIENCE": bool(os.getenv("EXPERIENCE")),
+        },
+        "sample_values": {
+            "NAME": os.getenv("NAME", "NOT_SET")[:20] if os.getenv("NAME") else "NOT_SET",
+            "ROLE": os.getenv("ROLE", "NOT_SET")[:20] if os.getenv("ROLE") else "NOT_SET",
+        }
+    }
+
