@@ -1,20 +1,13 @@
-version: "3.8"
-
 services:
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
+  app:
+    image: ${DOCKER_IMAGE:-ghcr.io/dny1020/personal_homepage:${IMAGE_TAG:-latest}}
     env_file:
       - backend/.env
-    expose:
-      - 8000
     restart: unless-stopped
-    networks:
-      - traefik_net
-      - internal
+    ports:
+      - "3000:80"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost/"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -24,35 +17,4 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-
-  frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend
-    depends_on:
-      backend:
-        condition: service_healthy
-    restart: unless-stopped
-    networks:
-      - traefik_net
-      - internal
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.cv-portfolio.rule=Host(`home.danilocloud.me`)"
-      - "traefik.http.routers.cv-portfolio.entrypoints=websecure"
-      - "traefik.http.routers.cv-portfolio.tls.certresolver=myresolver"
-      - "traefik.http.services.cv-portfolio.loadbalancer.server.port=80"
-      - "traefik.docker.network=traefik_net"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-networks:
-  traefik_net:
-    external: true
-  internal:
-    driver: bridge
-    internal: true
 
