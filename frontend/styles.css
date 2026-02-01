@@ -275,6 +275,17 @@ body {
   transform: translateY(-2px);
 }
 
+.btn-accent {
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  color: white;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+}
+
 /* Section */
 .section {
   padding: 80px 0;
