@@ -37,7 +37,7 @@ def get_cv_data():
         "projects": parse_json_env("PROJECTS", []),
         "repositories": parse_json_env("REPOSITORIES", []),
         "contact": parse_json_env("CONTACT", {}),
-        "footer": os.getenv("FOOTER", f"© 2024 {os.getenv('NAME', 'Your Name')}. All rights reserved.")
+        "footer": os.getenv("FOOTER", f"© 2025 {os.getenv('NAME', 'Your Name')}. All rights reserved.")
     }
 
 @app.get("/")
