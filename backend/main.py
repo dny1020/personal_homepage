@@ -5,7 +5,7 @@ import json
 
 app = FastAPI()
 
-# CORS middleware for development
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -24,12 +24,8 @@ def parse_json_env(key, default=None):
             return default
     return default
 
-@app.get("/")
-def root():
-    return {"message": "CV Portfolio API is running"}
-
-@app.get("/api/info")
-def info():
+def get_cv_data():
+    """Centralized CV data retrieval"""
     return {
         "name": os.getenv("NAME", "Your Name"),
         "role": os.getenv("ROLE", "Your Role"),
@@ -43,6 +39,20 @@ def info():
         "contact": parse_json_env("CONTACT", {}),
         "footer": os.getenv("FOOTER", f"© 2024 {os.getenv('NAME', 'Your Name')}. All rights reserved.")
     }
+
+@app.get("/")
+def root():
+    return {"message": "CV Portfolio API is running"}
+
+@app.get("/info")
+def info():
+    """Main info endpoint (called by frontend)"""
+    return get_cv_data()
+
+@app.get("/api/info")
+def api_info():
+    """API info endpoint (alternative route)"""
+    return get_cv_data()
 
 @app.get("/health")
 def health():
@@ -63,4 +73,3 @@ def debug_env():
             "ROLE": os.getenv("ROLE", "NOT_SET")[:20] if os.getenv("ROLE") else "NOT_SET",
         }
     }
-
