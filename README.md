@@ -1,6 +1,10 @@
 # CV Portfolio Website
 
-A modern, elegant single-page CV portfolio website featuring glassmorphism design with fuchsia and blue tones. Built with FastAPI backend and vanilla HTML/CSS/JS frontend, containerized with Docker.
+![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
+![JavaScript](https://img.shields.io/badge/javascript-ES6+-yellow.svg)
+![HTML5](https://img.shields.io/badge/html5-latest-orange.svg)
+
+A modern, elegant single-page CV portfolio website featuring glassmorphism design with fuchsia and blue tones. Built with FastAPI backend and vanilla HTML/CSS/JS frontend.
 
 ## Features
 
@@ -8,7 +12,6 @@ A modern, elegant single-page CV portfolio website featuring glassmorphism desig
 - Fuchsia & Blue Theme - Vibrant color scheme with smooth gradients
 - Fully Responsive - Optimized for desktop, tablet, and mobile devices
 - Dynamic Content - All content loaded from environment variables via API
-- Docker Deployment - Easy deployment with Docker Compose
 - Fast Performance - Lightweight and optimized for production
 - Security Headers - Built-in security best practices
 
@@ -16,7 +19,6 @@ A modern, elegant single-page CV portfolio website featuring glassmorphism desig
 
 - Frontend: HTML5, CSS3, Vanilla JavaScript with Nginx
 - Backend: FastAPI + Gunicorn with Uvicorn workers
-- Deployment: Docker Compose with separate containers
 - Styling: Glassmorphism with CSS animations and transitions
 
 ## Sections
@@ -33,8 +35,9 @@ A modern, elegant single-page CV portfolio website featuring glassmorphism desig
 
 ### Prerequisites
 
-- Docker
-- Docker Compose
+- Python 3.8+
+- Nginx
+- systemd
 
 ### Installation
 
@@ -52,24 +55,27 @@ A modern, elegant single-page CV portfolio website featuring glassmorphism desig
    nano .env
    ```
 
-3. Build and run with Docker Compose
+3. Install Python dependencies
    ```bash
-   cd ..
-   docker-compose up -d --build
+   cd backend
+   pip install -r requirements.txt
    ```
 
-4. Access the website
-   - Open your browser and navigate to `http://localhost:3000`
-   - The API is available at `http://localhost:3000/api/info`
+4. Configure Nginx
+   ```bash
+   sudo cp frontend/nginx.conf /etc/nginx/sites-available/cv-portfolio
+   sudo ln -s /etc/nginx/sites-available/cv-portfolio /etc/nginx/sites-enabled/
+   sudo nginx -t
+   sudo systemctl reload nginx
+   ```
 
 ### Development Mode
 
-For local development without Docker:
+For local development:
 
 1. Backend
    ```bash
    cd backend
-   pip install -r requirements.txt
    uvicorn main:app --reload --host 0.0.0.0 --port 8000
    ```
 
@@ -160,42 +166,69 @@ REPOSITORIES='[
 CONTACT='{"text": "Contact message", "email": "email@example.com", "linkedin": "https://linkedin.com/in/profile", "github": "https://github.com/user"}'
 ```
 
-## Docker Commands
+## systemd Deployment
+
+### Create systemd Service
+
+1. Create backend service file:
+   ```bash
+   sudo nano /etc/systemd/system/cv-backend.service
+   ```
+
+2. Add service configuration:
+   ```ini
+   [Unit]
+   Description=CV Portfolio Backend
+   After=network.target
+
+   [Service]
+   Type=notify
+   User=www-data
+   Group=www-data
+   WorkingDirectory=/path/to/cv_project/backend
+   Environment="PATH=/path/to/venv/bin"
+   ExecStart=/path/to/venv/bin/gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+   Restart=always
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+3. Enable and start service:
+   ```bash
+   sudo systemctl daemon-reload
+   sudo systemctl enable cv-backend
+   sudo systemctl start cv-backend
+   ```
+
+### Service Management
 
 ```bash
-# Build and start containers
-docker-compose up -d --build
+# Start service
+sudo systemctl start cv-backend
+
+# Stop service
+sudo systemctl stop cv-backend
+
+# Restart service
+sudo systemctl restart cv-backend
+
+# View status
+sudo systemctl status cv-backend
 
 # View logs
-docker-compose logs -f
-
-# Stop containers
-docker-compose down
-
-# Rebuild after changes
-docker-compose up -d --build --force-recreate
-
-# Check container status
-docker-compose ps
+sudo journalctl -u cv-backend -f
 ```
 
-## Updating Content (Without Rebuilding)
+## Updating Content
 
-After editing your `.env` file, you don't need to rebuild the Docker images. Just reload the configuration:
+After editing your `.env` file:
 
-### Quick Method (Recommended)
 ```bash
-./reload.sh
-```
-
-### Manual Method
-```bash
-docker-compose restart backend
+sudo systemctl restart cv-backend
 ```
 
 Then refresh your browser (hard refresh with Ctrl+F5 or Cmd+Shift+R to clear cache).
-
-Note: Only the backend needs to restart since it reads the .env file. The frontend will automatically display the new data from the API.
 
 ## Project Structure
 
@@ -211,9 +244,6 @@ cv_project/
 │   ├── requirements.txt    # Python dependencies
 │   ├── .env               # Environment variables (private)
 │   └── .env.example       # Environment template
-├── Dockerfile.frontend     # Frontend container
-├── Dockerfile.backend      # Backend container
-├── docker-compose.yml      # Docker Compose config
 └── README.md              # Documentation
 ```
 
@@ -229,7 +259,7 @@ Edit CSS variables in `frontend/styles.css`:
 }
 ```
 
-### Animations
+## Animations
 Modify animation timings in `frontend/styles.css` keyframes and transitions.
 
 ### Content Sections
@@ -268,4 +298,4 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-Built with FastAPI, Docker, and modern web technologies.
+Built with FastAPI, Python, JavaScript, HTML5, and modern web technologies.
