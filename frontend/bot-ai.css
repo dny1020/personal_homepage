@@ -377,14 +377,20 @@
 
 /* Accent Button Style */
 .btn-accent {
-  background: linear-gradient(135deg, var(--blue), var(--fuchsia));
-  color: white;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--blue);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
 }
 
 .btn-accent:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(217, 70, 239, 0.5);
+  background: rgba(59, 130, 246, 0.2);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: white;
 }
 
 /* Responsive Design */
