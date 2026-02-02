@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
   <link rel="stylesheet" href="styles.css?v=2">
   <link rel="stylesheet" href="bot-ai.css">
 </head>
+
 <body>
   <div class="background-gradient"></div>
   <div class="blur-orb orb-1"></div>
@@ -43,12 +45,13 @@
         <h1 class="hero-title">Bots + AI Solutions</h1>
         <p class="hero-subtitle">Automated Conversations for WhatsApp & Web</p>
         <p class="hero-description">
-          I build intelligent chatbots that automate customer support, sales, and engagement. 
+          I build intelligent chatbots that automate customer support, sales, and engagement.
           Powered by advanced AI and natural language processing, ready to scale your business 24/7.
         </p>
         <div class="hero-buttons">
           <a href="#demo" class="btn btn-primary">See Demo</a>
           <a href="#features" class="btn btn-secondary">Learn More</a>
+          <a href="/" class="btn btn-accent">Back to Home</a>
         </div>
       </div>
     </section>
@@ -58,25 +61,26 @@
       <div class="stats-grid">
         <div class="stat-card glass">
           <div class="stat-icon">⚡</div>
-          <div class="stat-number">< 2s</div>
-          <div class="stat-label">Response Time</div>
+          <div class="stat-number">
+            < 2s</div>
+              <div class="stat-label">Response Time</div>
+          </div>
+          <div class="stat-card glass">
+            <div class="stat-icon">🌐</div>
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Availability</div>
+          </div>
+          <div class="stat-card glass">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-number">95%+</div>
+            <div class="stat-label">Accuracy</div>
+          </div>
+          <div class="stat-card glass">
+            <div class="stat-icon">🚀</div>
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Scalability</div>
+          </div>
         </div>
-        <div class="stat-card glass">
-          <div class="stat-icon">🌐</div>
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Availability</div>
-        </div>
-        <div class="stat-card glass">
-          <div class="stat-icon">🎯</div>
-          <div class="stat-number">95%+</div>
-          <div class="stat-label">Accuracy</div>
-        </div>
-        <div class="stat-card glass">
-          <div class="stat-icon">🚀</div>
-          <div class="stat-number">∞</div>
-          <div class="stat-label">Scalability</div>
-        </div>
-      </div>
     </section>
 
     <!-- Features Section -->
@@ -90,7 +94,7 @@
           <div class="feature-icon">💬</div>
           <h3 class="feature-title">WhatsApp Integration</h3>
           <p class="feature-description">
-            Seamless integration with WhatsApp Business API via Twilio. 
+            Seamless integration with WhatsApp Business API via Twilio.
             Reach your customers where they already are.
           </p>
         </div>
@@ -98,7 +102,7 @@
           <div class="feature-icon">🌐</div>
           <h3 class="feature-title">Webchat Bot</h3>
           <p class="feature-description">
-            Embeddable chat widget for your website. 
+            Embeddable chat widget for your website.
             Customizable design to match your brand.
           </p>
         </div>
@@ -106,7 +110,7 @@
           <div class="feature-icon">🧠</div>
           <h3 class="feature-title">AI-Powered RAG</h3>
           <p class="feature-description">
-            Retrieval-Augmented Generation with BM25 search. 
+            Retrieval-Augmented Generation with BM25 search.
             Answers based on your custom knowledge base.
           </p>
         </div>
@@ -114,7 +118,7 @@
           <div class="feature-icon">⚡</div>
           <h3 class="feature-title">Fast LLM Response</h3>
           <p class="feature-description">
-            Ultra-fast responses using Llama 3 via Groq. 
+            Ultra-fast responses using Llama 3 via Groq.
             Cloud-powered with no local GPU needed.
           </p>
         </div>
@@ -122,7 +126,7 @@
           <div class="feature-icon">🗄️</div>
           <h3 class="feature-title">Conversation Memory</h3>
           <p class="feature-description">
-            PostgreSQL-powered persistent storage. 
+            PostgreSQL-powered persistent storage.
             Track users, messages, and tickets automatically.
           </p>
         </div>
@@ -130,7 +134,7 @@
           <div class="feature-icon">🎯</div>
           <h3 class="feature-title">Intent Detection</h3>
           <p class="feature-description">
-            Rule-based NLP for robust intent classification. 
+            Rule-based NLP for robust intent classification.
             Handle support, sales, and custom workflows.
           </p>
         </div>
@@ -143,7 +147,7 @@
         <h2 class="section-title">See It In Action</h2>
         <div class="section-divider"></div>
       </div>
-      
+
       <div class="demo-container">
         <div class="demo-showcase glass-card">
           <div class="demo-header">
@@ -156,7 +160,14 @@
               <span>Live in Production</span>
             </div>
           </div>
-          
+
+          <div class="demo-video-container">
+            <video controls autoplay loop muted playsinline class="demo-video">
+              <source src="whatsapp_bot.mov" type="video/quicktime">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
           <div class="chat-preview">
             <div class="chat-message user">
               <div class="message-bubble">
@@ -165,7 +176,8 @@
             </div>
             <div class="chat-message bot">
               <div class="message-bubble">
-                ¡Hola! 👋 Soy el asistente virtual. Estoy aquí para ayudarte con problemas de conexión, consultas técnicas o facturación. ¿Podrías contarme más sobre el problema con tu internet?
+                ¡Hola! 👋 Soy el asistente virtual. Estoy aquí para ayudarte con problemas de conexión, consultas
+                técnicas o facturación. ¿Podrías contarme más sobre el problema con tu internet?
               </div>
             </div>
             <div class="chat-message user">
@@ -175,7 +187,8 @@
             </div>
             <div class="chat-message bot">
               <div class="message-bubble">
-                Entiendo. Vamos a revisar tu conexión. Primero, ¿podrías verificar si las luces de tu router están encendidas? 🔌
+                Entiendo. Vamos a revisar tu conexión. Primero, ¿podrías verificar si las luces de tu router están
+                encendidas? 🔌
                 <br><br>
                 <strong>Pasos rápidos:</strong><br>
                 1. Desconecta el router por 30 segundos<br>
@@ -186,7 +199,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="demo-features">
             <div class="demo-feature-item">
               <span class="check-icon">✓</span>
@@ -256,7 +269,7 @@
           <div class="usecase-icon">🛠️</div>
           <h3 class="usecase-title">Technical Support</h3>
           <p class="usecase-description">
-            Automate first-level support with intelligent troubleshooting guides, 
+            Automate first-level support with intelligent troubleshooting guides,
             ticket creation, and escalation workflows.
           </p>
           <ul class="usecase-features">
@@ -269,7 +282,7 @@
           <div class="usecase-icon">💼</div>
           <h3 class="usecase-title">Sales & Lead Gen</h3>
           <p class="usecase-description">
-            Qualify leads, schedule appointments, and provide product information 
+            Qualify leads, schedule appointments, and provide product information
             automatically through conversational AI.
           </p>
           <ul class="usecase-features">
@@ -282,7 +295,7 @@
           <div class="usecase-icon">📊</div>
           <h3 class="usecase-title">Customer Service</h3>
           <p class="usecase-description">
-            Handle FAQs, order status, billing inquiries, and more with 
+            Handle FAQs, order status, billing inquiries, and more with
             24/7 instant responses.
           </p>
           <ul class="usecase-features">
@@ -299,7 +312,7 @@
       <div class="cta-card glass-card">
         <h2 class="cta-title">Ready to Automate Your Conversations?</h2>
         <p class="cta-description">
-          Let's build an intelligent bot tailored to your business needs. 
+          Let's build an intelligent bot tailored to your business needs.
           Whether it's WhatsApp, webchat, or both, I can help you scale your customer interactions.
         </p>
         <div class="cta-buttons">
@@ -325,7 +338,7 @@
     // Mobile Navigation Toggle
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
-    
+
     navToggle.addEventListener('click', () => {
       navLinks.classList.toggle('active');
       navToggle.classList.toggle('active');
@@ -340,4 +353,5 @@
     });
   </script>
 </body>
+
 </html>

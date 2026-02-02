@@ -159,8 +159,28 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.demo-video-container {
+  margin-bottom: 32px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+}
+
+.demo-video {
+  width: 100%;
+  display: block;
 }
 
 .chat-preview {
@@ -357,14 +377,14 @@
 
 /* Accent Button Style */
 .btn-accent {
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  background: linear-gradient(135deg, var(--blue), var(--fuchsia));
   color: white;
   box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
 }
 
 .btn-accent:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+  box-shadow: 0 8px 30px rgba(217, 70, 239, 0.5);
 }
 
 /* Responsive Design */
