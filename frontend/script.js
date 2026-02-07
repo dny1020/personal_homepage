@@ -188,12 +188,12 @@ function getFallbackData() {
     ],
     achievements: [
       {
-        icon: "🏆",
+        icon: "💡",
         title: "Best Project Award",
         description: "Recognized for outstanding project delivery"
       },
       {
-        icon: "⭐",
+        icon: "🧑‍💻",
         title: "Top Contributor",
         description: "Leading contributor to open source projects"
       }
@@ -230,7 +230,7 @@ function getFallbackData() {
       linkedin: "https://linkedin.com/in/yourprofile",
       github: "https://github.com/yourusername"
     },
-    footer: `© ${new Date().getFullYear()} Danilo. Built with ❤️`
+    footer: `© ${new Date().getFullYear()} Danilo. All rights reserved.`
   };
 }
 

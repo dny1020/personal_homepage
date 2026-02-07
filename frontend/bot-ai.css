@@ -8,8 +8,8 @@
 
 .badge-text {
   padding: 8px 20px;
-  background: linear-gradient(135deg, rgba(217, 70, 239, 0.2), rgba(59, 130, 246, 0.2));
-  border: 1px solid rgba(217, 70, 239, 0.4);
+  background: linear-gradient(135deg, rgba(66, 86, 146, 0.2), rgba(59, 130, 246, 0.2));
+  border: 1px solid rgba(46, 105, 124, 0.4);
   border-radius: 50px;
   font-size: 0.9rem;
   font-weight: 600;
