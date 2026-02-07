@@ -1,42 +1,62 @@
+# ====================
 # Python
+# ====================
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-env/
+
+# Virtual environments
+.venv/
 venv/
+env/
 ENV/
+
+# Packaging / build
 *.egg-info/
 dist/
 build/
 
+# ====================
 # Environment variables
+# ====================
 .env
 backend/.env
 !.env.example
 
-# IDE
+# ====================
+# Logs & runtime
+# ====================
+*.log
+*.pid
+*.pid.lock
+*.seed
+
+# ====================
+# IDE / Editors
+# ====================
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
+# ====================
 # OS
+# ====================
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
-
-# Docker
-*.pid
-*.seed
-*.pid.lock
-
-# Node (if using npm for frontend tools)
+# ====================
+# Node / Frontend tools
+# ====================
 node_modules/
 package-lock.json
 yarn.lock
+
+# ====================
+# Project-specific
+# ====================
 deploy.sh
+frontend/whatsapp_bot.mov
