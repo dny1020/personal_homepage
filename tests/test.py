@@ -1,8 +1,16 @@
-# test simple test cases index.html
+# simple test cases index.html and bot-ai.html
+
+
 
 def test_index():
-    assert 1 + 1 == 2
+    assert True  # Placeholder for actual test logic
 
-def test_bot_ai():  
-    assert 2 * 2 == 4
+
+
+def test_bot_ai():
+    assert True  # Placeholder for actual test logic
+    
+    
+
+
 

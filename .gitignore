@@ -6,6 +6,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
+.pytest_cache/
 
 # Virtual environments
 .venv/
@@ -59,4 +60,4 @@ yarn.lock
 # Project-specific
 # ====================
 deploy.sh
-frontend/whatsapp_bot.mov
+

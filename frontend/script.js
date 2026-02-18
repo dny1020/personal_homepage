@@ -12,7 +12,7 @@ const elements = {
   bio: document.getElementById('bio'),
   experienceList: document.getElementById('experience-list'),
   educationList: document.getElementById('education-list'),
-  achievementsList: document.getElementById('achievements-list'),
+
   projectsList: document.getElementById('projects-list'),
   reposList: document.getElementById('repos-list'),
   contactText: document.getElementById('contact-text'),
@@ -43,7 +43,7 @@ function populateData(data) {
     elements.name.textContent = data.name;
   }
   if (data.role) elements.role.textContent = data.role;
-  if (data.location) elements.location.textContent = `📍 ${data.location}`;
+  if (data.location) elements.location.textContent = `⦿ ${data.location}`;
   if (data.bio) elements.bio.textContent = data.bio;
 
   // Experience
@@ -70,17 +70,6 @@ function populateData(data) {
         <p class="education-school">${edu.school || ''}</p>
         <p class="education-period">${edu.period || ''}</p>
         ${edu.description ? `<p class="education-description">${edu.description}</p>` : ''}
-      </div>
-    `).join('');
-  }
-
-  // Achievements
-  if (data.achievements && Array.isArray(data.achievements)) {
-    elements.achievementsList.innerHTML = data.achievements.map(achievement => `
-      <div class="achievement-item fade-in">
-        <div class="achievement-icon">${achievement.icon || '🏆'}</div>
-        <h3 class="achievement-title">${achievement.title || ''}</h3>
-        <p class="achievement-description">${achievement.description || ''}</p>
       </div>
     `).join('');
   }
@@ -184,18 +173,6 @@ function getFallbackData() {
         school: "University Name",
         period: "2015 - 2019",
         description: "Focus on software engineering and web technologies."
-      }
-    ],
-    achievements: [
-      {
-        icon: "💡",
-        title: "Best Project Award",
-        description: "Recognized for outstanding project delivery"
-      },
-      {
-        icon: "🧑‍💻",
-        title: "Top Contributor",
-        description: "Leading contributor to open source projects"
       }
     ],
     projects: [

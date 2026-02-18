@@ -476,47 +476,6 @@ body {
   line-height: 1.7;
 }
 
-/* Achievements Grid */
-.achievements-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-}
-
-.achievement-item {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  padding: 28px;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.achievement-item:hover {
-  transform: translateY(-4px) scale(1.02);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
-}
-
-.achievement-icon {
-  font-size: 3rem;
-  margin-bottom: 16px;
-}
-
-.achievement-title {
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--text-primary);
-}
-
-.achievement-description {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
 /* Projects Grid */
 .projects-grid {
   display: grid;
@@ -865,8 +824,7 @@ body {
 
   .projects-grid,
   .repos-grid,
-  .education-grid,
-  .achievements-grid {
+  .education-grid {
     grid-template-columns: 1fr;
   }
 
