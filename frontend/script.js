@@ -14,7 +14,7 @@ const elements = {
   educationList: document.getElementById('education-list'),
 
   projectsList: document.getElementById('projects-list'),
-  reposList: document.getElementById('repos-list'),
+
   contactText: document.getElementById('contact-text'),
   contactInfo: document.getElementById('contact-info'),
   footerText: document.getElementById('footer-text'),
@@ -95,27 +95,14 @@ function populateData(data) {
     `).join('');
   }
 
-  // Repositories
-  if (data.repositories && Array.isArray(data.repositories)) {
-    elements.reposList.innerHTML = data.repositories.map(repo => `
-      <a href="${repo.url || '#'}" class="repo-card fade-in" target="_blank" rel="noopener">
-        <h3 class="repo-name">${repo.name || ''}</h3>
-        <p class="repo-description">${repo.description || 'No description available'}</p>
-        <div class="repo-stats">
-          ${repo.stars !== undefined ? `<span class="repo-stat">⭐ ${repo.stars}</span>` : ''}
-          ${repo.forks !== undefined ? `<span class="repo-stat">🔱 ${repo.forks}</span>` : ''}
-          ${repo.language ? `<span class="repo-stat">💻 ${repo.language}</span>` : ''}
-        </div>
-      </a>
-    `).join('');
-  }
+
 
   // Contact
   if (data.contact) {
     if (data.contact.text) {
       elements.contactText.textContent = data.contact.text;
     }
-    
+
     let contactHTML = '';
     if (data.contact.email) {
       contactHTML += `<a href="mailto:${data.contact.email}" class="contact-item">📧 ${data.contact.email}</a>`;
@@ -191,16 +178,7 @@ function getFallbackData() {
         github: "#"
       }
     ],
-    repositories: [
-      {
-        name: "awesome-repo",
-        description: "An awesome repository with great code",
-        url: "#",
-        stars: 42,
-        forks: 12,
-        language: "JavaScript"
-      }
-    ],
+
     contact: {
       text: "Feel free to reach out for collaborations or just a friendly chat!",
       email: "your.email@example.com",
@@ -231,7 +209,7 @@ const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
   const currentScroll = window.pageYOffset;
-  
+
   if (currentScroll > 100) {
     navbar.classList.add('scrolled');
   } else {
@@ -261,10 +239,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     const href = this.getAttribute('href');
     if (href === '#') return;
-    
+
     e.preventDefault();
     const target = document.querySelector(href);
-    
+
     if (target) {
       const offsetTop = target.offsetTop - 100;
       window.scrollTo({
@@ -303,7 +281,7 @@ const navLinksAll = document.querySelectorAll('.nav-link');
 
 window.addEventListener('scroll', () => {
   let current = '';
-  
+
   sections.forEach(section => {
     const sectionTop = section.offsetTop;
     const sectionHeight = section.clientHeight;
@@ -323,7 +301,7 @@ window.addEventListener('scroll', () => {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
   fetchData();
-  
+
   // Add loading class initially
   document.body.classList.add('loaded');
 });
