@@ -7,7 +7,7 @@ const fallbackData = {
   role: 'Software Developer',
   location: 'Bogota, Colombia',
   bio: 'Builder of thoughtful, resilient software. I focus on clean architecture, high-performance interfaces, and reliable delivery from concept to production.',
-  avatarUrl: '',
+  avatarUrl: 'IMG_2164.jpg',
   stats: [
     { label: 'Years Experience', value: '6+' },
     { label: 'Projects Delivered', value: '40+' },
