@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CORS Test</title>
+</head>
+<body>
+<button onclick="testCors()">Test CORS</button>
+<script>
+async function testCors() {
+  try {
+    const res = await fetch('https://webrtc.danilocloud.me/api/v1/chat/widget/start', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({queue: 'soporte'})
+    });
+    console.log(await res.text());
+  } catch (e) {
+    console.error(e);
+  }
+}
+testCors();
+</script>
+</body>
+</html>
