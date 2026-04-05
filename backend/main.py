@@ -3,12 +3,14 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 import json
 from dotenv import load_dotenv
+from pathlib import Path
 from datetime import datetime
 from zoneinfo import ZoneInfo
 import httpx
 import time
 
-load_dotenv()
+ROOT_ENV = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(ROOT_ENV)
 
 app = FastAPI()
 
