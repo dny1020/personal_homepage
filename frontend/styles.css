@@ -38,6 +38,14 @@ h1, h2, h3, h4 {
   font-weight: 600;
 }
 
+.icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: -3px;
+  fill: currentColor;
+}
+
 .app-shell {
   position: relative;
   min-height: 100vh;
@@ -341,6 +349,9 @@ h1, h2, h3, h4 {
 .hero-location {
   color: var(--slate-400);
   margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .hero-bio {
@@ -724,7 +735,18 @@ h1, h2, h3, h4 {
 }
 
 .skill-category-icon {
-  font-size: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.skill-category-icon .icon {
+  width: 18px;
+  height: 18px;
 }
 
 .skill-category-title {
@@ -1136,6 +1158,9 @@ h1, h2, h3, h4 {
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--mist);
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   transition: all 0.2s ease;
 }
 

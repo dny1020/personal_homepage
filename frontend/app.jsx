@@ -21,9 +21,7 @@ const fallbackData = {
     text: 'Open to collaborations in telephony, DevOps, and AI automation.',
     email: 'jnarvaar@icloud.com',
     linkedin: 'https://www.linkedin.com/in/jose-danilo-narvaez-arias-26488025a/',
-    github: 'https://github.com/dny1020',
-    website: 'http://coffee.danilocloud.me/api/v1',
-    youtube: 'https://www.youtube.com/@iDnyShell-ed7bp'
+    github: 'https://github.com/dny1020'
   },
   footer: ''
 };
@@ -64,13 +62,39 @@ function useRoute() {
 }
 
 const SKILL_CATEGORY_META = {
-  languages: { label: 'Languages & Scripting', icon: '💻', color: 'var(--teal)' },
-  infrastructure: { label: 'Infrastructure', icon: '🏗️', color: 'var(--amber)' },
-  telephony: { label: 'Telephony & VoIP', icon: '📞', color: 'var(--coral)' },
-  cloud_devops: { label: 'Cloud & DevOps', icon: '☁️', color: 'var(--teal)' },
-  ai_data: { label: 'AI & Data', icon: '🧠', color: 'var(--amber)' },
-  tools: { label: 'Tools & Platforms', icon: '🔧', color: 'var(--coral)' }
+  languages: { label: 'Languages & Scripting', icon: 'code', color: 'var(--teal)' },
+  infrastructure: { label: 'Infrastructure', icon: 'server', color: 'var(--amber)' },
+  telephony: { label: 'Telephony & VoIP', icon: 'phone', color: 'var(--coral)' },
+  cloud_devops: { label: 'Cloud & DevOps', icon: 'cloud', color: 'var(--teal)' },
+  ai_data: { label: 'AI & Data', icon: 'brain', color: 'var(--amber)' },
+  tools: { label: 'Tools & Platforms', icon: 'tool', color: 'var(--coral)' }
 };
+
+function Icon({ name, className = '' }) {
+  const paths = {
+    code: 'M16.2 4.7 8.9 12l7.3 7.3-1.9 1.9L5 12l9.3-9.2 1.9 1.9Zm3.8 0 9.3 9.2-9.3 9.2-1.9-1.9 7.3-7.3-7.3-7.3 1.9-1.9Z',
+    server: 'M5 4.5h22v6H5v-6Zm0 9.5h22v6H5v-6Zm0 9.5h22v6H5v-6Zm3 2.5h4v2H8v-2Zm0-9.5h4v2H8v-2Zm0-9.5h4v2H8v-2Z',
+    phone: 'M10.2 6.4 7.9 4.1 4.5 7.6c-1.2 1.2-1.6 3-1.1 4.6 1.6 5.1 5.8 9.4 10.9 11 1.6.5 3.4.1 4.6-1.1l3.5-3.5-2.3-2.3-2.9 1.2c-.8.3-1.7.1-2.3-.5l-3.9-3.9c-.6-.6-.8-1.5-.5-2.3l1.2-2.9Z',
+    cloud: 'M9 21h12a5 5 0 0 0 0-10 7 7 0 0 0-13.4-2.2A5.5 5.5 0 0 0 9 21Z',
+    brain: 'M9.5 20a4.5 4.5 0 0 1-4.5-4.5 4.3 4.3 0 0 1 1.1-2.9A4.5 4.5 0 0 1 9 5.1 4.5 4.5 0 0 1 14 3.5a4.6 4.6 0 0 1 4 2.3 4.5 4.5 0 0 1 5.5 4.4 4.3 4.3 0 0 1-1.1 2.9A4.5 4.5 0 0 1 19 20h-1.5',
+    tool: 'M21.7 6.9a5 5 0 0 1-6.8 6.8l-8 8-2.1-2.1 8-8a5 5 0 0 1 6.8-6.8l-3.2 3.2 2.1 2.1 3.2-3.2Z',
+    pin: 'M12 2a7 7 0 0 1 7 7c0 5.2-7 13-7 13S5 14.2 5 9a7 7 0 0 1 7-7Zm0 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z',
+    link: 'M10.5 13.5a4 4 0 0 1 0-5.7l3.3-3.3a4 4 0 1 1 5.7 5.7l-1.5 1.5m-4 6.8a4 4 0 0 1-5.7 0 4 4 0 0 1 0-5.7l1.5-1.5m3.2 5.5 5.8-5.8',
+    mail: 'M4 7h24v18H4V7Zm2 2v2l10 6 10-6V9H6Zm20 14V13l-10 6-10-6v10h20Z',
+    linkedin: 'M6 10h4v14H6V10Zm2-6a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm6 6h4v2.2c.9-1.4 2.5-2.5 4.7-2.5 4 0 5.3 2.6 5.3 6.4V24h-4v-6.6c0-1.6-.1-3.7-2.3-3.7-2.3 0-2.7 1.8-2.7 3.6V24h-4V10Z',
+    github: 'M12 2.5a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.5 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.3-.3-4.7-1.1-4.7-5a4 4 0 0 1 1-2.8 3.7 3.7 0 0 1 .1-2.8s.9-.3 2.9 1a10 10 0 0 1 5.2 0c2-1.3 2.9-1 2.9-1a3.7 3.7 0 0 1 .1 2.8 4 4 0 0 1 1 2.8c0 3.9-2.4 4.7-4.7 5 .3.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2.5Z',
+    certificate: 'M6 4h20v12H6V4Zm4 16h12v2H10v-2Zm2.5-7 3.5 2 3.5-2V6.5h-7v6.5Z',
+    award: 'M12 4a6 6 0 0 1 6 6c0 2.4-1.4 4.6-3.5 5.5V28l-2.5-1.6L9.5 28V15.5A6 6 0 0 1 6 10a6 6 0 0 1 6-6Z'
+  };
+
+  const d = paths[name];
+  if (!d) return null;
+  return (
+    <svg className={`icon ${className}`} viewBox="0 0 32 32" aria-hidden="true">
+      <path d={d} />
+    </svg>
+  );
+}
 
 function App() {
   const [data, setData] = useState(fallbackData);
@@ -297,9 +321,6 @@ function App() {
             {data.contact?.github ? (
               <a href={data.contact.github} target="_blank" rel="noopener" className="footer-link">GitHub</a>
             ) : null}
-            {data.contact?.youtube ? (
-              <a href={data.contact.youtube} target="_blank" rel="noopener" className="footer-link">YouTube</a>
-            ) : null}
           </div>
         </div>
       </footer>
@@ -397,7 +418,7 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
             <p className="hero-eyebrow">Cloud · Telephony · DevOps</p>
             <h1 className="hero-title">{data.name}</h1>
             <p className="hero-subtitle">{data.role}</p>
-            <p className="hero-location">⦿ {data.location}</p>
+            <p className="hero-location"><Icon name="pin" /> {data.location}</p>
             <p className="hero-bio">{data.bio}</p>
             <div className="hero-buttons">
               <a href="#contact" className="btn btn-primary">Let's Connect</a>
@@ -516,10 +537,10 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
               ) : null}
               <div className="project-links">
                 {project.demo && project.demo !== '#' ? (
-                  <a href={project.demo} className="project-link" target="_blank" rel="noopener">🔗 Live</a>
+                  <a href={project.demo} className="project-link" target="_blank" rel="noopener"><Icon name="link" /> Live</a>
                 ) : null}
                 {project.github ? (
-                  <a href={project.github} className="project-link" target="_blank" rel="noopener">💻 Code</a>
+                  <a href={project.github} className="project-link" target="_blank" rel="noopener"><Icon name="code" /> Code</a>
                 ) : null}
               </div>
             </div>
@@ -536,12 +557,12 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
           </div>
           <div className="skills-categories">
             {Object.entries(skills).map(([category, items]) => {
-              const meta = SKILL_CATEGORY_META[category] || { label: category, icon: '📌', color: 'var(--teal)' };
+              const meta = SKILL_CATEGORY_META[category] || { label: category, icon: 'award', color: 'var(--teal)' };
               if (!Array.isArray(items) || !items.length) return null;
               return (
                 <div key={category} className="skill-category reveal">
                   <div className="skill-category-header">
-                    <span className="skill-category-icon">{meta.icon}</span>
+                    <span className="skill-category-icon"><Icon name={meta.icon} /></span>
                     <h3 className="skill-category-title">{meta.label}</h3>
                   </div>
                   <div className="skill-category-pills">
@@ -557,7 +578,7 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
           </div>
           {languages.length > 0 ? (
             <div className="languages-section reveal">
-              <h3 className="languages-title">🌐 Languages</h3>
+              <h3 className="languages-title">Languages</h3>
               <div className="languages-grid">
                 {languages.map((lang) => (
                   <div key={lang.language} className="language-card">
@@ -581,7 +602,7 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
           <div className="certifications-grid">
             {certifications.map((cert, index) => (
               <div key={`${cert.name}-${index}`} className="certification-card reveal">
-                <div className="certification-icon">{cert.icon || '📜'}</div>
+                <div className="certification-icon"><Icon name="certificate" /></div>
                 <div className="certification-info">
                   <h3 className="certification-name">{cert.name}</h3>
                   <p className="certification-issuer">{cert.issuer}</p>
@@ -633,7 +654,7 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
           <div className="achievements-grid">
             {achievements.map((item, index) => (
               <div key={`${item.title}-${index}`} className="achievement-card reveal">
-                <div className="achievement-icon">{item.icon || '★'}</div>
+                <div className="achievement-icon"><Icon name="award" /></div>
                 <div>
                   <h3 className="achievement-title">{item.title}</h3>
                   <p className="achievement-description">{item.description}</p>
@@ -678,19 +699,13 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
           <p className="contact-text">{data.contact?.text}</p>
           <div className="contact-info">
             {data.contact?.email ? (
-              <a href={`mailto:${data.contact.email}`} className="contact-item">📧 {data.contact.email}</a>
+              <a href={`mailto:${data.contact.email}`} className="contact-item"><Icon name="mail" /> {data.contact.email}</a>
             ) : null}
             {data.contact?.linkedin ? (
-              <a href={data.contact.linkedin} className="contact-item" target="_blank" rel="noopener">💼 LinkedIn</a>
+              <a href={data.contact.linkedin} className="contact-item" target="_blank" rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
             ) : null}
             {data.contact?.github ? (
-              <a href={data.contact.github} className="contact-item" target="_blank" rel="noopener">💻 GitHub</a>
-            ) : null}
-            {data.contact?.youtube ? (
-              <a href={data.contact.youtube} className="contact-item" target="_blank" rel="noopener">🎬 YouTube</a>
-            ) : null}
-            {data.contact?.website ? (
-              <a href={data.contact.website} className="contact-item" target="_blank" rel="noopener">🌐 Website</a>
+              <a href={data.contact.github} className="contact-item" target="_blank" rel="noopener"><Icon name="github" /> GitHub</a>
             ) : null}
           </div>
         </div>
@@ -830,10 +845,10 @@ function ServicesPage({ data }) {
           <p className="contact-text">{data.contact?.text || 'Lets build an automation roadmap tailored to your business.'}</p>
           <div className="contact-info">
             {data.contact?.email ? (
-              <a href={`mailto:${data.contact.email}`} className="contact-item">📧 {data.contact.email}</a>
+              <a href={`mailto:${data.contact.email}`} className="contact-item"><Icon name="mail" /> {data.contact.email}</a>
             ) : null}
             {data.contact?.linkedin ? (
-              <a href={data.contact.linkedin} className="contact-item" target="_blank" rel="noopener">💼 LinkedIn</a>
+              <a href={data.contact.linkedin} className="contact-item" target="_blank" rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
             ) : null}
             <a
               href="https://wa.me/573238037419?text=Hola%20necesito%20ayuda"
@@ -841,7 +856,7 @@ function ServicesPage({ data }) {
               target="_blank"
               rel="noopener"
             >
-              💬 WhatsApp
+              <Icon name="phone" /> WhatsApp
             </a>
           </div>
         </div>
