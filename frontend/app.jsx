@@ -11,6 +11,7 @@ const fallbackData = {
   experience: [],
   education: [],
   certifications: [],
+  badges: [],
   projects: [],
   skills: {},
   languages: [],
@@ -73,6 +74,7 @@ const SKILL_CATEGORY_META = {
 
 function App() {
   const [data, setData] = useState(fallbackData);
+  const [widgets, setWidgets] = useState({ time: null, timezone: null, city: null, weather: null });
   const [navOpen, setNavOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -105,6 +107,31 @@ function App() {
 
     load();
     return () => { mounted = false; };
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    let timer;
+    const loadWidgets = async () => {
+      try {
+        const response = await fetch(`${API_BASE}/api/widgets`);
+        if (!response.ok) throw new Error('Failed to fetch widgets');
+        const payload = await response.json();
+        if (mounted) {
+          setWidgets(payload);
+        }
+      } catch (error) {
+        if (mounted) {
+          setWidgets((prev) => ({ ...prev, weather: null }));
+        }
+      }
+    };
+    loadWidgets();
+    timer = setInterval(loadWidgets, 10 * 60 * 1000);
+    return () => {
+      mounted = false;
+      if (timer) clearInterval(timer);
+    };
   }, []);
 
   useEffect(() => {
@@ -256,6 +283,7 @@ function App() {
           initials={initials}
           avatarOk={avatarOk}
           setAvatarOk={setAvatarOk}
+          widgets={widgets}
         />
       )}
 
@@ -298,9 +326,10 @@ function App() {
   );
 }
 
-function HomePage({ data, initials, avatarOk, setAvatarOk }) {
+function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
   const skills = data.skills || {};
   const certifications = data.certifications || [];
+  const badges = data.badges || [];
   const languages = data.languages || [];
   const achievements = data.achievements || [];
   const repositories = data.repositories || [];
@@ -311,6 +340,53 @@ function HomePage({ data, initials, avatarOk, setAvatarOk }) {
     const start = 2012;
     return new Date().getFullYear() - start;
   }, []);
+
+  const stats = Array.isArray(data.stats) && data.stats.length
+    ? data.stats
+    : [
+      { label: 'Years in IT', value: `${yearsExp}+` },
+      { label: 'Years Telephony', value: '6+' },
+      { label: 'GitHub Repos', value: '16' }
+    ];
+
+  const weatherLabel = (code) => {
+    if (code === null || code === undefined) return 'Weather unavailable';
+    const map = {
+      0: 'Clear sky',
+      1: 'Mainly clear',
+      2: 'Partly cloudy',
+      3: 'Overcast',
+      45: 'Fog',
+      48: 'Depositing rime fog',
+      51: 'Light drizzle',
+      53: 'Moderate drizzle',
+      55: 'Dense drizzle',
+      61: 'Slight rain',
+      63: 'Moderate rain',
+      65: 'Heavy rain',
+      71: 'Slight snow',
+      73: 'Moderate snow',
+      75: 'Heavy snow',
+      80: 'Rain showers',
+      81: 'Rain showers',
+      82: 'Violent showers',
+      95: 'Thunderstorm'
+    };
+    return map[code] || 'Mixed conditions';
+  };
+
+  const timeLabel = useMemo(() => {
+    if (!widgets?.time) return null;
+    const date = new Date(widgets.time);
+    return new Intl.DateTimeFormat('es-CO', {
+      timeZone: widgets.timezone || 'America/Bogota',
+      hour: '2-digit',
+      minute: '2-digit',
+      weekday: 'short',
+      month: 'short',
+      day: '2-digit'
+    }).format(date);
+  }, [widgets?.time, widgets?.timezone]);
 
   return (
     <main className="container">
@@ -339,19 +415,31 @@ function HomePage({ data, initials, avatarOk, setAvatarOk }) {
             </div>
             <div className="hero-card-content">
               <h3>Profile Overview</h3>
-              <p>Systems Engineer specializing in scalable VoIP infrastructure, cloud automation, and AI.</p>
+              <p>{data.profileOverview || 'Systems Engineer specializing in scalable VoIP infrastructure, cloud automation, and AI.'}</p>
               <div className="stats-row">
-                <div className="stat">
-                  <span className="stat-value">{yearsExp}+</span>
-                  <span className="stat-label">Years in IT</span>
+                {stats.map((stat, index) => (
+                  <div key={`${stat.label}-${index}`} className="stat">
+                    <span className="stat-value">{stat.value}</span>
+                    <span className="stat-label">{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="widget-row">
+                <div className="widget-card">
+                  <span className="widget-label">Bogotá time</span>
+                  <span className="widget-value">{timeLabel || 'Loading...'}</span>
+                  <span className="widget-meta">{widgets?.timezone || 'America/Bogota'}</span>
                 </div>
-                <div className="stat">
-                  <span className="stat-value">6+</span>
-                  <span className="stat-label">Years Telephony</span>
-                </div>
-                <div className="stat">
-                  <span className="stat-value">16</span>
-                  <span className="stat-label">GitHub Repos</span>
+                <div className="widget-card">
+                  <span className="widget-label">Weather</span>
+                  <span className="widget-value">
+                    {widgets?.weather?.temperature !== null && widgets?.weather?.temperature !== undefined
+                      ? `${Math.round(widgets.weather.temperature)}${widgets.weather.temperature_unit || '°C'}`
+                      : 'Loading...'}
+                  </span>
+                  <span className="widget-meta">
+                    {widgets?.weather ? weatherLabel(widgets.weather.weather_code) : 'No data'}
+                  </span>
                 </div>
               </div>
             </div>
@@ -500,6 +588,36 @@ function HomePage({ data, initials, avatarOk, setAvatarOk }) {
                   <span className="certification-date">{cert.date}</span>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {/* Badges */}
+      {badges.length > 0 ? (
+        <section id="badges" className="section">
+          <div className="section-header">
+            <h2 className="section-title">Digital Badges</h2>
+            <p className="section-kicker">Verified credentials and skill endorsements.</p>
+          </div>
+          <div className="badges-grid">
+            {badges.map((badge, index) => (
+              <a
+                key={`${badge.name}-${index}`}
+                className="badge-card reveal"
+                href={badge.url || '#'}
+                target="_blank"
+                rel="noopener"
+              >
+                <div className="badge-image">
+                  {badge.image ? <img src={badge.image} alt={badge.name} /> : <span>Badge</span>}
+                </div>
+                <div className="badge-info">
+                  <h3 className="badge-title">{badge.name}</h3>
+                  <p className="badge-issuer">{badge.issuer}</p>
+                  {badge.issued ? <span className="badge-date">{badge.issued}</span> : null}
+                </div>
+              </a>
             ))}
           </div>
         </section>

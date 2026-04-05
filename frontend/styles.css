@@ -450,6 +450,40 @@ h1, h2, h3, h4 {
   color: var(--slate-400);
 }
 
+.widget-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.widget-card {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(8, 12, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  gap: 4px;
+}
+
+.widget-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--slate-400);
+}
+
+.widget-value {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--mist);
+}
+
+.widget-meta {
+  font-size: 0.78rem;
+  color: var(--slate-200);
+}
+
 /* Section */
 .section {
   padding: 80px 0;
@@ -809,6 +843,72 @@ h1, h2, h3, h4 {
 
 .certification-date {
   color: var(--teal);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Badges */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.badge-card {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  background: var(--glass);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 18px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.badge-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(45, 212, 191, 0.5);
+}
+
+.badge-image {
+  width: 62px;
+  height: 62px;
+  border-radius: 14px;
+  background: rgba(45, 212, 191, 0.12);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  color: var(--slate-200);
+}
+
+.badge-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.badge-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.badge-issuer {
+  color: var(--slate-200);
+  font-size: 0.9rem;
+}
+
+.badge-date {
+  color: var(--amber);
   font-size: 0.8rem;
   font-weight: 500;
 }
