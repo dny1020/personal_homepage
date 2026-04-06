@@ -39,8 +39,8 @@ h1, h2, h3, h4 {
 }
 
 .icon {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   display: inline-block;
   vertical-align: -3px;
   fill: currentColor;
@@ -352,6 +352,11 @@ h1, h2, h3, h4 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+}
+
+.hero-location .icon {
+  width: 14px;
+  height: 14px;
 }
 
 .hero-bio {
@@ -1162,6 +1167,11 @@ h1, h2, h3, h4 {
   align-items: center;
   gap: 10px;
   transition: all 0.2s ease;
+}
+
+.contact-item .icon {
+  width: 16px;
+  height: 16px;
 }
 
 .contact-item:hover {
