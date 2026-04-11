@@ -71,7 +71,7 @@ const SKILL_CATEGORY_META = {
 };
 
 const SERVICES_BRAND = {
-  name: 'Aethra',
+  name: 'Aethrax',
   initials: 'AE'
 };
 
@@ -791,7 +791,7 @@ function ServicesPage({ data }) {
     <main className="container services-page">
       <section className="services-hero" id="services">
         <div className="services-hero-content reveal">
-          <p className="hero-eyebrow">Aethra · Bot + AI + Voicebot + WebRTC</p>
+          <p className="hero-eyebrow">Aethrax · Bot + AI + Voicebot + WebRTC</p>
           <h1 className="hero-title">Automatización empresarial con IA cloud</h1>
           <p className="hero-subtitle">Servicios propios en arquitectura multicloud y multitenant.</p>
           <p className="hero-bio">
@@ -818,6 +818,15 @@ function ServicesPage({ data }) {
             <h3>Analítica AI</h3>
             <p className="panel-value">Tiempo Real</p>
             <span>Reportes inteligentes accionables.</span>
+          </div>
+
+          <div className="services-image-composition">
+            <div className="services-image services-image-ai">
+              <img src="/AI_chat_and_voice_agent.png" alt="Asistente AI para chat y voz" loading="lazy" />
+            </div>
+            <div className="services-image services-image-human">
+              <img src="/agent_human.png" alt="Equipo humano de atención omnicanal" loading="lazy" />
+            </div>
           </div>
         </div>
       </section>
@@ -870,7 +879,7 @@ function ServicesPage({ data }) {
 
       <section className="section contact-section" id="contact">
         <div className="glass-card contact-card reveal">
-          <h2 className="section-title">Activa tu operación con Aethra</h2>
+          <h2 className="section-title">Activa tu operación con Aethrax</h2>
           <p className="contact-text">
             Construimos soluciones empresariales sobre servicios propios como <strong>webrtc_frontend</strong> y <strong>chatbot_ccaas</strong>,
             combinando IA, voicebot y reportes inteligentes para entornos multicloud.
