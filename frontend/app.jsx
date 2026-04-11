@@ -70,6 +70,11 @@ const SKILL_CATEGORY_META = {
   tools: { label: 'Tools & Platforms', icon: 'tool', color: 'var(--coral)' }
 };
 
+const SERVICES_BRAND = {
+  name: 'Aethra',
+  initials: 'AE'
+};
+
 function Icon({ name, className = '' }) {
   const paths = {
     code: 'M16.2 4.7 8.9 12l7.3 7.3-1.9 1.9L5 12l9.3-9.2 1.9 1.9Zm3.8 0 9.3 9.2-9.3 9.2-1.9-1.9 7.3-7.3-7.3-7.3 1.9-1.9Z',
@@ -203,6 +208,11 @@ function App() {
     setSubmenuOpen(false);
   };
 
+  const navBrandName = isServices
+    ? SERVICES_BRAND.name
+    : data.name?.split(' ').slice(0, 2).join(' ');
+  const navBrandInitials = isServices ? SERVICES_BRAND.initials : initials;
+
   return (
     <div className="app-shell">
       <div className="background-gradient" />
@@ -215,23 +225,23 @@ function App() {
         <div className="nav-content">
           <a className="nav-logo" href="/" onClick={handleNavClick}>
             <div className="nav-avatar">
-              {data.avatarUrl && avatarOk ? (
+              {!isServices && data.avatarUrl && avatarOk ? (
                 <img src={data.avatarUrl} alt={`${data.name} avatar`} onError={() => setAvatarOk(false)} />
               ) : (
-                <span>{initials}</span>
+                <span>{navBrandInitials}</span>
               )}
             </div>
-            <span className="nav-name">{data.name?.split(' ').slice(0, 2).join(' ')}</span>
+            <span className="nav-name">{navBrandName}</span>
           </a>
 
           <div className={`nav-links ${navOpen ? 'active' : ''}`}>
             {isServices ? (
               <>
-                <a href="/" className="nav-link" onClick={handleNavClick}>Home</a>
-                <a href="#services" className="nav-link" onClick={handleNavClick}>Services</a>
-                <a href="#process" className="nav-link" onClick={handleNavClick}>Process</a>
-                <a href="#cases" className="nav-link" onClick={handleNavClick}>Use Cases</a>
-                <a href="#contact" className="nav-link" onClick={handleNavClick}>Contact</a>
+                <a href="/" className="nav-link" onClick={handleNavClick}>Inicio</a>
+                <a href="#services" className="nav-link" onClick={handleNavClick}>Servicios</a>
+                <a href="#process" className="nav-link" onClick={handleNavClick}>Proceso</a>
+                <a href="#cases" className="nav-link" onClick={handleNavClick}>Casos de uso</a>
+                <a href="#contact" className="nav-link" onClick={handleNavClick}>Contacto</a>
               </>
             ) : (
               <>
@@ -313,14 +323,27 @@ function App() {
 
       <footer className="footer">
         <div className="footer-content">
-          <p>{data.footer || `© ${new Date().getFullYear()} ${data.name}. All rights reserved.`}</p>
+          <p>
+            {isServices
+              ? `© ${new Date().getFullYear()} ${SERVICES_BRAND.name}. Multicloud AI Communications.`
+              : data.footer || `© ${new Date().getFullYear()} ${data.name}. All rights reserved.`}
+          </p>
           <div className="footer-links">
-            {data.contact?.linkedin ? (
-              <a href={data.contact.linkedin} target="_blank" rel="noopener" className="footer-link">LinkedIn</a>
-            ) : null}
-            {data.contact?.github ? (
-              <a href={data.contact.github} target="_blank" rel="noopener" className="footer-link">GitHub</a>
-            ) : null}
+            {isServices ? (
+              <>
+                <a href="/bot-ai#services" className="footer-link">Servicios</a>
+                <a href="/bot-ai#contact" className="footer-link">Contacto</a>
+              </>
+            ) : (
+              <>
+                {data.contact?.linkedin ? (
+                  <a href={data.contact.linkedin} target="_blank" rel="noopener" className="footer-link">LinkedIn</a>
+                ) : null}
+                {data.contact?.github ? (
+                  <a href={data.contact.github} target="_blank" rel="noopener" className="footer-link">GitHub</a>
+                ) : null}
+              </>
+            )}
           </div>
         </div>
       </footer>
@@ -715,73 +738,97 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
 }
 
 function ServicesPage({ data }) {
+  const serviceCatalog = [
+    {
+      title: 'Bot AI Conversacional',
+      description: 'Asistentes para WhatsApp y webchat con flujos inteligentes, handoff humano y automatización de procesos.'
+    },
+    {
+      title: 'Voicebot + WebRTC',
+      description: 'Experiencias de voz con IA y canal WebRTC para atención omnicanal, autoservicio y campañas de salida.'
+    },
+    {
+      title: 'Arquitectura Multicloud',
+      description: 'Despliegues distribuidos en múltiples nubes para alta disponibilidad, baja latencia y continuidad operativa.'
+    },
+    {
+      title: 'Operación Multitenant',
+      description: 'Aislamiento por empresa, configuración por cliente y escalamiento independiente por unidad de negocio.'
+    },
+    {
+      title: 'Reportes Inteligentes',
+      description: 'Métricas en tiempo real, tableros ejecutivos y analítica accionable para mejorar conversión y servicio.'
+    },
+    {
+      title: 'Integraciones Empresariales',
+      description: 'Conexión con CRM, bases de datos, APIs y sistemas internos para una operación totalmente orquestada.'
+    }
+  ];
+
+  const processSteps = [
+    { step: '01', title: 'Descubrimiento', text: 'Definimos objetivos, canales, SLA y métricas de negocio desde el inicio.' },
+    { step: '02', title: 'Arquitectura', text: 'Diseñamos la solución Bot + AI + Voicebot + WebRTC con enfoque multicloud.' },
+    { step: '03', title: 'Implementación', text: 'Construimos flujos, integraciones y automatizaciones con entregas iterativas.' },
+    { step: '04', title: 'Optimización', text: 'Medimos resultados y ajustamos continuamente con reportes inteligentes.' }
+  ];
+
+  const useCases = [
+    {
+      title: 'Atención 24/7 con IA',
+      text: 'Reducción de tiempos de espera con bots de autoservicio y escalamiento contextual a agentes.'
+    },
+    {
+      title: 'Ventas Conversacionales',
+      text: 'Calificación de leads, seguimiento automatizado y mayor tasa de cierre en campañas digitales.'
+    },
+    {
+      title: 'Operaciones de Soporte',
+      text: 'Centralización omnicanal con trazabilidad completa por cliente y monitoreo en tiempo real.'
+    }
+  ];
+
   return (
     <main className="container services-page">
       <section className="services-hero" id="services">
         <div className="services-hero-content reveal">
-          <p className="hero-eyebrow">Automation + AI</p>
-          <h1 className="hero-title">Bots + AI for sales, support, and operations</h1>
-          <p className="hero-subtitle">WhatsApp bots, voice automation, SIP, and CRM integrations.</p>
+          <p className="hero-eyebrow">Aethra · Bot + AI + Voicebot + WebRTC</p>
+          <h1 className="hero-title">Automatización empresarial con IA cloud</h1>
+          <p className="hero-subtitle">Servicios propios en arquitectura multicloud y multitenant.</p>
           <p className="hero-bio">
-            Build intelligent assistants for customer support, lead qualification, and operational workflows.
-            From SIP telephony to AI voicebots, I deliver full-stack automation that is reliable and measurable.
+            Impulsamos operaciones de atención, ventas y soporte con canales unificados, analítica en tiempo real
+            y una base tecnológica diseñada para escalar en múltiples nubes.
           </p>
           <div className="hero-buttons">
-            <a href="#contact" className="btn btn-primary">Request a Demo</a>
-            <a href="#cases" className="btn btn-ghost">See Use Cases</a>
+            <a href="#contact" className="btn btn-primary">Solicitar Demo</a>
+            <a href="#cases" className="btn btn-ghost">Ver Casos de Uso</a>
           </div>
         </div>
         <div className="services-hero-panel reveal">
           <div className="panel-card">
-            <h3>Response Time</h3>
-            <p className="panel-value">&lt; 2s</p>
-            <span>Customer-grade SLA support.</span>
+            <h3>Multicloud</h3>
+            <p className="panel-value">Nativo</p>
+            <span>Despliegue resiliente entre nubes.</span>
           </div>
           <div className="panel-card">
-            <h3>Availability</h3>
-            <p className="panel-value">24/7</p>
-            <span>Always-on automation.</span>
+            <h3>Multitenant</h3>
+            <p className="panel-value">Seguro</p>
+            <span>Aislamiento por cliente y unidad.</span>
           </div>
           <div className="panel-card">
-            <h3>Deploy Time</h3>
-            <p className="panel-value">2-4 wks</p>
-            <span>From scope to production.</span>
+            <h3>Analítica AI</h3>
+            <p className="panel-value">Tiempo Real</p>
+            <span>Reportes inteligentes accionables.</span>
           </div>
         </div>
       </section>
 
       <section className="section" id="services-list">
         <div className="section-header">
-          <h2 className="section-title">Core Services</h2>
-          <p className="section-kicker">End-to-end automation services aligned with your business goals.</p>
+          <h2 className="section-title">Servicios y Capacidades</h2>
+          <p className="section-kicker">Portafolio enfocado en resultados de negocio y experiencia de cliente.</p>
         </div>
         <div className="services-grid">
-          {[
-            {
-              title: 'WhatsApp & Chatbots',
-              description: 'Conversational flows, escalation, and integrations with CRM and ticketing systems.'
-            },
-            {
-              title: 'Voicebots & IVR',
-              description: 'Natural language voice flows for call deflection and faster service resolution.'
-            },
-            {
-              title: 'SIP & Asterisk',
-              description: 'Reliable VoIP infrastructure, routing, and monitoring with enterprise stability.'
-            },
-            {
-              title: 'CRM & Workflow Automation',
-              description: 'Connect customer data, automate follow-ups, and improve response time.'
-            },
-            {
-              title: 'Observability & Analytics',
-              description: 'Dashboards and telemetry for quality monitoring, SLA performance, and ROI.'
-            },
-            {
-              title: 'Custom Integrations',
-              description: 'Tailored APIs and data synchronization to fit your stack.'
-            }
-          ].map((item) => (
+          {serviceCatalog.map((item) => (
             <div key={item.title} className="service-card reveal">
               <h3>{item.title}</h3>
               <p>{item.description}</p>
@@ -792,16 +839,11 @@ function ServicesPage({ data }) {
 
       <section className="section" id="process">
         <div className="section-header">
-          <h2 className="section-title">Delivery Process</h2>
-          <p className="section-kicker">A professional, transparent process from discovery to scaling.</p>
+          <h2 className="section-title">Modelo de Entrega</h2>
+          <p className="section-kicker">Implementación estructurada para acelerar valor y reducir riesgo.</p>
         </div>
         <div className="process-grid">
-          {[
-            { step: '01', title: 'Discovery', text: 'Map objectives, constraints, and success metrics.' },
-            { step: '02', title: 'Blueprint', text: 'Define architecture, flows, and integrations.' },
-            { step: '03', title: 'Build', text: 'Implementation with weekly demos and QA.' },
-            { step: '04', title: 'Launch', text: 'Production rollout, training, and monitoring.' }
-          ].map((item) => (
+          {processSteps.map((item) => (
             <div key={item.step} className="process-card reveal">
               <span className="process-step">{item.step}</span>
               <h3>{item.title}</h3>
@@ -813,24 +855,11 @@ function ServicesPage({ data }) {
 
       <section className="section" id="cases">
         <div className="section-header">
-          <h2 className="section-title">Use Cases</h2>
-          <p className="section-kicker">Examples of automation that move the needle.</p>
+          <h2 className="section-title">Casos de Uso</h2>
+          <p className="section-kicker">Aplicaciones prácticas para escalar atención y performance comercial.</p>
         </div>
         <div className="cases-grid">
-          {[
-            {
-              title: 'ISP Support Automation',
-              text: 'Deflect 40% of tier-1 tickets with guided troubleshooting and ticket escalation.'
-            },
-            {
-              title: 'Sales Qualification Bot',
-              text: 'Capture leads, qualify intent, and notify sales with structured data.'
-            },
-            {
-              title: 'Voice IVR Modernization',
-              text: 'Replace legacy IVR with conversational voice flows and call analytics.'
-            }
-          ].map((item) => (
+          {useCases.map((item) => (
             <div key={item.title} className="case-card reveal">
               <h3>{item.title}</h3>
               <p>{item.text}</p>
@@ -841,14 +870,14 @@ function ServicesPage({ data }) {
 
       <section className="section contact-section" id="contact">
         <div className="glass-card contact-card reveal">
-          <h2 className="section-title">Ready to automate?</h2>
-          <p className="contact-text">{data.contact?.text || 'Lets build an automation roadmap tailored to your business.'}</p>
+          <h2 className="section-title">Activa tu operación con Aethra</h2>
+          <p className="contact-text">
+            Construimos soluciones empresariales sobre servicios propios como <strong>webrtc_frontend</strong> y <strong>chatbot_ccaas</strong>,
+            combinando IA, voicebot y reportes inteligentes para entornos multicloud.
+          </p>
           <div className="contact-info">
             {data.contact?.email ? (
               <a href={`mailto:${data.contact.email}`} className="contact-item"><Icon name="mail" /> {data.contact.email}</a>
-            ) : null}
-            {data.contact?.linkedin ? (
-              <a href={data.contact.linkedin} className="contact-item" target="_blank" rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
             ) : null}
             <a
               href="https://wa.me/573238037419?text=Hola%20necesito%20ayuda"
@@ -856,7 +885,7 @@ function ServicesPage({ data }) {
               target="_blank"
               rel="noopener"
             >
-              <Icon name="phone" /> WhatsApp
+              <Icon name="phone" /> WhatsApp Empresarial
             </a>
           </div>
         </div>
