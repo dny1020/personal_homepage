@@ -44,7 +44,7 @@ resource "aws_spot_instance_request" "spot_instance" {
 }
 
 resource "aws_security_group" "web_sg" {
-  name        = "web_access"
+  name_prefix = "web_access_"
   description = "Allow HTTP and SSH"
 
   ingress {
