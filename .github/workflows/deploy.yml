@@ -1,47 +1,21 @@
-name: CI/CD Pipeline
+name: CI/CD Deploy Only
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
+  deploy:
+    name: Deploy to EC2
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: 1.5.0
-          terraform_wrapper: false
-
-      - name: Terraform Init
-        run: terraform init
-        working-directory: terraform
-
-      - name: Terraform Apply
-        id: terraform
-        run: |
-          terraform apply -auto-approve
-          echo "instance_ip=$(terraform output -raw instance_public_ip)" >> $GITHUB_ENV
-        working-directory: terraform
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: "us-east-1"
-
-      - name: Wait for SSH to be ready
-        run: |
-          echo "Waiting for instance at ${{ env.instance_ip }} to be ready..."
-          sleep 30
-
       - name: Sync files to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ env.instance_ip }}
+          host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "."
@@ -50,7 +24,7 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ env.instance_ip }}
+          host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
@@ -71,4 +45,9 @@ jobs:
             fi
 
             cd ~/app
+            # Ensure .env exists (it was synced by scp-action, but we can verify)
+            if [ ! -f .env ]; then
+              echo "Warning: .env file missing!"
+            fi
+
             sudo /usr/local/bin/docker-compose up -d --build
