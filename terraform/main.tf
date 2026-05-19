@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
 }
 
 # Obtiene la última AMI de Amazon Linux 2023 automáticamente
@@ -24,14 +24,14 @@ data "aws_ami" "amazon_linux" {
 
 # Par de claves SSH
 resource "aws_key_pair" "deployer" {
-  key_name   = "deployer-key"
-  public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIATZ3hKAciqQqpn2uL3Den2Ql5mre4QmSmZTrvKiils jnarvaar@icloud.com"
+  key_name   = var.key_name
+  public_key = var.public_key
 }
 
 # Solicitud de Instancia EC2 Spot
 resource "aws_spot_instance_request" "spot_instance" {
   ami           = data.aws_ami.amazon_linux.id
-  instance_type = "t3.micro"
+  instance_type = var.instance_type
   spot_type     = "one-time"
   key_name      = aws_key_pair.deployer.key_name
   wait_for_fulfillment = true
