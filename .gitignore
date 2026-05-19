@@ -66,4 +66,5 @@ deploy.sh
 crash.log
 *.mov
 *.mp4
+acme.json
 

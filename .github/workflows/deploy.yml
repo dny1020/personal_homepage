@@ -73,4 +73,10 @@ jobs:
               echo "Warning: .env file missing!"
             fi
 
+            # Traefik requires acme.json to exist with 600 permissions before first run
+            if [ ! -f acme.json ]; then
+              touch acme.json
+              chmod 600 acme.json
+            fi
+
             $DOCKER_COMPOSE up -d --build
