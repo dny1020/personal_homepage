@@ -34,6 +34,7 @@ resource "aws_spot_instance_request" "spot_instance" {
   instance_type = "t3.micro"
   spot_type     = "one-time"
   key_name      = aws_key_pair.deployer.key_name
+  wait_for_fulfillment = true
 
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
