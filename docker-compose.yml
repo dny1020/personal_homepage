@@ -25,7 +25,7 @@ services:
       dockerfile: frontend/Dockerfile
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nginx.rule=Host(`danilocloud.me`) || Host(`www.danilocloud.me`)"
+      - "traefik.http.routers.nginx.rule=Host(`danilocloud.me`)"
       - "traefik.http.routers.nginx.entrypoints=websecure"
       - "traefik.http.routers.nginx.tls.certresolver=letsencrypt"
       - "traefik.http.services.nginx.loadbalancer.server.port=80"
