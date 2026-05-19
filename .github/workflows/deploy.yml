@@ -44,8 +44,13 @@ jobs:
               sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
             fi
 
+            # Install Docker Buildx plugin if missing (required by modern docker-compose)
+            if ! docker buildx version >/dev/null 2>&1; then
+              sudo dnf install -y docker-buildx-plugin
+            fi
+
             cd ~/app
-            # Ensure .env exists (it was synced by scp-action, but we can verify)
+            # Ensure .env exists
             if [ ! -f .env ]; then
               echo "Warning: .env file missing!"
             fi
