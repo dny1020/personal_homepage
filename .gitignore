@@ -60,4 +60,10 @@ yarn.lock
 # Project-specific
 # ====================
 deploy.sh
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.mov
+*.mp4
 
