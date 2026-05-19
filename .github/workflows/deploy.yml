@@ -44,9 +44,15 @@ jobs:
               sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
             fi
 
-            # Install Docker Buildx plugin if missing (required by modern docker-compose)
+            # Install Docker Buildx plugin if missing
             if ! docker buildx version >/dev/null 2>&1; then
               sudo dnf install -y docker-buildx-plugin
+            fi
+
+            # Use docker compose (new) instead of docker-compose (old) if possible
+            DOCKER_COMPOSE="sudo /usr/local/bin/docker-compose"
+            if docker compose version >/dev/null 2>&1; then
+              DOCKER_COMPOSE="sudo docker compose"
             fi
 
             cd ~/app
@@ -55,4 +61,4 @@ jobs:
               echo "Warning: .env file missing!"
             fi
 
-            sudo /usr/local/bin/docker-compose up -d --build
+            $DOCKER_COMPOSE up -d --build
