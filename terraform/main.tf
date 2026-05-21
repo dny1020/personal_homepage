@@ -24,8 +24,8 @@ data "aws_ami" "amazon_linux" {
 
 # Par de claves SSH
 resource "aws_key_pair" "deployer" {
-  key_name   = var.key_name
-  public_key = var.public_key
+  key_name_prefix = "deployer-key-"
+  public_key      = var.public_key
 }
 
 # Solicitud de Instancia EC2 Spot
@@ -51,7 +51,7 @@ resource "aws_security_group" "web_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["201.185.142.146/32"]
   }
 
   ingress {

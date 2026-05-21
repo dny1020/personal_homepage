@@ -12,6 +12,56 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Update Cloudflare DNS
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_DNS_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          EC2_IP: ${{ secrets.EC2_HOST }}
+        run: |
+          set -euo pipefail
+          if [ -z "${CF_API_TOKEN}" ]; then
+            echo "CF_DNS_API_TOKEN is missing" >&2
+            exit 1
+          fi
+          if [ -z "${EC2_IP}" ]; then
+            echo "EC2_HOST is missing" >&2
+            exit 1
+          fi
+          if [ -z "${CF_ZONE_ID:-}" ]; then
+            CF_ZONE_ID=$(curl -fsSL "https://api.cloudflare.com/client/v4/zones?name=danilocloud.me" \
+              -H "Authorization: Bearer ${CF_API_TOKEN}" \
+              -H "Content-Type: application/json" \
+              | jq -r '.result[0].id')
+          fi
+          if [ -z "${CF_ZONE_ID}" ] || [ "${CF_ZONE_ID}" = "null" ]; then
+            echo "Could not resolve Cloudflare zone id for danilocloud.me; set CF_ZONE_ID secret." >&2
+            exit 1
+          fi
+
+          update_record() {
+            record_name="$1"
+            record_id=$(curl -fsSL "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records?type=A&name=${record_name}" \
+              -H "Authorization: Bearer ${CF_API_TOKEN}" \
+              -H "Content-Type: application/json" \
+              | jq -r '.result[0].id')
+            if [ -z "${record_id}" ] || [ "${record_id}" = "null" ]; then
+              curl -fsSL -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records" \
+                -H "Authorization: Bearer ${CF_API_TOKEN}" \
+                -H "Content-Type: application/json" \
+                --data "{\"type\":\"A\",\"name\":\"${record_name}\",\"content\":\"${EC2_IP}\",\"ttl\":120,\"proxied\":false}" \
+                | jq -e '.success' >/dev/null
+            else
+              curl -fsSL -X PUT "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records/${record_id}" \
+                -H "Authorization: Bearer ${CF_API_TOKEN}" \
+                -H "Content-Type: application/json" \
+                --data "{\"type\":\"A\",\"name\":\"${record_name}\",\"content\":\"${EC2_IP}\",\"ttl\":120,\"proxied\":false}" \
+                | jq -e '.success' >/dev/null
+            fi
+          }
+
+          update_record "danilocloud.me"
+          update_record "www.danilocloud.me"
+
       - name: Sync files to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -68,15 +118,31 @@ jobs:
             fi
 
             cd ~/app
-            # Ensure .env exists
-            if [ ! -f .env ]; then
-              echo "Warning: .env file missing!"
+            # Install certbot and cloudflare plugin if missing
+            if ! [ -x "$(command -v certbot)" ]; then
+              sudo dnf install -y certbot python3-certbot-dns-cloudflare
             fi
 
-            # Traefik requires acme.json to exist with 600 permissions before first run
-            if [ ! -f acme.json ]; then
-              touch acme.json
-              chmod 600 acme.json
-            fi
+            # Configure cloudflare credentials for certbot
+            mkdir -p ~/.secrets/certbot
+            echo "dns_cloudflare_api_token = ${{ secrets.CF_DNS_API_TOKEN }}" > ~/.secrets/certbot/cloudflare.ini
+            chmod 600 ~/.secrets/certbot/cloudflare.ini
+
+            # Obtain/Renew certificate
+            sudo certbot certonly \
+              --dns-cloudflare \
+              --dns-cloudflare-credentials ~/.secrets/certbot/cloudflare.ini \
+              --email 08porous-mucks@icloud.com \
+              --agree-tos \
+              --no-eff-email \
+              -d danilocloud.me \
+              -d www.danilocloud.me \
+              --non-interactive
+
+            # Create directory for certificates if it doesn't exist
+            mkdir -p etc/letsencrypt
+            sudo cp -L -r /etc/letsencrypt/live etc/
+            sudo cp -L -r /etc/letsencrypt/archive etc/
+            sudo chown -R ec2-user:ec2-user etc/letsencrypt
 
             $DOCKER_COMPOSE up -d --build

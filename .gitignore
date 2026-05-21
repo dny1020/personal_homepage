@@ -67,4 +67,6 @@ crash.log
 *.mov
 *.mp4
 acme.json
+etc/letsencrypt/
 
+terraform/terraform.tfstate
