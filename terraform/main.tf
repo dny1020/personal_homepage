@@ -28,18 +28,21 @@ resource "aws_key_pair" "deployer" {
   public_key      = var.public_key
 }
 
-# Solicitud de Instancia EC2 Spot
+# Solicitud de Instancia EC2 Spot persistente:
+# - Si AWS interrumpe la instancia, la detiene (no la termina) y la reactiva cuando haya capacidad.
+# - Para destruir completamente: terraform destroy
 resource "aws_spot_instance_request" "spot_instance" {
-  ami           = data.aws_ami.amazon_linux.id
-  instance_type = var.instance_type
-  spot_type     = "one-time"
-  key_name      = aws_key_pair.deployer.key_name
-  wait_for_fulfillment = true
+  ami                            = data.aws_ami.amazon_linux.id
+  instance_type                  = var.instance_type
+  spot_type                      = "persistent"
+  instance_interruption_behavior = "stop"
+  key_name                       = aws_key_pair.deployer.key_name
+  wait_for_fulfillment           = true
 
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
   tags = {
-    Name = "MiInstanciaSpot"
+    Name = "Homepage-Spot"
   }
 }
 
@@ -78,5 +81,9 @@ resource "aws_security_group" "web_sg" {
 
 output "instance_public_ip" {
   value = aws_spot_instance_request.spot_instance.public_ip
+}
+
+output "spot_instance_id" {
+  value = aws_spot_instance_request.spot_instance.spot_instance_id
 }
 

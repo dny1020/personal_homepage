@@ -5,9 +5,9 @@ variable "aws_region" {
 }
 
 variable "instance_type" {
-  description = "EC2 instance type"
+  description = "EC2 instance type (t3.nano ~$0.002/hr spot, t3.micro ~$0.004/hr si el build de Docker falla por OOM)"
   type        = string
-  default     = "t3.micro"
+  default     = "t3.nano"
 }
 
 variable "public_key" {
