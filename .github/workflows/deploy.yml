@@ -82,70 +82,58 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           envs: APP_ENV,CF_DNS_API_TOKEN
           script: |
-            # Install Docker if not present
-            if ! [ -x "$(command -v docker)" ]; then
+            set -euo pipefail
+
+            # ── Docker ────────────────────────────────────────────────────
+            if ! command -v docker >/dev/null 2>&1; then
               sudo dnf update -y
               sudo dnf install -y docker
-              sudo systemctl start docker
-              sudo systemctl enable docker
+              sudo systemctl enable --now docker
               sudo usermod -aG docker ec2-user
             fi
+            sudo systemctl start docker
 
-            # Install Docker Compose plugin if not present
-            if ! docker compose version >/dev/null 2>&1; then
-              sudo curl -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" \
-                -o /usr/local/bin/docker-compose
-              sudo chmod +x /usr/local/bin/docker-compose
-              sudo ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
-            fi
-
-            # Install Docker Buildx plugin if missing or older than 0.17.0
-            BUILDX_MIN="0.17.0"
-            BUILDX_VERSION=$(docker buildx version 2>/dev/null | grep -oP '\d+\.\d+\.\d+' | head -1)
-            NEEDS_BUILDX=false
-            if [ -z "$BUILDX_VERSION" ]; then
-              NEEDS_BUILDX=true
-            elif [ "$(printf '%s\n' "$BUILDX_MIN" "$BUILDX_VERSION" | sort -V | head -1)" != "$BUILDX_MIN" ]; then
-              NEEDS_BUILDX=true
-            fi
-            if [ "$NEEDS_BUILDX" = true ]; then
-              BUILDX_TAG=$(curl -fsSL https://api.github.com/repos/docker/buildx/releases/latest | grep '"tag_name"' | sed -E 's/.*"(v[^"]+)".*/\1/')
+            # ── Docker Compose plugin (system-wide para que sudo lo vea) ─
+            if ! sudo docker compose version >/dev/null 2>&1; then
+              COMPOSE_VER=$(curl -fsSL https://api.github.com/repos/docker/compose/releases/latest \
+                | grep '"tag_name"' | sed -E 's/.*"(v[^"]+)".*/\1/')
               sudo mkdir -p /usr/lib/docker/cli-plugins
-              sudo curl -fsSL "https://github.com/docker/buildx/releases/download/${BUILDX_TAG}/buildx-${BUILDX_TAG}.linux-amd64" \
-                -o /usr/lib/docker/cli-plugins/docker-buildx
-              sudo chmod +x /usr/lib/docker/cli-plugins/docker-buildx
+              sudo curl -fsSL \
+                "https://github.com/docker/compose/releases/download/${COMPOSE_VER}/docker-compose-linux-x86_64" \
+                -o /usr/lib/docker/cli-plugins/docker-compose
+              sudo chmod +x /usr/lib/docker/cli-plugins/docker-compose
             fi
 
-            cd ~/app
+            # ── Certbot via pip3 (python3-certbot-dns-cloudflare no existe en AL2023 dnf) ─
+            if ! command -v certbot >/dev/null 2>&1; then
+              sudo pip3 install --quiet certbot certbot-dns-cloudflare
+            fi
 
-            # Write .env from GitHub secret (never stored in git)
+            # ── .env desde GitHub Secret ──────────────────────────────────
+            cd ~/app
             printf '%s' "${APP_ENV}" > .env
             chmod 600 .env
 
-            # Install certbot and cloudflare plugin if missing
-            if ! [ -x "$(command -v certbot)" ]; then
-              sudo dnf install -y certbot python3-certbot-dns-cloudflare
-            fi
-
-            # Configure cloudflare credentials for certbot
+            # ── Credenciales Cloudflare para certbot ──────────────────────
             mkdir -p ~/.secrets/certbot
             printf 'dns_cloudflare_api_token = %s\n' "${CF_DNS_API_TOKEN}" > ~/.secrets/certbot/cloudflare.ini
             chmod 600 ~/.secrets/certbot/cloudflare.ini
 
-            # Obtain/Renew certificate
+            # ── Obtener/renovar certificado SSL ───────────────────────────
             sudo certbot certonly \
               --dns-cloudflare \
-              --dns-cloudflare-credentials ~/.secrets/certbot/cloudflare.ini \
+              --dns-cloudflare-credentials /home/ec2-user/.secrets/certbot/cloudflare.ini \
               --email 08porous-mucks@icloud.com \
               --agree-tos \
               --no-eff-email \
               -d danilocloud.me \
               --non-interactive
 
-            # Copy certs for Docker volume mount
+            # ── Copiar certs al volumen de Docker ─────────────────────────
             mkdir -p etc/letsencrypt
             sudo cp -L -r /etc/letsencrypt/live etc/
             sudo cp -L -r /etc/letsencrypt/archive etc/
             sudo chown -R ec2-user:ec2-user etc/letsencrypt
 
+            # ── Levantar stack ─────────────────────────────────────────────
             sudo docker compose up -d --build
