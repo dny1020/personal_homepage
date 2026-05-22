@@ -47,10 +47,10 @@ Credly badges are fetched server-side from `CREDLY_BADGES_URL` with a TTL cache 
 
 ### Deployment
 
-- Nginx (HTTPS on 443) serves `frontend/` as static files from `/opt/homepage/frontend`
-- Nginx proxies `/api/` requests to FastAPI running on `127.0.0.1:5000`
-- The active Nginx config lives at `/opt/homepage/homepage.conf`; `frontend/nginx.conf` is a copy for reference
-- FastAPI runs under systemd (service name `cv-backend`) using Gunicorn + Uvicorn workers
+- Nginx runs as a Docker container using `frontend/nginx-docker.conf` (proxies `/api/` to the `backend` container)
+- FastAPI runs as the `backend` Docker container (port 5000, internal only)
+- Both containers are managed by `docker-compose.yml` on the EC2 host
+- The `.env` file is never committed to git — it lives only on the EC2 server, written by the CI/CD pipeline from the `APP_ENV` GitHub secret
 
 ### Content updates
 

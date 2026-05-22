@@ -60,7 +60,6 @@ jobs:
           }
 
           update_record "danilocloud.me"
-          update_record "www.danilocloud.me"
 
       - name: Sync files to EC2
         uses: appleboy/scp-action@v0.1.7
@@ -68,16 +67,20 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "frontend,backend,docker-compose.yml,homepage.conf"
+          source: "frontend,backend,docker-compose.yml"
           target: "~/app"
           strip_components: 0
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          APP_ENV: ${{ secrets.APP_ENV }}
+          CF_DNS_API_TOKEN: ${{ secrets.CF_DNS_API_TOKEN }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
+          envs: APP_ENV,CF_DNS_API_TOKEN
           script: |
             # Install Docker if not present
             if ! [ -x "$(command -v docker)" ]; then
@@ -87,15 +90,16 @@ jobs:
               sudo systemctl enable docker
               sudo usermod -aG docker ec2-user
             fi
-            
-            # Install Docker Compose if not present
-            if ! [ -x "$(command -v docker-compose)" ]; then
-              sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+            # Install Docker Compose plugin if not present
+            if ! docker compose version >/dev/null 2>&1; then
+              sudo curl -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" \
+                -o /usr/local/bin/docker-compose
               sudo chmod +x /usr/local/bin/docker-compose
               sudo ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
             fi
 
-            # Install Docker Buildx plugin from GitHub if missing or older than 0.17.0
+            # Install Docker Buildx plugin if missing or older than 0.17.0
             BUILDX_MIN="0.17.0"
             BUILDX_VERSION=$(docker buildx version 2>/dev/null | grep -oP '\d+\.\d+\.\d+' | head -1)
             NEEDS_BUILDX=false
@@ -112,13 +116,12 @@ jobs:
               sudo chmod +x /usr/lib/docker/cli-plugins/docker-buildx
             fi
 
-            # Use docker compose (new) instead of docker-compose (old) if possible
-            DOCKER_COMPOSE="sudo /usr/local/bin/docker-compose"
-            if docker compose version >/dev/null 2>&1; then
-              DOCKER_COMPOSE="sudo docker compose"
-            fi
-
             cd ~/app
+
+            # Write .env from GitHub secret (never stored in git)
+            printf '%s' "${APP_ENV}" > .env
+            chmod 600 .env
+
             # Install certbot and cloudflare plugin if missing
             if ! [ -x "$(command -v certbot)" ]; then
               sudo dnf install -y certbot python3-certbot-dns-cloudflare
@@ -126,7 +129,7 @@ jobs:
 
             # Configure cloudflare credentials for certbot
             mkdir -p ~/.secrets/certbot
-            echo "dns_cloudflare_api_token = ${{ secrets.CF_DNS_API_TOKEN }}" > ~/.secrets/certbot/cloudflare.ini
+            printf 'dns_cloudflare_api_token = %s\n' "${CF_DNS_API_TOKEN}" > ~/.secrets/certbot/cloudflare.ini
             chmod 600 ~/.secrets/certbot/cloudflare.ini
 
             # Obtain/Renew certificate
@@ -137,13 +140,12 @@ jobs:
               --agree-tos \
               --no-eff-email \
               -d danilocloud.me \
-              -d www.danilocloud.me \
               --non-interactive
 
-            # Create directory for certificates if it doesn't exist
+            # Copy certs for Docker volume mount
             mkdir -p etc/letsencrypt
             sudo cp -L -r /etc/letsencrypt/live etc/
             sudo cp -L -r /etc/letsencrypt/archive etc/
             sudo chown -R ec2-user:ec2-user etc/letsencrypt
 
-            $DOCKER_COMPOSE up -d --build
+            sudo docker compose up -d --build
