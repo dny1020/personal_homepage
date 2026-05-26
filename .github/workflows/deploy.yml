@@ -67,7 +67,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "frontend,backend,docker-compose.yml"
+          source: "frontend,backend,nginx,docker-compose.yml"
           target: "~/app"
           strip_components: 0
 
@@ -130,11 +130,6 @@ jobs:
               -d danilocloud.me \
               --non-interactive
 
-            # ── Copiar certs al volumen de Docker ─────────────────────────
-            mkdir -p etc/letsencrypt
-            sudo cp -L -r /etc/letsencrypt/live etc/
-            sudo cp -L -r /etc/letsencrypt/archive etc/
-            sudo chown -R ec2-user:ec2-user etc/letsencrypt
-
             # ── Levantar stack ─────────────────────────────────────────────
+            # /etc/letsencrypt se monta directamente desde el host en docker-compose.yml
             sudo docker compose up -d --build

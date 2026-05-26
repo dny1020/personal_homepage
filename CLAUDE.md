@@ -21,8 +21,9 @@ cd backend && pip install -r requirements.txt
 
 **Production service management**
 ```bash
-sudo systemctl restart cv-backend   # apply .env changes
-sudo journalctl -u cv-backend -f    # tail logs
+cd ~/app && sudo docker compose up -d --build   # redeploy after changes
+sudo docker compose logs -f nginx               # tail nginx logs
+sudo docker compose logs -f backend             # tail backend logs
 ```
 
 ## Architecture
@@ -47,14 +48,16 @@ Credly badges are fetched server-side from `CREDLY_BADGES_URL` with a TTL cache 
 
 ### Deployment
 
-- Nginx runs as a Docker container using `frontend/nginx-docker.conf` (proxies `/api/` to the `backend` container)
-- FastAPI runs as the `backend` Docker container (port 5000, internal only)
-- Both containers are managed by `docker-compose.yml` on the EC2 host
-- The `.env` file is never committed to git — it lives only on the EC2 server, written by the CI/CD pipeline from the `APP_ENV` GitHub secret
+- Nginx runs as a single shared Docker container. Its image is built from `nginx/Dockerfile` (build context: project root).
+- Site configs live in `nginx/conf.d/` — each `.conf` file is a virtual host. Currently: `homepage.conf` (`danilocloud.me`).
+- To add a new site: drop a `.conf` in `nginx/conf.d/` and add the backend service to `docker-compose.yml`.
+- FastAPI runs as the `backend` Docker container (port 5000, internal only).
+- Both containers are managed by `docker-compose.yml` on the EC2 host.
+- The `.env` file is never committed to git — it lives only on the EC2 server, written by the CI/CD pipeline from the `APP_ENV` GitHub secret.
 
 ### Content updates
 
-Edit `/.env` at the project root, then `sudo systemctl restart cv-backend`. Hard-refresh the browser to clear cached assets (cache TTL is 7 days for static files).
+Edit `/.env` on the EC2 host, then run `sudo docker compose up -d --build` from `~/app`. Hard-refresh the browser to clear cached assets (cache TTL is 7 days for static files).
 
 ### Terraform
 
