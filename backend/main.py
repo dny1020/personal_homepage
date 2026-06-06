@@ -99,15 +99,14 @@ async def get_cv_data():
         "experience": parse_json_env("EXPERIENCE", []),
         "education": parse_json_env("EDUCATION", []),
         "skills": parse_json_env("SKILLS", {}),
+        "languages": parse_json_env("LANGUAGES", []),
         "certifications": parse_json_env("CERTIFICATIONS", []),
         "badges": await get_credly_badges(),
-        "testimonials": parse_json_env("TESTIMONIALS", []),
-        "awards": parse_json_env("AWARDS", []),
         "achievements": parse_json_env("ACHIEVEMENTS", []),
         "projects": parse_json_env("PROJECTS", []),
         "repositories": parse_json_env("REPOSITORIES", []),
         "contact": parse_json_env("CONTACT", {}),
-        "footer": os.getenv("FOOTER", f"© 2025 {os.getenv('NAME', 'Your Name')}. All rights reserved.")
+        "footer": os.getenv("FOOTER") or f"© {datetime.now().year} {os.getenv('NAME', '')}. {os.getenv('ROLE', '')}"
     }
 
 def get_widget_config():
@@ -150,11 +149,6 @@ async def get_weather_snapshot():
 def root():
     return {"message": "CV Portfolio API is running"}
 
-@app.get("/info")
-async def info():
-    """Main info endpoint (called by frontend)"""
-    return await get_cv_data()
-
 @app.get("/api/info")
 async def api_info():
     """API info endpoint (alternative route)"""
@@ -181,18 +175,3 @@ async def widgets():
         "weather": weather
     }
 
-@app.get("/api/debug/env")
-def debug_env():
-    """Debug endpoint to check environment variables"""
-    return {
-        "env_loaded": {
-            "NAME": bool(os.getenv("NAME")),
-            "ROLE": bool(os.getenv("ROLE")),
-            "BIO": bool(os.getenv("BIO")),
-            "EXPERIENCE": bool(os.getenv("EXPERIENCE")),
-        },
-        "sample_values": {
-            "NAME": os.getenv("NAME", "NOT_SET")[:20] if os.getenv("NAME") else "NOT_SET",
-            "ROLE": os.getenv("ROLE", "NOT_SET")[:20] if os.getenv("ROLE") else "NOT_SET",
-        }
-    }

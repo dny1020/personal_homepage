@@ -2,11 +2,14 @@ const { useEffect, useMemo, useState } = React;
 
 const API_BASE = '';
 
+const WA_URL = 'https://wa.me/573238037419?text=Hola%20necesito%20ayuda';
+
 const fallbackData = {
-  name: 'Jose Danilo Narvaez Arias',
-  role: 'Systems Engineer | Cloud & Telephony Infrastructure | DevOps',
-  location: 'Bogotá, Colombia',
-  bio: 'Systems Engineer specializing in Cloud & Telephony Infrastructure and DevOps Automation. 6+ years at Emtelco building scalable VoIP systems with Asterisk, Kamailio, and SIP. Fluent in Python, Bash, and containerized deployments.',
+  name: '',
+  role: '',
+  location: '',
+  bio: '',
+  profileOverview: '',
   avatarUrl: '/IMG_2164.jpg?v=7',
   experience: [],
   education: [],
@@ -17,12 +20,8 @@ const fallbackData = {
   languages: [],
   achievements: [],
   repositories: [],
-  contact: {
-    text: 'Open to collaborations in telephony, DevOps, and AI automation.',
-    email: 'jnarvaar@icloud.com',
-    linkedin: 'https://www.linkedin.com/in/jose-danilo-narvaez-arias-26488025a/',
-    github: 'https://github.com/dny1020'
-  },
+  stats: [],
+  contact: {},
   footer: ''
 };
 
@@ -357,7 +356,7 @@ function App() {
       </button>
 
       <a
-        href="https://wa.me/573238037419?text=Hola%20necesito%20ayuda"
+        href={WA_URL}
         target="_blank"
         rel="noopener"
         className="whatsapp-float"
@@ -380,18 +379,7 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
 
   const hasSkills = typeof skills === 'object' && Object.keys(skills).length > 0;
 
-  const yearsExp = useMemo(() => {
-    const start = 2012;
-    return new Date().getFullYear() - start;
-  }, []);
-
-  const stats = Array.isArray(data.stats) && data.stats.length
-    ? data.stats
-    : [
-      { label: 'Years in IT', value: `${yearsExp}+` },
-      { label: 'Years Telephony', value: '6+' },
-      { label: 'GitHub Repos', value: '16' }
-    ];
+  const stats = data.stats || [];
 
   const weatherLabel = (code) => {
     if (code === null || code === undefined) return 'Weather unavailable';
@@ -459,7 +447,7 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
             </div>
             <div className="hero-card-content">
               <h3>Profile Overview</h3>
-              <p>{data.profileOverview || 'Systems Engineer specializing in scalable VoIP infrastructure, cloud automation, and AI.'}</p>
+              <p>{data.profileOverview}</p>
               <div className="stats-row">
                 {stats.map((stat, index) => (
                   <div key={`${stat.label}-${index}`} className="stat">
@@ -470,7 +458,7 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
               </div>
               <div className="widget-row">
                 <div className="widget-card">
-                  <span className="widget-label">Bogotá time</span>
+                  <span className="widget-label">{widgets?.city || 'Local'} time</span>
                   <span className="widget-value">{timeLabel || 'Loading...'}</span>
                   <span className="widget-meta">{widgets?.timezone || 'America/Bogota'}</span>
                 </div>
@@ -889,7 +877,7 @@ function ServicesPage({ data }) {
               <a href={`mailto:${data.contact.email}`} className="contact-item"><Icon name="mail" /> {data.contact.email}</a>
             ) : null}
             <a
-              href="https://wa.me/573238037419?text=Hola%20necesito%20ayuda"
+              href={WA_URL}
               className="contact-item"
               target="_blank"
               rel="noopener"
