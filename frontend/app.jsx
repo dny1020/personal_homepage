@@ -426,7 +426,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
       <section id="about" className="hero-section">
         <div className="hero-grid">
           <div className="hero-copy reveal">
-            <p className="hero-eyebrow">Cloud · Telephony · DevOps</p>
             <h1 className="hero-title">{data.name}</h1>
             <p className="hero-subtitle">{data.role}</p>
             <p className="hero-location"><Icon name="pin" /> {data.location}</p>
@@ -483,7 +482,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
       <section id="experience" className="section">
         <div className="section-header">
           <h2 className="section-title">Professional Experience</h2>
-          <p className="section-kicker">A career arc from support to engineering — always in telecommunications.</p>
         </div>
         <div className="timeline">
           {(data.experience || []).map((exp, index) => (
@@ -505,7 +503,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
       <section id="education" className="section">
         <div className="section-header">
           <h2 className="section-title">Education & Certifications</h2>
-          <p className="section-kicker">Continuous learning in engineering, cybersecurity, cloud, and AI.</p>
         </div>
         <div className="education-grid">
           {(data.education || []).map((edu, index) => (
@@ -530,7 +527,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
       <section id="projects" className="section">
         <div className="section-header">
           <h2 className="section-title">Featured Projects</h2>
-          <p className="section-kicker">Real-world solutions from telephony platforms to monitoring APIs.</p>
         </div>
         <div className="projects-grid">
           {(data.projects || []).map((project, index) => (
@@ -564,7 +560,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
         <section id="skills" className="section">
           <div className="section-header">
             <h2 className="section-title">Technical Skills</h2>
-            <p className="section-kicker">A comprehensive toolkit spanning infrastructure, development, and operations.</p>
           </div>
           <div className="skills-categories">
             {Object.entries(skills).map(([category, items]) => {
@@ -608,7 +603,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
         <section id="certifications" className="section">
           <div className="section-header">
             <h2 className="section-title">Licenses & Certifications</h2>
-            <p className="section-kicker">Industry certifications validating cloud, security, and leadership competencies.</p>
           </div>
           <div className="certifications-grid">
             {certifications.map((cert, index) => (
@@ -630,7 +624,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
         <section id="badges" className="section">
           <div className="section-header">
             <h2 className="section-title">Digital Badges</h2>
-            <p className="section-kicker">Verified credentials and skill endorsements.</p>
           </div>
           <div className="badges-grid">
             {badges.map((badge, index) => (
@@ -660,7 +653,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
         <section id="achievements" className="section">
           <div className="section-header">
             <h2 className="section-title">Key Achievements</h2>
-            <p className="section-kicker">Impact highlights from recent engineering work.</p>
           </div>
           <div className="achievements-grid">
             {achievements.map((item, index) => (
@@ -681,7 +673,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
         <section id="repositories" className="section">
           <div className="section-header">
             <h2 className="section-title">Open Source</h2>
-            <p className="section-kicker">Public repositories and technical experiments on GitHub.</p>
           </div>
           <div className="repositories-grid">
             {repositories.map((repo, index) => (
