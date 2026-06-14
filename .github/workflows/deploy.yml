@@ -1,135 +1,59 @@
-name: CI/CD Deploy Only
+name: Deploy to S3
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
+    paths:
+      - 'frontend/**'
 
 jobs:
   deploy:
-    name: Deploy to EC2
+    name: Deploy to S3
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Update Cloudflare DNS
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Sync to S3
+        env:
+          BUCKET: danilocloud.me
+        run: |
+          # Assets estáticos: cache largo (app.jsx?v=8 / styles.css?v=8 hacen cache busting)
+          aws s3 sync frontend/ s3://$BUCKET/ \
+            --delete \
+            --cache-control "public, max-age=604800, immutable"
+
+          # index.html y data.json: siempre frescos (sobrescribe los headers del paso anterior)
+          aws s3 cp s3://$BUCKET/index.html s3://$BUCKET/index.html \
+            --metadata-directive REPLACE \
+            --content-type "text/html; charset=utf-8" \
+            --cache-control "no-cache, no-store, must-revalidate"
+
+          aws s3 cp s3://$BUCKET/data.json s3://$BUCKET/data.json \
+            --metadata-directive REPLACE \
+            --content-type "application/json" \
+            --cache-control "no-cache, no-store, must-revalidate"
+
+      - name: Purge Cloudflare cache
         env:
           CF_API_TOKEN: ${{ secrets.CF_DNS_API_TOKEN }}
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
-          EC2_IP: ${{ secrets.EC2_HOST }}
         run: |
-          set -euo pipefail
-          if [ -z "${CF_API_TOKEN}" ]; then
-            echo "CF_DNS_API_TOKEN is missing" >&2
-            exit 1
-          fi
-          if [ -z "${EC2_IP}" ]; then
-            echo "EC2_HOST is missing" >&2
-            exit 1
-          fi
-          if [ -z "${CF_ZONE_ID:-}" ]; then
-            CF_ZONE_ID=$(curl -fsSL "https://api.cloudflare.com/client/v4/zones?name=danilocloud.me" \
+          ZONE_ID="${CF_ZONE_ID}"
+          if [ -z "$ZONE_ID" ]; then
+            ZONE_ID=$(curl -fsSL "https://api.cloudflare.com/client/v4/zones?name=danilocloud.me" \
               -H "Authorization: Bearer ${CF_API_TOKEN}" \
               -H "Content-Type: application/json" \
               | jq -r '.result[0].id')
           fi
-          if [ -z "${CF_ZONE_ID}" ] || [ "${CF_ZONE_ID}" = "null" ]; then
-            echo "Could not resolve Cloudflare zone id for danilocloud.me; set CF_ZONE_ID secret." >&2
-            exit 1
-          fi
-
-          update_record() {
-            record_name="$1"
-            record_id=$(curl -fsSL "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records?type=A&name=${record_name}" \
-              -H "Authorization: Bearer ${CF_API_TOKEN}" \
-              -H "Content-Type: application/json" \
-              | jq -r '.result[0].id')
-            if [ -z "${record_id}" ] || [ "${record_id}" = "null" ]; then
-              curl -fsSL -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records" \
-                -H "Authorization: Bearer ${CF_API_TOKEN}" \
-                -H "Content-Type: application/json" \
-                --data "{\"type\":\"A\",\"name\":\"${record_name}\",\"content\":\"${EC2_IP}\",\"ttl\":120,\"proxied\":false}" \
-                | jq -e '.success' >/dev/null
-            else
-              curl -fsSL -X PUT "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records/${record_id}" \
-                -H "Authorization: Bearer ${CF_API_TOKEN}" \
-                -H "Content-Type: application/json" \
-                --data "{\"type\":\"A\",\"name\":\"${record_name}\",\"content\":\"${EC2_IP}\",\"ttl\":120,\"proxied\":false}" \
-                | jq -e '.success' >/dev/null
-            fi
-          }
-
-          update_record "danilocloud.me"
-
-      - name: Sync files to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ec2-user
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: "frontend,backend,nginx,docker-compose.yml"
-          target: "~/app"
-          strip_components: 0
-
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        env:
-          APP_ENV: ${{ secrets.APP_ENV }}
-          CF_DNS_API_TOKEN: ${{ secrets.CF_DNS_API_TOKEN }}
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ec2-user
-          key: ${{ secrets.EC2_SSH_KEY }}
-          envs: APP_ENV,CF_DNS_API_TOKEN
-          script: |
-            set -euo pipefail
-
-            # ── Docker ────────────────────────────────────────────────────
-            if ! command -v docker >/dev/null 2>&1; then
-              sudo dnf update -y
-              sudo dnf install -y docker
-              sudo systemctl enable --now docker
-              sudo usermod -aG docker ec2-user
-            fi
-            sudo systemctl start docker
-
-            # ── Docker Compose plugin (system-wide para que sudo lo vea) ─
-            if ! sudo docker compose version >/dev/null 2>&1; then
-              COMPOSE_VER=$(curl -fsSL https://api.github.com/repos/docker/compose/releases/latest \
-                | grep '"tag_name"' | sed -E 's/.*"(v[^"]+)".*/\1/')
-              sudo mkdir -p /usr/lib/docker/cli-plugins
-              sudo curl -fsSL \
-                "https://github.com/docker/compose/releases/download/${COMPOSE_VER}/docker-compose-linux-x86_64" \
-                -o /usr/lib/docker/cli-plugins/docker-compose
-              sudo chmod +x /usr/lib/docker/cli-plugins/docker-compose
-            fi
-
-            # ── Certbot via pip3 (python3-certbot-dns-cloudflare no existe en AL2023 dnf) ─
-            if ! command -v certbot >/dev/null 2>&1; then
-              sudo dnf install -y python3-pip
-              sudo python3 -m pip install --quiet certbot certbot-dns-cloudflare
-            fi
-
-            # ── .env desde GitHub Secret ──────────────────────────────────
-            cd ~/app
-            printf '%s' "${APP_ENV}" > .env
-            chmod 600 .env
-
-            # ── Credenciales Cloudflare para certbot ──────────────────────
-            mkdir -p ~/.secrets/certbot
-            printf 'dns_cloudflare_api_token = %s\n' "${CF_DNS_API_TOKEN}" > ~/.secrets/certbot/cloudflare.ini
-            chmod 600 ~/.secrets/certbot/cloudflare.ini
-
-            # ── Obtener/renovar certificado SSL ───────────────────────────
-            sudo certbot certonly \
-              --dns-cloudflare \
-              --dns-cloudflare-credentials /home/ec2-user/.secrets/certbot/cloudflare.ini \
-              --email 08porous-mucks@icloud.com \
-              --agree-tos \
-              --no-eff-email \
-              -d danilocloud.me \
-              --non-interactive
-
-            # ── Levantar stack ─────────────────────────────────────────────
-            # /etc/letsencrypt se monta directamente desde el host en docker-compose.yml
-            sudo docker compose up -d --build
+          curl -fsSL -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/purge_cache" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}'

@@ -4,13 +4,19 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "instance_type" {
-  description = "EC2 instance type (t3.nano ~$0.002/hr spot, t3.micro ~$0.004/hr si el build de Docker falla por OOM)"
+variable "bucket_name" {
+  description = "Nombre del bucket S3 — debe coincidir con el dominio para que S3 website routing funcione con Cloudflare proxy"
   type        = string
-  default     = "t3.nano"
+  default     = "danilocloud.me"
 }
 
-variable "public_key" {
-  description = "Public SSH key"
+variable "monthly_budget_usd" {
+  description = "Tope mensual del budget AWS (USD)"
+  type        = string
+  default     = "2"
+}
+
+variable "billing_alert_email" {
+  description = "Email para alertas de AWS Budgets (definir en terraform.tfvars)"
   type        = string
 }

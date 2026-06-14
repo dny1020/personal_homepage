@@ -1,8 +1,15 @@
 const { useEffect, useMemo, useState } = React;
 
-const API_BASE = '';
-
 const WA_URL = 'https://wa.me/573238037419?text=Hola%20necesito%20ayuda';
+
+const WIDGET_CONFIG = {
+  timezone: 'America/Bogota',
+  city: 'Bogotá',
+  lat: '4.7110',
+  lon: '-74.0721',
+  temperatureUnit: 'celsius',
+  windSpeedUnit: 'kmh'
+};
 
 const fallbackData = {
   name: '',
@@ -47,19 +54,6 @@ function useRevealOnScroll(deps = []) {
   }, deps);
 }
 
-function useRoute() {
-  const getRoute = () => window.location.pathname;
-  const [route, setRoute] = useState(getRoute());
-
-  useEffect(() => {
-    const onPop = () => setRoute(getRoute());
-    window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
-  }, []);
-
-  return route;
-}
-
 const SKILL_CATEGORY_META = {
   languages: { label: 'Languages & Scripting', icon: 'code', color: 'var(--teal)' },
   infrastructure: { label: 'Infrastructure', icon: 'server', color: 'var(--amber)' },
@@ -67,11 +61,6 @@ const SKILL_CATEGORY_META = {
   cloud_devops: { label: 'Cloud & DevOps', icon: 'cloud', color: 'var(--teal)' },
   ai_data: { label: 'AI & Data', icon: 'brain', color: 'var(--amber)' },
   tools: { label: 'Tools & Platforms', icon: 'tool', color: 'var(--coral)' }
-};
-
-const SERVICES_BRAND = {
-  name: 'Aethrax',
-  initials: 'AE'
 };
 
 function Icon({ name, className = '' }) {
@@ -109,14 +98,12 @@ function App() {
   const [showTop, setShowTop] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
   const [avatarOk, setAvatarOk] = useState(true);
-  const route = useRoute();
-  const isServices = route.startsWith('/bot-ai');
 
   useEffect(() => {
     let mounted = true;
     const load = async () => {
       try {
-        const response = await fetch(`${API_BASE}/api/info`);
+        const response = await fetch('/data.json');
         if (!response.ok) throw new Error('Failed to fetch data');
         const payload = await response.json();
         if (mounted) {
@@ -141,17 +128,33 @@ function App() {
     let mounted = true;
     let timer;
     const loadWidgets = async () => {
+      const { timezone, city, lat, lon, temperatureUnit, windSpeedUnit } = WIDGET_CONFIG;
+      let weather = null;
       try {
-        const response = await fetch(`${API_BASE}/api/widgets`);
-        if (!response.ok) throw new Error('Failed to fetch widgets');
-        const payload = await response.json();
-        if (mounted) {
-          setWidgets(payload);
+        const url = new URL('https://api.open-meteo.com/v1/forecast');
+        url.searchParams.set('latitude', lat);
+        url.searchParams.set('longitude', lon);
+        url.searchParams.set('current', 'temperature_2m,weather_code,wind_speed_10m');
+        url.searchParams.set('temperature_unit', temperatureUnit);
+        url.searchParams.set('wind_speed_unit', windSpeedUnit);
+        url.searchParams.set('timezone', timezone);
+        const response = await fetch(url.toString());
+        if (response.ok) {
+          const payload = await response.json();
+          const current = payload.current || {};
+          const units = payload.current_units || {};
+          weather = {
+            temperature: current.temperature_2m,
+            temperature_unit: units.temperature_2m || '°C',
+            wind_speed: current.wind_speed_10m,
+            wind_speed_unit: units.wind_speed_10m || 'km/h',
+            weather_code: current.weather_code,
+            observed_at: current.time
+          };
         }
-      } catch (error) {
-        if (mounted) {
-          setWidgets((prev) => ({ ...prev, weather: null }));
-        }
+      } catch (_) {}
+      if (mounted) {
+        setWidgets({ time: new Date().toISOString(), timezone, city, weather });
       }
     };
     loadWidgets();
@@ -168,7 +171,6 @@ function App() {
       setScrolled(y > 80);
       setShowTop(y > 600);
 
-      if (isServices) return;
       const sections = document.querySelectorAll('section[id]');
       let current = 'about';
       sections.forEach((section) => {
@@ -184,9 +186,9 @@ function App() {
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isServices]);
+  }, []);
 
-  useRevealOnScroll([data, isServices]);
+  useRevealOnScroll([data]);
 
   useEffect(() => {
     setAvatarOk(true);
@@ -207,10 +209,7 @@ function App() {
     setSubmenuOpen(false);
   };
 
-  const navBrandName = isServices
-    ? SERVICES_BRAND.name
-    : data.name?.split(' ').slice(0, 2).join(' ');
-  const navBrandInitials = isServices ? SERVICES_BRAND.initials : initials;
+  const navBrandName = data.name?.split(' ').slice(0, 2).join(' ');
 
   return (
     <div className="app-shell">
@@ -224,76 +223,63 @@ function App() {
         <div className="nav-content">
           <a className="nav-logo" href="/" onClick={handleNavClick}>
             <div className="nav-avatar">
-              {!isServices && data.avatarUrl && avatarOk ? (
+              {data.avatarUrl && avatarOk ? (
                 <img src={data.avatarUrl} alt={`${data.name} avatar`} onError={() => setAvatarOk(false)} />
               ) : (
-                <span>{navBrandInitials}</span>
+                <span>{initials}</span>
               )}
             </div>
             <span className="nav-name">{navBrandName}</span>
           </a>
 
           <div className={`nav-links ${navOpen ? 'active' : ''}`}>
-            {isServices ? (
-              <>
-                <a href="/" className="nav-link" onClick={handleNavClick}>Inicio</a>
-                <a href="#services" className="nav-link" onClick={handleNavClick}>Servicios</a>
-                <a href="#process" className="nav-link" onClick={handleNavClick}>Proceso</a>
-                <a href="#cases" className="nav-link" onClick={handleNavClick}>Casos de uso</a>
-                <a href="#contact" className="nav-link" onClick={handleNavClick}>Contacto</a>
-              </>
-            ) : (
-              <>
+            {[
+              { id: 'about', label: 'About' },
+              { id: 'experience', label: 'Experience' },
+              { id: 'education', label: 'Education' },
+              { id: 'projects', label: 'Projects' },
+              { id: 'skills', label: 'Skills' }
+            ].map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
+                onClick={handleNavClick}
+              >
+                {link.label}
+              </a>
+            ))}
+            <div
+              className={`nav-dropdown ${submenuOpen ? 'open' : ''}`}
+              onMouseLeave={() => setSubmenuOpen(false)}
+            >
+              <button
+                className="nav-link nav-link-button"
+                onClick={() => setSubmenuOpen((prev) => !prev)}
+                aria-haspopup="true"
+                aria-expanded={submenuOpen}
+              >
+                More
+                <span className="chevron">▾</span>
+              </button>
+              <div className="dropdown-menu">
                 {[
-                  { id: 'about', label: 'About' },
-                  { id: 'experience', label: 'Experience' },
-                  { id: 'education', label: 'Education' },
-                  { id: 'projects', label: 'Projects' },
-                  { id: 'skills', label: 'Skills' }
-                ].map((link) => (
+                  { id: 'certifications', label: 'Certifications' },
+                  { id: 'achievements', label: 'Achievements' },
+                  { id: 'repositories', label: 'Repositories' },
+                  { id: 'contact', label: 'Contact' }
+                ].map((item) => (
                   <a
-                    key={link.id}
-                    href={`#${link.id}`}
-                    className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
+                    key={item.id}
+                    href={`#${item.id}`}
                     onClick={handleNavClick}
+                    className={`dropdown-link ${activeSection === item.id ? 'active' : ''}`}
                   >
-                    {link.label}
+                    {item.label}
                   </a>
                 ))}
-                <a href="/bot-ai" className="nav-link" onClick={handleNavClick}>Services</a>
-                <div
-                  className={`nav-dropdown ${submenuOpen ? 'open' : ''}`}
-                  onMouseLeave={() => setSubmenuOpen(false)}
-                >
-                  <button
-                    className="nav-link nav-link-button"
-                    onClick={() => setSubmenuOpen((prev) => !prev)}
-                    aria-haspopup="true"
-                    aria-expanded={submenuOpen}
-                  >
-                    More
-                    <span className="chevron">▾</span>
-                  </button>
-                  <div className="dropdown-menu">
-                    {[
-                      { id: 'certifications', label: 'Certifications' },
-                      { id: 'achievements', label: 'Achievements' },
-                      { id: 'repositories', label: 'Repositories' },
-                      { id: 'contact', label: 'Contact' }
-                    ].map((item) => (
-                      <a
-                        key={item.id}
-                        href={`#${item.id}`}
-                        onClick={handleNavClick}
-                        className={`dropdown-link ${activeSection === item.id ? 'active' : ''}`}
-                      >
-                        {item.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </>
-            )}
+              </div>
+            </div>
           </div>
 
           <button
@@ -308,41 +294,24 @@ function App() {
         </div>
       </nav>
 
-      {isServices ? (
-        <ServicesPage data={data} />
-      ) : (
-        <HomePage
-          data={data}
-          initials={initials}
-          avatarOk={avatarOk}
-          setAvatarOk={setAvatarOk}
-          widgets={widgets}
-        />
-      )}
+      <HomePage
+        data={data}
+        initials={initials}
+        avatarOk={avatarOk}
+        setAvatarOk={setAvatarOk}
+        widgets={widgets}
+      />
 
       <footer className="footer">
         <div className="footer-content">
-          <p>
-            {isServices
-              ? `© ${new Date().getFullYear()} ${SERVICES_BRAND.name}. Multicloud AI Communications.`
-              : data.footer || `© ${new Date().getFullYear()} ${data.name}. All rights reserved.`}
-          </p>
+          <p>{data.footer || `© ${new Date().getFullYear()} ${data.name}. All rights reserved.`}</p>
           <div className="footer-links">
-            {isServices ? (
-              <>
-                <a href="/bot-ai#services" className="footer-link">Servicios</a>
-                <a href="/bot-ai#contact" className="footer-link">Contacto</a>
-              </>
-            ) : (
-              <>
-                {data.contact?.linkedin ? (
-                  <a href={data.contact.linkedin} target="_blank" rel="noopener" className="footer-link">LinkedIn</a>
-                ) : null}
-                {data.contact?.github ? (
-                  <a href={data.contact.github} target="_blank" rel="noopener" className="footer-link">GitHub</a>
-                ) : null}
-              </>
-            )}
+            {data.contact?.linkedin ? (
+              <a href={data.contact.linkedin} target="_blank" rel="noopener" className="footer-link">LinkedIn</a>
+            ) : null}
+            {data.contact?.github ? (
+              <a href={data.contact.github} target="_blank" rel="noopener" className="footer-link">GitHub</a>
+            ) : null}
           </div>
         </div>
       </footer>
@@ -709,172 +678,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
             {data.contact?.github ? (
               <a href={data.contact.github} className="contact-item" target="_blank" rel="noopener"><Icon name="github" /> GitHub</a>
             ) : null}
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-}
-
-function ServicesPage({ data }) {
-  const serviceCatalog = [
-    {
-      title: 'Bot AI Conversacional',
-      description: 'Asistentes para WhatsApp y webchat con flujos inteligentes, handoff humano y automatización de procesos.'
-    },
-    {
-      title: 'Voicebot + WebRTC',
-      description: 'Experiencias de voz con IA y canal WebRTC para atención omnicanal, autoservicio y campañas de salida.'
-    },
-    {
-      title: 'Arquitectura Multicloud',
-      description: 'Despliegues distribuidos en múltiples nubes para alta disponibilidad, baja latencia y continuidad operativa.'
-    },
-    {
-      title: 'Operación Multitenant',
-      description: 'Aislamiento por empresa, configuración por cliente y escalamiento independiente por unidad de negocio.'
-    },
-    {
-      title: 'Reportes Inteligentes',
-      description: 'Métricas en tiempo real, tableros ejecutivos y analítica accionable para mejorar conversión y servicio.'
-    },
-    {
-      title: 'Integraciones Empresariales',
-      description: 'Conexión con CRM, bases de datos, APIs y sistemas internos para una operación totalmente orquestada.'
-    }
-  ];
-
-  const processSteps = [
-    { step: '01', title: 'Descubrimiento', text: 'Definimos objetivos, canales, SLA y métricas de negocio desde el inicio.' },
-    { step: '02', title: 'Arquitectura', text: 'Diseñamos la solución Bot + AI + Voicebot + WebRTC con enfoque multicloud.' },
-    { step: '03', title: 'Implementación', text: 'Construimos flujos, integraciones y automatizaciones con entregas iterativas.' },
-    { step: '04', title: 'Optimización', text: 'Medimos resultados y ajustamos continuamente con reportes inteligentes.' }
-  ];
-
-  const useCases = [
-    {
-      title: 'Atención 24/7 con IA',
-      text: 'Reducción de tiempos de espera con bots de autoservicio y escalamiento contextual a agentes.'
-    },
-    {
-      title: 'Ventas Conversacionales',
-      text: 'Calificación de leads, seguimiento automatizado y mayor tasa de cierre en campañas digitales.'
-    },
-    {
-      title: 'Operaciones de Soporte',
-      text: 'Centralización omnicanal con trazabilidad completa por cliente y monitoreo en tiempo real.'
-    }
-  ];
-
-  return (
-    <main className="container services-page">
-      <section className="services-hero" id="services">
-        <div className="services-hero-content reveal">
-          <p className="hero-eyebrow">Aethrax · Bot + AI + Voicebot + WebRTC</p>
-          <h1 className="hero-title">Automatización empresarial con IA cloud</h1>
-          <p className="hero-subtitle">Servicios propios en arquitectura multicloud y multitenant.</p>
-          <p className="hero-bio">
-            Impulsamos operaciones de atención, ventas y soporte con canales unificados, analítica en tiempo real
-            y una base tecnológica diseñada para escalar en múltiples nubes.
-          </p>
-          <div className="hero-buttons">
-            <a href="#contact" className="btn btn-primary">Solicitar Demo</a>
-            <a href="#cases" className="btn btn-ghost">Ver Casos de Uso</a>
-          </div>
-        </div>
-        <div className="services-hero-panel reveal">
-          <div className="panel-card">
-            <h3>Multicloud</h3>
-            <p className="panel-value">Nativo</p>
-            <span>Despliegue resiliente entre nubes.</span>
-          </div>
-          <div className="panel-card">
-            <h3>Multitenant</h3>
-            <p className="panel-value">Seguro</p>
-            <span>Aislamiento por cliente y unidad.</span>
-          </div>
-          <div className="panel-card">
-            <h3>Analítica AI</h3>
-            <p className="panel-value">Tiempo Real</p>
-            <span>Reportes inteligentes accionables.</span>
-          </div>
-
-          <div className="services-image-composition">
-            <div className="services-image services-image-ai">
-              <img src="/AI_chat_and_voice_agent.png" alt="Asistente AI para chat y voz" loading="lazy" />
-            </div>
-            <div className="services-image services-image-human">
-              <img src="/agent_human.png" alt="Equipo humano de atención omnicanal" loading="lazy" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section" id="services-list">
-        <div className="section-header">
-          <h2 className="section-title">Servicios y Capacidades</h2>
-          <p className="section-kicker">Portafolio enfocado en resultados de negocio y experiencia de cliente.</p>
-        </div>
-        <div className="services-grid">
-          {serviceCatalog.map((item) => (
-            <div key={item.title} className="service-card reveal">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="section" id="process">
-        <div className="section-header">
-          <h2 className="section-title">Modelo de Entrega</h2>
-          <p className="section-kicker">Implementación estructurada para acelerar valor y reducir riesgo.</p>
-        </div>
-        <div className="process-grid">
-          {processSteps.map((item) => (
-            <div key={item.step} className="process-card reveal">
-              <span className="process-step">{item.step}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="section" id="cases">
-        <div className="section-header">
-          <h2 className="section-title">Casos de Uso</h2>
-          <p className="section-kicker">Aplicaciones prácticas para escalar atención y performance comercial.</p>
-        </div>
-        <div className="cases-grid">
-          {useCases.map((item) => (
-            <div key={item.title} className="case-card reveal">
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="section contact-section" id="contact">
-        <div className="glass-card contact-card reveal">
-          <h2 className="section-title">Activa tu operación con Aethrax</h2>
-          <p className="contact-text">
-            Construimos soluciones empresariales sobre servicios propios como <strong>webrtc_frontend</strong> y <strong>chatbot_ccaas</strong>,
-            combinando IA, voicebot y reportes inteligentes para entornos multicloud.
-          </p>
-          <div className="contact-info">
-            {data.contact?.email ? (
-              <a href={`mailto:${data.contact.email}`} className="contact-item"><Icon name="mail" /> {data.contact.email}</a>
-            ) : null}
-            <a
-              href={WA_URL}
-              className="contact-item"
-              target="_blank"
-              rel="noopener"
-            >
-              <Icon name="phone" /> WhatsApp Empresarial
-            </a>
           </div>
         </div>
       </section>

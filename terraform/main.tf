@@ -11,79 +11,85 @@ provider "aws" {
   region = var.aws_region
 }
 
-# Obtiene la última AMI de Amazon Linux 2023 automáticamente
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  owners      = ["amazon"]
+# ── S3 Bucket ─────────────────────────────────────────────────────────────────
 
-  filter {
-    name   = "name"
-    values = ["al2023-ami-2023.*-x86_64"]
-  }
-}
-
-# Par de claves SSH
-resource "aws_key_pair" "deployer" {
-  key_name_prefix = "deployer-key-"
-  public_key      = var.public_key
-}
-
-# Solicitud de Instancia EC2 Spot persistente:
-# - Si AWS interrumpe la instancia, la detiene (no la termina) y la reactiva cuando haya capacidad.
-# - Para destruir completamente: terraform destroy
-resource "aws_spot_instance_request" "spot_instance" {
-  ami                            = data.aws_ami.amazon_linux.id
-  instance_type                  = var.instance_type
-  spot_type                      = "persistent"
-  instance_interruption_behavior = "stop"
-  key_name                       = aws_key_pair.deployer.key_name
-  wait_for_fulfillment           = true
-
-  vpc_security_group_ids = [aws_security_group.web_sg.id]
+resource "aws_s3_bucket" "homepage" {
+  bucket        = var.bucket_name
+  force_destroy = true
 
   tags = {
-    Name = "Homepage-Spot"
+    Project = "personal-homepage"
   }
 }
 
-resource "aws_security_group" "web_sg" {
-  name_prefix = "web_access_"
-  description = "Allow HTTP and SSH"
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+# Versionado mínimo: protege contra sobreescrituras accidentales.
+# Las versiones antiguas se eliminan automáticamente después de 30 días (ver lifecycle).
+resource "aws_s3_bucket_versioning" "homepage" {
+  bucket = aws_s3_bucket.homepage.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
-output "instance_public_ip" {
-  value = aws_spot_instance_request.spot_instance.public_ip
+resource "aws_s3_bucket_lifecycle_configuration" "homepage" {
+  bucket = aws_s3_bucket.homepage.id
+
+  rule {
+    id     = "expire-old-versions"
+    status = "Enabled"
+
+    filter {}
+
+    noncurrent_version_expiration {
+      noncurrent_days = 30
+    }
+  }
 }
 
-output "spot_instance_id" {
-  value = aws_spot_instance_request.spot_instance.spot_instance_id
+# ── Website hosting ───────────────────────────────────────────────────────────
+# error_document = index.html → S3 devuelve index.html ante cualquier ruta
+# inexistente (e.g. /bot-ai), permitiendo que React maneje el routing client-side.
+
+resource "aws_s3_bucket_website_configuration" "homepage" {
+  bucket = aws_s3_bucket.homepage.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "index.html"
+  }
 }
 
+# ── Acceso público ────────────────────────────────────────────────────────────
+# block_public_acls/ignore_public_acls = true → prohíbe ACLs de objeto (más seguro).
+# block_public_policy = false → permite la bucket policy pública de solo lectura.
+
+resource "aws_s3_bucket_public_access_block" "homepage" {
+  bucket = aws_s3_bucket.homepage.id
+
+  block_public_acls       = true
+  block_public_policy     = false
+  ignore_public_acls      = true
+  restrict_public_buckets = false
+}
+
+# Solo GetObject es público. El bucket en sí y sus metadatos no son listables.
+resource "aws_s3_bucket_policy" "homepage" {
+  bucket     = aws_s3_bucket.homepage.id
+  depends_on = [aws_s3_bucket_public_access_block.homepage]
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "PublicReadGetObject"
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = "s3:GetObject"
+        Resource  = "${aws_s3_bucket.homepage.arn}/*"
+      }
+    ]
+  })
+}
