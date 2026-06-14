@@ -70,3 +70,4 @@ acme.json
 etc/letsencrypt/
 
 terraform/terraform.tfstate
+CLAUDE.md
