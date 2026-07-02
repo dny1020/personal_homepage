@@ -266,7 +266,6 @@ function App() {
                 {[
                   { id: 'certifications', label: 'Certifications' },
                   { id: 'achievements', label: 'Achievements' },
-                  { id: 'repositories', label: 'Repositories' },
                   { id: 'contact', label: 'Contact' }
                 ].map((item) => (
                   <a

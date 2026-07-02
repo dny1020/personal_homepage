@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nslookup danilocloud.me)",
+      "Bash(host danilocloud.me)",
+      "Bash(ssh *)",
+      "Bash(curl -s \"https://cloudflare-dns.com/dns-query?name=danilocloud.me&type=A\" -H \"accept: application/dns-json\")",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(a['data']\\) for a in data.get\\('Answer',[]\\)]\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(curl -sI https://danilocloud.me --max-time 10)",
+      "Bash(scp ec2:~/app/acme.json /home/jnarvaar/personal_homepage/acme.json)",
+      "Bash(curl -sv https://danilocloud.me --max-time 15)",
+      "Bash(curl -s \"https://cloudflare-dns.com/dns-query?name=www.danilocloud.me&type=A\" -H \"accept: application/dns-json\")",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(a['data']\\) for a in data.get\\('Answer',[]\\)] or print\\('NO RECORD'\\)\")",
+      "Bash(scp /home/jnarvaar/personal_homepage/docker-compose.yml ec2:~/app/docker-compose.yml)",
+      "Bash(git -C /home/jnarvaar/personal_homepage ls-files terraform/)",
+      "Bash(git -C /home/jnarvaar/personal_homepage show HEAD:terraform/terraform.tfstate)",
+      "Bash(git -C /home/jnarvaar/personal_homepage ls-files)",
+      "Bash(git -C /home/jnarvaar/personal_homepage show HEAD:.env)",
+      "Bash(git -C /home/jnarvaar/personal_homepage log --all --oneline --diff-filter=A -- .env)",
+      "Bash(git -C /home/jnarvaar/personal_homepage log --all --oneline --diff-filter=A -- terraform/terraform.tfstate)",
+      "Bash(gh pr *)"
+    ]
+  }
+}

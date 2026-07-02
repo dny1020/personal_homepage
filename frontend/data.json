@@ -2,7 +2,7 @@
   "name": "Jose Danilo Narvaez Arias",
   "role": "Systems Engineer | Cloud & Telephony Infrastructure | DevOps",
   "location": "Bogotá, Colombia",
-  "bio": "Systems Engineer specializing in Cloud & Telephony Infrastructure and DevOps Automation. 6+ years at Emtelco building scalable VoIP systems with Asterisk, Kamailio, and SIP. Fluent in Python, Bash, and containerized deployments. Self-hoster, privacy advocate, and relentless learner pursuing AI specialization.",
+  "bio": "6+ years at Emtelco building scalable VoIP systems with Asterisk, Kamailio, and SIP. Fluent in Python, Bash, and containerized deployments. Self-hoster and privacy advocate, now pursuing an AI specialization.",
   "profileOverview": "Systems Engineer specializing in scalable VoIP infrastructure, cloud automation, and AI.",
   "avatarUrl": "/IMG_2164.jpg?v=7",
   "stats": [
@@ -73,12 +73,12 @@
     }
   ],
   "skills": {
-    "languages": ["Python", "Bash", "JavaScript", "Shell Scripting", "SQL"],
+    "languages": ["Python", "Bash", "JavaScript", "SQL"],
     "infrastructure": ["Docker", "Nginx", "Traefik", "WireGuard", "Linux", "Ansible", "GitHub Actions"],
     "telephony": ["Asterisk", "Kamailio", "SIP", "WebRTC", "SRTP", "PJSIP", "Genesys Cloud", "SBC"],
     "cloud_devops": ["AWS", "Azure", "Prometheus", "Grafana", "CI/CD", "Systemd", "Crontab"],
-    "ai_data": ["TensorFlow", "FastAPI", "LLMOps", "SQLite", "PostgreSQL"],
-    "tools": ["Git", "Gitea", "Vaultwarden", "Docker Compose", "Raspberry Pi"]
+    "ai_data": ["TensorFlow", "FastAPI", "LLMOps", "MCP", "RAG", "SQLite", "PostgreSQL"],
+    "tools": ["Git", "Gitea", "Vaultwarden", "Raspberry Pi"]
   },
   "languages": [
     { "language": "Spanish", "level": "Native" },
@@ -143,90 +143,25 @@
   ],
   "projects": [
     {
-      "name": "WebRTC Contact Center (CCaaS)",
-      "description": "Full-stack WebRTC contact center platform with Asterisk, Kamailio, SIP trunking, real-time supervisor dashboard, agent management, and CDR reporting. Deployed with Docker and Nginx.",
-      "tags": ["WebRTC", "Asterisk", "Kamailio", "Docker", "FastAPI", "SIP"],
-      "demo": "https://webrtc.danilocloud.me",
-      "github": "https://github.com/dny1020/webrtc_frontend"
+      "name": "doction",
+      "description": "Self-hosted, markdown-first wiki and knowledge base for humans and AI agents. PostgreSQL full-text search, optional local semantic search, per-page git history, a REST API, and a native MCP server for agent integration. MIT licensed.",
+      "tags": ["Python", "FastAPI", "PostgreSQL", "MCP", "Docker"],
+      "demo": "#",
+      "github": "https://github.com/dny1020/doction"
+    },
+    {
+      "name": "WhatsApp ISP Support Bot",
+      "description": "Automated WhatsApp technical support bot for ISPs. Combines a local RAG (BM25) knowledge base with Llama 3 via Groq for fast responses, integrated with Twilio WhatsApp and deployed with Docker.",
+      "tags": ["Python", "FastAPI", "RAG", "Twilio", "Docker"],
+      "demo": "#",
+      "github": "https://github.com/dny1020/bot_whatsapp"
     },
     {
       "name": "Coffee Tracker API",
-      "description": "Minimalist API that tracks coffee consumption with caffeine (mg) and heart rate metrics. Built with FastAPI and SQLite for data visualization and habit analysis.",
+      "description": "Minimalist API that tracks coffee consumption via caffeine (mg) and heart rate metrics, consumable directly from iPhone Shortcuts. Built with FastAPI and SQLite for habit analysis.",
       "tags": ["FastAPI", "SQLite", "Python", "REST API"],
       "demo": "http://coffee.danilocloud.me/api/v1",
       "github": "https://github.com/dny1020/coffee-tracker"
-    },
-    {
-      "name": "Realtime Session API",
-      "description": "Backend service for managing real-time telephony sessions. Developed with FastAPI and PJSIP for event tracking, session monitoring, and secure WebSocket communication.",
-      "tags": ["FastAPI", "Python", "WebSockets", "Telephony"],
-      "demo": "#",
-      "github": "https://github.com/dny1020/realtime-session-api"
-    },
-    {
-      "name": "Prometheus Consumption API",
-      "description": "API for Prometheus metrics reporting and monitoring automation. Tracks resource consumption with Python scripts and Bash automation.",
-      "tags": ["Python", "Prometheus", "Bash", "Monitoring"],
-      "demo": "#",
-      "github": "https://github.com/dny1020/prometheus_ocupation"
-    },
-    {
-      "name": "API News Eventos",
-      "description": "Scraping API for local event aggregation and automation using FastAPI. Streamlined news and event ingestion engine.",
-      "tags": ["FastAPI", "Python", "Scraping", "Automation"],
-      "demo": "#",
-      "github": "https://github.com/dny1020/api_news_eventos"
-    },
-    {
-      "name": "macOS Widget Monitor",
-      "description": "Native Swift widget for macOS that displays real-time system monitoring metrics. Custom-built for personal productivity tracking.",
-      "tags": ["Swift", "macOS", "Widget", "Monitoring"],
-      "demo": "#",
-      "github": "https://github.com/dny1020/Widget_MacOS_Monitory"
-    }
-  ],
-  "repositories": [
-    {
-      "name": "webrtc_frontend",
-      "description": "WebRTC contact center frontend with Asterisk integration, SIP call handling, and real-time agent dashboard.",
-      "url": "https://github.com/dny1020/webrtc_frontend",
-      "language": "JavaScript"
-    },
-    {
-      "name": "realtime-session-api",
-      "description": "FastAPI-based backend for managing and monitoring SIP real-time sessions with secure WebSockets.",
-      "url": "https://github.com/dny1020/realtime-session-api",
-      "language": "Python"
-    },
-    {
-      "name": "coffee-tracker",
-      "description": "FastAPI and SQLite app for tracking coffee intake with RESTful endpoints and data visualization.",
-      "url": "https://github.com/dny1020/coffee-tracker",
-      "language": "Python"
-    },
-    {
-      "name": "prometheus_ocupation",
-      "description": "Prometheus consumption and monitoring automation with Python and Bash.",
-      "url": "https://github.com/dny1020/prometheus_ocupation",
-      "language": "Python"
-    },
-    {
-      "name": "api_news_eventos",
-      "description": "FastAPI-based local events and news automation API with web scraping.",
-      "url": "https://github.com/dny1020/api_news_eventos",
-      "language": "Python"
-    },
-    {
-      "name": "Widget_MacOS_Monitory",
-      "description": "Native macOS widget for real-time system monitoring and resource tracking.",
-      "url": "https://github.com/dny1020/Widget_MacOS_Monitory",
-      "language": "Swift"
-    },
-    {
-      "name": "dotfiles",
-      "description": "Personal dotfiles for terminal, shell, and development environment configuration.",
-      "url": "https://github.com/dny1020/dotfiles",
-      "language": "Shell"
     }
   ],
   "contact": {
