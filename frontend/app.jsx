@@ -89,6 +89,41 @@ function Icon({ name, className = '' }) {
   );
 }
 
+function LinkedInBadge() {
+  useEffect(() => {
+    const scriptId = 'linkedin-badge-script';
+    if (document.getElementById(scriptId)) {
+      if (window.IN && window.IN.parse) window.IN.parse();
+      return;
+    }
+    const script = document.createElement('script');
+    script.id = scriptId;
+    script.src = 'https://platform.linkedin.com/badges/js/profile.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  }, []);
+
+  return (
+    <div
+      className="badge-base LI-profile-badge"
+      data-locale="en_US"
+      data-size="medium"
+      data-theme="light"
+      data-type="VERTICAL"
+      data-vanity="jose-danilo-narvaez-arias-26488025a"
+      data-version="v1"
+    >
+      <a
+        className="badge-base__link LI-simple-link"
+        href="https://co.linkedin.com/in/jose-danilo-narvaez-arias-26488025a?trk=profile-badge"
+      >
+        Jose Danilo Narvaez Arias
+      </a>
+    </div>
+  );
+}
+
 function App() {
   const [data, setData] = useState(fallbackData);
   const [widgets, setWidgets] = useState({ time: null, timezone: null, city: null, weather: null });
@@ -677,6 +712,9 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
             {data.contact?.github ? (
               <a href={data.contact.github} className="contact-item" target="_blank" rel="noopener"><Icon name="github" /> GitHub</a>
             ) : null}
+          </div>
+          <div className="linkedin-badge-wrap">
+            <LinkedInBadge />
           </div>
         </div>
       </section>

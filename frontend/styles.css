@@ -1226,6 +1226,12 @@ h1, h2, h3, h4 {
   color: var(--amber);
 }
 
+.linkedin-badge-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+}
+
 /* Footer */
 .footer {
   padding: 40px 24px;
