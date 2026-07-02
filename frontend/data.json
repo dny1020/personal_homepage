@@ -162,6 +162,13 @@
       "tags": ["FastAPI", "SQLite", "Python", "REST API"],
       "demo": "http://coffee.danilocloud.me/api/v1",
       "github": "https://github.com/dny1020/coffee-tracker"
+    },
+    {
+      "name": "RAG Without LLM",
+      "description": "Local RAG pipeline that answers extractively with citations, no generative LLM involved. Hybrid retrieval combines PostgreSQL pgvector similarity search with local Hugging Face embeddings and cross-encoder reranking; served via FastAPI with a Streamlit UI.",
+      "tags": ["FastAPI", "PostgreSQL", "pgvector", "Hugging Face", "Streamlit"],
+      "demo": "#",
+      "github": "https://github.com/dny1020/rag_without_llm"
     }
   ],
   "contact": {
