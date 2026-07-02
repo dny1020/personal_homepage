@@ -74,10 +74,10 @@
   ],
   "skills": {
     "languages": ["Python", "Bash", "JavaScript", "SQL"],
-    "infrastructure": ["Docker", "Nginx", "Traefik", "WireGuard", "Linux", "Ansible", "GitHub Actions"],
+    "infrastructure": ["Docker", "Kubernetes", "Nginx", "Traefik", "WireGuard", "Linux", "Ansible", "GitHub Actions"],
     "telephony": ["Asterisk", "Kamailio", "SIP", "WebRTC", "SRTP", "PJSIP", "Genesys Cloud", "SBC"],
     "cloud_devops": ["AWS", "Azure", "Prometheus", "Grafana", "CI/CD", "Systemd", "Crontab"],
-    "ai_data": ["TensorFlow", "FastAPI", "LLMOps", "MCP", "RAG", "SQLite", "PostgreSQL"],
+    "ai_data": ["Machine Learning", "TensorFlow", "FastAPI", "LLMOps", "MCP", "RAG", "SQLite", "PostgreSQL"],
     "tools": ["Git", "Gitea", "Vaultwarden", "Raspberry Pi"]
   },
   "languages": [
@@ -85,9 +85,7 @@
     { "language": "English", "level": "Professional Working (B1)" }
   ],
   "certifications": [
-    { "name": "AWS Knowledge: Cloud Essentials", "issuer": "Amazon Web Services (AWS)", "date": "Dec 2025" },
-    { "name": "Diplomado en Habilidades Directivas y Liderazgo", "issuer": "UNIR | Universidad Internacional de La Rioja", "date": "2024" },
-    { "name": "CyberOps Associate (Cisco)", "issuer": "Cisco / Fundación Universitaria del Área Andina", "date": "Feb 2024" }
+    { "name": "Diplomado en Habilidades Directivas y Liderazgo", "issuer": "UNIR | Universidad Internacional de La Rioja", "date": "2024" }
   ],
   "badges": [
     {
@@ -121,24 +119,8 @@
   ],
   "achievements": [
     {
-      "title": "Automation Champion",
-      "description": "Reduced manual VoIP provisioning tasks by 60% using Python and Bash automation at Emtelco."
-    },
-    {
-      "title": "Telephony Architect",
-      "description": "Designed and deployed multi-tenant SIP systems using Asterisk, Kamailio, and WebRTC for enterprise contact centers."
-    },
-    {
-      "title": "DevOps Advocate",
-      "description": "Containerized telephony services and optimized deployment pipelines with Docker, Nginx, and CI/CD."
-    },
-    {
       "title": "Self-Hosting Purist",
       "description": "Runs personal infrastructure on Raspberry Pi with Traefik, Vaultwarden, and Gitea — zero third-party dependencies."
-    },
-    {
-      "title": "AI Specialization",
-      "description": "Pursuing postgraduate specialization in Artificial Intelligence at UNIR with focus on TensorFlow and LLMOps."
     }
   ],
   "projects": [
