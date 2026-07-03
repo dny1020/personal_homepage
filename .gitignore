@@ -33,6 +33,12 @@ crash.log
 *.mp4
 
 # ====================
+# Build artifacts
+# ====================
+# app.js is transpiled from frontend/app.jsx by CI (and locally for preview)
+frontend/app.js
+
+# ====================
 # Claude Code
 # ====================
 CLAUDE.md

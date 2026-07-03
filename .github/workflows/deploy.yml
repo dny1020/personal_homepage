@@ -15,6 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Transpile JSX
+        run: |
+          npx --yes -p @babel/core@7 -p @babel/cli@7 -p @babel/preset-react@7 \
+            babel frontend/app.jsx --out-file frontend/app.js --presets=@babel/preset-react
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -26,12 +31,14 @@ jobs:
         env:
           BUCKET: danilocloud.me
         run: |
-          # Assets estáticos: cache largo (app.jsx?v=8 / styles.css?v=8 hacen cache busting)
+          # Static assets: long cache (styles.css?v=N / app.js?v=N handle cache busting)
+          # app.jsx is the source; only the transpiled app.js is deployed
           aws s3 sync frontend/ s3://$BUCKET/ \
             --delete \
+            --exclude "app.jsx" \
             --cache-control "public, max-age=604800, immutable"
 
-          # index.html y data.json: siempre frescos (sobrescribe los headers del paso anterior)
+          # index.html, data.json, app.js: always fresh (overrides headers from the sync above)
           aws s3 cp s3://$BUCKET/index.html s3://$BUCKET/index.html \
             --metadata-directive REPLACE \
             --content-type "text/html; charset=utf-8" \
@@ -40,5 +47,10 @@ jobs:
           aws s3 cp s3://$BUCKET/data.json s3://$BUCKET/data.json \
             --metadata-directive REPLACE \
             --content-type "application/json" \
+            --cache-control "no-cache, no-store, must-revalidate"
+
+          aws s3 cp s3://$BUCKET/app.js s3://$BUCKET/app.js \
+            --metadata-directive REPLACE \
+            --content-type "application/javascript" \
             --cache-control "no-cache, no-store, must-revalidate"
 

@@ -1,6 +1,6 @@
 const { useEffect, useMemo, useState } = React;
 
-const WA_URL = 'https://wa.me/573238037419?text=Hola%20necesito%20ayuda';
+const WA_URL = 'https://wa.me/573238037419?text=Hi%20Danilo%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect.';
 
 const WIDGET_CONFIG = {
   timezone: 'America/Bogota',
@@ -18,6 +18,7 @@ const fallbackData = {
   bio: '',
   profileOverview: '',
   avatarUrl: '/IMG_2164.jpg?v=7',
+  resumeUrl: '',
   experience: [],
   education: [],
   certifications: [],
@@ -55,12 +56,12 @@ function useRevealOnScroll(deps = []) {
 }
 
 const SKILL_CATEGORY_META = {
-  languages: { label: 'Languages & Scripting', icon: 'code', color: 'var(--teal)' },
-  infrastructure: { label: 'Infrastructure', icon: 'server', color: 'var(--amber)' },
-  telephony: { label: 'Telephony & VoIP', icon: 'phone', color: 'var(--coral)' },
-  cloud_devops: { label: 'Cloud & DevOps', icon: 'cloud', color: 'var(--teal)' },
-  ai_data: { label: 'AI & Data', icon: 'brain', color: 'var(--amber)' },
-  tools: { label: 'Tools & Platforms', icon: 'tool', color: 'var(--coral)' }
+  languages: { label: 'Languages & Scripting', icon: 'code' },
+  infrastructure: { label: 'Infrastructure', icon: 'server' },
+  telephony: { label: 'Telephony & VoIP', icon: 'phone' },
+  cloud_devops: { label: 'Cloud & DevOps', icon: 'cloud' },
+  ai_data: { label: 'AI & Data', icon: 'brain' },
+  tools: { label: 'Tools & Platforms', icon: 'tool' }
 };
 
 function Icon({ name, className = '' }) {
@@ -109,7 +110,7 @@ function LinkedInBadge() {
       className="badge-base LI-profile-badge"
       data-locale="en_US"
       data-size="medium"
-      data-theme="light"
+      data-theme="dark"
       data-type="VERTICAL"
       data-vanity="jose-danilo-narvaez-arias-26488025a"
       data-version="v1"
@@ -121,6 +122,54 @@ function LinkedInBadge() {
         Jose Danilo Narvaez Arias
       </a>
     </div>
+  );
+}
+
+const WEATHER_LABELS = {
+  0: 'Clear sky',
+  1: 'Mainly clear',
+  2: 'Partly cloudy',
+  3: 'Overcast',
+  45: 'Fog',
+  48: 'Depositing rime fog',
+  51: 'Light drizzle',
+  53: 'Moderate drizzle',
+  55: 'Dense drizzle',
+  61: 'Slight rain',
+  63: 'Moderate rain',
+  65: 'Heavy rain',
+  71: 'Slight snow',
+  73: 'Moderate snow',
+  75: 'Heavy snow',
+  80: 'Rain showers',
+  81: 'Rain showers',
+  82: 'Violent showers',
+  95: 'Thunderstorm'
+};
+
+function LocalWidgets({ widgets }) {
+  const timeLabel = useMemo(() => {
+    if (!widgets?.time) return null;
+    const date = new Date(widgets.time);
+    return new Intl.DateTimeFormat('en-US', {
+      timeZone: widgets.timezone || 'America/Bogota',
+      hour: '2-digit',
+      minute: '2-digit',
+      weekday: 'short'
+    }).format(date);
+  }, [widgets?.time, widgets?.timezone]);
+
+  if (!timeLabel) return null;
+
+  const weather = widgets?.weather;
+  const weatherPart = weather && weather.temperature !== null && weather.temperature !== undefined
+    ? ` · ${Math.round(weather.temperature)}${weather.temperature_unit || '°C'} ${WEATHER_LABELS[weather.weather_code] || ''}`.trimEnd()
+    : '';
+
+  return (
+    <p className="footer-widgets">
+      {widgets?.city || 'Bogotá'} · {timeLabel}{weatherPart}
+    </p>
   );
 }
 
@@ -251,8 +300,6 @@ function App() {
       <div className="background-gradient" />
       <div className="noise-layer" />
       <div className="blur-orb orb-1" />
-      <div className="blur-orb orb-2" />
-      <div className="blur-orb orb-3" />
 
       <nav className={`navbar glass ${scrolled ? 'scrolled' : ''}`}>
         <div className="nav-content">
@@ -300,8 +347,7 @@ function App() {
               <div className="dropdown-menu">
                 {[
                   { id: 'certifications', label: 'Certifications' },
-                  { id: 'achievements', label: 'Achievements' },
-                  { id: 'contact', label: 'Contact' }
+                  { id: 'achievements', label: 'Achievements' }
                 ].map((item) => (
                   <a
                     key={item.id}
@@ -314,6 +360,7 @@ function App() {
                 ))}
               </div>
             </div>
+            <a href="#contact" className="nav-cta" onClick={handleNavClick}>Contact</a>
           </div>
 
           <button
@@ -333,12 +380,12 @@ function App() {
         initials={initials}
         avatarOk={avatarOk}
         setAvatarOk={setAvatarOk}
-        widgets={widgets}
       />
 
       <footer className="footer">
         <div className="footer-content">
           <p>{data.footer || `© ${new Date().getFullYear()} ${data.name}. All rights reserved.`}</p>
+          <LocalWidgets widgets={widgets} />
           <div className="footer-links">
             {data.contact?.linkedin ? (
               <a href={data.contact.linkedin} target="_blank" rel="noopener" className="footer-link">LinkedIn</a>
@@ -357,22 +404,11 @@ function App() {
       >
         ↑
       </button>
-
-      <a
-        href={WA_URL}
-        target="_blank"
-        rel="noopener"
-        className="whatsapp-float"
-        aria-label="Chat on WhatsApp"
-      >
-        <span className="whatsapp-icon">WA</span>
-        <span className="whatsapp-text">WhatsApp</span>
-      </a>
     </div>
   );
 }
 
-function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
+function HomePage({ data, initials, avatarOk, setAvatarOk }) {
   const skills = data.skills || {};
   const certifications = data.certifications || [];
   const badges = data.badges || [];
@@ -383,45 +419,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
   const hasSkills = typeof skills === 'object' && Object.keys(skills).length > 0;
 
   const stats = data.stats || [];
-
-  const weatherLabel = (code) => {
-    if (code === null || code === undefined) return 'Weather unavailable';
-    const map = {
-      0: 'Clear sky',
-      1: 'Mainly clear',
-      2: 'Partly cloudy',
-      3: 'Overcast',
-      45: 'Fog',
-      48: 'Depositing rime fog',
-      51: 'Light drizzle',
-      53: 'Moderate drizzle',
-      55: 'Dense drizzle',
-      61: 'Slight rain',
-      63: 'Moderate rain',
-      65: 'Heavy rain',
-      71: 'Slight snow',
-      73: 'Moderate snow',
-      75: 'Heavy snow',
-      80: 'Rain showers',
-      81: 'Rain showers',
-      82: 'Violent showers',
-      95: 'Thunderstorm'
-    };
-    return map[code] || 'Mixed conditions';
-  };
-
-  const timeLabel = useMemo(() => {
-    if (!widgets?.time) return null;
-    const date = new Date(widgets.time);
-    return new Intl.DateTimeFormat('es-CO', {
-      timeZone: widgets.timezone || 'America/Bogota',
-      hour: '2-digit',
-      minute: '2-digit',
-      weekday: 'short',
-      month: 'short',
-      day: '2-digit'
-    }).format(date);
-  }, [widgets?.time, widgets?.timezone]);
 
   return (
     <main className="container">
@@ -435,6 +432,9 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
             <p className="hero-bio">{data.bio}</p>
             <div className="hero-buttons">
               <a href="#contact" className="btn btn-primary">Let's Connect</a>
+              {data.resumeUrl ? (
+                <a href={data.resumeUrl} className="btn btn-ghost" download>Download CV</a>
+              ) : null}
               <a href="#projects" className="btn btn-ghost">View Projects</a>
             </div>
           </div>
@@ -457,24 +457,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
                     <span className="stat-label">{stat.label}</span>
                   </div>
                 ))}
-              </div>
-              <div className="widget-row">
-                <div className="widget-card">
-                  <span className="widget-label">{widgets?.city || 'Local'} time</span>
-                  <span className="widget-value">{timeLabel || 'Loading...'}</span>
-                  <span className="widget-meta">{widgets?.timezone || 'America/Bogota'}</span>
-                </div>
-                <div className="widget-card">
-                  <span className="widget-label">Weather</span>
-                  <span className="widget-value">
-                    {widgets?.weather?.temperature !== null && widgets?.weather?.temperature !== undefined
-                      ? `${Math.round(widgets.weather.temperature)}${widgets.weather.temperature_unit || '°C'}`
-                      : 'Loading...'}
-                  </span>
-                  <span className="widget-meta">
-                    {widgets?.weather ? weatherLabel(widgets.weather.weather_code) : 'No data'}
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -566,7 +548,7 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
           </div>
           <div className="skills-categories">
             {Object.entries(skills).map(([category, items]) => {
-              const meta = SKILL_CATEGORY_META[category] || { label: category, icon: 'award', color: 'var(--teal)' };
+              const meta = SKILL_CATEGORY_META[category] || { label: category, icon: 'award' };
               if (!Array.isArray(items) || !items.length) return null;
               return (
                 <div key={category} className="skill-category reveal">
@@ -576,9 +558,7 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
                   </div>
                   <div className="skill-category-pills">
                     {items.map((skill) => (
-                      <span key={skill} className="skill-pill" style={{ borderColor: meta.color + '44', background: meta.color + '18' }}>
-                        {skill}
-                      </span>
+                      <span key={skill} className="skill-pill">{skill}</span>
                     ))}
                   </div>
                 </div>
@@ -712,6 +692,7 @@ function HomePage({ data, initials, avatarOk, setAvatarOk, widgets }) {
             {data.contact?.github ? (
               <a href={data.contact.github} className="contact-item" target="_blank" rel="noopener"><Icon name="github" /> GitHub</a>
             ) : null}
+            <a href={WA_URL} className="contact-item" target="_blank" rel="noopener"><Icon name="phone" /> WhatsApp</a>
           </div>
           <div className="linkedin-badge-wrap">
             <LinkedInBadge />

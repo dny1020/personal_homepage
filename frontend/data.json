@@ -5,10 +5,11 @@
   "bio": "6+ years at Emtelco building scalable VoIP systems with Asterisk, Kamailio, and SIP. Fluent in Python, Bash, and containerized deployments. Self-hoster and privacy advocate, now pursuing an AI specialization.",
   "profileOverview": "Systems Engineer specializing in scalable VoIP infrastructure, cloud automation, and AI.",
   "avatarUrl": "/IMG_2164.jpg?v=7",
+  "resumeUrl": "/resume.pdf",
   "stats": [
-    { "label": "Years Experience", "value": "10+" },
-    { "label": "Projects Delivered", "value": "40+" },
-    { "label": "Telephony Deploys", "value": "20+" }
+    { "label": "Years in IT", "value": "13+" },
+    { "label": "Years in VoIP Engineering", "value": "6+" },
+    { "label": "Open-Source Projects", "value": "4" }
   ],
   "experience": [
     {
@@ -63,13 +64,6 @@
       "period": "Nov 2023 - Feb 2024",
       "description": "Specialized diploma in cybersecurity operations and Cisco network defense. Training focused on CyberOps, threat analysis, and incident response.",
       "skills": ["Cyber Operations", "Cisco Networking", "Security Monitoring"]
-    },
-    {
-      "degree": "English Level B1",
-      "school": "ILTO (International Language Teaching Organization)",
-      "period": "Jun 2024 - Aug 2024",
-      "description": "Certification in English as a Second Language (ESL). Focused on communication for technical and professional contexts.",
-      "skills": ["English Language", "ESL Communication"]
     }
   ],
   "skills": {
@@ -82,10 +76,11 @@
   },
   "languages": [
     { "language": "Spanish", "level": "Native" },
-    { "language": "English", "level": "Professional Working (B1)" }
+    { "language": "English", "level": "Intermediate (B1)" }
   ],
   "certifications": [
-    { "name": "Diplomado en Habilidades Directivas y Liderazgo", "issuer": "UNIR | Universidad Internacional de La Rioja", "date": "2024" }
+    { "name": "Diploma in Leadership and Management Skills", "issuer": "UNIR | Universidad Internacional de La Rioja", "date": "2024" },
+    { "name": "English Level B1 (ESL)", "issuer": "ILTO (International Language Teaching Organization)", "date": "2024" }
   ],
   "badges": [
     {
@@ -154,7 +149,7 @@
     }
   ],
   "contact": {
-    "text": "Open to collaborations in telephony, DevOps, and AI automation. Lets build something together.",
+    "text": "Open to collaborations in telephony, DevOps, and AI automation. Let's build something together.",
     "email": "jnarvaar@icloud.com",
     "linkedin": "https://www.linkedin.com/in/jose-danilo-narvaez-arias-26488025a/",
     "github": "https://github.com/dny1020"
