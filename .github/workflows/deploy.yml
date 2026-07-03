@@ -17,8 +17,10 @@ jobs:
 
       - name: Transpile JSX
         run: |
-          npx --yes -p @babel/core@7 -p @babel/cli@7 -p @babel/preset-react@7 \
-            babel frontend/app.jsx --out-file frontend/app.js --presets=@babel/preset-react
+          # Install locally so babel can resolve the preset from the workspace
+          npm install --no-save --no-package-lock --silent \
+            @babel/core@7 @babel/cli@7 @babel/preset-react@7
+          npx babel frontend/app.jsx --out-file frontend/app.js --presets=@babel/preset-react
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
