@@ -75,7 +75,6 @@ function Icon({ name, className = '' }) {
     pin: 'M12 2a7 7 0 0 1 7 7c0 5.2-7 13-7 13S5 14.2 5 9a7 7 0 0 1 7-7Zm0 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z',
     link: 'M10.5 13.5a4 4 0 0 1 0-5.7l3.3-3.3a4 4 0 1 1 5.7 5.7l-1.5 1.5m-4 6.8a4 4 0 0 1-5.7 0 4 4 0 0 1 0-5.7l1.5-1.5m3.2 5.5 5.8-5.8',
     mail: 'M4 7h24v18H4V7Zm2 2v2l10 6 10-6V9H6Zm20 14V13l-10 6-10-6v10h20Z',
-    linkedin: 'M6 10h4v14H6V10Zm2-6a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm6 6h4v2.2c.9-1.4 2.5-2.5 4.7-2.5 4 0 5.3 2.6 5.3 6.4V24h-4v-6.6c0-1.6-.1-3.7-2.3-3.7-2.3 0-2.7 1.8-2.7 3.6V24h-4V10Z',
     github: 'M12 2.5a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.5 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.3-.3-4.7-1.1-4.7-5a4 4 0 0 1 1-2.8 3.7 3.7 0 0 1 .1-2.8s.9-.3 2.9 1a10 10 0 0 1 5.2 0c2-1.3 2.9-1 2.9-1a3.7 3.7 0 0 1 .1 2.8 4 4 0 0 1 1 2.8c0 3.9-2.4 4.7-4.7 5 .3.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2.5Z',
     certificate: 'M6 4h20v12H6V4Zm4 16h12v2H10v-2Zm2.5-7 3.5 2 3.5-2V6.5h-7v6.5Z',
     award: 'M12 4a6 6 0 0 1 6 6c0 2.4-1.4 4.6-3.5 5.5V28l-2.5-1.6L9.5 28V15.5A6 6 0 0 1 6 10a6 6 0 0 1 6-6Z'
@@ -386,14 +385,6 @@ function App() {
         <div className="footer-content">
           <p>{data.footer || `© ${new Date().getFullYear()} ${data.name}. All rights reserved.`}</p>
           <LocalWidgets widgets={widgets} />
-          <div className="footer-links">
-            {data.contact?.linkedin ? (
-              <a href={data.contact.linkedin} target="_blank" rel="noopener" className="footer-link">LinkedIn</a>
-            ) : null}
-            {data.contact?.github ? (
-              <a href={data.contact.github} target="_blank" rel="noopener" className="footer-link">GitHub</a>
-            ) : null}
-          </div>
         </div>
       </footer>
 
@@ -487,7 +478,7 @@ function HomePage({ data, initials, avatarOk, setAvatarOk }) {
       {/* Education */}
       <section id="education" className="section">
         <div className="section-header">
-          <h2 className="section-title">Education & Certifications</h2>
+          <h2 className="section-title">Education</h2>
         </div>
         <div className="education-grid">
           {(data.education || []).map((edu, index) => (
@@ -581,32 +572,11 @@ function HomePage({ data, initials, avatarOk, setAvatarOk }) {
         </section>
       ) : null}
 
-      {/* Certifications */}
-      {certifications.length > 0 ? (
+      {/* Certifications & Badges */}
+      {certifications.length > 0 || badges.length > 0 ? (
         <section id="certifications" className="section">
           <div className="section-header">
-            <h2 className="section-title">Licenses & Certifications</h2>
-          </div>
-          <div className="certifications-grid">
-            {certifications.map((cert, index) => (
-              <div key={`${cert.name}-${index}`} className="certification-card reveal">
-                <div className="certification-icon"><Icon name="certificate" /></div>
-                <div className="certification-info">
-                  <h3 className="certification-name">{cert.name}</h3>
-                  <p className="certification-issuer">{cert.issuer}</p>
-                  <span className="certification-date">{cert.date}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* Badges */}
-      {badges.length > 0 ? (
-        <section id="badges" className="section">
-          <div className="section-header">
-            <h2 className="section-title">Digital Badges</h2>
+            <h2 className="section-title">Certifications & Badges</h2>
           </div>
           <div className="badges-grid">
             {badges.map((badge, index) => (
@@ -618,14 +588,24 @@ function HomePage({ data, initials, avatarOk, setAvatarOk }) {
                 rel="noopener"
               >
                 <div className="badge-image">
-                  {badge.image ? <img src={badge.image} alt={badge.name} /> : <span>Badge</span>}
+                  {badge.image ? <img src={badge.image} alt={badge.name} /> : <Icon name="certificate" />}
                 </div>
                 <div className="badge-info">
                   <h3 className="badge-title">{badge.name}</h3>
                   <p className="badge-issuer">{badge.issuer}</p>
-                  {badge.issued ? <span className="badge-date">{badge.issued}</span> : null}
+                  {badge.issued ? <span className="badge-date">{badge.issued.slice(0, 4)}</span> : null}
                 </div>
               </a>
+            ))}
+            {certifications.map((cert, index) => (
+              <div key={`${cert.name}-${index}`} className="badge-card reveal">
+                <div className="badge-image"><Icon name="certificate" /></div>
+                <div className="badge-info">
+                  <h3 className="badge-title">{cert.name}</h3>
+                  <p className="badge-issuer">{cert.issuer}</p>
+                  {cert.date ? <span className="badge-date">{cert.date}</span> : null}
+                </div>
+              </div>
             ))}
           </div>
         </section>
@@ -685,9 +665,6 @@ function HomePage({ data, initials, avatarOk, setAvatarOk }) {
           <div className="contact-info">
             {data.contact?.email ? (
               <a href={`mailto:${data.contact.email}`} className="contact-item"><Icon name="mail" /> {data.contact.email}</a>
-            ) : null}
-            {data.contact?.linkedin ? (
-              <a href={data.contact.linkedin} className="contact-item" target="_blank" rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
             ) : null}
             {data.contact?.github ? (
               <a href={data.contact.github} className="contact-item" target="_blank" rel="noopener"><Icon name="github" /> GitHub</a>
