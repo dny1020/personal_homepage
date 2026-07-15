@@ -38,6 +38,13 @@ crash.log
 # app.js is transpiled from frontend/app.jsx by CI (and locally for preview)
 frontend/app.js
 node_modules/
+frontend/package-lock.json
+
+# ====================
+# Personal documents (not part of the site's asset pipeline)
+# ====================
+Curriculum vitae_spanish.docx
+Curriculum vitae_spanish.pdf
 
 # ====================
 # Claude Code

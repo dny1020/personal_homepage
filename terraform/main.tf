@@ -22,8 +22,6 @@ resource "aws_s3_bucket" "homepage" {
   }
 }
 
-# Versionado mínimo: protege contra sobreescrituras accidentales.
-# Las versiones antiguas se eliminan automáticamente después de 30 días (ver lifecycle).
 resource "aws_s3_bucket_versioning" "homepage" {
   bucket = aws_s3_bucket.homepage.id
   versioning_configuration {
@@ -47,8 +45,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "homepage" {
 }
 
 # ── Website hosting ───────────────────────────────────────────────────────────
-# error_document = index.html → S3 devuelve index.html ante cualquier ruta
-# inexistente (e.g. /bot-ai), permitiendo que React maneje el routing client-side.
 
 resource "aws_s3_bucket_website_configuration" "homepage" {
   bucket = aws_s3_bucket.homepage.id
@@ -63,8 +59,6 @@ resource "aws_s3_bucket_website_configuration" "homepage" {
 }
 
 # ── Acceso público ────────────────────────────────────────────────────────────
-# block_public_acls/ignore_public_acls = true → prohíbe ACLs de objeto (más seguro).
-# block_public_policy = false → permite la bucket policy pública de solo lectura.
 
 resource "aws_s3_bucket_public_access_block" "homepage" {
   bucket = aws_s3_bucket.homepage.id
@@ -92,4 +86,87 @@ resource "aws_s3_bucket_policy" "homepage" {
       }
     ]
   })
+}
+
+# ── IAM (deploy) ──────────────────────────────────────────────────────────────
+
+resource "aws_iam_user" "deploy" {
+  name = "homepage-deploy"
+
+  tags = {
+    Project = "personal-homepage"
+  }
+}
+
+resource "aws_iam_user_policy" "deploy" {
+  name = "homepage-s3-deploy"
+  user = aws_iam_user.deploy.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid      = "ListBucket"
+        Effect   = "Allow"
+        Action   = ["s3:ListBucket"]
+        Resource = aws_s3_bucket.homepage.arn
+      },
+      {
+        Sid    = "ManageObjects"
+        Effect = "Allow"
+        Action = [
+          "s3:PutObject",
+          "s3:GetObject",
+          "s3:DeleteObject"
+        ]
+        Resource = "${aws_s3_bucket.homepage.arn}/*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_access_key" "deploy" {
+  user = aws_iam_user.deploy.name
+}
+
+# ── Budget ─────────────────────────────────────────────────────────────────────
+
+resource "aws_budgets_budget" "monthly" {
+  name         = "homepage-monthly-cap"
+  budget_type  = "COST"
+  limit_amount = var.monthly_budget_usd
+  limit_unit   = "USD"
+  time_unit    = "MONTHLY"
+
+  notification {
+    comparison_operator        = "GREATER_THAN"
+    threshold                  = 60
+    threshold_type             = "PERCENTAGE"
+    notification_type          = "ACTUAL"
+    subscriber_email_addresses = [var.billing_alert_email]
+  }
+
+  notification {
+    comparison_operator        = "GREATER_THAN"
+    threshold                  = 85
+    threshold_type             = "PERCENTAGE"
+    notification_type          = "ACTUAL"
+    subscriber_email_addresses = [var.billing_alert_email]
+  }
+
+  notification {
+    comparison_operator        = "GREATER_THAN"
+    threshold                  = 100
+    threshold_type             = "PERCENTAGE"
+    notification_type          = "ACTUAL"
+    subscriber_email_addresses = [var.billing_alert_email]
+  }
+
+  notification {
+    comparison_operator        = "GREATER_THAN"
+    threshold                  = 100
+    threshold_type             = "PERCENTAGE"
+    notification_type          = "FORECASTED"
+    subscriber_email_addresses = [var.billing_alert_email]
+  }
 }
