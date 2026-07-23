@@ -11,7 +11,28 @@ provider "aws" {
   region = var.aws_region
 }
 
-# ── S3 Bucket ─────────────────────────────────────────────────────────────────
+variable "aws_region" {
+  description = "AWS region"
+  type        = string
+  default     = "us-east-1"
+}
+
+variable "bucket_name" {
+  description = "S3 bucket name. Keep it aligned with the domain so website hosting works with Cloudflare."
+  type        = string
+  default     = "danilocloud.me"
+}
+
+variable "monthly_budget_usd" {
+  description = "Monthly AWS budget in USD"
+  type        = string
+  default     = "2"
+}
+
+variable "billing_alert_email" {
+  description = "Email for AWS Budgets alerts"
+  type        = string
+}
 
 resource "aws_s3_bucket" "homepage" {
   bucket        = var.bucket_name
@@ -22,6 +43,7 @@ resource "aws_s3_bucket" "homepage" {
   }
 }
 
+# S3 versioning and lifecycle
 resource "aws_s3_bucket_versioning" "homepage" {
   bucket = aws_s3_bucket.homepage.id
   versioning_configuration {
@@ -44,8 +66,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "homepage" {
   }
 }
 
-# ── Website hosting ───────────────────────────────────────────────────────────
-
+# Website hosting
 resource "aws_s3_bucket_website_configuration" "homepage" {
   bucket = aws_s3_bucket.homepage.id
 
@@ -58,8 +79,7 @@ resource "aws_s3_bucket_website_configuration" "homepage" {
   }
 }
 
-# ── Acceso público ────────────────────────────────────────────────────────────
-
+# Public access
 resource "aws_s3_bucket_public_access_block" "homepage" {
   bucket = aws_s3_bucket.homepage.id
 
@@ -69,7 +89,7 @@ resource "aws_s3_bucket_public_access_block" "homepage" {
   restrict_public_buckets = false
 }
 
-# Solo GetObject es público. El bucket en sí y sus metadatos no son listables.
+# Allow public read access to objects only.
 resource "aws_s3_bucket_policy" "homepage" {
   bucket     = aws_s3_bucket.homepage.id
   depends_on = [aws_s3_bucket_public_access_block.homepage]
@@ -88,8 +108,7 @@ resource "aws_s3_bucket_policy" "homepage" {
   })
 }
 
-# ── IAM (deploy) ──────────────────────────────────────────────────────────────
-
+# Deploy user
 resource "aws_iam_user" "deploy" {
   name = "homepage-deploy"
 
@@ -129,8 +148,7 @@ resource "aws_iam_access_key" "deploy" {
   user = aws_iam_user.deploy.name
 }
 
-# ── Budget ─────────────────────────────────────────────────────────────────────
-
+# Budget alerts
 resource "aws_budgets_budget" "monthly" {
   name         = "homepage-monthly-cap"
   budget_type  = "COST"
@@ -169,4 +187,29 @@ resource "aws_budgets_budget" "monthly" {
     notification_type          = "FORECASTED"
     subscriber_email_addresses = [var.billing_alert_email]
   }
+}
+
+output "s3_website_endpoint" {
+  description = "Endpoint of the website. Use it as the Cloudflare CNAME target."
+  value       = aws_s3_bucket_website_configuration.homepage.website_endpoint
+}
+
+output "s3_bucket_name" {
+  description = "Bucket name used by aws s3 sync."
+  value       = aws_s3_bucket.homepage.id
+}
+
+output "s3_bucket_arn" {
+  value = aws_s3_bucket.homepage.arn
+}
+
+output "deploy_access_key_id" {
+  description = "AWS_ACCESS_KEY_ID for GitHub Actions / CI"
+  value       = aws_iam_access_key.deploy.id
+}
+
+output "deploy_secret_access_key" {
+  description = "AWS_SECRET_ACCESS_KEY. Retrieve with: terraform output -raw deploy_secret_access_key"
+  value       = aws_iam_access_key.deploy.secret
+  sensitive   = true
 }
