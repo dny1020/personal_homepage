@@ -60,7 +60,7 @@ Content: 13+ years in IT, 6+ in VoIP engineering, all at the same telephony oper
 
 Real and verifiable:
 
-- **Four public GitHub repos** under `github.com/dny1020` — `doction` (MIT-licensed FastAPI/PostgreSQL/MCP wiki), `bot_whatsapp` (RAG + Llama 3 via Groq + Twilio), `coffee-tracker` (FastAPI/SQLite), `rag_without_llm` (pgvector + HF embeddings + cross-encoder reranking, Streamlit UI). The source is the proof — a peer reads it.
+- **Five public GitHub repos** under `github.com/dny1020` — `doction` (MIT-licensed FastAPI/PostgreSQL/MCP wiki), `pulse_bogota` (FastAPI/PostgreSQL activity scoring with Alembic, scheduler, OSM imports), `bot_whatsapp` (RAG + Llama 3 via Groq + Twilio), `coffee-tracker` (FastAPI/SQLite), `rag_without_llm` (pgvector + HF embeddings + cross-encoder reranking, Streamlit UI). The source is the proof — a peer reads it.
 - **Self-hosted services** that exist but are **not publicly reachable**: the WebRTC webchat stack (`webrtc.danilocloud.me`) and the Coffee Tracker API (`coffee.danilocloud.me/api/v1`). Both are NXDOMAIN in public DNS as of 2026-09-01. They are real and they are the strongest available evidence, but until the DNS records are public they cannot be linked or embedded — a link to either is a broken promise, not a demonstration. Exposing one is the single highest-value change available to this product.
 - **The homelab itself** — Raspberry Pi running Traefik, Vaultwarden, Gitea, WireGuard. Real and describable but not publicly reachable; it must be *shown* (described, diagrammed, evidenced), never linked to something that 404s.
 - **Credly badges** with live issuer URLs: AWS Cloud Essentials, Cisco CyberOps Associate, Introduction to Cybersecurity, Networking Academy Learn-A-Thon 2023.
@@ -73,6 +73,6 @@ Absences future work must not fabricate: no testimonials, no client case studies
 
 1. **Evidence over assertion.** For this audience, a working link, a readable repo, or a reachable endpoint is worth more than any claim about skill. When there is nothing real to link, say less rather than decorating.
 2. **The infrastructure is the portfolio.** The site runs on the same stack it describes. Anything that undercuts that — a dead demo link, a broken widget, a third-party service standing in for something he could self-host — costs more credibility than it buys.
-3. **Depth in one domain, honestly dated.** Six years of VoIP at one operator, now extending into AI. Present it as specialization, not as a breadth checklist; don't inflate the AI work, which is in progress.
+3. **Depth in one domain, honestly dated.** Six years of VoIP at one operator, and since Aug 2026 an AI & Automation Developer role at the same operator, backed by a completed UNIR AI specialization (Jun 2025 - Jun 2026). Present it as specialization, not as a breadth checklist; the AI track is early and should not be inflated.
 4. **A peer's read path is outward.** Make leaving easy and rewarding — to GitHub, to a live service, to the CV. The page succeeds when the visitor keeps track of the work, not when they stay on it.
 5. **Boring, buildless, maintainable.** Content changes are a JSON edit and a push. Whatever gets built must still be editable that way a year from now.

@@ -1,21 +1,27 @@
 {
   "name": "Jose Danilo Narvaez Arias",
-  "role": "Systems Engineer | Cloud & Telephony Infrastructure | DevOps",
+  "role": "AI & Automation Developer | LLM, RAG & Python Backends | VoIP & DevOps",
   "location": "Bogotá, Colombia",
-  "bio": "6+ years at Emtelco building scalable VoIP systems with Asterisk, Kamailio, and SIP. Fluent in Python, Bash, and containerized deployments. Self-hoster and privacy advocate, now pursuing an AI specialization.",
-  "profileOverview": "Systems Engineer specializing in scalable VoIP infrastructure, cloud automation, and AI.",
+  "bio": "6+ years at Emtelco, now building AI and automation systems after years of scaling VoIP platforms with Asterisk, Kamailio, and SIP. Python and Bash first, with RAG pipelines, FastAPI services, and containerized deployments. Self-hoster and privacy advocate, with a completed AI specialization.",
+  "profileOverview": "Systems Engineer building AI and automation systems on a base of VoIP infrastructure and cloud DevOps.",
   "avatarUrl": "/IMG_2164.jpg?v=7",
   "resumeUrl": "/resume.pdf",
   "stats": [
     { "label": "Years in IT", "value": "13+" },
     { "label": "Years in VoIP Engineering", "value": "6+" },
-    { "label": "Open-Source Projects", "value": "4" }
+    { "label": "Open-Source Projects", "value": "5" }
   ],
   "experience": [
     {
+      "title": "AI & Automation Developer",
+      "company": "EMTELCO S.A.",
+      "period": "Aug 2026 - Present",
+      "description": "Build AI and automation solutions for contact center and telephony operations. Develop RAG pipelines and LLM-backed services with Python and FastAPI. Automate internal processes and third-party integrations, packaged with Docker and shipped through CI/CD."
+    },
+    {
       "title": "Telephony Engineer",
       "company": "EMTELCO S.A.",
-      "period": "Jun 2024 - Present",
+      "period": "Jun 2024 - Aug 2026",
       "description": "Design and implement enterprise SIP telephony solutions. Build WebRTC contact center platforms with Asterisk and Kamailio. Automate VoIP provisioning and monitoring with Python, Bash, and Docker. Manage Linux infrastructure, Nginx reverse proxies, and CI/CD pipelines."
     },
     {
@@ -47,7 +53,7 @@
     {
       "degree": "Specialization in Artificial Intelligence",
       "school": "UNIR | Universidad Internacional de La Rioja",
-      "period": "Jul 2025 - Present",
+      "period": "Jun 2025 - Jun 2026",
       "description": "Postgraduate specialization focused on Python, TensorFlow, containerized LLM environments, and DevOps for AI pipelines.",
       "skills": ["Artificial Intelligence", "TensorFlow", "Python", "LLMOps", "DevOps"]
     },
@@ -71,7 +77,7 @@
     "infrastructure": ["Docker", "Kubernetes", "Nginx", "Traefik", "WireGuard", "Linux", "Ansible", "GitHub Actions"],
     "telephony": ["Asterisk", "Kamailio", "SIP", "WebRTC", "SRTP", "PJSIP", "Genesys Cloud", "SBC"],
     "cloud_devops": ["AWS", "Azure", "Prometheus", "Grafana", "CI/CD", "Systemd", "Crontab"],
-    "ai_data": ["Machine Learning", "TensorFlow", "FastAPI", "LLMOps", "MCP", "RAG", "SQLite", "PostgreSQL"],
+    "ai_data": ["Machine Learning", "TensorFlow", "FastAPI", "LLMOps", "MCP", "RAG", "pgvector", "SQLite", "PostgreSQL"],
     "tools": ["Git", "Gitea", "Vaultwarden", "Raspberry Pi"]
   },
   "languages": [
@@ -123,6 +129,12 @@
       "description": "Self-hosted, markdown-first wiki and knowledge base for humans and AI agents. PostgreSQL full-text search, optional local semantic search, per-page git history, a REST API, and a native MCP server for agent integration. MIT licensed.",
       "tags": ["Python", "FastAPI", "PostgreSQL", "MCP", "Docker"],
       "github": "https://github.com/dny1020/doction"
+    },
+    {
+      "name": "pulse_bogota",
+      "description": "Backend-first REST API that estimates how busy a place in Bogotá is without counting people. Blends public signals into an Activity Score and a complementary Discovery Score, with Alembic migrations, a scheduler that recalculates every 15 minutes, and weekly OpenStreetMap imports.",
+      "tags": ["Python", "FastAPI", "PostgreSQL", "Alembic", "OpenStreetMap"],
+      "github": "https://github.com/dny1020/pulse_bogota"
     },
     {
       "name": "WhatsApp ISP Support Bot",
