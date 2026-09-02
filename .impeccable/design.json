@@ -1,484 +1,481 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-02T00:39:35.575183+00:00",
+  "generatedAt": "2026-09-02T01:53:48.293Z",
   "title": "Design System: danilocloud.me",
   "extensions": {
     "colorMeta": {
-      "ink-900": {
+      "enamel": {
         "role": "neutral",
-        "displayName": "Ink Void",
-        "purpose": "The page ground. Everything else floats on it.",
-        "canonical": "oklch(15.93% 0.0111 267.98)",
+        "displayName": "Enamel",
+        "purpose": "The frame's paint, and the page ground.",
+        "canonical": "oklch(85.24% 0.0202 87.52)",
         "tonalRamp": [
-          "oklch(15% 0.0111 267.98)",
-          "oklch(26% 0.0111 267.98)",
-          "oklch(37% 0.0111 267.98)",
-          "oklch(48% 0.0111 267.98)",
-          "oklch(59% 0.0111 267.98)",
-          "oklch(70% 0.0111 267.98)",
-          "oklch(82% 0.0111 267.98)",
-          "oklch(94% 0.0111 267.98)"
+          "oklch(15% 0.0202 87.52)",
+          "oklch(26% 0.0202 87.52)",
+          "oklch(37% 0.0202 87.52)",
+          "oklch(48% 0.0202 87.52)",
+          "oklch(59% 0.0202 87.52)",
+          "oklch(70% 0.0202 87.52)",
+          "oklch(82% 0.0202 87.52)",
+          "oklch(94% 0.0202 87.52)"
         ]
       },
-      "ink-800": {
+      "enamel-lit": {
         "role": "neutral",
-        "displayName": "Ink Raised",
-        "purpose": "The opaque mobile navigation panel — one step up from the void.",
-        "canonical": "oklch(20.10% 0.0211 267.58)",
+        "displayName": "Enamel Lit",
+        "purpose": "A raised face: circuits, cells, data rows.",
+        "canonical": "oklch(88.59% 0.0171 88.01)",
         "tonalRamp": [
-          "oklch(15% 0.0211 267.58)",
-          "oklch(26% 0.0211 267.58)",
-          "oklch(37% 0.0211 267.58)",
-          "oklch(48% 0.0211 267.58)",
-          "oklch(59% 0.0211 267.58)",
-          "oklch(70% 0.0211 267.58)",
-          "oklch(82% 0.0211 267.58)",
-          "oklch(94% 0.0211 267.58)"
+          "oklch(15% 0.0171 88.01)",
+          "oklch(26% 0.0171 88.01)",
+          "oklch(37% 0.0171 88.01)",
+          "oklch(48% 0.0171 88.01)",
+          "oklch(59% 0.0171 88.01)",
+          "oklch(70% 0.0171 88.01)",
+          "oklch(82% 0.0171 88.01)",
+          "oklch(94% 0.0171 88.01)"
         ]
       },
-      "ink-700": {
+      "trough": {
         "role": "neutral",
-        "displayName": "Ink Panel",
-        "purpose": "The opaque dropdown surface; the lightest opaque ink in the system.",
-        "canonical": "oklch(23.54% 0.0267 265.22)",
+        "displayName": "Trough",
+        "purpose": "A recessed channel: rail, terminals at rest, legend, footer.",
+        "canonical": "oklch(80.22% 0.0217 88.74)",
         "tonalRamp": [
-          "oklch(15% 0.0267 265.22)",
-          "oklch(26% 0.0267 265.22)",
-          "oklch(37% 0.0267 265.22)",
-          "oklch(48% 0.0267 265.22)",
-          "oklch(59% 0.0267 265.22)",
-          "oklch(70% 0.0267 265.22)",
-          "oklch(82% 0.0267 265.22)",
-          "oklch(94% 0.0267 265.22)"
+          "oklch(15% 0.0217 88.74)",
+          "oklch(26% 0.0217 88.74)",
+          "oklch(37% 0.0217 88.74)",
+          "oklch(48% 0.0217 88.74)",
+          "oklch(59% 0.0217 88.74)",
+          "oklch(70% 0.0217 88.74)",
+          "oklch(82% 0.0217 88.74)",
+          "oklch(94% 0.0217 88.74)"
         ]
       },
-      "teal": {
+      "trough-deep": {
+        "role": "neutral",
+        "displayName": "Trough Deep",
+        "purpose": "Rivets, terminal edges, dashed rules. Never a text ground.",
+        "canonical": "oklch(71.34% 0.0254 88.27)",
+        "tonalRamp": [
+          "oklch(15% 0.0254 88.27)",
+          "oklch(26% 0.0254 88.27)",
+          "oklch(37% 0.0254 88.27)",
+          "oklch(48% 0.0254 88.27)",
+          "oklch(59% 0.0254 88.27)",
+          "oklch(70% 0.0254 88.27)",
+          "oklch(82% 0.0254 88.27)",
+          "oklch(94% 0.0254 88.27)"
+        ]
+      },
+      "steel": {
+        "role": "neutral",
+        "displayName": "Steel",
+        "purpose": "The 1px member, and text selection.",
+        "canonical": "oklch(48.97% 0.0149 126.60)",
+        "tonalRamp": [
+          "oklch(15% 0.0149 126.60)",
+          "oklch(26% 0.0149 126.60)",
+          "oklch(37% 0.0149 126.60)",
+          "oklch(48% 0.0149 126.60)",
+          "oklch(59% 0.0149 126.60)",
+          "oklch(70% 0.0149 126.60)",
+          "oklch(82% 0.0149 126.60)",
+          "oklch(94% 0.0149 126.60)"
+        ]
+      },
+      "steel-dark": {
+        "role": "neutral",
+        "displayName": "Steel Dark",
+        "purpose": "The 2px member between blocks.",
+        "canonical": "oklch(39.90% 0.0141 128.86)",
+        "tonalRamp": [
+          "oklch(15% 0.0141 128.86)",
+          "oklch(26% 0.0141 128.86)",
+          "oklch(37% 0.0141 128.86)",
+          "oklch(48% 0.0141 128.86)",
+          "oklch(59% 0.0141 128.86)",
+          "oklch(70% 0.0141 128.86)",
+          "oklch(82% 0.0141 128.86)",
+          "oklch(94% 0.0141 128.86)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "purpose": "Engraved type, and the fill of every live control.",
+        "canonical": "oklch(21.84% 0.0082 128.89)",
+        "tonalRamp": [
+          "oklch(15% 0.0082 128.89)",
+          "oklch(26% 0.0082 128.89)",
+          "oklch(37% 0.0082 128.89)",
+          "oklch(48% 0.0082 128.89)",
+          "oklch(59% 0.0082 128.89)",
+          "oklch(70% 0.0082 128.89)",
+          "oklch(82% 0.0082 128.89)",
+          "oklch(94% 0.0082 128.89)"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "purpose": "Prose and terminal labels. 4.67:1 on trough.",
+        "canonical": "oklch(41.36% 0.0155 126.69)",
+        "tonalRamp": [
+          "oklch(15% 0.0155 126.69)",
+          "oklch(26% 0.0155 126.69)",
+          "oklch(37% 0.0155 126.69)",
+          "oklch(48% 0.0155 126.69)",
+          "oklch(59% 0.0155 126.69)",
+          "oklch(70% 0.0155 126.69)",
+          "oklch(82% 0.0155 126.69)",
+          "oklch(94% 0.0155 126.69)"
+        ]
+      },
+      "ink-faint": {
+        "role": "neutral",
+        "displayName": "Ink Faint",
+        "purpose": "Section heads and metadata. Never on trough.",
+        "canonical": "oklch(45.48% 0.0148 122.02)",
+        "tonalRamp": [
+          "oklch(15% 0.0148 122.02)",
+          "oklch(26% 0.0148 122.02)",
+          "oklch(37% 0.0148 122.02)",
+          "oklch(48% 0.0148 122.02)",
+          "oklch(59% 0.0148 122.02)",
+          "oklch(70% 0.0148 122.02)",
+          "oklch(82% 0.0148 122.02)",
+          "oklch(94% 0.0148 122.02)"
+        ]
+      },
+      "strip": {
+        "role": "neutral",
+        "displayName": "Strip",
+        "purpose": "Designation-strip stock, and type on any inked control.",
+        "canonical": "oklch(93.39% 0.0166 91.56)",
+        "tonalRamp": [
+          "oklch(15% 0.0166 91.56)",
+          "oklch(26% 0.0166 91.56)",
+          "oklch(37% 0.0166 91.56)",
+          "oklch(48% 0.0166 91.56)",
+          "oklch(59% 0.0166 91.56)",
+          "oklch(70% 0.0166 91.56)",
+          "oklch(82% 0.0166 91.56)",
+          "oklch(94% 0.0166 91.56)"
+        ]
+      },
+      "strip-edge": {
+        "role": "neutral",
+        "displayName": "Strip Edge",
+        "purpose": "The strip stock edge.",
+        "canonical": "oklch(80.82% 0.0230 89.82)",
+        "tonalRamp": [
+          "oklch(15% 0.0230 89.82)",
+          "oklch(26% 0.0230 89.82)",
+          "oklch(37% 0.0230 89.82)",
+          "oklch(48% 0.0230 89.82)",
+          "oklch(59% 0.0230 89.82)",
+          "oklch(70% 0.0230 89.82)",
+          "oklch(82% 0.0230 89.82)",
+          "oklch(94% 0.0230 89.82)"
+        ]
+      },
+      "pair-blue": {
         "role": "primary",
-        "displayName": "Phosphor Teal",
-        "purpose": "The one light in the room. Marks state and signal only.",
-        "canonical": "oklch(78.45% 0.1325 181.91)",
+        "displayName": "Jumper Blue",
+        "purpose": "Pair 1 of the 25-pair code. Wire only.",
+        "canonical": "oklch(44.18% 0.1427 259.36)",
         "tonalRamp": [
-          "oklch(15% 0.1325 181.91)",
-          "oklch(26% 0.1325 181.91)",
-          "oklch(37% 0.1325 181.91)",
-          "oklch(48% 0.1325 181.91)",
-          "oklch(59% 0.1325 181.91)",
-          "oklch(70% 0.1325 181.91)",
-          "oklch(82% 0.1325 181.91)",
-          "oklch(94% 0.1325 181.91)"
+          "oklch(15% 0.1427 259.36)",
+          "oklch(26% 0.1427 259.36)",
+          "oklch(37% 0.1427 259.36)",
+          "oklch(48% 0.1427 259.36)",
+          "oklch(59% 0.1427 259.36)",
+          "oklch(70% 0.1427 259.36)",
+          "oklch(82% 0.1427 259.36)",
+          "oklch(94% 0.1427 259.36)"
         ]
       },
-      "teal-bright": {
+      "pair-orange": {
         "role": "primary",
-        "displayName": "Phosphor Bright",
-        "purpose": "The hover state of the accent, and only that.",
-        "canonical": "oklch(83.27% 0.1277 183.07)",
+        "displayName": "Jumper Orange",
+        "purpose": "Pair 2. Wire only.",
+        "canonical": "oklch(59.06% 0.1640 44.70)",
         "tonalRamp": [
-          "oklch(15% 0.1277 183.07)",
-          "oklch(26% 0.1277 183.07)",
-          "oklch(37% 0.1277 183.07)",
-          "oklch(48% 0.1277 183.07)",
-          "oklch(59% 0.1277 183.07)",
-          "oklch(70% 0.1277 183.07)",
-          "oklch(82% 0.1277 183.07)",
-          "oklch(94% 0.1277 183.07)"
+          "oklch(15% 0.1640 44.70)",
+          "oklch(26% 0.1640 44.70)",
+          "oklch(37% 0.1640 44.70)",
+          "oklch(48% 0.1640 44.70)",
+          "oklch(59% 0.1640 44.70)",
+          "oklch(70% 0.1640 44.70)",
+          "oklch(82% 0.1640 44.70)",
+          "oklch(94% 0.1640 44.70)"
         ]
       },
-      "teal-dark": {
+      "pair-green": {
         "role": "primary",
-        "displayName": "Phosphor Deep",
-        "purpose": "Never a surface — only the far stop of the 135° avatar gradient.",
-        "canonical": "oklch(51.09% 0.0861 186.39)",
+        "displayName": "Jumper Green",
+        "purpose": "Pair 3. Wire only.",
+        "canonical": "oklch(48.08% 0.1091 153.11)",
         "tonalRamp": [
-          "oklch(15% 0.0861 186.39)",
-          "oklch(26% 0.0861 186.39)",
-          "oklch(37% 0.0861 186.39)",
-          "oklch(48% 0.0861 186.39)",
-          "oklch(59% 0.0861 186.39)",
-          "oklch(70% 0.0861 186.39)",
-          "oklch(82% 0.0861 186.39)",
-          "oklch(94% 0.0861 186.39)"
+          "oklch(15% 0.1091 153.11)",
+          "oklch(26% 0.1091 153.11)",
+          "oklch(37% 0.1091 153.11)",
+          "oklch(48% 0.1091 153.11)",
+          "oklch(59% 0.1091 153.11)",
+          "oklch(70% 0.1091 153.11)",
+          "oklch(82% 0.1091 153.11)",
+          "oklch(94% 0.1091 153.11)"
         ]
       },
-      "teal-ink": {
-        "role": "neutral",
-        "displayName": "Console Ink",
-        "purpose": "The blue-black text color that sits on teal.",
-        "canonical": "oklch(16.86% 0.0193 245.27)",
+      "pair-brown": {
+        "role": "primary",
+        "displayName": "Jumper Brown",
+        "purpose": "Pair 4. Wire only.",
+        "canonical": "oklch(45.68% 0.0849 57.98)",
         "tonalRamp": [
-          "oklch(15% 0.0193 245.27)",
-          "oklch(26% 0.0193 245.27)",
-          "oklch(37% 0.0193 245.27)",
-          "oklch(48% 0.0193 245.27)",
-          "oklch(59% 0.0193 245.27)",
-          "oklch(70% 0.0193 245.27)",
-          "oklch(82% 0.0193 245.27)",
-          "oklch(94% 0.0193 245.27)"
+          "oklch(15% 0.0849 57.98)",
+          "oklch(26% 0.0849 57.98)",
+          "oklch(37% 0.0849 57.98)",
+          "oklch(48% 0.0849 57.98)",
+          "oklch(59% 0.0849 57.98)",
+          "oklch(70% 0.0849 57.98)",
+          "oklch(82% 0.0849 57.98)",
+          "oklch(94% 0.0849 57.98)"
         ]
       },
-      "mist": {
-        "role": "neutral",
-        "displayName": "Mist",
-        "purpose": "Primary text and headings. Never pure white.",
-        "canonical": "oklch(98.42% 0.0034 247.86)",
+      "pair-slate": {
+        "role": "primary",
+        "displayName": "Jumper Slate",
+        "purpose": "Pair 5. Wire only.",
+        "canonical": "oklch(51.61% 0.0233 239.04)",
         "tonalRamp": [
-          "oklch(15% 0.0034 247.86)",
-          "oklch(26% 0.0034 247.86)",
-          "oklch(37% 0.0034 247.86)",
-          "oklch(48% 0.0034 247.86)",
-          "oklch(59% 0.0034 247.86)",
-          "oklch(70% 0.0034 247.86)",
-          "oklch(82% 0.0034 247.86)",
-          "oklch(94% 0.0034 247.86)"
+          "oklch(15% 0.0233 239.04)",
+          "oklch(26% 0.0233 239.04)",
+          "oklch(37% 0.0233 239.04)",
+          "oklch(48% 0.0233 239.04)",
+          "oklch(59% 0.0233 239.04)",
+          "oklch(70% 0.0233 239.04)",
+          "oklch(82% 0.0233 239.04)",
+          "oklch(94% 0.0233 239.04)"
         ]
-      },
-      "slate-200": {
-        "role": "neutral",
-        "displayName": "Slate 200",
-        "purpose": "Body prose and descriptions — carries most of the reading weight.",
-        "canonical": "oklch(88.72% 0.0135 262.38)",
-        "tonalRamp": [
-          "oklch(15% 0.0135 262.38)",
-          "oklch(26% 0.0135 262.38)",
-          "oklch(37% 0.0135 262.38)",
-          "oklch(48% 0.0135 262.38)",
-          "oklch(59% 0.0135 262.38)",
-          "oklch(70% 0.0135 262.38)",
-          "oklch(82% 0.0135 262.38)",
-          "oklch(94% 0.0135 262.38)"
-        ]
-      },
-      "slate-400": {
-        "role": "neutral",
-        "displayName": "Slate 400",
-        "purpose": "Metadata only: dates, periods, footer, location.",
-        "canonical": "oklch(71.52% 0.0233 256.76)",
-        "tonalRamp": [
-          "oklch(15% 0.0233 256.76)",
-          "oklch(26% 0.0233 256.76)",
-          "oklch(37% 0.0233 256.76)",
-          "oklch(48% 0.0233 256.76)",
-          "oklch(59% 0.0233 256.76)",
-          "oklch(70% 0.0233 256.76)",
-          "oklch(82% 0.0233 256.76)",
-          "oklch(94% 0.0233 256.76)"
-        ]
-      },
-      "glass": {
-        "role": "neutral",
-        "displayName": "Glass Fill",
-        "purpose": "The pane material: 6% white over the lit background.",
-        "canonical": "rgba(255, 255, 255, 0.06)"
-      },
-      "hairline": {
-        "role": "neutral",
-        "displayName": "Hairline",
-        "purpose": "The single 1px edge of light on every raised surface.",
-        "canonical": "rgba(255, 255, 255, 0.12)"
-      },
-      "shadow": {
-        "role": "neutral",
-        "displayName": "Seat Shadow",
-        "purpose": "Seats a pane in the dark; suggests separation, not height.",
-        "canonical": "rgba(4, 8, 20, 0.45)"
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "The name, once, in the hero. Nothing else may use this size."
-      },
-      "headline": {
-        "displayName": "Headline",
-        "purpose": "Section titles — the page’s scan structure."
+        "purpose": "The name, once, on the identification strip."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Job titles, project names, badge names, card headings."
+        "purpose": "Role titles, project names, qualification titles."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "All prose. Constrain measure to 65–75ch."
+        "purpose": "Prose. Measure 34–66ch by column."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Uppercase skill-category headers; letter-spacing is what makes it read as a label."
+        "purpose": "Designation-strip titles, tracked and uppercase."
       },
-      "mono": {
-        "displayName": "Instrument",
-        "purpose": "Measured values only: dates, periods, counts, ratings. Set with tabular-nums and slashed-zero. Technology names and labels are NOT readouts and stay in Space Grotesk."
+      "term": {
+        "displayName": "Terminal",
+        "purpose": "All data: periods, pair counts, designations, terminals."
+      },
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "Group labels, captions, legend keys."
       }
     },
-    "shadows": [
-      {
-        "name": "seat",
-        "value": "0 18px 40px rgba(4, 8, 20, 0.45)",
-        "purpose": "Default under any Tier 1 or Tier 2 surface. Separates the pane from the ground."
-      },
-      {
-        "name": "seat-deep",
-        "value": "0 24px 60px rgba(4, 8, 20, 0.45)",
-        "purpose": "The hero card only — the largest surface gets the widest shadow."
-      },
-      {
-        "name": "overlay",
-        "value": "0 14px 32px rgba(4, 8, 20, 0.6)",
-        "purpose": "The dropdown menu. Darker and tighter: it sits in front of a Tier 1 surface."
-      },
-      {
-        "name": "accent-glow",
-        "value": "0 10px 30px rgba(45, 212, 191, 0.3)",
-        "purpose": "Teal elements at rest. Light spilling from the element, not a shadow cast by it."
-      },
-      {
-        "name": "accent-glow-hover",
-        "value": "0 16px 36px rgba(45, 212, 191, 0.45)",
-        "purpose": "Primary button and scroll-to-top on hover."
-      },
-      {
-        "name": "halo-dot",
-        "value": "0 0 0 6px rgba(45, 212, 191, 0.15)",
-        "purpose": "The 6px halo around the one lit milestone dot (the role still running). Neutral dots take a 6% white halo instead."
-      }
-    ],
+    "shadows": [],
     "motion": [
       {
-        "name": "reveal",
-        "value": "opacity 0.6s ease, transform 0.6s ease",
-        "purpose": "Scroll reveal: 28px rise into view at a 0.12 intersection threshold."
+        "name": "seat",
+        "value": "transform/opacity 0.34s cubic-bezier(0.2,0.8,0.3,1), 60ms stagger",
+        "purpose": "Designation strips seat into their channels. Once, on load."
+      },
+      {
+        "name": "run",
+        "value": "stroke-dashoffset 0.5s cubic-bezier(0.3,0.9,0.4,1) 0.3s forwards",
+        "purpose": "Live jumpers draw after the strips seat. The landing ends here."
       },
       {
         "name": "state",
-        "value": "all 0.25s ease",
-        "purpose": "Default for hover, focus, and nav state changes."
-      },
-      {
-        "name": "state-quick",
-        "value": "all 0.2s ease",
-        "purpose": "Small inline controls: dropdown links, contact rows, project links."
-      },
-      {
-        "name": "nav-shrink",
-        "value": "all 0.3s ease",
-        "purpose": "The navbar tightening past 40px of scroll — the only scroll-linked state."
-      },
-      {
-        "name": "lift-card",
-        "value": "translateY(-8px)",
-        "purpose": "Project card hover. Cards rise."
-      },
-      {
-        "name": "lift-small",
-        "value": "translateY(-4px)",
-        "purpose": "Achievement cards, scroll-to-top."
-      },
-      {
-        "name": "slide-rail",
-        "value": "translateX(6px)",
-        "purpose": "Timeline entries slide along their rail rather than rising off it."
-      },
-      {
-        "name": "underline-sweep",
-        "value": "transform 0.25s ease (scaleX from transform-origin: left)",
-        "purpose": "The active nav underline. Never an animated width — that thrashes layout every frame."
+        "value": "0.15s linear",
+        "purpose": "All post-landing feedback: fill, border, colour."
       }
     ],
     "breakpoints": [
       {
         "name": "md",
-        "value": "960px"
+        "value": "900px"
       },
       {
         "name": "sm",
-        "value": "640px"
+        "value": "560px"
       }
     ]
   },
   "components": [
     {
-      "name": "Primary Button",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "The single primary action per view. Teal fill, console-ink text, accent glow that widens on hover.",
-      "html": "<a class=\"ds-btn-primary\" href=\"#\">Download CV</a>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 999px; border: 1px solid transparent; background: #2dd4bf; color: #081017; font-family: \"Space Grotesk\", system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; text-decoration: none; box-shadow: 0 10px 30px rgba(45,212,191,0.3); transition: all 0.25s ease; } .ds-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(45,212,191,0.45); } .ds-btn-primary:focus-visible { outline: 2px solid #4ee3d0; outline-offset: 3px; }"
-    },
-    {
-      "name": "Ghost Button",
-      "kind": "button",
-      "refersTo": "button-ghost",
-      "description": "The secondary action. Translucent white fill on the dark ground; unlimited per view.",
-      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Get in touch</a>",
-      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 999px; background: rgba(255,255,255,0.08); color: #f8fafc; border: 1px solid rgba(255,255,255,0.2); font-family: \"Space Grotesk\", system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.25s ease; } .ds-btn-ghost:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); } .ds-btn-ghost:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 3px; }"
-    },
-    {
-      "name": "Navigation Link",
+      "name": "Designation Strip",
       "kind": "nav",
-      "refersTo": "nav-link",
-      "description": "Slate text that grows a 2px teal underline left-to-right on hover and active. The purest expression of the Scarcity Rule: teal marks exactly one link.",
-      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link--active\" href=\"#\">About</a><a class=\"ds-nav-link\" href=\"#\">Experience</a><a class=\"ds-nav-link\" href=\"#\">Projects</a></nav>",
-      "css": ".ds-nav { display: flex; gap: 26px; align-items: center; } .ds-nav-link { position: relative; color: #d5dae3; text-decoration: none; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; transition: color 0.25s ease; } .ds-nav-link::after { content: \"\"; position: absolute; left: 0; bottom: -6px; width: 100%; height: 2px; background: #2dd4bf; transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; } .ds-nav-link:hover, .ds-nav-link--active { color: #f8fafc; } .ds-nav-link:hover::after, .ds-nav-link--active::after { transform: scaleX(1); } .ds-nav-link:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 3px; }"
+      "refersTo": "strip",
+      "description": "A 34px bar of strip stock, sticky, rivetted at both ends. Never truncates.",
+      "html": "<div class=\"ds-strip\"><span class=\"ds-strip-des\">01</span><span class=\"ds-strip-title\">Cross-connect</span><span class=\"ds-strip-clause\">— Record against stack</span><span class=\"ds-strip-count\">5 circuits</span></div>",
+      "css": ".ds-strip{height:34px;background:#ede9dd;border-bottom:1px solid #5e6259;display:flex;align-items:center;gap:12px;padding:0 16px}.ds-strip::before,.ds-strip::after{content:\"\";width:5px;height:5px;border-radius:50%;background:#a9a291;flex-shrink:0}.ds-strip::after{margin-left:auto}.ds-strip-des{font-family:\"JetBrains Mono\",monospace;font-size:.72rem;font-weight:700;letter-spacing:.1em;color:#191b17}.ds-strip-title{font-family:Archivo,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#494d44;white-space:nowrap}.ds-strip-clause{font-family:Archivo,sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#55584f;white-space:nowrap}.ds-strip-count{font-family:\"JetBrains Mono\",monospace;font-size:.68rem;color:#55584f;margin-left:auto;padding-right:12px}"
     },
     {
-      "name": "Tonal Pane Card",
-      "kind": "card",
-      "refersTo": "card-glass",
-      "description": "The Tier 2 default surface. 6% white fill, one hairline, seat shadow; border brightens to teal and the card rises on hover.",
-      "html": "<article class=\"ds-card\"><h3 class=\"ds-card-title\">doction</h3><p class=\"ds-card-body\">Self-hosted, markdown-first wiki and knowledge base for humans and AI agents.</p></article>",
-      "css": ".ds-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 20px; box-shadow: 0 18px 40px rgba(4,8,20,0.45); transition: transform 0.25s ease, border-color 0.25s ease; } .ds-card:hover { transform: translateY(-8px); border-color: rgba(45,212,191,0.4); } .ds-card-title { margin: 0 0 8px; font-family: Sora, system-ui, sans-serif; font-weight: 600; font-size: 1.2rem; color: #f8fafc; } .ds-card-body { margin: 0; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 1rem; line-height: 1.6; color: #d5dae3; }"
-    },
-    {
-      "name": "Technology Tag",
-      "kind": "chip",
-      "refersTo": "chip-tag",
-      "description": "Static categorical chip, shared by project tags and education skills. Neutral by rule: categorical things are named, not accented.",
-      "html": "<div class=\"ds-tags\"><span class=\"ds-tag\">Python</span><span class=\"ds-tag\">FastAPI</span><span class=\"ds-tag\">PostgreSQL</span></div>",
-      "css": ".ds-tags { display: flex; flex-wrap: wrap; gap: 8px; } .ds-tag { padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: #d5dae3; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 0.8rem; font-weight: 500; }"
-    },
-    {
-      "name": "Skill Pill",
-      "kind": "chip",
-      "refersTo": "skill-pill",
-      "description": "The one chip that responds to the pointer. Neutral at rest because 30+ appear at once; the border goes full teal on hover.",
-      "html": "<div class=\"ds-pills\"><span class=\"ds-pill\">Asterisk</span><span class=\"ds-pill\">Kamailio</span><span class=\"ds-pill\">SIP</span></div>",
-      "css": ".ds-pills { display: flex; flex-wrap: wrap; gap: 8px; } .ds-pill { padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color: #d5dae3; font-family: \"Space Grotesk\", system-ui, sans-serif; font-weight: 500; font-size: 0.85rem; transition: border-color 0.2s ease, color 0.2s ease; } .ds-pill:hover { border-color: #2dd4bf; color: #f8fafc; }"
-    },
-    {
-      "name": "Timeline Entry",
-      "kind": "custom",
-      "refersTo": "timeline-content",
-      "description": "The signature component. A neutral 2px rail; only the role still running gets a lit dot. The pane slides along the rail on hover rather than lifting off it.",
-      "html": "<div class=\"ds-timeline\"><div class=\"ds-timeline-item ds-timeline-item--current\"><div class=\"ds-timeline-content\"><div class=\"ds-timeline-header\"><h3 class=\"ds-timeline-title\">Telephony Engineer</h3><span class=\"ds-timeline-period\">Jun 2024 &ndash; Present</span></div><p class=\"ds-timeline-subtitle\">EMTELCO S.A.</p><p class=\"ds-timeline-description\">Design and implement enterprise SIP telephony solutions.</p></div></div></div>",
-      "css": ".ds-timeline { position: relative; padding-left: 26px; } .ds-timeline::before { content: \"\"; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.12); } .ds-timeline-item { position: relative; padding-left: 24px; } .ds-timeline-item::before { content: \"\"; position: absolute; left: -14px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: #9aa4b2; box-shadow: 0 0 0 6px rgba(255,255,255,0.06); } .ds-timeline-item--current::before { background: #2dd4bf; box-shadow: 0 0 0 6px rgba(45,212,191,0.15); } .ds-timeline-content { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 20px; transition: transform 0.25s ease, border-color 0.25s ease; } .ds-timeline-content:hover { transform: translateX(6px); border-color: rgba(45,212,191,0.4); } .ds-timeline-header { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; } .ds-timeline-title { margin: 0; font-family: Sora, system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: #f8fafc; } .ds-timeline-period { font-family: \"JetBrains Mono\", ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums slashed-zero; letter-spacing: 0.02em; font-size: 0.85rem; color: #9aa4b2; } .ds-timeline-subtitle { margin: 0 0 8px; color: #f8fafc; font-weight: 500; font-family: \"Space Grotesk\", system-ui, sans-serif; } .ds-timeline-description { margin: 0; color: #d5dae3; font-family: \"Space Grotesk\", system-ui, sans-serif; line-height: 1.6; }"
-    },
-    {
-      "name": "Stat Tile",
-      "kind": "custom",
-      "refersTo": "stat-tile",
-      "description": "A Tier 3 recessed well — darker than its parent, pressed in rather than lifted off. The clearest instrument readout in the system and the model for measured values everywhere.",
-      "html": "<div class=\"ds-stats\"><div class=\"ds-stat\"><span class=\"ds-stat-value\">13+</span><span class=\"ds-stat-label\">Years in IT</span></div><div class=\"ds-stat\"><span class=\"ds-stat-value\">6+</span><span class=\"ds-stat-label\">Years in VoIP</span></div></div>",
-      "css": ".ds-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 16px; } .ds-stat { padding: 14px; border-radius: 14px; background: rgba(8,12,20,0.5); border: 1px solid rgba(255,255,255,0.08); text-align: center; } .ds-stat-value { display: block; font-family: \"JetBrains Mono\", ui-monospace, Menlo, monospace; font-size: 1.3rem; font-weight: 600; color: #2dd4bf; } .ds-stat-label { font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 0.8rem; color: #9aa4b2; }"
-    },
-    {
-      "name": "Contact Row",
-      "kind": "input",
-      "refersTo": "contact-item",
-      "description": "A Tier 3 well acting as a terminal action. The only place a full row adopts the accent on hover, justified because these end the page.",
-      "html": "<a class=\"ds-contact-row\" href=\"#\"><svg class=\"ds-contact-icon\" viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path d=\"M4 7h24v18H4V7Zm2 2v2l10 6 10-6V9H6Zm20 14V13l-10 6-10-6v10h20Z\"/></svg><span>jnarvaar@icloud.com</span></a>",
-      "css": ".ds-contact-row { display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #f8fafc; font-family: \"Space Grotesk\", system-ui, sans-serif; text-decoration: none; transition: all 0.2s ease; } .ds-contact-row:hover { border-color: rgba(45,212,191,0.6); color: #2dd4bf; } .ds-contact-row:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 2px; } .ds-contact-icon { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }"
-    },
-    {
-      "name": "Scroll To Top",
+      "name": "State Control",
       "kind": "button",
-      "refersTo": "scroll-top",
-      "description": "A persistent utility affordance, so it is neutral at rest — a permanently teal control would be the single largest leak in the Scarcity Rule. Accent arrives on hover.",
-      "html": "<button class=\"ds-scroll-top\" aria-label=\"Scroll to top\">&uarr;</button>",
-      "css": ".ds-scroll-top { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.12); background: #181e2b; color: #f8fafc; font-size: 1.4rem; cursor: pointer; box-shadow: 0 12px 28px rgba(4,8,20,0.45); transition: all 0.25s ease; } .ds-scroll-top:hover { transform: translateY(-4px); border-color: rgba(45,212,191,0.5); color: #2dd4bf; } .ds-scroll-top:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 3px; }"
+      "refersTo": "state",
+      "description": "The trace toggle. A real button carrying aria-pressed; active is ink-filled, terminated is an outline.",
+      "html": "<button type=\"button\" class=\"ds-state ds-state--active\" aria-pressed=\"true\">Active</button> <button type=\"button\" class=\"ds-state\" aria-pressed=\"false\">Terminated</button>",
+      "css": ".ds-state{font-family:\"JetBrains Mono\",monospace;font-size:.6rem;font-weight:700;letter-spacing:.1em;padding:2px 6px;border:1px solid currentColor;text-transform:uppercase;background:none;line-height:1.4;cursor:pointer;color:#55584f}.ds-state--active{background:#191b17;border-color:#191b17;color:#ede9dd}.ds-state[aria-pressed=\"true\"]{outline:2px solid #191b17;outline-offset:2px}.ds-state:focus-visible{outline:2px solid #191b17;outline-offset:2px}"
+    },
+    {
+      "name": "Terminal",
+      "kind": "chip",
+      "refersTo": "terminal",
+      "description": "A mono chip on the equipment side. Three opaque states; never dimmed with opacity, which would let wire show through as a strike.",
+      "html": "<div class=\"ds-terms\"><span class=\"ds-term ds-term--live\">Asterisk</span><span class=\"ds-term\">SRTP</span><span class=\"ds-term ds-term--dim\">Kubernetes</span></div>",
+      "css": ".ds-terms{display:flex;flex-wrap:wrap;gap:3px}.ds-term{font-family:\"JetBrains Mono\",monospace;font-size:.72rem;font-weight:500;padding:4px 8px;border:1px solid #a9a291;background:#c4beaf;color:#494d44;white-space:nowrap;position:relative;z-index:1}.ds-term--live{background:#191b17;border-color:#191b17;color:#ede9dd}.ds-term--dim{background:#d4cec0;border-color:#a9a291;color:#494d44}"
+    },
+    {
+      "name": "Circuit",
+      "kind": "card",
+      "refersTo": "circuit",
+      "description": "A record on the line side. Shares its top member with the circuit above, so five circuits read as one block.",
+      "html": "<article class=\"ds-circuit\"><div class=\"ds-circuit-row\"><button type=\"button\" class=\"ds-state ds-state--active\" aria-pressed=\"false\">Active</button><h4 class=\"ds-circuit-title\">Telephony Engineer</h4><span class=\"ds-circuit-period\">Jun 2024 – Present</span></div><p class=\"ds-circuit-pairs\">10 pairs cross-connected</p><p class=\"ds-circuit-org\">EMTELCO S.A.</p></article>",
+      "css": ".ds-circuit{border:1px solid #5e6259;background:#ded9cd;padding:12px 14px}.ds-circuit:hover{background:#ede9dd;border-color:#191b17}.ds-circuit-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}.ds-circuit-title{margin:0;font-family:Archivo,sans-serif;font-size:1rem;font-weight:600;color:#191b17}.ds-circuit-period{font-family:\"JetBrains Mono\",monospace;font-size:.72rem;font-variant-numeric:tabular-nums slashed-zero;color:#494d44;margin-left:auto}.ds-circuit-pairs{margin:0;font-family:\"JetBrains Mono\",monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:#55584f}.ds-circuit-org{margin:2px 0 0;font-family:\"JetBrains Mono\",monospace;font-size:.74rem;color:#494d44}"
+    },
+    {
+      "name": "Record Tag",
+      "kind": "button",
+      "refersTo": "tag",
+      "description": "A square mono control. The primary variant is ink-filled and goes to steel on hover.",
+      "html": "<a class=\"ds-tag ds-tag--live\" href=\"#\">Record copy</a> <a class=\"ds-tag\" href=\"#\">Source</a>",
+      "css": ".ds-tag{font-family:\"JetBrains Mono\",monospace;font-size:.74rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:8px 14px;border:1px solid #5e6259;background:#ded9cd;color:#191b17;display:inline-flex;align-items:center;gap:8px}.ds-tag:hover{background:#ede9dd;border-color:#191b17}.ds-tag--live{background:#191b17;border-color:#191b17;color:#ede9dd}.ds-tag--live:hover{background:#5e6259;border-color:#5e6259;color:#ede9dd}.ds-tag:focus-visible{outline:2px solid #191b17;outline-offset:2px}"
+    },
+    {
+      "name": "Frame Data Panel",
+      "kind": "custom",
+      "refersTo": "data-row",
+      "description": "Label-value rows carrying only metadata about the record — never CV content, which lives at its own designation.",
+      "html": "<dl class=\"ds-data\"><div class=\"ds-data-row\"><dt>Location</dt><dd>Bogotá, Colombia</dd></div><div class=\"ds-data-row\"><dt>Circuits</dt><dd>5</dd></div><div class=\"ds-data-row\"><dt>Terminals</dt><dd>39</dd></div></dl>",
+      "css": ".ds-data{border:1px solid #5e6259;margin:0}.ds-data-row{display:flex;gap:12px;align-items:baseline;padding:7px 12px;border-bottom:1px solid #5e6259;background:#ded9cd}.ds-data-row:last-child{border-bottom:none}.ds-data-row dt{font-family:\"JetBrains Mono\",monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:#55584f}.ds-data-row dd{font-family:\"JetBrains Mono\",monospace;font-size:.7rem;color:#191b17;margin:0 0 0 auto;font-variant-numeric:tabular-nums slashed-zero}"
+    },
+    {
+      "name": "Pair Legend",
+      "kind": "custom",
+      "refersTo": "pair-legend",
+      "description": "The frame's printed matter: decodes the wire and carries auditable totals. Hidden below 900px, where no wire is drawn.",
+      "html": "<div class=\"ds-legend\"><p class=\"ds-legend-title\">JUMPER — 25-PAIR CODE</p><div class=\"ds-legend-row\"><span class=\"ds-key\"><span class=\"ds-sw\" style=\"background:#1b4fa0\"></span>Blue</span><span class=\"ds-key\"><span class=\"ds-sw\" style=\"background:#c9550f\"></span>Orange</span><span class=\"ds-key\"><span class=\"ds-sw\" style=\"background:#1d6f3f\"></span>Green</span></div><p class=\"ds-legend-foot\">39 terminals across 6 blocks.</p></div>",
+      "css": ".ds-legend{border:1px solid #5e6259;background:#c4beaf;padding:10px 12px}.ds-legend-title{margin:0 0 8px;font-family:\"JetBrains Mono\",monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;color:#494d44}.ds-legend-row{display:flex;flex-wrap:wrap;gap:12px}.ds-key{display:inline-flex;align-items:center;gap:6px;font-family:\"JetBrains Mono\",monospace;font-size:.66rem;color:#494d44}.ds-sw{width:16px;height:3px;flex-shrink:0}.ds-legend-foot{font-family:\"JetBrains Mono\",monospace;font-size:.64rem;color:#55584f;margin:8px 0 0;padding-top:8px;border-top:1px dashed #a9a291}"
+    },
+    {
+      "name": "Upright Rail",
+      "kind": "nav",
+      "refersTo": "upright",
+      "description": "The frame's left member, carrying the vertical mark and the block index. The current designation is ink-filled.",
+      "html": "<nav class=\"ds-rail\"><span class=\"ds-rail-mark\">MDF</span><a class=\"ds-rail-link ds-rail-link--on\" href=\"#\">00</a><a class=\"ds-rail-link\" href=\"#\">01</a><a class=\"ds-rail-link\" href=\"#\">02</a></nav>",
+      "css": ".ds-rail{width:56px;background:#c4beaf;border-right:2px solid #454941;display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:4px}.ds-rail-mark{font-family:\"JetBrains Mono\",monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;color:#494d44;writing-mode:vertical-rl;margin-bottom:10px}.ds-rail-link{font-family:\"JetBrains Mono\",monospace;font-size:.72rem;font-weight:500;font-variant-numeric:tabular-nums;color:#494d44;text-decoration:none;width:32px;height:28px;display:grid;place-items:center;border:1px solid transparent}.ds-rail-link:hover{color:#191b17;border-color:#5e6259}.ds-rail-link--on{background:#191b17;border-color:#191b17;color:#ede9dd}"
     },
     {
       "name": "Browser Surfaces",
       "kind": "custom",
       "refersTo": "browser-surfaces",
-      "description": "Selection, focus ring and scrollbar — the parts nobody draws. Themed from the palette because browser defaults belong to no design system.",
-      "html": "<p class=\"ds-surfaces\">Select this text, or tab to <a class=\"ds-surfaces-link\" href=\"#\">this link</a>, to see the accent doing its actual job.</p>",
-      "css": ".ds-surfaces { color: #d5dae3; font-family: \"Space Grotesk\", system-ui, sans-serif; line-height: 1.6; scrollbar-color: rgba(255,255,255,0.18) transparent; scrollbar-width: thin; } .ds-surfaces ::selection, .ds-surfaces::selection { background: rgba(45,212,191,0.25); color: #f8fafc; } .ds-surfaces-link { color: #f8fafc; } .ds-surfaces-link:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 3px; }"
+      "description": "Selection, focus ring and scrollbar, themed from the frame rather than left to the browser.",
+      "html": "<p class=\"ds-surf\">Select this text, or tab to <a class=\"ds-surf-link\" href=\"#\">this link</a>.</p>",
+      "css": ".ds-surf{font-family:Archivo,sans-serif;color:#494d44;line-height:1.5;scrollbar-color:#5e6259 #c4beaf;scrollbar-width:thin}.ds-surf ::selection,.ds-surf::selection{background:#5e6259;color:#ede9dd}.ds-surf-link{color:#191b17}.ds-surf-link:focus-visible{outline:2px solid #191b17;outline-offset:2px}"
     }
   ],
   "narrative": {
-    "northStar": "The Night Operations Console",
-    "overview": "This is a room with the lights off and one instrument lit. The page sits at near-black (#0b0d12), lifted only by a cold teal glow bleeding in from the top-right corner and a fine dot-grid noise laid over everything at 15% opacity. Content lives on translucent panes stacked in that dark — you can see the glow through them, which is the point: the panels are glass in front of a running system, not cards on a page.\n\nThe tone is instrumented, quiet, precise, and warm underneath. Instrumented, because the surface reports live state rather than describing it: the footer carries Bogotá’s actual local time and current temperature, and the timeline lights exactly one milestone — the role still running. The page once carried a live WebRTC webchat widget too, and should again; it was removed while its subdomain is unreachable, because an instrument that reports nothing is worse than an absent one. Quiet and low-lit, because a visiting engineer is reading, not being sold to. Precise, because alignment and rhythm are the visible evidence of engineering discipline. Warm underneath, because there is a person here and the design says so.\n\nTypographically it runs on two geometric sans faces — Sora for structure, Space Grotesk for prose — with a monospace instrument voice for anything measured. The form language is soft: pills for anything interactive or categorical, generously rounded panes, one hairline of light on every edge. Motion is a single gesture, repeated: a 28px rise into view on scroll, a 2–8px lift on hover, 250ms, never more.",
+    "northStar": "The Distribution Frame",
+    "overview": "In a telephone exchange, the main distribution frame is the steel rack where every subscriber line lands on one side, every switch port on the other, and jumper wire crosses between them. It is the act of routing made into an object: who connects to whom is not described anywhere, it is visible as wire. This site is that frame.\n\nThe ground is equipment enamel, the warm putty of painted exchange steel under fluorescent light. Structure is painted steel members at one and two pixels; text is engraved ink; labels ride on designation-strip stock. The only chromatic system is the 25-pair telecom colour code, spent exclusively on live jumper wire.\n\nThe system is entirely flat and entirely square: zero box-shadows, zero backdrop-filters, and exactly one border-radius — the 50% on the rivet dots at the ends of each designation strip. Depth is real material stacking, never simulated relief.",
     "keyCharacteristics": [
-      "Near-black ground with a single teal signal color; no second accent",
-      "Translucent panes at three distinct tiers of depth, not one uniform glass",
-      "One hairline of light (rgba(255,255,255,0.12)) defines every edge",
-      "Live readouts over static claims — the interface reports rather than asserts",
-      "Pill geometry for interactive and categorical elements; soft rectangles for content",
-      "Motion as feedback only: reveal-on-scroll, hover lift, nothing longer than 600ms",
-      "Full prefers-reduced-motion honoring, already implemented"
+      "Equipment-enamel ground; no dark mode, no glass, no gradient field",
+      "The 25-pair colour code as the only chroma, reserved for wire",
+      "Square corners everywhere; one circle, on the strip rivets",
+      "No shadows and no blur — depth from tonal grounds and steel members",
+      "Full-bleed frame elevation; no centred content column",
+      "Data set in mono with tabular figures; prose in Archivo",
+      "One authored landing: strips seat, then jumpers run, then it stops"
     ],
     "rules": [
       {
-        "name": "The One Light Rule",
+        "name": "The Wire Rule",
         "section": "colors",
-        "body": "There is exactly one accent color in this system and there will never be a second. No status greens, no warning ambers, no per-category hues on skill groups. If something needs to be distinguished from its neighbor, distinguish it with type, weight, position, or opacity — never by introducing a color."
+        "body": "The 25-pair colour code is spent on jumper wire and on the legend that decodes it. Nothing else may take a pair colour — not a button, chip, border or focus ring. A page where the accent appears on controls is one where a blue wire reads as brand colour instead of as pair 1."
       },
       {
-        "name": "The Scarcity Rule",
+        "name": "The Fill Rule",
         "section": "colors",
-        "body": "Phosphor Teal marks *state and signal*, not category. At rest it appears in exactly five places: the primary button, the nav CTA, the three stat values, the active nav link's underline, and the dot of the one role still running. Everything else earns it only under the pointer or the keyboard — hover borders, focus rings, text selection. Tags, skill pills, education chips, icon wells, section rails, and the scroll-to-top control are all neutral by rule. **Audit test:** count the elements painting teal as a foreground, border, or fill in the resting state. If more than roughly one in ten, the signal has become wallpaper and the rarest thing on the page is no longer the most important."
+        "body": "State is carried by fill and weight, never by hue. Live is ink-filled with strip type; dimmed recedes to the enamel ground. Never dim with opacity: a translucent chip lets jumper wire show through and reads as a strike-through."
       },
       {
         "name": "The No-Pure-Black Rule",
         "section": "colors",
-        "body": "The darkest value in the system is #07080c. Pure #000 never appears. Every dark is a blue-black, which is what makes the teal read as cold light rather than as neon."
+        "body": "The darkest value is Ink (#191b17). Pure #000 and #fff never appear."
       },
       {
         "name": "The Instrument Voice Rule",
         "section": "typography",
-        "body": "If a value was measured, counted, dated, or rated, it is set in mono with `font-variant-numeric: tabular-nums slashed-zero`. If a human wrote it as a sentence, or it is the name of a thing, it is set in Space Grotesk. \"Jun 2024 – Present\" is mono; \"13+\" is mono; \"Intermediate (B1)\" is mono. \"Design and implement enterprise SIP telephony solutions\" is not, and neither is \"Kamailio\". **Audit test:** point at any string of digits on the page — if it is not in mono, either it should be, or it is genuinely prose. Then point at any mono string with no digits and no rating in it; that one is a costume and should come off."
+        "body": "If a value was measured, counted, dated or rated, it is mono with tabular figures. If a human wrote it as a sentence, or it is the name of a thing, it is Archivo. A technology name is a label, not a reading."
       },
       {
-        "name": "The Two-Step Rule",
+        "name": "The Engraved Strip Rule",
         "section": "typography",
-        "body": "Between any two adjacent levels of hierarchy there is a visible step in both size and weight or color. Never differentiate two type levels by size alone at close values."
+        "body": "A designation strip never truncates. Below 560px it drops its clause and shows the designation alone."
       },
       {
-        "name": "The One Column Rule",
+        "name": "The Shared Member Rule",
         "section": "layout",
-        "body": "This page is a single 1180px column and a vertical read. No sidebars, no sticky rails, no split-screen sections, no full-bleed breakouts."
+        "body": "Adjacent units share one steel member. Two abutting 1px borders read as a 2px seam and turn a block back into a stack of cards."
       },
       {
-        "name": "The Three-Pane Rule",
+        "name": "The Full-Bleed Rule",
+        "section": "layout",
+        "body": "The frame owns the whole viewport. No centred column, no content max-width. The upright rail is the only reserved edge."
+      },
+      {
+        "name": "The No-Relief Rule",
         "section": "elevation",
-        "body": "Every surface belongs to exactly one of three tiers: Tier 1 true glass (navbar and hero card only, the sole carriers of backdrop-filter), Tier 2 tonal pane (the default), Tier 3 recessed well (darker than its parent). Name the tier before you build the surface."
+        "body": "Never simulate the material. No bevels, emboss, metallic gradient or grain. Real material arrives as a produced raster, not as CSS relief. Imitation material is the most reliable mark of machine-made design."
       },
       {
-        "name": "The Hairline Rule",
+        "name": "The Three Plane Rule",
         "section": "elevation",
-        "body": "Every raised surface carries exactly one 1px border at rgba(255,255,255,0.12). Never two borders, never a border plus an outline, never a hairline on a Tier 3 well brighter than 10%."
+        "body": "Every surface is raised (enamel-lit), recessed (trough), or strip stock. Name its plane before building it."
       },
       {
-        "name": "The Lift-On-Intent Rule",
-        "section": "elevation",
-        "body": "Surfaces are still at rest. They move only in response to the pointer, and the movement encodes direction: cards rise, timeline entries slide along their rail, the accent brightens. Rest state is never animated."
-      },
-      {
-        "name": "The Three-Radius Rule",
+        "name": "The Square Rule",
         "section": "shapes",
-        "body": "Content surfaces use 10px, 14px, or 18px — nothing between. If a new component seems to need 16px, it is either a small tile (14px) or a card (18px)."
-      },
-      {
-        "name": "The Pill Rule",
-        "section": "shapes",
-        "body": "Round to 999px only when the element is a discrete, tappable, or countable unit: a button, a tag, a skill pill, a level indicator. Never pill a container that holds prose."
+        "body": "Nothing is rounded. If a new element seems to want a radius, it wants a different plane or member weight instead. The single circle is the 5px strip rivet."
       }
     ],
     "dos": [
-      "Do treat Phosphor Teal as the one light in the room — mark state and signal with it, and audit that it stays near one element in ten.",
-      "Do name a surface’s tier before you build it: Tier 1 true glass, Tier 2 tonal pane, Tier 3 recessed well.",
-      "Do put exactly one 1px hairline at rgba(255,255,255,0.12) on every raised surface.",
-      "Do set measured values — dates, periods, counts, tags, endpoints — in the mono instrument voice, and load JetBrains Mono in index.html when you do.",
-      "Do stay on the five-step radius scale: 10px, 14px, 18px, 999px, 50%.",
-      "Do let repeat(auto-fit, minmax(<floor>, 1fr)) do the responsive work; add a media query only for the two breakpoints that already exist (960px, 640px).",
-      "Do keep motion as feedback: reveal at 600ms, hover at 250ms, hover lifts between 2px and 8px, and extend the existing prefers-reduced-motion block to cover anything new.",
-      "Do show live state where you can — real local time, real weather, real reachable endpoints. The instrument reports; it does not describe.",
-      "Do keep the accent glow tinted on teal elements and dark everywhere else.",
-      "Do theme the surfaces you did not draw — selection, focus ring, scrollbar — from the palette.",
-      "Do animate transform and opacity only. The nav underline sweeps with scaleX, not width."
+      "Do spend the 25-pair colour code on wire and its legend, and nowhere else.",
+      "Do carry state with fill and weight — ink-filled for live, outline for at-rest, receded to enamel for dimmed.",
+      "Do keep every surface square. The one circle is the 5px strip rivet.",
+      "Do name a surface's plane before building it: raised, recessed, or strip stock.",
+      "Do let adjacent units share one steel member.",
+      "Do set every measured value in mono with tabular figures and a slashed zero.",
+      "Do derive relationships from the record — a wire may only exist where the CV already says it does.",
+      "Do keep the frame full-bleed; the upright rail is the only reserved edge.",
+      "Do put an interactive control on an actual button and leave headings as headings."
     ],
     "donts": [
-      "Don’t introduce a second accent color. No status green, no warning amber, no per-category hue.",
-      "Don’t add backdrop-filter to a new surface. Two blurred layers already exist and the page paints three fixed background layers beneath them.",
-      "Don’t use pure #000 or pure #fff. The darkest value is #07080c; the lightest is Mist (#f8fafc).",
-      "Don’t pill a container that holds prose.",
-      "Don’t add radius values between the scale steps — no 12px, 16px, 20px, 22px, 26px on new work.",
-      "Don’t drift toward the template dev portfolio: no purple-to-blue gradient hero, no floating 3D blobs, no typewriter effect on the role line, no animated counting stat numbers.",
-      "Don’t drift toward corporate SaaS marketing: no illustrated people, no \"Trusted by\" logo wall, no testimonial cards, no trust badges. PRODUCT.md records that none of that evidence exists and it must never be fabricated to fill a layout.",
-      "Don’t drift toward the over-animated showcase: no scroll-jacking, no parallax, no cursor followers, no magnetic buttons, no page transitions.",
-      "Don’t drift toward the corporate résumé document: no serif headings, no letterhead layout, no dense two-column body text.",
-      "Don’t add a sidebar, sticky rail, split-screen section, or full-bleed breakout.",
-      "Don’t accent something categorical. Tags, skill pills, icon wells and section rails are neutral; distinguish them with type, weight or position.",
-      "Don’t ship a link that goes nowhere, and don’t count a private subdomain as a live demo. Every demo value was removed on 2026-09-01 — three were \"#\" placeholders and the fourth pointed at a host that returns NXDOMAIN publicly. Verify a target resolves from outside the network before a control is allowed to promise it."
+      "Don't give a pair colour to a button, chip, border or focus ring.",
+      "Don't add a box-shadow or a backdrop-filter. There are zero of each, deliberately.",
+      "Don't round anything.",
+      "Don't dim with opacity — a translucent terminal lets wire show through and reads as a strike-through.",
+      "Don't simulate the material with CSS bevels, emboss, metallic gradients or grain.",
+      "Don't centre the content in a column, or re-introduce a hero above the identification strip.",
+      "Don't ship a big-number-plus-small-label stat row. Counts belong on designation strips and in the frame data panel.",
+      "Don't let a designation strip truncate; drop its clause instead.",
+      "Don't print the same record at two designations. One record, one home.",
+      "Don't wrap a whole card in role=\"button\". It swallows the headings inside it and destroys the document outline."
     ]
   }
 }

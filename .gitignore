@@ -51,3 +51,10 @@ Curriculum vitae_spanish.pdf
 # Claude Code
 # ====================
 CLAUDE.md
+
+# ====================
+# Impeccable working artifacts (review captures, decision-round state)
+# ====================
+.impeccable/review/
+.impeccable/questions/
+.impeccable/build/

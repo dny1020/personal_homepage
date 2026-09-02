@@ -1,336 +1,318 @@
 ---
 name: danilocloud.me
-description: A night-shift operations console for a telephony and infrastructure engineer's CV portfolio.
+description: A telephone-exchange main distribution frame, carrying an engineer's record as wired terminal blocks.
 colors:
-  ink-900: "#0b0d12"
-  ink-800: "#121620"
-  ink-700: "#181e2b"
-  teal: "#2dd4bf"
-  teal-bright: "#4ee3d0"
-  teal-dark: "#0f766e"
-  teal-ink: "#081017"
-  mist: "#f8fafc"
-  slate-200: "#d5dae3"
-  slate-400: "#9aa4b2"
-  glass: "rgba(255, 255, 255, 0.06)"
-  hairline: "rgba(255, 255, 255, 0.12)"
-  shadow: "rgba(4, 8, 20, 0.45)"
+  enamel: "#d4cec0"
+  enamel-lit: "#ded9cd"
+  trough: "#c4beaf"
+  trough-deep: "#a9a291"
+  steel: "#5e6259"
+  steel-dark: "#454941"
+  ink: "#191b17"
+  ink-soft: "#494d44"
+  ink-faint: "#55584f"
+  strip: "#ede9dd"
+  strip-edge: "#c6c0b0"
+  pair-blue: "#1b4fa0"
+  pair-orange: "#c9550f"
+  pair-green: "#1d6f3f"
+  pair-brown: "#7a4a22"
+  pair-slate: "#5c6a74"
 typography:
   display:
-    fontFamily: "Sora, system-ui, -apple-system, sans-serif"
-    fontSize: "clamp(2.8rem, 6vw, 4.6rem)"
-    fontWeight: 600
-    lineHeight: 1.05
-    letterSpacing: "normal"
-  headline:
-    fontFamily: "Sora, system-ui, -apple-system, sans-serif"
-    fontSize: "clamp(2rem, 4vw, 2.8rem)"
-    fontWeight: 600
-    lineHeight: 1.15
-    letterSpacing: "normal"
+    fontFamily: "Archivo, system-ui, -apple-system, sans-serif"
+    fontSize: "clamp(1.9rem, 5vw, 3.7rem)"
+    fontWeight: 700
+    lineHeight: 0.98
+    letterSpacing: "-0.025em"
   title:
-    fontFamily: "Sora, system-ui, -apple-system, sans-serif"
-    fontSize: "1.1rem"
-    fontWeight: 600
-    lineHeight: 1.4
-    letterSpacing: "normal"
-  body:
-    fontFamily: "Space Grotesk, system-ui, -apple-system, sans-serif"
+    fontFamily: "Archivo, system-ui, -apple-system, sans-serif"
     fontSize: "1rem"
+    fontWeight: 600
+    lineHeight: 1.3
+    letterSpacing: "-0.01em"
+  body:
+    fontFamily: "Archivo, system-ui, -apple-system, sans-serif"
+    fontSize: "0.95rem"
     fontWeight: 400
-    lineHeight: 1.6
+    lineHeight: 1.5
     letterSpacing: "normal"
   label:
-    fontFamily: "Space Grotesk, system-ui, -apple-system, sans-serif"
-    fontSize: "1rem"
+    fontFamily: "Archivo, system-ui, -apple-system, sans-serif"
+    fontSize: "0.72rem"
     fontWeight: 600
     lineHeight: 1.4
-    letterSpacing: "0.08em"
-  mono:
+    letterSpacing: "0.16em"
+  term:
     fontFamily: "JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace"
-    fontSize: "0.85rem"
+    fontSize: "0.72rem"
     fontWeight: 500
     lineHeight: 1.4
     letterSpacing: "0.02em"
+  micro:
+    fontFamily: "JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace"
+    fontSize: "0.66rem"
+    fontWeight: 500
+    lineHeight: 1.4
+    letterSpacing: "0.08em"
 rounded:
-  sm: "10px"
-  md: "14px"
-  lg: "18px"
-  pill: "999px"
+  square: "0"
   circle: "50%"
 spacing:
+  hair: "3px"
   xs: "8px"
   sm: "12px"
   md: "16px"
   lg: "20px"
   xl: "24px"
-  2xl: "40px"
-  section: "80px"
+  block: "34px"
 components:
-  button-primary:
-    backgroundColor: "{colors.teal}"
-    textColor: "{colors.teal-ink}"
-    rounded: "{rounded.pill}"
-    padding: "12px 26px"
-    typography: "{typography.label}"
-  button-primary-hover:
-    backgroundColor: "{colors.teal}"
-    textColor: "{colors.teal-ink}"
-  button-ghost:
-    backgroundColor: "rgba(255, 255, 255, 0.08)"
-    textColor: "{colors.mist}"
-    rounded: "{rounded.pill}"
-    padding: "12px 26px"
-  button-ghost-hover:
-    backgroundColor: "rgba(255, 255, 255, 0.15)"
-    textColor: "{colors.mist}"
-  nav-cta:
-    backgroundColor: "{colors.teal}"
-    textColor: "{colors.teal-ink}"
-    rounded: "{rounded.pill}"
-    padding: "9px 20px"
-  nav-cta-hover:
-    backgroundColor: "{colors.teal-bright}"
-    textColor: "{colors.teal-ink}"
-  card-glass:
-    backgroundColor: "{colors.glass}"
-    textColor: "{colors.mist}"
-    rounded: "{rounded.lg}"
-    padding: "20px"
-  chip-tag:
-    backgroundColor: "rgba(45, 212, 191, 0.14)"
-    textColor: "{colors.teal}"
-    rounded: "{rounded.pill}"
-    padding: "6px 12px"
-  skill-pill:
-    backgroundColor: "rgba(45, 212, 191, 0.08)"
-    textColor: "{colors.slate-200}"
-    rounded: "{rounded.pill}"
+  tag:
+    backgroundColor: "{colors.enamel-lit}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.square}"
     padding: "8px 14px"
-  skill-pill-hover:
-    backgroundColor: "rgba(45, 212, 191, 0.08)"
-    textColor: "{colors.mist}"
-  contact-item:
-    backgroundColor: "rgba(255, 255, 255, 0.05)"
-    textColor: "{colors.mist}"
-    rounded: "{rounded.sm}"
-    padding: "12px 16px"
-  contact-item-hover:
-    backgroundColor: "rgba(255, 255, 255, 0.05)"
-    textColor: "{colors.teal}"
-  stat-tile:
-    backgroundColor: "rgba(8, 12, 20, 0.5)"
-    textColor: "{colors.teal}"
-    rounded: "{rounded.md}"
-    padding: "14px"
+    typography: "{typography.term}"
+  tag-live:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.strip}"
+    rounded: "{rounded.square}"
+    padding: "8px 14px"
+  tag-live-hover:
+    backgroundColor: "{colors.steel}"
+    textColor: "{colors.strip}"
+  terminal:
+    backgroundColor: "{colors.trough}"
+    textColor: "{colors.ink-soft}"
+    rounded: "{rounded.square}"
+    padding: "4px 8px"
+    typography: "{typography.term}"
+  terminal-live:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.strip}"
+  terminal-dimmed:
+    backgroundColor: "{colors.enamel}"
+    textColor: "{colors.ink-soft}"
+  state:
+    backgroundColor: "{colors.enamel-lit}"
+    textColor: "{colors.ink-faint}"
+    rounded: "{rounded.square}"
+    padding: "2px 6px"
+    typography: "{typography.micro}"
+  state-active:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.strip}"
+  circuit:
+    backgroundColor: "{colors.enamel-lit}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.square}"
+    padding: "12px 14px"
+  circuit-active:
+    backgroundColor: "{colors.strip}"
+    textColor: "{colors.ink}"
+  strip:
+    backgroundColor: "{colors.strip}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.square}"
+    padding: "0 16px"
+    height: "34px"
+  data-row:
+    backgroundColor: "{colors.enamel-lit}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.square}"
+    padding: "7px 12px"
+    typography: "{typography.micro}"
+  term-link:
+    backgroundColor: "{colors.enamel-lit}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.square}"
+    padding: "10px 14px"
+    typography: "{typography.term}"
+  term-link-hover:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.strip}"
 ---
 
 # Design System: danilocloud.me
 
 ## Overview
 
-**Creative North Star: "The Night Operations Console"**
+**Creative North Star: "The Distribution Frame"**
 
-This is a room with the lights off and one instrument lit. The page sits at near-black (`#0b0d12`), lifted only by a cold teal glow bleeding in from the top-right corner and a fine dot-grid noise laid over everything at 15% opacity. Content lives on translucent panes stacked in that dark — you can see the glow through them, which is the point: the panels are glass in front of a running system, not cards on a page. Nothing here is bright except the one accent, and the accent is doing work.
+In a telephone exchange, the main distribution frame is the steel rack where every subscriber line lands on one side, every switch port on the other, and jumper wire crosses between them. It is the act of routing made into an object: who connects to whom is not described anywhere, it is visible as wire. This site is that frame. The page is not a document about an engineer who routes signals between systems — it is the rack, and the record is wired into it.
 
-The tone is **instrumented, quiet, precise, and warm underneath**. Instrumented, because the surface reports live state rather than describing it: the footer carries Bogotá's actual local time and current temperature, and the timeline lights exactly one milestone — the role still running. The page once carried a live WebRTC webchat widget too, and should again; it was removed while its subdomain is unreachable, because an instrument that reports nothing is worse than an absent one. Quiet and low-lit, because a visiting engineer is reading, not being sold to — there is no hero animation to sit through, and the type never shouts. Precise, because alignment and rhythm are the visible evidence of engineering discipline; a misaligned rail on this page costs more credibility than it would anywhere else. Warm underneath, because there is a person here and the design says so — a real photograph rather than an avatar, a coffee-consumption API sitting among the serious infrastructure, plain first-person copy with no inflation.
+The ground is equipment enamel (`#d4cec0`), the warm putty of painted exchange steel under fluorescent light, not a screen colour and not a dark-mode default. Structure is drawn in painted steel members at one and two pixels. Text is engraved ink. Labels ride on designation-strip stock, the paper slips that sit in a channel above each connection block. The only chromatic system on the page is the **25-pair telecom colour code** — blue, orange, green, brown, slate — and it is spent exclusively on live jumper wire. Every interface state that is not wire is carried by fill, weight and member thickness instead.
 
-Typographically it runs on two geometric sans faces — Sora for structure, Space Grotesk for prose — with a monospace instrument voice for anything measured. The form language is soft: pills for anything interactive or categorical, generously rounded panes, one hairline of light on every edge. Motion is a single gesture, repeated: a 28px rise into view on scroll, a 2-8px lift on hover, 250ms, never more.
+The system is entirely flat and entirely square. There are **zero** `box-shadow` declarations, **zero** `backdrop-filter` declarations, and exactly **one** `border-radius` in the stylesheet: the 50% on the two rivet dots at the ends of each designation strip. Depth is real material stacking — a recessed trough is darker than the enamel around it, a strip is lighter — never a simulated bevel or a cast shadow. A frame rendered with CSS relief would be a costume; the honest reduction is the commitment.
 
 **Key Characteristics:**
-- Near-black ground with a single teal signal color; no second accent
-- Translucent panes at three distinct tiers of depth, not one uniform glass
-- One hairline of light (`rgba(255,255,255,0.12)`) defines every edge
-- Live readouts over static claims — the interface reports rather than asserts
-- Pill geometry for interactive and categorical elements; soft rectangles for content
-- Motion as feedback only: reveal-on-scroll, hover lift, nothing longer than 600ms
-- Full `prefers-reduced-motion` honoring, already implemented
+- Equipment-enamel ground; no dark mode, no glass, no gradient field
+- The 25-pair colour code as the only chroma, reserved for wire
+- Square corners everywhere; one circle, on the strip rivets
+- No shadows and no blur — depth from tonal grounds and steel members
+- Full-bleed frame elevation; no centred content column
+- Data set in mono with tabular figures; prose in Archivo
+- One authored landing: strips seat, then jumpers run, then it stops
 
 ## Colors
 
-A single cold accent burning in a deep blue-black room, with a three-step grey ramp carrying all text.
+Painted steel and enamel in a narrow warm-grey band, with one saturated system reserved for wire.
 
 ### Primary
-- **Phosphor Teal** (`#2dd4bf`): The one light in the room. Named for CRT phosphor, not for a brand — it reads as an instrument's readout, not as decoration. At rest it marks only the primary button, the nav CTA, the stat values, the active nav underline, and the milestone dot of the role still running. Under the pointer or the keyboard it also carries every hover border, the focus ring, and the text selection. It takes a matching glow wherever it fills a raised element (`0 10px 30px rgba(45,212,191,0.3)`).
-- **Phosphor Bright** (`#4ee3d0`): The hover state of the accent, and only that. It exists so the primary CTA can brighten without shifting hue.
-- **Phosphor Deep** (`#0f766e`): Never a surface. Used exclusively as the far stop of the 135° avatar gradient, so the photograph frame has depth rather than a flat wash.
-- **Console Ink** (`#081017`): The text color that sits *on* teal. Not a neutral — it is a blue-black chosen to keep teal buttons readable without introducing pure black anywhere in the system.
+- **Jumper Blue** (`#1b4fa0`), **Jumper Orange** (`#c9550f`), **Jumper Green** (`#1d6f3f`), **Jumper Brown** (`#7a4a22`), **Jumper Slate** (`#5c6a74`): the first five ring colours of the 25-pair code, assigned in order to the wires leaving the circuit under trace. They exist as SVG stroke and as the swatches in the pair legend. They appear nowhere else.
 
 ### Neutral
-- **Ink Void** (`#0b0d12`): The page ground. Everything else floats on it.
-- **Ink Raised** (`#121620`): One step up from the void. Used where a surface must be opaque rather than translucent — the mobile navigation panel, which cannot blur content behind it while scrolling is locked.
-- **Ink Panel** (`#181e2b`): The opaque dropdown menu surface. The lightest opaque ink in the system.
-- **Mist** (`#f8fafc`): Primary text and headings. Never pure white — the off-white keeps a dark screen readable at length.
-- **Slate 200** (`#d5dae3`): Body prose, descriptions, secondary text. Carries almost all the reading weight on this page.
-- **Slate 400** (`#9aa4b2`): Metadata only — dates, periods, the footer, the location line. The system's way of saying "this is a timestamp, not content."
-- **Glass Fill** (`rgba(255,255,255,0.06)`) and **Hairline** (`rgba(255,255,255,0.12)`): The pane material and its edge. See Elevation & Depth.
+- **Enamel** (`#d4cec0`): the frame's paint, and the page ground.
+- **Enamel Lit** (`#ded9cd`): a raised face — circuit bodies, service cells, data rows.
+- **Trough** (`#c4beaf`): a recessed channel — the upright rail, terminals at rest, the pair legend, the footer.
+- **Trough Deep** (`#a9a291`): strip rivets, terminal edges at rest, dashed rules. Never a text ground.
+- **Steel** (`#5e6259`) and **Steel Dark** (`#454941`): the frame's members, at 1px and 2px respectively. Steel also carries text selection.
+- **Ink** (`#191b17`): engraved type, and the fill of every live or active control.
+- **Ink Soft** (`#494d44`): prose and terminal labels. Passes 4.67:1 on trough, the darkest text ground in the system.
+- **Ink Faint** (`#55584f`): section heads, metadata, strip clauses. Only ever on enamel, enamel-lit or strip stock — never on trough.
+- **Strip** (`#ede9dd`) and **Strip Edge** (`#c6c0b0`): designation-strip stock and its edge. Strip is also the text colour on any inked control.
 
 ### Named Rules
 
-**The One Light Rule.** There is exactly one accent color in this system and there will never be a second. No status greens, no warning ambers, no per-category hues on skill groups. If something needs to be distinguished from its neighbor, distinguish it with type, weight, position, or opacity — never by introducing a color.
+**The Wire Rule.** The 25-pair colour code is spent on jumper wire and on the legend that decodes it. Nothing else on the page may take a pair colour — not a button, not a chip, not a border, not a focus ring. A page where the accent appears on controls is a page where a blue wire reads as brand colour instead of as pair 1, and that is precisely the generic-portfolio tell this world exists to refuse.
 
-**The Scarcity Rule.** Phosphor Teal marks *state and signal*, not category. At rest it appears in exactly five places: the primary button, the nav CTA, the three stat values, the active nav link's underline, and the dot of the one role still running. Everything else earns it only under the pointer or the keyboard — hover borders, focus rings, text selection. Tags, skill pills, education chips, icon wells, section rails, and the scroll-to-top control are all neutral by rule. **Audit test:** count the elements painting teal as a foreground, border, or fill in the resting state. If more than roughly one in ten, the signal has become wallpaper and the rarest thing on the page is no longer the most important.
+**The Fill Rule.** State is carried by fill and weight, never by hue. A live terminal, an active circuit's state chip, the current rail designation and the primary action are all ink-filled with strip-coloured type. A dimmed terminal recedes to the enamel ground. Never dim with `opacity`: a translucent chip lets jumper wire show through and reads as a strike-through.
 
-**The No-Pure-Black Rule.** The darkest value in the system is `#07080c` (the far stop of the background gradient). Pure `#000` never appears. Every dark is a blue-black, which is what makes the teal read as cold light rather than as neon.
+**The No-Pure-Black Rule.** The darkest value is Ink (`#191b17`). Pure `#000` and pure `#fff` never appear; every value sits in the warm grey band of painted equipment.
 
 ## Typography
 
-**Display Font:** Sora (fallback `system-ui, -apple-system, sans-serif`) — weights 600, 700
-**Body Font:** Space Grotesk (fallback `system-ui, -apple-system, sans-serif`) — weights 400, 500, 600
-**Mono/Instrument Font:** JetBrains Mono (fallback `ui-monospace, SFMono-Regular, Menlo, monospace`) — weight 500
+**Structural face:** Archivo (with `system-ui, -apple-system, sans-serif`) — weights 400, 500, 600, 700
+**Terminal face:** JetBrains Mono (with `ui-monospace, SFMono-Regular, Menlo, monospace`) — weights 400, 500, 700
 
-**Character:** Two geometric sans faces that share a skeleton but not a temperament. Sora is the structural voice — wide, even, confident at display sizes, and it carries every heading. Space Grotesk is the reading voice, slightly mechanical in its detailing (the flat-sided `a`, the cut terminals), which keeps technical prose from feeling like marketing copy. The pairing is deliberately close; the hierarchy comes from size and weight, not from contrast between families.
-
-The monospace is the instrument voice: it separates *what is measured* from *what is said*. Dates, periods, stat values, and proficiency ratings are readouts and are set in mono with tabular figures and a slashed zero; prose is not. Technology names are **not** readouts — a tag reading "PostgreSQL" is a label, and setting it in mono would be monospace worn as a costume for "technical" rather than used for data. The line is measurement, not subject matter.
+**Character:** Archivo is an American grotesque with signage lineage — sturdy, slightly condensed, and convincing at display scale, which is what a stencilled frame designation needs. JetBrains Mono is the instrument voice. The two do all the work; there is no third family and no display serif.
 
 ### Hierarchy
-- **Display** (Sora 600, `clamp(2.8rem, 6vw, 4.6rem)`, line-height 1.05): The name, once, in the hero. Nothing else in the system is allowed this size.
-- **Headline** (Sora 600, `clamp(2rem, 4vw, 2.8rem)`, line-height ~1.15): Section titles. Eight of them on the page; they are the scan structure.
-- **Title** (Sora 600, `1rem`–`1.2rem`): Job titles, project names, badge names, card headings. The step from Headline to Title is deliberately large — there is no mid-level heading, which keeps the page a flat list of sections rather than a nested document.
-- **Body** (Space Grotesk 400, `1rem`, line-height 1.6): All descriptions and prose. Constrain measure to 65–75ch; the hero bio already caps at `520px` for this reason.
-- **Label** (Space Grotesk 600, `1rem`, letter-spacing `0.08em`, uppercase): Skill category headers only. The letter-spacing plus uppercase is what makes a 1rem label read as a label rather than as a title at the same size.
-- **Mono** (JetBrains Mono 500, `0.8rem`–`0.85rem`, letter-spacing `0.02em`): Periods, dates, stat values, tags, endpoints. Metadata sizes stay in the `0.8`–`0.85rem` band that the system already uses for `slate-400` text.
+- **Display** (Archivo 700, `clamp(1.9rem, 5vw, 3.7rem)`, line-height 0.98, tracking -0.025em, uppercase): the name, once, on the identification strip. Nothing else takes this size.
+- **Title** (Archivo 600, `1rem`–`1.02rem`): role titles, project names, qualification titles.
+- **Body** (Archivo 400, `0.84rem`–`0.95rem`, line-height 1.5): prose. Measure capped at 34–66ch depending on column.
+- **Label** (Archivo 600, `0.72rem`, tracking 0.16em, uppercase): designation-strip titles.
+- **Terminal** (JetBrains Mono 500, `0.68rem`–`0.74rem`, tracking 0.02em): all data — periods, pair counts, designations, terminals, contact rows.
+- **Micro** (JetBrains Mono 500, `0.62rem`–`0.66rem`, tracking 0.08em): group labels, captions, legend keys.
+
+Every numeric readout carries `font-variant-numeric: tabular-nums slashed-zero`.
+
+*Implementation note: the mono band currently carries more one-off steps than these six roles describe (0.62, 0.64, 0.66, 0.68, 0.7, 0.72, 0.74rem). Consolidate to `0.66` (micro) and `0.72` (terminal) as the two mono steps; the extra values are drift, not system.*
 
 ### Named Rules
 
-**The Instrument Voice Rule.** If a value was measured, counted, dated, or rated, it is set in mono with `font-variant-numeric: tabular-nums slashed-zero`. If a human wrote it as a sentence, or it is the name of a thing, it is set in Space Grotesk. "Jun 2024 – Present" is mono; "13+" is mono; "Intermediate (B1)" is mono. "Design and implement enterprise SIP telephony solutions" is not, and neither is "Kamailio". **Audit test:** point at any string of digits on the page — if it is not in mono, either it should be, or it is genuinely prose. Then point at any mono string with no digits and no rating in it; that one is a costume and should come off.
+**The Instrument Voice Rule.** If a value was measured, counted, dated or rated, it is mono with tabular figures. If a human wrote it as a sentence, or it is the name of a thing, it is Archivo. "Jun 2024 – Present" is mono; "10 pairs cross-connected" is mono; "Kamailio" is not, because a technology name is a label, not a reading. Monospace here is the frame's data voice, never a costume for "technical".
 
-**The Two-Step Rule.** Between any two adjacent levels of hierarchy there is a visible step in *both* size and weight or color. Never differentiate two type levels by size alone at close values; the system has no `1.05rem` vs `1.1rem` distinctions worth making.
+**The Engraved Strip Rule.** A designation strip never truncates. It is the world's signature label, and cutting it mid-word is the one thing it must not do. Below 560px the strip drops its clause and shows the designation alone.
 
 ## Layout
 
-A single centered column, `max-width: 1180px`, with `24px` gutters that tighten to `16px` below 640px. Every section is a full-width band inside that container at `80px` vertical padding; the page top clears the floating navbar with `140px` of lead-in (`130px` on mobile).
+Full-bleed frame elevation. There is no centred content column and no `max-width` on the page: the frame runs edge to edge, offset only by the fixed 56px upright rail on the left (44px below 900px).
 
-The grid model is uniform and deliberately simple: `repeat(auto-fit, minmax(<floor>, 1fr))` everywhere, with the floor doing all the responsive work. There are no media-query column counts. The floors in use are `280px` (hero, projects), `300px` (skills), `260px` (achievements, repositories), `240px` (education, badges), and `100px` (stat tiles). Gaps sit at `20px`–`24px` between cards, `40px` between hero columns, `16px` between stat tiles.
+The page is five stacked **blocks**, each opened by a 34px designation strip that sticks to the top of the viewport as its block scrolls. Block bodies pad 24px/16px/34px. The upright carries the vertical `MDF` mark and the block index (00–04), with the current designation inked by an IntersectionObserver at `-20% 0px -70% 0px`.
 
-**Breakpoints:** two, and only two. `960px` collapses the navigation into a toggled overlay panel and turns the skills grid single-column; `640px` tightens gutters, makes buttons full-width, and forces the badges grid to one column. Everything else adapts through `auto-fit` without a query.
+Block 01, the cross-connect, is the only three-column structure: `minmax(0, 1.05fr) 120px minmax(0, 0.95fr)` — line side, wire gutter, equipment side. The equipment column is a flex column with `justify-content: space-between` and `min-height: 100%`, so it terminates at the line side's foot rather than running out above it.
 
-**The vertical rail.** The experience timeline is the one piece of structural geometry in the system: a `2px` rail at 12% white running the full height of the section, with `10px` Slate 400 dots at each milestone under a `6px` halo at 6% white. The rail is structure, so it is neutral. Exactly one dot is lit — the role whose period still reads "Present" — and that single teal mark is what tells a reader where the timeline ends without a word of copy doing it.
+Blocks 02 and 03 are `repeat(auto-fit, minmax(320px, 1fr))` and `minmax(300px, 1fr)` cell grids that share continuous members: each cell draws only its right and bottom border against a container that draws top and left, so adjacent cells never double their rules.
 
-**Rhythm.** Internal padding runs on a coarse scale: `14px` (tiles), `18px`–`20px` (list items and cards), `22px`–`24px` (feature cards), `28px`–`32px` (hero card, contact panel). Padding scales with the surface's importance, not with its content.
+**Breakpoints:** two. At 900px the wire gutter collapses, the cross-connect stacks, the pair legend is replaced by a text note, and the head goes single column. At 560px the strip drops its clause and block padding tightens.
 
 ### Named Rules
 
-**The One Column Rule.** This page is a single 1180px column and a vertical read. No sidebars, no sticky rails, no split-screen sections, no full-bleed breakouts. The nav is the only fixed element besides the scroll-to-top control.
+**The Shared Member Rule.** Adjacent units in a block share one steel member. A circuit sets `border-top: none` against its predecessor; a grid cell draws only right and bottom. Two abutting 1px borders read as a 2px seam and turn a block back into a stack of cards.
+
+**The Full-Bleed Rule.** The frame owns the whole viewport. No centred column, no page gutter, no content max-width. The only reserved edge is the upright rail.
 
 ## Elevation & Depth
 
-Depth is built from translucency, not from shadow. Surfaces are panes of glass over a lit background: a 6% white fill, a 1px hairline at 12% white, a `22px` backdrop blur, and a wide soft shadow to seat the pane in the dark. The three fixed background layers underneath — a radial teal glow at 15%/15%, a 160° blue-black gradient, and a 3px dot-grid noise field at 15% opacity — are what make the glass legible. Remove them and the panes turn into flat grey rectangles.
+There are no shadows in this system, and no blur. `box-shadow` and `backdrop-filter` appear zero times in the stylesheet, and that is a rule rather than an omission.
 
-**Glass is tiered, not uniform.** The current implementation applies the same treatment to nearly every surface, which flattens the hierarchy it should be creating. The system defines three tiers:
+Depth is material stacking in three tonal planes, read against the enamel ground:
 
-- **Tier 1 — True glass (blurred):** The floating navbar and the hero card. These are the only surfaces that carry `backdrop-filter: blur(22px)`. They sit closest to the viewer and are the only ones that visibly refract the glow behind them.
-- **Tier 2 — Tonal panes (unblurred):** Project cards, badge cards, achievement cards, repo cards, timeline entries, language cards, the contact panel. Same 6% fill and hairline, but no backdrop blur — they read as material, not as glass, and they cost nothing to composite.
-- **Tier 3 — Recessed wells:** Stat tiles and contact rows. *Darker* than their parent (`rgba(8,12,20,0.5)` / `rgba(255,255,255,0.05)`) with a fainter 8-10% hairline. These read as pressed into the surface rather than lifted off it — the readout inset on an instrument panel.
+- **Raised** — Enamel Lit (`#ded9cd`): circuit bodies, service and qualification cells, data rows, contact rows. Lighter than the ground.
+- **Recessed** — Trough (`#c4beaf`): the upright rail, terminals at rest, the pair legend, the footer. Darker than the ground.
+- **Strip stock** — Strip (`#ede9dd`): designation strips and the surface of any hovered circuit. The lightest plane, and the only one that carries display type.
 
-### Shadow Vocabulary
-- **Seat** (`box-shadow: 0 18px 40px rgba(4,8,20,0.45)`): The default under any Tier 1 or Tier 2 surface. Its job is to separate the pane from the ground, not to suggest height.
-- **Deep seat** (`box-shadow: 0 24px 60px rgba(4,8,20,0.45)`): The hero card only. The largest surface gets the widest shadow so it doesn't float unanchored.
-- **Overlay** (`box-shadow: 0 14px 32px rgba(4,8,20,0.6)`): The dropdown menu. Darker and tighter, because it must read as *in front of* a Tier 1 surface.
-- **Accent glow** (`box-shadow: 0 10px 30px rgba(45,212,191,0.3)`, hover `0 16px 36px rgba(45,212,191,0.45)`): Teal elements only — the primary button and the scroll-to-top control. This is light spilling from the element, not a shadow cast by it, which is why it is tinted rather than dark.
+Members separate planes: 1px Steel for ordinary divisions, 2px Steel Dark between blocks and around the ID plate.
 
 ### Named Rules
 
-**The Three-Pane Rule.** Every surface belongs to exactly one of the three tiers. Before adding a surface, name its tier. A new card is Tier 2 by default; Tier 1 is reserved for the two elements that already hold it, and each additional `backdrop-filter` is a real compositing cost on a page that already paints three fixed background layers.
+**The No-Relief Rule.** Never simulate the material. No bevels, no emboss, no metallic gradient, no grain filter, no faked screw heads beyond the two flat rivet dots. If the frame is ever to gain real material, it arrives as a produced raster texture, not as CSS relief. Imitation material is the most reliable mark of machine-made design, and an honest flat reduction outranks a convincing fake.
 
-**The Hairline Rule.** Every raised surface carries exactly one 1px border at `rgba(255,255,255,0.12)` — the light catching an edge. Never two borders, never a border plus an outline, and never a hairline on a Tier 3 well brighter than 10%.
-
-**The Lift-On-Intent Rule.** Surfaces are still at rest. They move only in response to the pointer, and the movement encodes direction: cards rise (`translateY(-4px)` to `-8px`), timeline entries slide along their rail (`translateX(6px)`), and the accent brightens. Rest state is never animated.
+**The Three Plane Rule.** Every surface is raised, recessed, or strip stock. Name its plane before building it. A fourth value means the system grew a tone it does not need.
 
 ## Shapes
 
-Soft rectangles for content, full pills for anything interactive or categorical, circles for identity. Nothing in this system has a square corner except the left edge of an education item, where the rail cuts it.
+Square. `border-radius` appears once in the entire stylesheet — `50%` on the two rivet dots that terminate each designation strip — and nothing else on the page is rounded. No pills, no rounded cards, no soft corners on buttons, chips, images or panels.
 
-The radius scale in use is **`10px` / `14px` / `18px` / `999px` / `50%`**, and radius encodes the size of the thing: `10px` for inline controls (project links, dropdown items), `14px` for small tiles and cards (stat tiles, language cards, badge thumbnails), `18px` for standard content cards, `999px` for pills and buttons, `50%` for avatars, timeline dots, and the scroll-to-top control.
-
-The implementation also contains one-off values at `12px`, `16px`, `20px`, `22px`, `24px`, and `26px`. These are drift, not system: each appears once or twice on a single component. New work uses the five-step scale.
-
-**Borders carry no colour at structural weight.** A tinted `border-left` or `border-right` above 1px reads as a stripe stuck onto a card rather than as material, so the education list — which once wore a `2px` teal left border and a square left edge — is now an ordinary Tier 2 pane: a full `14px` radius and one hairline on all four sides.
-
-**Borders** are always 1px hairlines, with one structural exception: the `2px` neutral timeline rail, which is geometry rather than edging.
+Form is carried by the member grid: everything is a rectangle bounded by painted steel, at 1px for divisions within a block and 2px between blocks. The ID plate takes a 2px frame with a 6px trough inset, the only double-framed element. Terminals are 1px rectangles at `4px 8px`. The wire is the only curve in the system: cubic beziers with a bend of `max(40, (x2 - x1) * 0.55)`, 1.6px stroke, drawn behind every opaque block.
 
 ### Named Rules
 
-**The Three-Radius Rule.** Content surfaces use `10px`, `14px`, or `18px` — nothing between. If a new component seems to need `16px`, it is either a small tile (`14px`) or a card (`18px`); decide which, and use that.
-
-**The Pill Rule.** Round to `999px` only when the element is a discrete, tappable, or countable unit: a button, a tag, a skill pill, a level indicator. Never pill a container that holds prose.
+**The Square Rule.** Nothing is rounded. If a new element seems to want a radius, it wants to be a different plane or a different member weight instead. The single circle is the rivet, and it is 5px.
 
 ## Components
 
-### Buttons
-- **Shape:** Full pill (`999px`), `12px 26px` padding, weight 600 at `0.95rem`, 1px transparent border reserved so variants don't shift size.
-- **Primary:** Phosphor Teal fill with Console Ink text (`#081017`) and an accent glow (`0 10px 30px rgba(45,212,191,0.3)`). One per view. The hero's "Download CV" is the canonical instance.
-- **Primary hover:** Rises `2px`; the glow widens and intensifies (`0 16px 36px rgba(45,212,191,0.45)`). The fill does not change — the light around it does.
-- **Ghost:** 8% white fill, Mist text, 20% white border. The secondary action; unlimited per view.
-- **Ghost hover:** Fill to 15% white, rises `2px`.
-- **Nav CTA:** A compact primary (`9px 20px`, `0.9rem`) that brightens to Phosphor Bright on hover instead of glowing — it lives on a glass pane and a glow there would smear.
-- **Mobile:** Below 640px every button goes full-width and stacks.
+### Upright Rail
+The frame's left member, fixed full height at 56px, Trough ground with a 2px Steel Dark right edge. Carries the vertical `MDF` mark and five 32x28px designation links. The current block's designation is ink-filled with strip type; hover draws a Steel border. Below 900px it narrows to 44px and drops the mark.
 
-### Chips and Pills
-The system has **two** chip variants, not three. Categorical things are never accented; they are named, and the name is the content.
-- **Tag** (project technologies and education skills, one shared rule): 5% white fill, one hairline, Slate 200 text, `6px 12px`, weight 500 at `0.8rem`. Static — not interactive, purely categorical.
-- **Skill pill:** the same neutral fill and hairline at `8px 14px` and `0.85rem`, because 30+ appear at once. It is the one chip that responds: hovering brightens the border to full teal and the text to Mist.
+### Designation Strip
+A 34px bar of strip stock with a 1px Steel bottom edge, sticky at `top: 0`, bearing a 5px Trough Deep rivet at each end. It carries the designation in mono 700, the block title as a tracked uppercase label, an optional clause in Ink Faint, and a right-aligned count. It never truncates.
 
-### Cards and Containers
-- **Corner style:** `18px` for standard cards (badge, achievement, repo), `14px` for education items, `20px` for project cards, `24px` for the hero card, `22px` for the contact panel. Consolidate the `20px`/`22px` outliers to `18px` under the Three-Radius Rule; the hero card may keep `24px` as the one intentional exception.
-- **Background:** Glass Fill (6% white), Tier 2 by default.
-- **Border:** One hairline at 12% white.
-- **Shadow:** Seat, or Deep seat for the hero card.
-- **Padding:** `20px` for list-scale cards, `24px` for project cards, `28px`–`32px` for the hero and contact panels.
-- **Hover:** Border brightens to `rgba(45,212,191,0.4)` and the card rises `4px`–`8px` over 250ms. The border shift is the primary signal; the lift supports it.
+### Identification Strip (signature)
+Block 00's strip, unrolled: full-bleed strip stock, `20px 16px 16px`, static rather than sticky, carrying the name at display scale, the discipline line in mono above a 1px rule, and a mono line of record counts. This is the frame's name plate and the page's first viewport. It replaces the conventional portfolio hero entirely — there is no hero on this page.
 
-### Navigation
-- **Style:** A floating Tier 1 glass bar, `min(1180px, 92%)` wide, centered, `22px` from the top, `20px` radius. On scroll past 40px it tightens to `12px` from the top with reduced padding — the only scroll-linked state in the system.
-- **Links:** Slate 200 at `0.95rem` weight 500. The active and hover state sweeps a `2px` teal underline in from the left over 250ms — `transform: scaleX()` from a `transform-origin: left`, never an animated `width`, which would thrash layout on every frame of the sweep — and lifts the text to Mist. This underline is the purest expression of the Scarcity Rule: teal marks exactly one link, the one you are reading.
-- **Brand:** A 42px circular avatar (photo, or initials on a 135° teal gradient) with a 2px white-15% ring, beside the first two name words at `1.05rem` weight 600.
-- **Dropdown:** An opaque Ink Panel surface (`#181e2b`), `14px` radius, `10px` padding, items at `10px` radius. It is opaque, not glass, because a blurred menu over a blurred bar is unreadable. Opens on hover on desktop, on click on mobile.
-- **Mobile (≤960px):** The links become a fixed Ink Raised panel below the bar; the toggle's three bars rotate into an X.
+### Circuit
+A record on the line side: an `<article>` on Enamel Lit with a 1px member, `12px 14px`, sharing its top member with the circuit above. Holds a state control, a role title, a mono period, a mono pair count, the organisation, and the description. Pointer entry previews its trace; the surface lifts to strip stock and the member goes to Ink.
 
-### Timeline (signature component)
-The system's defining structure and the piece most worth preserving. A `2px` neutral rail at 12% white anchors the left edge of the experience section. Each entry hangs a `10px` Slate 400 dot on the rail under a `6px` halo at 6% white, and a Tier 2 pane sits `24px` to its right. Hovering slides the pane `6px` further along the rail and brightens its border. The role title is Title-scale Sora; the company is Mist at weight 500; the period is mono, right-aligned in a flex header that wraps on narrow screens.
+### State Control (signature)
+The chip that reads `Active` or `Terminated` is a real `<button type="button">` with `aria-pressed` and an `aria-label` naming its circuit. It is the trace toggle. `Active` is ink-filled with strip type; `Terminated` is an Ink Faint outline. Pressing pins a circuit's trace; the pin survives the pointer leaving, and only pressing again releases it. The role title stays a sibling `<h4>` so the document outline keeps all five roles.
 
-**The current entry is the only lit one.** An entry whose period contains "Present" takes the modifier `.timeline-item--current`, which fills its dot with teal and restores the teal halo. The marker is derived from the data, never from list position, so it stays correct when roles are reordered and disappears honestly when no role is open.
+### Terminal
+A mono chip on the equipment side, 1px Trough Deep edge on Trough, `4px 8px`, `position: relative; z-index: 1` so wire passes behind it. Three states, all opaque: at rest on Trough; live, ink-filled with strip type; dimmed, receded to the Enamel ground. Terminals are packed at 3px gaps — density is the point.
 
-### Stat Tiles
-Three recessed wells in the hero card, `14px` radius, `14px` padding, centered. The value is teal at `1.3rem` weight 600, set in the mono instrument voice with tabular figures; the label is Slate 400 at `0.8rem` in Space Grotesk. This is the clearest instrument readout in the system and the model for how measured values look everywhere else — and one of only two places teal survives as a resting foreground.
+### Jumper (signature)
+An SVG overlay at `z-index: 0` spanning the cross-connect field, drawn from measured element boxes and recomputed on a `ResizeObserver` plus scroll and resize, always on the next animation frame. One cubic bezier per connection, 1.6px, coloured by pair index in code order. The set is derived, never authored: each role's own title and description are matched against the terminal inventory, so a wire exists only where the record already says it does. The circuit still in service is traced at rest, so the mechanism is visible without interaction.
 
-### Contact Rows
-Tier 3 wells, `12px` radius, `12px 16px` padding, 5% white fill with a 10% hairline, each led by a 16px icon. Hovering shifts both the border and the text to teal — the only place in the system where a full row adopts the accent, justified because these are the terminal actions of the page.
+### Tag
+A square mono control, `8px 14px`, 1px member on Enamel Lit. The primary variant (`RECORD COPY`) is ink-filled with strip type and goes to Steel on hover.
 
-### Scroll-to-Top
-A 48px circle fixed at `28px` from the bottom-right: Ink Panel fill, one hairline, seat shadow, Mist arrow. Hidden at `opacity: 0` with `pointer-events: none` until 400px of scroll. On hover it rises `4px` and its border and arrow turn teal. It is a persistent control, and a persistently teal control would have been the single largest leak in the Scarcity Rule — a utility affordance holding the same weight as the page's one primary action.
+### Frame Data Panel
+A label-value list in a 1px frame: each row is Enamel Lit, `7px 12px`, with a micro uppercase term at the left and a mono value pushed right. Carries only metadata about the record — location, circuit and terminal counts, issue year — never CV content.
+
+### Pair Legend / Block Elevation
+The frame's printed matter. The legend seats at the foot of the equipment column with five 16x3px swatches naming their pairs and a foot line carrying terminal and circuit totals. The elevation key lists the five blocks with their designations, titles and live counts, each row a link. Below 900px the legend is replaced by a plain note, because no wire is drawn at that width and a colour key would decode an absent device.
+
+### Cells (service, qualification, badge)
+Grid cells on Enamel Lit drawing right and bottom members only, `14px`–`16px` padding, lifting to strip stock on hover. Project cells carry a mono designation, a title, prose, terminals and their source tag. Badge rows carry a 42x42px raster in a 1px Trough well.
 
 ### Browser Surfaces
-The parts of the page nobody draws still belong to the system. Text selection is teal at 25% with Mist text. The keyboard focus ring is a `2px` teal outline at `3px` offset on every link and button, which is the accent doing its actual job — marking state — and it is the only focus treatment in the system. The scrollbar is thin, with a 18%-white thumb on a transparent track.
+Selection is Steel with strip type. The focus ring is a 2px Ink outline at 2px offset. The scrollbar is thin, Steel thumb on Trough track.
 
-### Icons
-A hand-authored set of 15 single-path SVGs on a `32×32` viewBox, filled with `currentColor` at 16px default. No icon library, no icon font, no external requests. Icons inherit the color of whatever they sit in, which is why they never need their own color rules.
+### Motion
+One authored landing, once: designation strips seat in from `translateX(-10px)` at 340ms on a 60ms stagger, then the live jumpers draw via `stroke-dashoffset` at 500ms after a 300ms delay, then it stops. Everything after is 150ms linear state feedback. Under `prefers-reduced-motion: reduce` the landing is removed, wire renders already drawn, and all transitions collapse to 0.01ms.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** treat Phosphor Teal as the one light in the room — mark state and signal with it (active nav, current role, live link, stat value, primary CTA, focus), and audit that it stays near one element in ten.
-- **Do** name a surface's tier before you build it: Tier 1 true glass (nav and hero card only), Tier 2 tonal pane (the default), Tier 3 recessed well (readouts and rows).
-- **Do** put exactly one 1px hairline at `rgba(255,255,255,0.12)` on every raised surface.
-- **Do** set measured values — dates, periods, counts, tags, endpoints — in the mono instrument voice, and load JetBrains Mono in `index.html` when you do.
-- **Do** stay on the five-step radius scale: `10px`, `14px`, `18px`, `999px`, `50%`.
-- **Do** let `repeat(auto-fit, minmax(<floor>, 1fr))` do the responsive work; add a media query only for the two breakpoints that already exist (`960px`, `640px`).
-- **Do** keep motion as feedback: reveal at 600ms, hover at 250ms, hover lifts between 2px and 8px, and extend the existing `prefers-reduced-motion` block to cover anything new.
-- **Do** show live state where you can — real local time, real weather, real reachable endpoints. The instrument reports; it does not describe.
-- **Do** keep the accent glow tinted (`rgba(45,212,191,…)`) on teal elements and dark (`rgba(4,8,20,…)`) everywhere else.
-- **Do** theme the surfaces you did not draw — selection, focus ring, scrollbar — from the palette. They are the cheapest evidence the page was built rather than assembled.
-- **Do** animate `transform` and `opacity` only. The nav underline sweeps with `scaleX`, not `width`.
+- **Do** spend the 25-pair colour code on wire and its legend, and nowhere else.
+- **Do** carry state with fill and weight — ink-filled for live, outline for at-rest, receded to enamel for dimmed.
+- **Do** keep every surface square. The one circle in the system is the 5px strip rivet.
+- **Do** name a surface's plane before building it: raised, recessed, or strip stock.
+- **Do** let adjacent units share one steel member.
+- **Do** set every measured value in mono with tabular figures and a slashed zero.
+- **Do** derive relationships from the record rather than authoring them — a wire may only exist where the CV already says it does.
+- **Do** keep the frame full-bleed; the upright rail is the only reserved edge.
+- **Do** put an interactive control on an actual `<button>` and leave headings as headings.
 
 ### Don't:
-- **Don't** introduce a second accent color. No status green, no warning amber, no per-category hue. Differentiate with type, weight, position, or opacity.
-- **Don't** add `backdrop-filter` to a new surface. Two blurred layers already exist and the page paints three fixed background layers beneath them.
-- **Don't** use pure `#000` or pure `#fff`. The darkest value is `#07080c`; the lightest is Mist (`#f8fafc`).
-- **Don't** pill a container that holds prose. Pills are for discrete, countable, or tappable units.
-- **Don't** add radius values between the scale steps — no `12px`, `16px`, `20px`, `22px`, `26px` on new work.
-- **Don't** drift toward the template dev portfolio: no purple-to-blue gradient hero, no floating 3D blobs, no typewriter effect on the role line, no animated counting stat numbers.
-- **Don't** drift toward corporate SaaS marketing: no illustrated people, no "Trusted by" logo wall, no testimonial cards, no trust badges. PRODUCT.md records that none of that evidence exists and it must never be fabricated to fill a layout.
-- **Don't** drift toward the over-animated showcase: no scroll-jacking, no parallax, no cursor followers, no magnetic buttons, no page transitions. Motion responds to the user; it never performs for them.
-- **Don't** drift toward the corporate résumé document: no serif headings, no letterhead layout, no dense two-column body text. This is a console, not a printout — `resume.pdf` already exists for anyone who wants the document.
-- **Don't** add a sidebar, sticky rail, split-screen section, or full-bleed breakout. One 1180px column, one vertical read.
-- **Don't** accent something categorical. Tags, skill pills, icon wells, and section rails are neutral; if a reader needs to tell two of them apart, that is a job for type, weight, or position.
-- **Don't** ship a link that goes nowhere, and don't count a private subdomain as a live demo. Every `demo` value was removed on 2026-09-01 — three were `"#"` placeholders and the fourth pointed at a host that returns NXDOMAIN publicly. Verify a target resolves from outside the network before a control is allowed to promise it.
+- **Don't** give a pair colour to a button, chip, border or focus ring.
+- **Don't** add a `box-shadow` or a `backdrop-filter`. There are zero of each, deliberately.
+- **Don't** round anything.
+- **Don't** dim with `opacity` — a translucent terminal lets wire show through and reads as a strike-through.
+- **Don't** simulate the material with CSS bevels, emboss, metallic gradients or grain. Real material arrives as a produced raster or not at all.
+- **Don't** centre the content in a column, or re-introduce a hero above the identification strip.
+- **Don't** ship a big-number-plus-small-label stat row. Counts belong on designation strips and in the frame data panel.
+- **Don't** let a designation strip truncate; drop its clause instead.
+- **Don't** print the same record at two designations. One record, one home — the elevation key asserts where each block's content lives, and it must stay true.
+- **Don't** wrap a whole card in `role="button"`. It swallows the headings inside it and destroys the document outline.

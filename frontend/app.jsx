@@ -1,687 +1,610 @@
-const { useEffect, useMemo, useState } = React;
-
-const WA_URL = 'https://wa.me/573238037419?text=Hi%20Danilo%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect.';
+const { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } = React;
 
 const WIDGET_CONFIG = {
   timezone: 'America/Bogota',
   city: 'Bogotá',
   lat: '4.7110',
-  lon: '-74.0721',
-  temperatureUnit: 'celsius',
-  windSpeedUnit: 'kmh'
+  lon: '-74.0721'
 };
+
+const WEATHER_LABELS = {
+  0: 'CLEAR', 1: 'CLEAR', 2: 'PART CLOUD', 3: 'OVERCAST',
+  45: 'FOG', 48: 'FOG', 51: 'DRIZZLE', 53: 'DRIZZLE', 55: 'DRIZZLE',
+  61: 'RAIN', 63: 'RAIN', 65: 'HEAVY RAIN', 80: 'SHOWERS', 81: 'SHOWERS',
+  82: 'HEAVY SHOWERS', 95: 'STORM', 96: 'STORM', 99: 'STORM'
+};
+
+/* Jumper wire, 25-pair ring colours. The only chromatic system on the frame. */
+const PAIRS = [
+  { name: 'Blue', colour: '#1b4fa0' },
+  { name: 'Orange', colour: '#c9550f' },
+  { name: 'Green', colour: '#1d6f3f' },
+  { name: 'Brown', colour: '#7a4a22' },
+  { name: 'Slate', colour: '#5c6a74' }
+];
+
+const EQUIPMENT_GROUPS = {
+  telephony: 'Telephony',
+  infrastructure: 'Infrastructure',
+  cloud_devops: 'Cloud & DevOps',
+  languages: 'Languages',
+  ai_data: 'AI & Data',
+  tools: 'Tools'
+};
+
+const BLOCKS = [
+  { id: 'frame', designation: '00', title: 'Frame', clause: 'Identification' },
+  { id: 'cross-connect', designation: '01', title: 'Cross-connect', clause: 'Record against stack' },
+  { id: 'in-service', designation: '02', title: 'In service', clause: 'Open source' },
+  { id: 'qualification', designation: '03', title: 'Qualification', clause: 'Schooling and certification' },
+  { id: 'termination', designation: '04', title: 'Termination', clause: 'Reach the frame' }
+];
 
 const fallbackData = {
-  name: '',
-  role: '',
-  location: '',
-  bio: '',
-  profileOverview: '',
-  avatarUrl: '/IMG_2164.jpg?v=7',
-  resumeUrl: '',
-  experience: [],
-  education: [],
-  certifications: [],
-  badges: [],
-  projects: [],
-  skills: {},
-  languages: [],
-  achievements: [],
-  repositories: [],
-  stats: [],
-  contact: {},
-  footer: ''
+  name: '', role: '', location: '', bio: '', avatarUrl: '', resumeUrl: '',
+  experience: [], education: [], certifications: [], badges: [], projects: [],
+  skills: {}, languages: [], achievements: [], stats: [], contact: {}, footer: ''
 };
 
-function useRevealOnScroll(deps = []) {
-  useEffect(() => {
-    const elements = document.querySelectorAll('.reveal');
-    if (!elements.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('reveal-visible');
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
-    );
-
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, deps);
-}
-
-const SKILL_CATEGORY_META = {
-  languages: { label: 'Languages & Scripting', icon: 'code' },
-  infrastructure: { label: 'Infrastructure', icon: 'server' },
-  telephony: { label: 'Telephony & VoIP', icon: 'phone' },
-  cloud_devops: { label: 'Cloud & DevOps', icon: 'cloud' },
-  ai_data: { label: 'AI & Data', icon: 'brain' },
-  tools: { label: 'Tools & Platforms', icon: 'tool' }
-};
-
-function Icon({ name, className = '' }) {
+function Icon({ name }) {
   const paths = {
-    code: 'M16.2 4.7 8.9 12l7.3 7.3-1.9 1.9L5 12l9.3-9.2 1.9 1.9Zm3.8 0 9.3 9.2-9.3 9.2-1.9-1.9 7.3-7.3-7.3-7.3 1.9-1.9Z',
-    server: 'M5 4.5h22v6H5v-6Zm0 9.5h22v6H5v-6Zm0 9.5h22v6H5v-6Zm3 2.5h4v2H8v-2Zm0-9.5h4v2H8v-2Zm0-9.5h4v2H8v-2Z',
-    phone: 'M10.2 6.4 7.9 4.1 4.5 7.6c-1.2 1.2-1.6 3-1.1 4.6 1.6 5.1 5.8 9.4 10.9 11 1.6.5 3.4.1 4.6-1.1l3.5-3.5-2.3-2.3-2.9 1.2c-.8.3-1.7.1-2.3-.5l-3.9-3.9c-.6-.6-.8-1.5-.5-2.3l1.2-2.9Z',
-    cloud: 'M9 21h12a5 5 0 0 0 0-10 7 7 0 0 0-13.4-2.2A5.5 5.5 0 0 0 9 21Z',
-    brain: 'M9.5 20a4.5 4.5 0 0 1-4.5-4.5 4.3 4.3 0 0 1 1.1-2.9A4.5 4.5 0 0 1 9 5.1 4.5 4.5 0 0 1 14 3.5a4.6 4.6 0 0 1 4 2.3 4.5 4.5 0 0 1 5.5 4.4 4.3 4.3 0 0 1-1.1 2.9A4.5 4.5 0 0 1 19 20h-1.5',
-    tool: 'M21.7 6.9a5 5 0 0 1-6.8 6.8l-8 8-2.1-2.1 8-8a5 5 0 0 1 6.8-6.8l-3.2 3.2 2.1 2.1 3.2-3.2Z',
-    pin: 'M12 2a7 7 0 0 1 7 7c0 5.2-7 13-7 13S5 14.2 5 9a7 7 0 0 1 7-7Zm0 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z',
-    link: 'M10.5 13.5a4 4 0 0 1 0-5.7l3.3-3.3a4 4 0 1 1 5.7 5.7l-1.5 1.5m-4 6.8a4 4 0 0 1-5.7 0 4 4 0 0 1 0-5.7l1.5-1.5m3.2 5.5 5.8-5.8',
-    mail: 'M4 7h24v18H4V7Zm2 2v2l10 6 10-6V9H6Zm20 14V13l-10 6-10-6v10h20Z',
-    github: 'M12 2.5a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.5 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.3-.3-4.7-1.1-4.7-5a4 4 0 0 1 1-2.8 3.7 3.7 0 0 1 .1-2.8s.9-.3 2.9 1a10 10 0 0 1 5.2 0c2-1.3 2.9-1 2.9-1a3.7 3.7 0 0 1 .1 2.8 4 4 0 0 1 1 2.8c0 3.9-2.4 4.7-4.7 5 .3.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2.5Z',
-    certificate: 'M6 4h20v12H6V4Zm4 16h12v2H10v-2Zm2.5-7 3.5 2 3.5-2V6.5h-7v6.5Z',
-    award: 'M12 4a6 6 0 0 1 6 6c0 2.4-1.4 4.6-3.5 5.5V28l-2.5-1.6L9.5 28V15.5A6 6 0 0 1 6 10a6 6 0 0 1 6-6Z'
+    download: 'M12 3v12m0 0-5-5m5 5 5-5M4 20h16',
+    code: 'm9 7-6 5 6 5M15 7l6 5-6 5',
+    link: 'M10 13a4 4 0 0 0 5.6 0l3-3a4 4 0 0 0-5.6-5.6L11 6M14 11a4 4 0 0 0-5.6 0l-3 3A4 4 0 0 0 11 19.6L13 18',
+    mail: 'M3 6h18v12H3zM3 6l9 7 9-7',
+    pin: 'M12 22s7-7.6 7-12a7 7 0 1 0-14 0c0 4.4 7 12 7 12ZM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z',
+    up: 'M12 20V4m0 0-6 6m6-6 6 6'
   };
-
   const d = paths[name];
   if (!d) return null;
-  return (
-    <svg className={`icon ${className}`} viewBox="0 0 32 32" aria-hidden="true">
-      <path d={d} />
-    </svg>
-  );
+  return <svg className="icon" viewBox="0 0 24 24" aria-hidden="true"><path d={d} /></svg>;
 }
 
-function LinkedInBadge() {
-  useEffect(() => {
-    const scriptId = 'linkedin-badge-script';
-    if (document.getElementById(scriptId)) {
-      if (window.IN && window.IN.parse) window.IN.parse();
-      return;
-    }
-    const script = document.createElement('script');
-    script.id = scriptId;
-    script.src = 'https://platform.linkedin.com/badges/js/profile.js';
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-  }, []);
+/* Which equipment a role actually terminated on, derived from the role's own
+   words. Nothing is asserted here that the CV does not already say. */
+function crossConnect(experience, skills) {
+  const inventory = [];
+  Object.keys(EQUIPMENT_GROUPS).forEach((key) => {
+    (skills[key] || []).forEach((name) => inventory.push({ name, group: key }));
+  });
 
+  const map = experience.map((role) => {
+    const haystack = `${role.title} ${role.description || ''}`.toLowerCase();
+    return inventory
+      .filter((item) => haystack.includes(item.name.toLowerCase()))
+      .map((item) => item.name);
+  });
+
+  return { inventory, map };
+}
+
+function LocalReading({ reading }) {
+  if (!reading || !reading.time) return null;
+
+  const clock = new Intl.DateTimeFormat('en-GB', {
+    timeZone: reading.timezone || WIDGET_CONFIG.timezone,
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(new Date(reading.time));
+
+  const temp = reading.temperature;
+  const sky = WEATHER_LABELS[reading.weatherCode];
+  const parts = [WIDGET_CONFIG.city.toUpperCase(), clock];
+  if (temp !== null && temp !== undefined) parts.push(`${Math.round(temp)}°C`);
+  if (sky) parts.push(sky);
+
+  return <span className="foot-reading">{parts.join('  ·  ')}</span>;
+}
+
+function Strip({ index, designation, title, clause, count }) {
   return (
-    <div
-      className="badge-base LI-profile-badge"
-      data-locale="en_US"
-      data-size="medium"
-      data-theme="dark"
-      data-type="VERTICAL"
-      data-vanity="jose-danilo-narvaez-arias-26488025a"
-      data-version="v1"
-    >
-      <a
-        className="badge-base__link LI-simple-link"
-        href="https://co.linkedin.com/in/jose-danilo-narvaez-arias-26488025a?trk=profile-badge"
-      >
-        Jose Danilo Narvaez Arias
-      </a>
+    <div className="strip" style={{ '--i': index }}>
+      <span className="strip-designation">{designation}</span>
+      <span className="strip-title">{title}</span>
+      {clause ? <span className="strip-clause">— {clause}</span> : null}
+      {count ? <span className="strip-count">{count}</span> : null}
     </div>
   );
 }
 
-const WEATHER_LABELS = {
-  0: 'Clear sky',
-  1: 'Mainly clear',
-  2: 'Partly cloudy',
-  3: 'Overcast',
-  45: 'Fog',
-  48: 'Depositing rime fog',
-  51: 'Light drizzle',
-  53: 'Moderate drizzle',
-  55: 'Dense drizzle',
-  61: 'Slight rain',
-  63: 'Moderate rain',
-  65: 'Heavy rain',
-  71: 'Slight snow',
-  73: 'Moderate snow',
-  75: 'Heavy snow',
-  80: 'Rain showers',
-  81: 'Rain showers',
-  82: 'Violent showers',
-  95: 'Thunderstorm'
-};
+function CrossConnect({ experience, skills }) {
+  const { inventory, map } = useMemo(
+    () => crossConnect(experience, skills),
+    [experience, skills]
+  );
 
-function LocalWidgets({ widgets }) {
-  const timeLabel = useMemo(() => {
-    if (!widgets?.time) return null;
-    const date = new Date(widgets.time);
-    return new Intl.DateTimeFormat('en-US', {
-      timeZone: widgets.timezone || 'America/Bogota',
-      hour: '2-digit',
-      minute: '2-digit',
-      weekday: 'short'
-    }).format(date);
-  }, [widgets?.time, widgets?.timezone]);
+  const running = useMemo(
+    () => experience.findIndex((role) => (role.period || '').includes('Present')),
+    [experience]
+  );
+  const atRest = running >= 0 ? running : null;
+  const [hover, setHover] = useState(null);
+  const [pinned, setPinned] = useState(null);
+  const active = hover !== null ? hover : (pinned !== null ? pinned : atRest);
+  const [paths, setPaths] = useState([]);
+  const fieldRef = useRef(null);
+  const circuitRefs = useRef({});
+  const terminalRefs = useRef({});
 
-  if (!timeLabel) return null;
+  const live = active === null ? [] : map[active] || [];
 
-  const weather = widgets?.weather;
-  const weatherPart = weather && weather.temperature !== null && weather.temperature !== undefined
-    ? ` · ${Math.round(weather.temperature)}${weather.temperature_unit || '°C'} ${WEATHER_LABELS[weather.weather_code] || ''}`.trimEnd()
-    : '';
+  const draw = useCallback(() => {
+    if (active === null || !fieldRef.current) {
+      setPaths([]);
+      return;
+    }
+    const field = fieldRef.current.getBoundingClientRect();
+    const from = circuitRefs.current[active];
+    if (!from) return;
+    const a = from.getBoundingClientRect();
+    const x1 = a.right - field.left;
+    const y1 = a.top + a.height / 2 - field.top;
+
+    const next = [];
+    (map[active] || []).forEach((name, i) => {
+      const node = terminalRefs.current[name];
+      if (!node) return;
+      const b = node.getBoundingClientRect();
+      const x2 = b.left - field.left;
+      const y2 = b.top + b.height / 2 - field.top;
+      const bend = Math.max(40, (x2 - x1) * 0.55);
+      next.push({
+        d: `M${x1},${y1} C${x1 + bend},${y1} ${x2 - bend},${y2} ${x2},${y2}`,
+        colour: PAIRS[i % PAIRS.length].colour,
+        key: name
+      });
+    });
+    setPaths(next);
+  }, [active, map]);
+
+  useLayoutEffect(draw, [draw]);
+
+  useEffect(() => {
+    if (active === null) return undefined;
+    // Redraw on the next frame so the measurement happens after layout settles,
+    // and observe the field itself: a window resize is not the only thing that
+    // moves these boxes (font swap, image load, viewport change on capture).
+    let frame = 0;
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(draw);
+    };
+    const observer = new ResizeObserver(schedule);
+    if (fieldRef.current) observer.observe(fieldRef.current);
+    window.addEventListener('resize', schedule);
+    window.addEventListener('scroll', schedule, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener('resize', schedule);
+      window.removeEventListener('scroll', schedule);
+    };
+  }, [active, draw]);
 
   return (
-    <p className="footer-widgets">
-      {widgets?.city || 'Bogotá'} · {timeLabel}{weatherPart}
-    </p>
+    <div className="xconnect" ref={fieldRef}>
+      <p className="xconnect-legend">
+        Line side carries the dated record. Equipment side carries the stack. The circuit
+        still in service is traced at rest; focus any other to trace what it terminated on.
+        Every jumper is drawn from that role&rsquo;s own description.
+      </p>
+
+      <svg className="jumpers" aria-hidden="true">
+        {paths.map((p) => (
+          <path key={p.key} className="jumper is-live" d={p.d} stroke={p.colour} />
+        ))}
+      </svg>
+
+      <div className="side">
+        <h3 className="side-head">LINE SIDE — RECORD</h3>
+        {experience.map((role, index) => {
+          const running = (role.period || '').includes('Present');
+          const pairs = (map[index] || []).length;
+          return (
+            <article
+              key={`${role.title}-${index}`}
+              className={`circuit ${active === index ? 'is-active' : ''}`}
+              ref={(el) => { circuitRefs.current[index] = el; }}
+              onMouseEnter={() => setHover(index)}
+              onMouseLeave={() => setHover(null)}
+            >
+              <div className="circuit-row">
+                <button
+                  type="button"
+                  className={`state ${running ? 'state--active' : 'state--terminated'}`}
+                  aria-pressed={pinned === index}
+                  aria-label={`Trace the ${role.title} circuit`}
+                  onClick={() => setPinned(pinned === index ? null : index)}
+                  onFocus={() => setHover(index)}
+                  onBlur={() => setHover(null)}
+                >
+                  {running ? 'Active' : 'Terminated'}
+                </button>
+                <h4 className="circuit-title">{role.title}</h4>
+                <span className="circuit-period">{role.period}</span>
+              </div>
+              <p className="circuit-pairs">
+                {pairs ? `${pairs} pair${pairs === 1 ? '' : 's'} cross-connected` : 'Line side only — predates this stack'}
+              </p>
+              <p className="circuit-org">{role.company}</p>
+              <p className="circuit-note">{role.description}</p>
+            </article>
+          );
+        })}
+      </div>
+
+      <div aria-hidden="true" />
+
+      <div className="blocks-eq">
+        <h3 className="side-head">EQUIPMENT SIDE — STACK</h3>
+        {Object.entries(EQUIPMENT_GROUPS).map(([key, label]) => {
+          const items = inventory.filter((item) => item.group === key);
+          if (!items.length) return null;
+          return (
+            <div className="eq-group" key={key}>
+              <p className="eq-group-label">
+                {label} <span className="eq-group-count">{items.length}</span>
+              </p>
+              <div className="terminals">
+                {items.map((item) => {
+                  const isLive = live.includes(item.name);
+                  const dimmed = active !== null && !isLive;
+                  return (
+                    <span
+                      key={item.name}
+                      ref={(el) => { terminalRefs.current[item.name] = el; }}
+                      className={`terminal ${isLive ? 'is-live' : ''} ${dimmed ? 'is-dimmed' : ''}`}
+                    >
+                      {item.name}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+
+        <div className="pair-legend">
+          <p className="pair-legend-title">JUMPER — 25-PAIR CODE</p>
+          <div className="pair-legend-row">
+            {PAIRS.map((pair) => (
+              <span className="pair-key" key={pair.name}>
+                <span className="pair-swatch" style={{ background: pair.colour }} />
+                {pair.name}
+              </span>
+            ))}
+          </div>
+          <p className="pair-legend-foot">
+            {inventory.length} terminals across {Object.keys(EQUIPMENT_GROUPS).length} blocks.
+            Wire is assigned per pair, in order, from the circuit under trace.
+          </p>
+        </div>
+
+        <p className="eq-note">
+          Inked terminals are the ones the traced circuit terminated on. Tap any circuit&rsquo;s
+          state chip on the line side to trace it.
+        </p>
+      </div>
+    </div>
   );
 }
 
 function App() {
   const [data, setData] = useState(fallbackData);
-  const [widgets, setWidgets] = useState({ time: null, timezone: null, city: null, weather: null });
-  const [navOpen, setNavOpen] = useState(false);
-  const [submenuOpen, setSubmenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [showTop, setShowTop] = useState(false);
-  const [activeSection, setActiveSection] = useState('about');
+  const [reading, setReading] = useState(null);
   const [avatarOk, setAvatarOk] = useState(true);
+  const [current, setCurrent] = useState('frame');
+  const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
-    let mounted = true;
-    const load = async () => {
-      try {
-        const response = await fetch('/data.json');
-        if (!response.ok) throw new Error('Failed to fetch data');
-        const payload = await response.json();
-        if (mounted) {
-          const merged = { ...fallbackData, ...payload };
-          if (!payload.avatarUrl) {
-            merged.avatarUrl = fallbackData.avatarUrl;
-          }
-          setData(merged);
-        }
-      } catch (error) {
-        if (mounted) {
-          setData(fallbackData);
-        }
-      }
-    };
-
-    load();
-    return () => { mounted = false; };
+    fetch('data.json')
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(res.status))))
+      .then((json) => setData({ ...fallbackData, ...json }))
+      .catch(() => setData(fallbackData));
   }, []);
 
   useEffect(() => {
-    let mounted = true;
-    let timer;
-    const loadWidgets = async () => {
-      const { timezone, city, lat, lon, temperatureUnit, windSpeedUnit } = WIDGET_CONFIG;
-      let weather = null;
-      try {
-        const url = new URL('https://api.open-meteo.com/v1/forecast');
-        url.searchParams.set('latitude', lat);
-        url.searchParams.set('longitude', lon);
-        url.searchParams.set('current', 'temperature_2m,weather_code,wind_speed_10m');
-        url.searchParams.set('temperature_unit', temperatureUnit);
-        url.searchParams.set('wind_speed_unit', windSpeedUnit);
-        url.searchParams.set('timezone', timezone);
-        const response = await fetch(url.toString());
-        if (response.ok) {
-          const payload = await response.json();
-          const current = payload.current || {};
-          const units = payload.current_units || {};
-          weather = {
-            temperature: current.temperature_2m,
-            temperature_unit: units.temperature_2m || '°C',
-            wind_speed: current.wind_speed_10m,
-            wind_speed_unit: units.wind_speed_10m || 'km/h',
-            weather_code: current.weather_code,
-            observed_at: current.time
-          };
-        }
-      } catch (_) {}
-      if (mounted) {
-        setWidgets({ time: new Date().toISOString(), timezone, city, weather });
-      }
-    };
-    loadWidgets();
-    timer = setInterval(loadWidgets, 10 * 60 * 1000);
-    return () => {
-      mounted = false;
-      if (timer) clearInterval(timer);
-    };
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${WIDGET_CONFIG.lat}`
+      + `&longitude=${WIDGET_CONFIG.lon}&current=temperature_2m,weather_code&timezone=auto`;
+    fetch(url)
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(res.status))))
+      .then((json) => setReading({
+        time: new Date().toISOString(),
+        timezone: WIDGET_CONFIG.timezone,
+        temperature: json?.current?.temperature_2m,
+        weatherCode: json?.current?.weather_code
+      }))
+      .catch(() => setReading({ time: new Date().toISOString(), timezone: WIDGET_CONFIG.timezone }));
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 80);
-      setShowTop(y > 600);
-
-      const sections = document.querySelectorAll('section[id]');
-      let current = 'about';
-      sections.forEach((section) => {
-        const top = section.offsetTop - 180;
-        if (y >= top) {
-          current = section.getAttribute('id');
-        }
-      });
-      setActiveSection(current);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setShowTop(window.scrollY > 600);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useRevealOnScroll([data]);
-
   useEffect(() => {
-    setAvatarOk(true);
-  }, [data.avatarUrl]);
+    const sections = BLOCKS
+      .map((b) => document.getElementById(b.id))
+      .filter(Boolean);
+    if (!sections.length) return undefined;
 
-  const initials = useMemo(() => {
-    if (!data?.name) return 'JD';
-    return data.name
-      .split(' ')
-      .map((part) => part[0])
-      .slice(0, 2)
-      .join('')
-      .toUpperCase();
-  }, [data?.name]);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setCurrent(entry.target.id);
+        });
+      },
+      { rootMargin: '-20% 0px -70% 0px' }
+    );
+    sections.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [data]);
 
-  const handleNavClick = () => {
-    setNavOpen(false);
-    setSubmenuOpen(false);
+  const skills = data.skills || {};
+  const terminalCount = Object.keys(EQUIPMENT_GROUPS)
+    .reduce((total, key) => total + ((data.skills || {})[key] || []).length, 0);
+  const counts = {
+    'cross-connect': `${(data.experience || []).length} circuits`,
+    'in-service': `${(data.projects || []).length} circuits`,
+    qualification: `${(data.education || []).length + (data.badges || []).length + (data.certifications || []).length} records`,
+    termination: `${(data.languages || []).length} languages`
   };
-
-  const navBrandName = data.name?.split(' ').slice(0, 2).join(' ');
+  const badges = data.badges || [];
+  const certifications = data.certifications || [];
 
   return (
-    <div className="app-shell">
-      <div className="background-gradient" />
-      <div className="noise-layer" />
-      <div className="blur-orb orb-1" />
-
-      <nav className={`navbar glass ${scrolled ? 'scrolled' : ''}`}>
-        <div className="nav-content">
-          <a className="nav-logo" href="/" onClick={handleNavClick}>
-            <div className="nav-avatar">
-              {data.avatarUrl && avatarOk ? (
-                <img src={data.avatarUrl} alt={`${data.name} avatar`} onError={() => setAvatarOk(false)} />
-              ) : (
-                <span>{initials}</span>
-              )}
-            </div>
-            <span className="nav-name">{navBrandName}</span>
+    <div className="frame landing">
+      <nav className="upright" aria-label="Frame blocks">
+        <span className="upright-mark">MDF</span>
+        {BLOCKS.map((block) => (
+          <a
+            key={block.id}
+            className="upright-link"
+            href={`#${block.id}`}
+            aria-current={current === block.id ? 'true' : undefined}
+            title={block.title}
+          >
+            {block.designation}
           </a>
+        ))}
+        <div className="upright-foot">
+          {showTop ? (
+            <a className="upright-link" href="#frame" aria-label="Back to frame head">
+              <Icon name="up" />
+            </a>
+          ) : null}
+        </div>
+      </nav>
 
-          <div className={`nav-links ${navOpen ? 'active' : ''}`}>
-            {[
-              { id: 'about', label: 'About' },
-              { id: 'experience', label: 'Experience' },
-              { id: 'education', label: 'Education' },
-              { id: 'projects', label: 'Projects' },
-              { id: 'skills', label: 'Skills' }
-            ].map((link) => (
+      <section className="block" id="frame">
+        <div className="strip strip--head" style={{ '--i': 0 }}>
+          <h1 className="head-name">{data.name}</h1>
+          <p className="head-discipline">{data.role}</p>
+          {(data.stats || []).length ? (
+            <p className="head-counts">
+              {data.stats.map((stat) => `${stat.value} ${stat.label}`).join('  ·  ')}
+            </p>
+          ) : null}
+        </div>
+        <div className="block-body">
+          <div className="head">
+            <div>
+              <p className="head-bio">{data.bio}</p>
+              <div className="head-actions">
+                {data.resumeUrl ? (
+                  <a className="tag tag--live" href={data.resumeUrl} download>
+                    <Icon name="download" /> Record copy
+                  </a>
+                ) : null}
+                {data.contact?.github ? (
+                  <a className="tag" href={data.contact.github} target="_blank" rel="noopener">
+                    <Icon name="code" /> Source
+                  </a>
+                ) : null}
+                {data.location ? (
+                  <span className="tag"><Icon name="pin" /> {data.location}</span>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="frame-data">
+              <h2 className="side-head">FRAME DATA</h2>
+              <dl className="data-list">
+                <div className="data-row">
+                  <dt>Location</dt>
+                  <dd>{data.location}</dd>
+                </div>
+                <div className="data-row">
+                  <dt>Circuits</dt>
+                  <dd>{(data.experience || []).length}</dd>
+                </div>
+                <div className="data-row">
+                  <dt>Terminals</dt>
+                  <dd>{terminalCount}</dd>
+                </div>
+                <div className="data-row">
+                  <dt>Record issued</dt>
+                  <dd>{new Date().getFullYear()}</dd>
+                </div>
+              </dl>
+              {(data.achievements || []).map((item) => (
+                <p className="frame-note" key={item.title}>
+                  <strong>{item.title}.</strong> {item.description}
+                </p>
+              ))}
+            </div>
+
+            {data.avatarUrl && avatarOk ? (
+              <figure className="plate">
+                <img src={data.avatarUrl} alt={data.name} onError={() => setAvatarOk(false)} />
+                <figcaption className="plate-caption">ID PLATE</figcaption>
+              </figure>
+            ) : null}
+          </div>
+        </div>
+      </section>
+
+      <section className="block" id="cross-connect">
+        <Strip
+          index={1}
+          designation="01"
+          title="Cross-connect" clause="Record against stack"
+          count={counts['cross-connect']}
+        />
+        <div className="block-body">
+          <CrossConnect experience={data.experience || []} skills={skills} />
+        </div>
+      </section>
+
+      <section className="block" id="in-service">
+        <Strip
+          index={2}
+          designation="02"
+          title="In service" clause="Open source"
+          count={counts['in-service']}
+        />
+        <div className="block-body">
+          <div className="circuits-grid">
+            {(data.projects || []).map((project, index) => (
+              <article className="service" key={project.name}>
+                <div className="service-head">
+                  <span className="service-designation">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="service-name">{project.name}</h3>
+                </div>
+                <p className="service-note">{project.description}</p>
+                <div className="terminals">
+                  {(project.tags || []).map((tag) => (
+                    <span className="terminal" key={tag}>{tag}</span>
+                  ))}
+                </div>
+                <div className="service-foot">
+                  {project.github ? (
+                    <a className="tag" href={project.github} target="_blank" rel="noopener">
+                      <Icon name="code" /> Source
+                    </a>
+                  ) : null}
+                  {project.demo ? (
+                    <a className="tag" href={project.demo} target="_blank" rel="noopener">
+                      <Icon name="link" /> Live
+                    </a>
+                  ) : null}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="block" id="qualification">
+        <Strip
+          index={3}
+          designation="03"
+          title="Qualification" clause="Schooling and certification"
+          count={counts.qualification}
+        />
+        <div className="block-body">
+          <div className="qual-grid">
+            {(data.education || []).map((edu) => (
+              <div className="qual" key={edu.degree}>
+                <h3 className="qual-title">{edu.degree}</h3>
+                <p className="qual-org">{edu.school}</p>
+                <p className="qual-period">{edu.period}</p>
+                {edu.description ? <p className="qual-note">{edu.description}</p> : null}
+              </div>
+            ))}
+            {certifications.map((cert) => (
+              <div className="qual" key={cert.name}>
+                <h3 className="qual-title">{cert.name}</h3>
+                <p className="qual-org">{cert.issuer}</p>
+                <p className="qual-period">{cert.date}</p>
+              </div>
+            ))}
+            {badges.map((badge) => (
               <a
-                key={link.id}
-                href={`#${link.id}`}
-                className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
-                onClick={handleNavClick}
+                className="badge-row"
+                key={badge.name}
+                href={badge.url}
+                target="_blank"
+                rel="noopener"
               >
-                {link.label}
+                {badge.image ? (
+                  <img className="badge-img" src={badge.image} alt="" loading="lazy" />
+                ) : null}
+                <span>
+                  <span className="badge-name">{badge.name}</span>
+                  <span className="badge-meta">{badge.issuer} · {badge.issued}</span>
+                </span>
               </a>
             ))}
-            <div
-              className={`nav-dropdown ${submenuOpen ? 'open' : ''}`}
-              onMouseLeave={() => setSubmenuOpen(false)}
-            >
-              <button
-                className="nav-link nav-link-button"
-                onClick={() => setSubmenuOpen((prev) => !prev)}
-                aria-haspopup="true"
-                aria-expanded={submenuOpen}
-              >
-                More
-                <span className="chevron">▾</span>
-              </button>
-              <div className="dropdown-menu">
-                {[
-                  { id: 'certifications', label: 'Certifications' },
-                  { id: 'achievements', label: 'Achievements' }
-                ].map((item) => (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    onClick={handleNavClick}
-                    className={`dropdown-link ${activeSection === item.id ? 'active' : ''}`}
-                  >
-                    {item.label}
+          </div>
+
+        </div>
+      </section>
+
+      <section className="block" id="termination">
+        <Strip index={4} designation="04" title="Termination" clause="Reach the frame" />
+        <div className="block-body">
+          <div className="termination">
+            <div>
+              {data.contact?.text ? <p className="term-note">{data.contact.text}</p> : null}
+              <div className="term-list">
+                {data.contact?.email ? (
+                  <a className="term-link" href={`mailto:${data.contact.email}`}>
+                    <Icon name="mail" /> {data.contact.email}
+                  </a>
+                ) : null}
+                {data.contact?.github ? (
+                  <a className="term-link" href={data.contact.github} target="_blank" rel="noopener">
+                    <Icon name="code" /> github.com/dny1020
+                  </a>
+                ) : null}
+                {data.contact?.linkedin ? (
+                  <a className="term-link" href={data.contact.linkedin} target="_blank" rel="noopener">
+                    <Icon name="link" /> LinkedIn
+                  </a>
+                ) : null}
+              </div>
+            </div>
+
+            {(data.languages || []).length ? (
+              <div>
+                <h3 className="side-head">LANGUAGES</h3>
+                <div className="lang-row">
+                  {data.languages.map((lang) => (
+                    <div className="lang" key={lang.language}>
+                      <span className="lang-name">{lang.language}</span>
+                      <span className="lang-level">{lang.level}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            <div>
+              <h3 className="side-head">BLOCK ELEVATION</h3>
+              <div className="elevation-key">
+                {BLOCKS.map((block) => (
+                  <a className="elevation-row" href={`#${block.id}`} key={block.id}>
+                    <span>{block.designation}</span>
+                    <span>{block.title}</span>
+                    <span className="elevation-count">{counts[block.id] || ''}</span>
                   </a>
                 ))}
               </div>
             </div>
-            <a href="#contact" className="nav-cta" onClick={handleNavClick}>Contact</a>
           </div>
-
-          <button
-            className={`nav-toggle ${navOpen ? 'active' : ''}`}
-            aria-label="Toggle navigation"
-            onClick={() => setNavOpen((prev) => !prev)}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
         </div>
-      </nav>
+      </section>
 
-      <HomePage
-        data={data}
-        initials={initials}
-        avatarOk={avatarOk}
-        setAvatarOk={setAvatarOk}
-      />
-
-      <footer className="footer">
-        <div className="footer-content">
-          <p>{data.footer || `© ${new Date().getFullYear()} ${data.name}. All rights reserved.`}</p>
-          <LocalWidgets widgets={widgets} />
-        </div>
+      <footer className="foot">
+        <span>{data.footer || `© ${new Date().getFullYear()} ${data.name}`}</span>
+        <LocalReading reading={reading} />
       </footer>
-
-      <button
-        className={`scroll-top ${showTop ? 'visible' : ''}`}
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        aria-label="Scroll to top"
-      >
-        ↑
-      </button>
     </div>
   );
 }
 
-function HomePage({ data, initials, avatarOk, setAvatarOk }) {
-  const skills = data.skills || {};
-  const certifications = data.certifications || [];
-  const badges = data.badges || [];
-  const languages = data.languages || [];
-  const achievements = data.achievements || [];
-  const repositories = data.repositories || [];
-
-  const hasSkills = typeof skills === 'object' && Object.keys(skills).length > 0;
-
-  const stats = data.stats || [];
-
-  return (
-    <main className="container">
-      {/* Hero / About */}
-      <section id="about" className="hero-section">
-        <div className="hero-grid">
-          <div className="hero-copy reveal">
-            <h1 className="hero-title">{data.name}</h1>
-            <p className="hero-subtitle">{data.role}</p>
-            <p className="hero-location"><Icon name="pin" /> {data.location}</p>
-            <p className="hero-bio">{data.bio}</p>
-            <div className="hero-buttons">
-              <a href="#contact" className="btn btn-primary">Let's Connect</a>
-              {data.resumeUrl ? (
-                <a href={data.resumeUrl} className="btn btn-ghost" download>Download CV</a>
-              ) : null}
-              <a href="#projects" className="btn btn-ghost">View Projects</a>
-            </div>
-          </div>
-
-          <div className="hero-card reveal">
-            <div className="hero-avatar">
-              {data.avatarUrl && avatarOk ? (
-                <img src={data.avatarUrl} alt={`${data.name} profile`} onError={() => setAvatarOk(false)} />
-              ) : (
-                <span>{initials}</span>
-              )}
-            </div>
-            <div className="hero-card-content">
-              <h3>Profile Overview</h3>
-              <p>{data.profileOverview}</p>
-              <div className="stats-row">
-                {stats.map((stat, index) => (
-                  <div key={`${stat.label}-${index}`} className="stat">
-                    <span className="stat-value">{stat.value}</span>
-                    <span className="stat-label">{stat.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Experience */}
-      <section id="experience" className="section">
-        <div className="section-header">
-          <h2 className="section-title">Professional Experience</h2>
-        </div>
-        <div className="timeline">
-          {(data.experience || []).map((exp, index) => (
-            <div
-              key={`${exp.title}-${index}`}
-              className={`timeline-item reveal ${(exp.period || '').includes('Present') ? 'timeline-item--current' : ''}`}
-            >
-              <div className="timeline-content">
-                <div className="timeline-header">
-                  <h3 className="timeline-title">{exp.title}</h3>
-                  <span className="timeline-period">{exp.period}</span>
-                </div>
-                <p className="timeline-subtitle">{exp.company}</p>
-                <p className="timeline-description">{exp.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Education */}
-      <section id="education" className="section">
-        <div className="section-header">
-          <h2 className="section-title">Education</h2>
-        </div>
-        <div className="education-grid">
-          {(data.education || []).map((edu, index) => (
-            <div key={`${edu.degree}-${index}`} className="education-item reveal">
-              <h3 className="education-degree">{edu.degree}</h3>
-              <p className="education-school">{edu.school}</p>
-              <p className="education-period">{edu.period}</p>
-              {edu.description ? <p className="education-description">{edu.description}</p> : null}
-              {edu.skills ? (
-                <div className="education-skills">
-                  {edu.skills.map((skill) => (
-                    <span key={skill}>{skill}</span>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Projects */}
-      <section id="projects" className="section">
-        <div className="section-header">
-          <h2 className="section-title">Featured Projects</h2>
-        </div>
-        <div className="projects-grid">
-          {(data.projects || []).map((project, index) => (
-            <div key={`${project.name}-${index}`} className="project-card reveal">
-              <div className="project-header">
-                <h3 className="project-title">{project.name}</h3>
-              </div>
-              <p className="project-description">{project.description}</p>
-              {project.tags ? (
-                <div className="project-tags">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="tag">{tag}</span>
-                  ))}
-                </div>
-              ) : null}
-              <div className="project-links">
-                {project.demo && project.demo !== '#' ? (
-                  <a href={project.demo} className="project-link" target="_blank" rel="noopener"><Icon name="link" /> Live</a>
-                ) : null}
-                {project.github ? (
-                  <a href={project.github} className="project-link" target="_blank" rel="noopener"><Icon name="code" /> Code</a>
-                ) : null}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Skills */}
-      {hasSkills ? (
-        <section id="skills" className="section">
-          <div className="section-header">
-            <h2 className="section-title">Technical Skills</h2>
-          </div>
-          <div className="skills-categories">
-            {Object.entries(skills).map(([category, items]) => {
-              const meta = SKILL_CATEGORY_META[category] || { label: category, icon: 'award' };
-              if (!Array.isArray(items) || !items.length) return null;
-              return (
-                <div key={category} className="skill-category reveal">
-                  <div className="skill-category-header">
-                    <span className="skill-category-icon"><Icon name={meta.icon} /></span>
-                    <h3 className="skill-category-title">{meta.label}</h3>
-                  </div>
-                  <div className="skill-category-pills">
-                    {items.map((skill) => (
-                      <span key={skill} className="skill-pill">{skill}</span>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          {languages.length > 0 ? (
-            <div className="languages-section reveal">
-              <h3 className="languages-title">Languages</h3>
-              <div className="languages-grid">
-                {languages.map((lang) => (
-                  <div key={lang.language} className="language-card">
-                    <span className="language-name">{lang.language}</span>
-                    <span className="language-level">{lang.level}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : null}
-        </section>
-      ) : null}
-
-      {/* Certifications & Badges */}
-      {certifications.length > 0 || badges.length > 0 ? (
-        <section id="certifications" className="section">
-          <div className="section-header">
-            <h2 className="section-title">Certifications & Badges</h2>
-          </div>
-          <div className="badges-grid">
-            {badges.map((badge, index) => (
-              <a
-                key={`${badge.name}-${index}`}
-                className="badge-card reveal"
-                href={badge.url || '#'}
-                target="_blank"
-                rel="noopener"
-              >
-                <div className="badge-image">
-                  {badge.image ? <img src={badge.image} alt={badge.name} /> : <Icon name="certificate" />}
-                </div>
-                <div className="badge-info">
-                  <h3 className="badge-title">{badge.name}</h3>
-                  <p className="badge-issuer">{badge.issuer}</p>
-                  {badge.issued ? <span className="badge-date">{badge.issued.slice(0, 4)}</span> : null}
-                </div>
-              </a>
-            ))}
-            {certifications.map((cert, index) => (
-              <div key={`${cert.name}-${index}`} className="badge-card reveal">
-                <div className="badge-image"><Icon name="certificate" /></div>
-                <div className="badge-info">
-                  <h3 className="badge-title">{cert.name}</h3>
-                  <p className="badge-issuer">{cert.issuer}</p>
-                  {cert.date ? <span className="badge-date">{cert.date}</span> : null}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* Achievements */}
-      {achievements.length ? (
-        <section id="achievements" className="section">
-          <div className="section-header">
-            <h2 className="section-title">Key Achievements</h2>
-          </div>
-          <div className="achievements-grid">
-            {achievements.map((item, index) => (
-              <div key={`${item.title}-${index}`} className="achievement-card reveal">
-                <div className="achievement-icon"><Icon name="award" /></div>
-                <div>
-                  <h3 className="achievement-title">{item.title}</h3>
-                  <p className="achievement-description">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* Repositories */}
-      {repositories.length ? (
-        <section id="repositories" className="section">
-          <div className="section-header">
-            <h2 className="section-title">Open Source</h2>
-          </div>
-          <div className="repositories-grid">
-            {repositories.map((repo, index) => (
-              <a
-                key={`${repo.name}-${index}`}
-                className="repo-card reveal"
-                href={repo.url || '#'}
-                target="_blank"
-                rel="noopener"
-              >
-                <div className="repo-header">
-                  <span className="repo-name">{repo.name}</span>
-                  <span className="repo-language">{repo.language}</span>
-                </div>
-                <p className="repo-description">{repo.description}</p>
-              </a>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* Contact */}
-      <section id="contact" className="section contact-section">
-        <div className="glass-card contact-card reveal">
-          <h2 className="section-title">Let's Connect</h2>
-          <p className="contact-text">{data.contact?.text}</p>
-          <div className="contact-info">
-            {data.contact?.email ? (
-              <a href={`mailto:${data.contact.email}`} className="contact-item"><Icon name="mail" /> {data.contact.email}</a>
-            ) : null}
-            {data.contact?.github ? (
-              <a href={data.contact.github} className="contact-item" target="_blank" rel="noopener"><Icon name="github" /> GitHub</a>
-            ) : null}
-            <a href={WA_URL} className="contact-item" target="_blank" rel="noopener"><Icon name="phone" /> WhatsApp</a>
-          </div>
-          <div className="linkedin-badge-wrap">
-            <LinkedInBadge />
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-}
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
