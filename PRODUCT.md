@@ -30,7 +30,7 @@ Content: 13+ years in IT, 6+ in VoIP engineering, all at the same telephony oper
 
 - Visitors arrive on desktop and mobile, often from a link with no prior context about who Danilo is.
 - Peers evaluate by leaving: they open GitHub, read source, hit an endpoint. Outbound links are part of the experience, not a leak.
-- The site is the public face of a personal infrastructure that the owner also uses daily (Gitea, Vaultwarden, WireGuard, Traefik on Raspberry Pi).
+- The site is the public face of a personal infrastructure that the owner also uses daily (Forgejo, Vaultwarden, Immich, MinIO, AdGuard, WireGuard, behind nginx on a Raspberry Pi 4).
 - Content updates are a `data.json` edit plus a push to `main`; the downloadable `resume.pdf` is regenerated from that same file by a Python script.
 
 ## Capabilities and Constraints
@@ -41,7 +41,7 @@ Content: 13+ years in IT, 6+ in VoIP engineering, all at the same telephony oper
 
 **The webchat widget is removed, not abandoned.** `https://webrtc.danilocloud.me/webchat.js` used to load on every page. It is Danilo's own WebRTC contact-center stack, not a third-party chat tool, and it remains the intended live demonstration of the telephony work the CV describes. It was removed from `index.html` on 2026-09-01 because the subdomain does not resolve publicly, so every external visit fired a request that failed silently. Restore it — the commented placeholder in `index.html` marks the spot — once the DNS record is public.
 
-**Third-party runtime dependencies** currently in the page: React UMD from unpkg, Google Fonts (Space Grotesk, Sora, JetBrains Mono), LinkedIn profile badge script, Credly badge images, and the open-meteo weather API.
+**Third-party runtime dependencies** currently in the page: React UMD from unpkg, Google Fonts (Archivo, JetBrains Mono), Credly badge images, and the open-meteo weather API. There is no LinkedIn badge script.
 
 **Client-side widgets.** Bogotá local time (`Intl.DateTimeFormat`) and live weather (open-meteo, no auth) are computed in the browser, configured by `WIDGET_CONFIG` in `app.jsx`.
 
@@ -62,7 +62,7 @@ Real and verifiable:
 
 - **Five public GitHub repos** under `github.com/dny1020` — `doction` (MIT-licensed FastAPI/PostgreSQL/MCP wiki), `pulse_bogota` (FastAPI/PostgreSQL activity scoring with Alembic, scheduler, OSM imports), `bot_whatsapp` (RAG + Llama 3 via Groq + Twilio), `coffee-tracker` (FastAPI/SQLite), `rag_without_llm` (pgvector + HF embeddings + cross-encoder reranking, Streamlit UI). The source is the proof — a peer reads it.
 - **Self-hosted services** that exist but are **not publicly reachable**: the WebRTC webchat stack (`webrtc.danilocloud.me`) and the Coffee Tracker API (`coffee.danilocloud.me/api/v1`). Both are NXDOMAIN in public DNS as of 2026-09-01. They are real and they are the strongest available evidence, but until the DNS records are public they cannot be linked or embedded — a link to either is a broken promise, not a demonstration. Exposing one is the single highest-value change available to this product.
-- **The homelab itself** — Raspberry Pi running Traefik, Vaultwarden, Gitea, WireGuard. Real and describable but not publicly reachable; it must be *shown* (described, diagrammed, evidenced), never linked to something that 404s.
+- **The homelab itself** — a Raspberry Pi 4 (arm64, 8 GB, Ubuntu 22.04) running fifteen containers behind nginx: Forgejo, Vaultwarden, Immich, MinIO, AdGuard, Uptime Kuma, doction and its Postgres, WireGuard. Every nginx vhost is guarded `allow 10.0.5.0/24; allow 10.13.13.0/24; deny all`, so nothing is publicly reachable by design. TLS is a Let's Encrypt wildcard for `*.danilocloud.me`, renewed by certbot over the Cloudflare DNS-01 challenge. It must be *shown* (described, diagrammed, evidenced), never linked to something that 404s.
 - **Credly badges** with live issuer URLs: AWS Cloud Essentials, Cisco CyberOps Associate, Introduction to Cybersecurity, Networking Academy Learn-A-Thon 2023.
 - **LinkedIn** profile, embedded as an official badge.
 - **`resume.pdf`**, generated from `data.json`. A Spanish CV also exists in the repo root (`Curriculum vitae_spanish.docx/.pdf`) but is not published.

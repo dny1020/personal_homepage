@@ -9,7 +9,7 @@
   "stats": [
     { "label": "Years in IT", "value": "13+" },
     { "label": "Years in VoIP Engineering", "value": "6+" },
-    { "label": "Open-Source Projects", "value": "5" }
+    { "label": "Open-Source Projects", "value": "6" }
   ],
   "experience": [
     {
@@ -78,14 +78,20 @@
     "telephony": ["Asterisk", "Kamailio", "SIP", "WebRTC", "SRTP", "PJSIP", "Genesys Cloud", "SBC"],
     "cloud_devops": ["AWS", "Azure", "Prometheus", "Grafana", "CI/CD", "Systemd", "Crontab"],
     "ai_data": ["Machine Learning", "TensorFlow", "FastAPI", "LLMOps", "MCP", "RAG", "pgvector", "SQLite", "PostgreSQL"],
-    "tools": ["Git", "Gitea", "Vaultwarden", "Raspberry Pi"]
+    "tools": ["Git", "Forgejo", "Vaultwarden", "Raspberry Pi"]
   },
   "languages": [
     { "language": "Spanish", "level": "Native" },
     { "language": "English", "level": "Intermediate (B1)" }
   ],
   "certifications": [
-    { "name": "Diploma in Leadership and Management Skills", "issuer": "UNIR | Universidad Internacional de La Rioja", "date": "2024" }
+    { "name": "Certificate of Completion: Claude Code 101", "issuer": "Anthropic", "date": "2026" },
+    { "name": "Certificate of Completion: Introduction to Agent Skills", "issuer": "Anthropic", "date": "2026" },
+    { "name": "Kubernetes for the Absolute Beginners", "issuer": "KodeKloud", "date": "2025" },
+    { "name": "Docker Complete", "issuer": "KodeKloud", "date": "2024" },
+    { "name": "Diploma in Leadership and Management Skills", "issuer": "UNIR | Universidad Internacional de La Rioja", "date": "2024" },
+    { "name": "B1 English Level", "issuer": "ILTO", "date": "2024" },
+    { "name": "The Foundations of SIP", "issuer": "Udemy", "date": "2023" }
   ],
   "badges": [
     {
@@ -120,7 +126,7 @@
   "achievements": [
     {
       "title": "Self-Hosting Purist",
-      "description": "Runs personal infrastructure on Raspberry Pi with Traefik, Vaultwarden, and Gitea — zero third-party dependencies."
+      "description": "Runs personal infrastructure on a Raspberry Pi 4: fifteen containers behind nginx, including Forgejo, Vaultwarden, Immich, MinIO and AdGuard, reachable only over WireGuard."
     }
   ],
   "projects": [
@@ -144,8 +150,8 @@
     },
     {
       "name": "Coffee Tracker API",
-      "description": "Minimalist API that tracks coffee consumption via caffeine (mg) and heart rate metrics, consumable directly from iPhone Shortcuts. Built with FastAPI and SQLite for habit analysis.",
-      "tags": ["FastAPI", "SQLite", "Python", "REST API"],
+      "description": "Minimalist API for logging coffee intake by caffeine (mg) and drink type, consumable directly from iPhone Shortcuts. Fastify and Prisma over SQLite, with bearer-token auth, daily and aggregate stats endpoints, and OpenAPI docs.",
+      "tags": ["Node.js", "Fastify", "Prisma", "SQLite", "REST API"],
       "github": "https://github.com/dny1020/coffee-tracker"
     },
     {
@@ -153,6 +159,12 @@
       "description": "Local RAG pipeline that answers extractively with citations, no generative LLM involved. Hybrid retrieval combines PostgreSQL pgvector similarity search with local Hugging Face embeddings and cross-encoder reranking; served via FastAPI with a Streamlit UI.",
       "tags": ["FastAPI", "PostgreSQL", "pgvector", "Hugging Face", "Streamlit"],
       "github": "https://github.com/dny1020/rag_without_llm"
+    },
+    {
+      "name": "prometheus_ocupation",
+      "description": "Exporter that queries Prometheus with custom PromQL and writes the results to structured CSV at hourly resolution. Retry logic and structured logging make it usable as an unattended reporting job.",
+      "tags": ["Python", "Prometheus", "PromQL", "CSV", "Automation"],
+      "github": "https://github.com/dny1020/prometheus_ocupation"
     }
   ],
   "contact": {

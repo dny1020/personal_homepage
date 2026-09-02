@@ -6,7 +6,7 @@ CV portfolio hosted as a static site on AWS S3, served via Cloudflare.
 
 ## Stack
 
-- **Frontend** — React (Babel in-browser, no build step) + plain CSS
+- **Frontend** — React 18 UMD + plain CSS. `app.jsx` is transpiled once by Babel CLI to `app.js`; there is no bundler.
 - **Data** — `frontend/data.json` (CV content) + open-meteo.com (live weather)
 - **Hosting** — S3 static website + Cloudflare proxy (HTTPS, CDN)
 - **IaC** — Terraform (`terraform/`) manages the S3 bucket and IAM deploy user
@@ -34,9 +34,11 @@ Any push to `main` that touches `frontend/**` triggers the workflow:
 
 1. `aws s3 sync frontend/ s3://danilocloud.me/ --delete`
 2. Sets `no-cache` headers on `index.html` and `data.json`
-3. Purges the Cloudflare edge cache
+3. Sets `no-cache` headers on `index.html`, `data.json` and `app.js`
 
-Required secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `CF_DNS_API_TOKEN`.
+Required secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`.
+
+The repository also holds `CF_DNS_API_TOKEN` and `CF_ZONE_ID` secrets. No workflow uses them; they are left over from a Cloudflare purge step that was never implemented.
 
 ## Infrastructure
 

@@ -8,6 +8,7 @@ stays in sync with the site content.
 """
 
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 
 from fpdf import FPDF
@@ -70,6 +71,9 @@ def main() -> None:
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
 
     pdf = ResumePDF(format="A4")
+    # Pin the timestamp so regenerating unchanged data produces an identical file,
+    # which is what lets CI detect a stale PDF by hash.
+    pdf.set_creation_date(datetime(2020, 1, 1, tzinfo=timezone.utc))
     pdf.set_margins(MARGIN, MARGIN, MARGIN)
     pdf.set_auto_page_break(auto=True, margin=MARGIN)
     pdf.add_page()

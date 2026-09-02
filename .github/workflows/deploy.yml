@@ -22,6 +22,18 @@ jobs:
             @babel/core@7 @babel/cli@7 @babel/preset-react@7
           npx babel frontend/app.jsx --out-file frontend/app.js --presets=@babel/preset-react
 
+      - name: Check resume.pdf is current
+        run: |
+          # data.json is the source of truth; the PDF must not lag behind it.
+          pipx install uv >/dev/null 2>&1 || pip install --quiet uv
+          before=$(sha256sum frontend/resume.pdf | cut -d' ' -f1)
+          uv run --with fpdf2 python scripts/generate_resume.py
+          after=$(sha256sum frontend/resume.pdf | cut -d' ' -f1)
+          if [ "$before" != "$after" ]; then
+            echo "::error::frontend/resume.pdf is stale. Run: uv run --with fpdf2 python scripts/generate_resume.py"
+            exit 1
+          fi
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:

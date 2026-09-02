@@ -58,3 +58,6 @@ CLAUDE.md
 .impeccable/review/
 .impeccable/questions/
 .impeccable/build/
+
+# Python
+__pycache__/

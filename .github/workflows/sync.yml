@@ -1,0 +1,51 @@
+name: GitHub drift
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  drift:
+    name: Compare data.json against the account
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Report drift
+        id: drift
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # The script exits 1 when it finds drift, which is the signal, not a failure.
+          set +e
+          body=$(python scripts/github_drift.py --markdown)
+          echo "found=$?" >> "$GITHUB_OUTPUT"
+          {
+            echo 'body<<DRIFT_EOF'
+            echo "$body"
+            echo 'DRIFT_EOF'
+          } >> "$GITHUB_OUTPUT"
+          echo "$body" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open or update the drift issue
+        if: steps.drift.outputs.found == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BODY: ${{ steps.drift.outputs.body }}
+        run: |
+          title='data.json has drifted from GitHub'
+          existing=$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$BODY"
+          else
+            gh issue create --title "$title" --body "$BODY"
+          fi
