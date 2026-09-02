@@ -277,6 +277,7 @@ a {
 
 .frame-data {
   min-width: 230px;
+  max-width: 360px;
 }
 
 .data-list {
@@ -702,7 +703,7 @@ a {
 
 .circuits-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: 0;
   border-top: var(--member);
   border-left: var(--member);
@@ -761,7 +762,7 @@ a {
 
 .qual-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 0;
   border-top: var(--member);
   border-left: var(--member);
@@ -850,7 +851,7 @@ a {
 
 .termination {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 26px;
   align-items: start;
 }
@@ -991,6 +992,19 @@ a {
 
   .head {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Between 641 and 900 the frame still has room for two columns: the plate
+     rides the full height at the right rather than dropping below the record. */
+  @media (min-width: 641px) {
+    .head {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .plate {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
   }
 
   .pair-legend {
