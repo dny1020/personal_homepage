@@ -122,28 +122,24 @@
       "name": "doction",
       "description": "Self-hosted, markdown-first wiki and knowledge base for humans and AI agents. PostgreSQL full-text search, optional local semantic search, per-page git history, a REST API, and a native MCP server for agent integration. MIT licensed.",
       "tags": ["Python", "FastAPI", "PostgreSQL", "MCP", "Docker"],
-      "demo": "#",
       "github": "https://github.com/dny1020/doction"
     },
     {
       "name": "WhatsApp ISP Support Bot",
       "description": "Automated WhatsApp technical support bot for ISPs. Combines a local RAG (BM25) knowledge base with Llama 3 via Groq for fast responses, integrated with Twilio WhatsApp and deployed with Docker.",
       "tags": ["Python", "FastAPI", "RAG", "Twilio", "Docker"],
-      "demo": "#",
       "github": "https://github.com/dny1020/bot_whatsapp"
     },
     {
       "name": "Coffee Tracker API",
       "description": "Minimalist API that tracks coffee consumption via caffeine (mg) and heart rate metrics, consumable directly from iPhone Shortcuts. Built with FastAPI and SQLite for habit analysis.",
       "tags": ["FastAPI", "SQLite", "Python", "REST API"],
-      "demo": "http://coffee.danilocloud.me/api/v1",
       "github": "https://github.com/dny1020/coffee-tracker"
     },
     {
       "name": "RAG Without LLM",
       "description": "Local RAG pipeline that answers extractively with citations, no generative LLM involved. Hybrid retrieval combines PostgreSQL pgvector similarity search with local Hugging Face embeddings and cross-encoder reranking; served via FastAPI with a Streamlit UI.",
       "tags": ["FastAPI", "PostgreSQL", "pgvector", "Hugging Face", "Streamlit"],
-      "demo": "#",
       "github": "https://github.com/dny1020/rag_without_llm"
     }
   ],
