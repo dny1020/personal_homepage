@@ -1,0 +1,484 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-02T00:39:35.575183+00:00",
+  "title": "Design System: danilocloud.me",
+  "extensions": {
+    "colorMeta": {
+      "ink-900": {
+        "role": "neutral",
+        "displayName": "Ink Void",
+        "purpose": "The page ground. Everything else floats on it.",
+        "canonical": "oklch(15.93% 0.0111 267.98)",
+        "tonalRamp": [
+          "oklch(15% 0.0111 267.98)",
+          "oklch(26% 0.0111 267.98)",
+          "oklch(37% 0.0111 267.98)",
+          "oklch(48% 0.0111 267.98)",
+          "oklch(59% 0.0111 267.98)",
+          "oklch(70% 0.0111 267.98)",
+          "oklch(82% 0.0111 267.98)",
+          "oklch(94% 0.0111 267.98)"
+        ]
+      },
+      "ink-800": {
+        "role": "neutral",
+        "displayName": "Ink Raised",
+        "purpose": "The opaque mobile navigation panel — one step up from the void.",
+        "canonical": "oklch(20.10% 0.0211 267.58)",
+        "tonalRamp": [
+          "oklch(15% 0.0211 267.58)",
+          "oklch(26% 0.0211 267.58)",
+          "oklch(37% 0.0211 267.58)",
+          "oklch(48% 0.0211 267.58)",
+          "oklch(59% 0.0211 267.58)",
+          "oklch(70% 0.0211 267.58)",
+          "oklch(82% 0.0211 267.58)",
+          "oklch(94% 0.0211 267.58)"
+        ]
+      },
+      "ink-700": {
+        "role": "neutral",
+        "displayName": "Ink Panel",
+        "purpose": "The opaque dropdown surface; the lightest opaque ink in the system.",
+        "canonical": "oklch(23.54% 0.0267 265.22)",
+        "tonalRamp": [
+          "oklch(15% 0.0267 265.22)",
+          "oklch(26% 0.0267 265.22)",
+          "oklch(37% 0.0267 265.22)",
+          "oklch(48% 0.0267 265.22)",
+          "oklch(59% 0.0267 265.22)",
+          "oklch(70% 0.0267 265.22)",
+          "oklch(82% 0.0267 265.22)",
+          "oklch(94% 0.0267 265.22)"
+        ]
+      },
+      "teal": {
+        "role": "primary",
+        "displayName": "Phosphor Teal",
+        "purpose": "The one light in the room. Marks state and signal only.",
+        "canonical": "oklch(78.45% 0.1325 181.91)",
+        "tonalRamp": [
+          "oklch(15% 0.1325 181.91)",
+          "oklch(26% 0.1325 181.91)",
+          "oklch(37% 0.1325 181.91)",
+          "oklch(48% 0.1325 181.91)",
+          "oklch(59% 0.1325 181.91)",
+          "oklch(70% 0.1325 181.91)",
+          "oklch(82% 0.1325 181.91)",
+          "oklch(94% 0.1325 181.91)"
+        ]
+      },
+      "teal-bright": {
+        "role": "primary",
+        "displayName": "Phosphor Bright",
+        "purpose": "The hover state of the accent, and only that.",
+        "canonical": "oklch(83.27% 0.1277 183.07)",
+        "tonalRamp": [
+          "oklch(15% 0.1277 183.07)",
+          "oklch(26% 0.1277 183.07)",
+          "oklch(37% 0.1277 183.07)",
+          "oklch(48% 0.1277 183.07)",
+          "oklch(59% 0.1277 183.07)",
+          "oklch(70% 0.1277 183.07)",
+          "oklch(82% 0.1277 183.07)",
+          "oklch(94% 0.1277 183.07)"
+        ]
+      },
+      "teal-dark": {
+        "role": "primary",
+        "displayName": "Phosphor Deep",
+        "purpose": "Never a surface — only the far stop of the 135° avatar gradient.",
+        "canonical": "oklch(51.09% 0.0861 186.39)",
+        "tonalRamp": [
+          "oklch(15% 0.0861 186.39)",
+          "oklch(26% 0.0861 186.39)",
+          "oklch(37% 0.0861 186.39)",
+          "oklch(48% 0.0861 186.39)",
+          "oklch(59% 0.0861 186.39)",
+          "oklch(70% 0.0861 186.39)",
+          "oklch(82% 0.0861 186.39)",
+          "oklch(94% 0.0861 186.39)"
+        ]
+      },
+      "teal-ink": {
+        "role": "neutral",
+        "displayName": "Console Ink",
+        "purpose": "The blue-black text color that sits on teal.",
+        "canonical": "oklch(16.86% 0.0193 245.27)",
+        "tonalRamp": [
+          "oklch(15% 0.0193 245.27)",
+          "oklch(26% 0.0193 245.27)",
+          "oklch(37% 0.0193 245.27)",
+          "oklch(48% 0.0193 245.27)",
+          "oklch(59% 0.0193 245.27)",
+          "oklch(70% 0.0193 245.27)",
+          "oklch(82% 0.0193 245.27)",
+          "oklch(94% 0.0193 245.27)"
+        ]
+      },
+      "mist": {
+        "role": "neutral",
+        "displayName": "Mist",
+        "purpose": "Primary text and headings. Never pure white.",
+        "canonical": "oklch(98.42% 0.0034 247.86)",
+        "tonalRamp": [
+          "oklch(15% 0.0034 247.86)",
+          "oklch(26% 0.0034 247.86)",
+          "oklch(37% 0.0034 247.86)",
+          "oklch(48% 0.0034 247.86)",
+          "oklch(59% 0.0034 247.86)",
+          "oklch(70% 0.0034 247.86)",
+          "oklch(82% 0.0034 247.86)",
+          "oklch(94% 0.0034 247.86)"
+        ]
+      },
+      "slate-200": {
+        "role": "neutral",
+        "displayName": "Slate 200",
+        "purpose": "Body prose and descriptions — carries most of the reading weight.",
+        "canonical": "oklch(88.72% 0.0135 262.38)",
+        "tonalRamp": [
+          "oklch(15% 0.0135 262.38)",
+          "oklch(26% 0.0135 262.38)",
+          "oklch(37% 0.0135 262.38)",
+          "oklch(48% 0.0135 262.38)",
+          "oklch(59% 0.0135 262.38)",
+          "oklch(70% 0.0135 262.38)",
+          "oklch(82% 0.0135 262.38)",
+          "oklch(94% 0.0135 262.38)"
+        ]
+      },
+      "slate-400": {
+        "role": "neutral",
+        "displayName": "Slate 400",
+        "purpose": "Metadata only: dates, periods, footer, location.",
+        "canonical": "oklch(71.52% 0.0233 256.76)",
+        "tonalRamp": [
+          "oklch(15% 0.0233 256.76)",
+          "oklch(26% 0.0233 256.76)",
+          "oklch(37% 0.0233 256.76)",
+          "oklch(48% 0.0233 256.76)",
+          "oklch(59% 0.0233 256.76)",
+          "oklch(70% 0.0233 256.76)",
+          "oklch(82% 0.0233 256.76)",
+          "oklch(94% 0.0233 256.76)"
+        ]
+      },
+      "glass": {
+        "role": "neutral",
+        "displayName": "Glass Fill",
+        "purpose": "The pane material: 6% white over the lit background.",
+        "canonical": "rgba(255, 255, 255, 0.06)"
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "purpose": "The single 1px edge of light on every raised surface.",
+        "canonical": "rgba(255, 255, 255, 0.12)"
+      },
+      "shadow": {
+        "role": "neutral",
+        "displayName": "Seat Shadow",
+        "purpose": "Seats a pane in the dark; suggests separation, not height.",
+        "canonical": "rgba(4, 8, 20, 0.45)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name, once, in the hero. Nothing else may use this size."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles — the page’s scan structure."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Job titles, project names, badge names, card headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All prose. Constrain measure to 65–75ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase skill-category headers; letter-spacing is what makes it read as a label."
+      },
+      "mono": {
+        "displayName": "Instrument",
+        "purpose": "Measured values only: dates, periods, counts, ratings. Set with tabular-nums and slashed-zero. Technology names and labels are NOT readouts and stay in Space Grotesk."
+      }
+    },
+    "shadows": [
+      {
+        "name": "seat",
+        "value": "0 18px 40px rgba(4, 8, 20, 0.45)",
+        "purpose": "Default under any Tier 1 or Tier 2 surface. Separates the pane from the ground."
+      },
+      {
+        "name": "seat-deep",
+        "value": "0 24px 60px rgba(4, 8, 20, 0.45)",
+        "purpose": "The hero card only — the largest surface gets the widest shadow."
+      },
+      {
+        "name": "overlay",
+        "value": "0 14px 32px rgba(4, 8, 20, 0.6)",
+        "purpose": "The dropdown menu. Darker and tighter: it sits in front of a Tier 1 surface."
+      },
+      {
+        "name": "accent-glow",
+        "value": "0 10px 30px rgba(45, 212, 191, 0.3)",
+        "purpose": "Teal elements at rest. Light spilling from the element, not a shadow cast by it."
+      },
+      {
+        "name": "accent-glow-hover",
+        "value": "0 16px 36px rgba(45, 212, 191, 0.45)",
+        "purpose": "Primary button and scroll-to-top on hover."
+      },
+      {
+        "name": "halo-dot",
+        "value": "0 0 0 6px rgba(45, 212, 191, 0.15)",
+        "purpose": "The 6px halo around the one lit milestone dot (the role still running). Neutral dots take a 6% white halo instead."
+      }
+    ],
+    "motion": [
+      {
+        "name": "reveal",
+        "value": "opacity 0.6s ease, transform 0.6s ease",
+        "purpose": "Scroll reveal: 28px rise into view at a 0.12 intersection threshold."
+      },
+      {
+        "name": "state",
+        "value": "all 0.25s ease",
+        "purpose": "Default for hover, focus, and nav state changes."
+      },
+      {
+        "name": "state-quick",
+        "value": "all 0.2s ease",
+        "purpose": "Small inline controls: dropdown links, contact rows, project links."
+      },
+      {
+        "name": "nav-shrink",
+        "value": "all 0.3s ease",
+        "purpose": "The navbar tightening past 40px of scroll — the only scroll-linked state."
+      },
+      {
+        "name": "lift-card",
+        "value": "translateY(-8px)",
+        "purpose": "Project card hover. Cards rise."
+      },
+      {
+        "name": "lift-small",
+        "value": "translateY(-4px)",
+        "purpose": "Achievement cards, scroll-to-top."
+      },
+      {
+        "name": "slide-rail",
+        "value": "translateX(6px)",
+        "purpose": "Timeline entries slide along their rail rather than rising off it."
+      },
+      {
+        "name": "underline-sweep",
+        "value": "transform 0.25s ease (scaleX from transform-origin: left)",
+        "purpose": "The active nav underline. Never an animated width — that thrashes layout every frame."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "960px"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single primary action per view. Teal fill, console-ink text, accent glow that widens on hover.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Download CV</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 999px; border: 1px solid transparent; background: #2dd4bf; color: #081017; font-family: \"Space Grotesk\", system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; text-decoration: none; box-shadow: 0 10px 30px rgba(45,212,191,0.3); transition: all 0.25s ease; } .ds-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(45,212,191,0.45); } .ds-btn-primary:focus-visible { outline: 2px solid #4ee3d0; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "The secondary action. Translucent white fill on the dark ground; unlimited per view.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Get in touch</a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 999px; background: rgba(255,255,255,0.08); color: #f8fafc; border: 1px solid rgba(255,255,255,0.2); font-family: \"Space Grotesk\", system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.25s ease; } .ds-btn-ghost:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); } .ds-btn-ghost:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 3px; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Slate text that grows a 2px teal underline left-to-right on hover and active. The purest expression of the Scarcity Rule: teal marks exactly one link.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link--active\" href=\"#\">About</a><a class=\"ds-nav-link\" href=\"#\">Experience</a><a class=\"ds-nav-link\" href=\"#\">Projects</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 26px; align-items: center; } .ds-nav-link { position: relative; color: #d5dae3; text-decoration: none; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; transition: color 0.25s ease; } .ds-nav-link::after { content: \"\"; position: absolute; left: 0; bottom: -6px; width: 100%; height: 2px; background: #2dd4bf; transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; } .ds-nav-link:hover, .ds-nav-link--active { color: #f8fafc; } .ds-nav-link:hover::after, .ds-nav-link--active::after { transform: scaleX(1); } .ds-nav-link:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 3px; }"
+    },
+    {
+      "name": "Tonal Pane Card",
+      "kind": "card",
+      "refersTo": "card-glass",
+      "description": "The Tier 2 default surface. 6% white fill, one hairline, seat shadow; border brightens to teal and the card rises on hover.",
+      "html": "<article class=\"ds-card\"><h3 class=\"ds-card-title\">doction</h3><p class=\"ds-card-body\">Self-hosted, markdown-first wiki and knowledge base for humans and AI agents.</p></article>",
+      "css": ".ds-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 20px; box-shadow: 0 18px 40px rgba(4,8,20,0.45); transition: transform 0.25s ease, border-color 0.25s ease; } .ds-card:hover { transform: translateY(-8px); border-color: rgba(45,212,191,0.4); } .ds-card-title { margin: 0 0 8px; font-family: Sora, system-ui, sans-serif; font-weight: 600; font-size: 1.2rem; color: #f8fafc; } .ds-card-body { margin: 0; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 1rem; line-height: 1.6; color: #d5dae3; }"
+    },
+    {
+      "name": "Technology Tag",
+      "kind": "chip",
+      "refersTo": "chip-tag",
+      "description": "Static categorical chip, shared by project tags and education skills. Neutral by rule: categorical things are named, not accented.",
+      "html": "<div class=\"ds-tags\"><span class=\"ds-tag\">Python</span><span class=\"ds-tag\">FastAPI</span><span class=\"ds-tag\">PostgreSQL</span></div>",
+      "css": ".ds-tags { display: flex; flex-wrap: wrap; gap: 8px; } .ds-tag { padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: #d5dae3; font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 0.8rem; font-weight: 500; }"
+    },
+    {
+      "name": "Skill Pill",
+      "kind": "chip",
+      "refersTo": "skill-pill",
+      "description": "The one chip that responds to the pointer. Neutral at rest because 30+ appear at once; the border goes full teal on hover.",
+      "html": "<div class=\"ds-pills\"><span class=\"ds-pill\">Asterisk</span><span class=\"ds-pill\">Kamailio</span><span class=\"ds-pill\">SIP</span></div>",
+      "css": ".ds-pills { display: flex; flex-wrap: wrap; gap: 8px; } .ds-pill { padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); color: #d5dae3; font-family: \"Space Grotesk\", system-ui, sans-serif; font-weight: 500; font-size: 0.85rem; transition: border-color 0.2s ease, color 0.2s ease; } .ds-pill:hover { border-color: #2dd4bf; color: #f8fafc; }"
+    },
+    {
+      "name": "Timeline Entry",
+      "kind": "custom",
+      "refersTo": "timeline-content",
+      "description": "The signature component. A neutral 2px rail; only the role still running gets a lit dot. The pane slides along the rail on hover rather than lifting off it.",
+      "html": "<div class=\"ds-timeline\"><div class=\"ds-timeline-item ds-timeline-item--current\"><div class=\"ds-timeline-content\"><div class=\"ds-timeline-header\"><h3 class=\"ds-timeline-title\">Telephony Engineer</h3><span class=\"ds-timeline-period\">Jun 2024 &ndash; Present</span></div><p class=\"ds-timeline-subtitle\">EMTELCO S.A.</p><p class=\"ds-timeline-description\">Design and implement enterprise SIP telephony solutions.</p></div></div></div>",
+      "css": ".ds-timeline { position: relative; padding-left: 26px; } .ds-timeline::before { content: \"\"; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.12); } .ds-timeline-item { position: relative; padding-left: 24px; } .ds-timeline-item::before { content: \"\"; position: absolute; left: -14px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: #9aa4b2; box-shadow: 0 0 0 6px rgba(255,255,255,0.06); } .ds-timeline-item--current::before { background: #2dd4bf; box-shadow: 0 0 0 6px rgba(45,212,191,0.15); } .ds-timeline-content { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 20px; transition: transform 0.25s ease, border-color 0.25s ease; } .ds-timeline-content:hover { transform: translateX(6px); border-color: rgba(45,212,191,0.4); } .ds-timeline-header { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; } .ds-timeline-title { margin: 0; font-family: Sora, system-ui, sans-serif; font-size: 1.1rem; font-weight: 600; color: #f8fafc; } .ds-timeline-period { font-family: \"JetBrains Mono\", ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums slashed-zero; letter-spacing: 0.02em; font-size: 0.85rem; color: #9aa4b2; } .ds-timeline-subtitle { margin: 0 0 8px; color: #f8fafc; font-weight: 500; font-family: \"Space Grotesk\", system-ui, sans-serif; } .ds-timeline-description { margin: 0; color: #d5dae3; font-family: \"Space Grotesk\", system-ui, sans-serif; line-height: 1.6; }"
+    },
+    {
+      "name": "Stat Tile",
+      "kind": "custom",
+      "refersTo": "stat-tile",
+      "description": "A Tier 3 recessed well — darker than its parent, pressed in rather than lifted off. The clearest instrument readout in the system and the model for measured values everywhere.",
+      "html": "<div class=\"ds-stats\"><div class=\"ds-stat\"><span class=\"ds-stat-value\">13+</span><span class=\"ds-stat-label\">Years in IT</span></div><div class=\"ds-stat\"><span class=\"ds-stat-value\">6+</span><span class=\"ds-stat-label\">Years in VoIP</span></div></div>",
+      "css": ".ds-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 16px; } .ds-stat { padding: 14px; border-radius: 14px; background: rgba(8,12,20,0.5); border: 1px solid rgba(255,255,255,0.08); text-align: center; } .ds-stat-value { display: block; font-family: \"JetBrains Mono\", ui-monospace, Menlo, monospace; font-size: 1.3rem; font-weight: 600; color: #2dd4bf; } .ds-stat-label { font-family: \"Space Grotesk\", system-ui, sans-serif; font-size: 0.8rem; color: #9aa4b2; }"
+    },
+    {
+      "name": "Contact Row",
+      "kind": "input",
+      "refersTo": "contact-item",
+      "description": "A Tier 3 well acting as a terminal action. The only place a full row adopts the accent on hover, justified because these end the page.",
+      "html": "<a class=\"ds-contact-row\" href=\"#\"><svg class=\"ds-contact-icon\" viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path d=\"M4 7h24v18H4V7Zm2 2v2l10 6 10-6V9H6Zm20 14V13l-10 6-10-6v10h20Z\"/></svg><span>jnarvaar@icloud.com</span></a>",
+      "css": ".ds-contact-row { display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #f8fafc; font-family: \"Space Grotesk\", system-ui, sans-serif; text-decoration: none; transition: all 0.2s ease; } .ds-contact-row:hover { border-color: rgba(45,212,191,0.6); color: #2dd4bf; } .ds-contact-row:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 2px; } .ds-contact-icon { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }"
+    },
+    {
+      "name": "Scroll To Top",
+      "kind": "button",
+      "refersTo": "scroll-top",
+      "description": "A persistent utility affordance, so it is neutral at rest — a permanently teal control would be the single largest leak in the Scarcity Rule. Accent arrives on hover.",
+      "html": "<button class=\"ds-scroll-top\" aria-label=\"Scroll to top\">&uarr;</button>",
+      "css": ".ds-scroll-top { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.12); background: #181e2b; color: #f8fafc; font-size: 1.4rem; cursor: pointer; box-shadow: 0 12px 28px rgba(4,8,20,0.45); transition: all 0.25s ease; } .ds-scroll-top:hover { transform: translateY(-4px); border-color: rgba(45,212,191,0.5); color: #2dd4bf; } .ds-scroll-top:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 3px; }"
+    },
+    {
+      "name": "Browser Surfaces",
+      "kind": "custom",
+      "refersTo": "browser-surfaces",
+      "description": "Selection, focus ring and scrollbar — the parts nobody draws. Themed from the palette because browser defaults belong to no design system.",
+      "html": "<p class=\"ds-surfaces\">Select this text, or tab to <a class=\"ds-surfaces-link\" href=\"#\">this link</a>, to see the accent doing its actual job.</p>",
+      "css": ".ds-surfaces { color: #d5dae3; font-family: \"Space Grotesk\", system-ui, sans-serif; line-height: 1.6; scrollbar-color: rgba(255,255,255,0.18) transparent; scrollbar-width: thin; } .ds-surfaces ::selection, .ds-surfaces::selection { background: rgba(45,212,191,0.25); color: #f8fafc; } .ds-surfaces-link { color: #f8fafc; } .ds-surfaces-link:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Night Operations Console",
+    "overview": "This is a room with the lights off and one instrument lit. The page sits at near-black (#0b0d12), lifted only by a cold teal glow bleeding in from the top-right corner and a fine dot-grid noise laid over everything at 15% opacity. Content lives on translucent panes stacked in that dark — you can see the glow through them, which is the point: the panels are glass in front of a running system, not cards on a page.\n\nThe tone is instrumented, quiet, precise, and warm underneath. Instrumented, because the surface reports live state rather than describing it: the footer carries Bogotá’s actual local time and current temperature, and the timeline lights exactly one milestone — the role still running. The page once carried a live WebRTC webchat widget too, and should again; it was removed while its subdomain is unreachable, because an instrument that reports nothing is worse than an absent one. Quiet and low-lit, because a visiting engineer is reading, not being sold to. Precise, because alignment and rhythm are the visible evidence of engineering discipline. Warm underneath, because there is a person here and the design says so.\n\nTypographically it runs on two geometric sans faces — Sora for structure, Space Grotesk for prose — with a monospace instrument voice for anything measured. The form language is soft: pills for anything interactive or categorical, generously rounded panes, one hairline of light on every edge. Motion is a single gesture, repeated: a 28px rise into view on scroll, a 2–8px lift on hover, 250ms, never more.",
+    "keyCharacteristics": [
+      "Near-black ground with a single teal signal color; no second accent",
+      "Translucent panes at three distinct tiers of depth, not one uniform glass",
+      "One hairline of light (rgba(255,255,255,0.12)) defines every edge",
+      "Live readouts over static claims — the interface reports rather than asserts",
+      "Pill geometry for interactive and categorical elements; soft rectangles for content",
+      "Motion as feedback only: reveal-on-scroll, hover lift, nothing longer than 600ms",
+      "Full prefers-reduced-motion honoring, already implemented"
+    ],
+    "rules": [
+      {
+        "name": "The One Light Rule",
+        "section": "colors",
+        "body": "There is exactly one accent color in this system and there will never be a second. No status greens, no warning ambers, no per-category hues on skill groups. If something needs to be distinguished from its neighbor, distinguish it with type, weight, position, or opacity — never by introducing a color."
+      },
+      {
+        "name": "The Scarcity Rule",
+        "section": "colors",
+        "body": "Phosphor Teal marks *state and signal*, not category. At rest it appears in exactly five places: the primary button, the nav CTA, the three stat values, the active nav link's underline, and the dot of the one role still running. Everything else earns it only under the pointer or the keyboard — hover borders, focus rings, text selection. Tags, skill pills, education chips, icon wells, section rails, and the scroll-to-top control are all neutral by rule. **Audit test:** count the elements painting teal as a foreground, border, or fill in the resting state. If more than roughly one in ten, the signal has become wallpaper and the rarest thing on the page is no longer the most important."
+      },
+      {
+        "name": "The No-Pure-Black Rule",
+        "section": "colors",
+        "body": "The darkest value in the system is #07080c. Pure #000 never appears. Every dark is a blue-black, which is what makes the teal read as cold light rather than as neon."
+      },
+      {
+        "name": "The Instrument Voice Rule",
+        "section": "typography",
+        "body": "If a value was measured, counted, dated, or rated, it is set in mono with `font-variant-numeric: tabular-nums slashed-zero`. If a human wrote it as a sentence, or it is the name of a thing, it is set in Space Grotesk. \"Jun 2024 – Present\" is mono; \"13+\" is mono; \"Intermediate (B1)\" is mono. \"Design and implement enterprise SIP telephony solutions\" is not, and neither is \"Kamailio\". **Audit test:** point at any string of digits on the page — if it is not in mono, either it should be, or it is genuinely prose. Then point at any mono string with no digits and no rating in it; that one is a costume and should come off."
+      },
+      {
+        "name": "The Two-Step Rule",
+        "section": "typography",
+        "body": "Between any two adjacent levels of hierarchy there is a visible step in both size and weight or color. Never differentiate two type levels by size alone at close values."
+      },
+      {
+        "name": "The One Column Rule",
+        "section": "layout",
+        "body": "This page is a single 1180px column and a vertical read. No sidebars, no sticky rails, no split-screen sections, no full-bleed breakouts."
+      },
+      {
+        "name": "The Three-Pane Rule",
+        "section": "elevation",
+        "body": "Every surface belongs to exactly one of three tiers: Tier 1 true glass (navbar and hero card only, the sole carriers of backdrop-filter), Tier 2 tonal pane (the default), Tier 3 recessed well (darker than its parent). Name the tier before you build the surface."
+      },
+      {
+        "name": "The Hairline Rule",
+        "section": "elevation",
+        "body": "Every raised surface carries exactly one 1px border at rgba(255,255,255,0.12). Never two borders, never a border plus an outline, never a hairline on a Tier 3 well brighter than 10%."
+      },
+      {
+        "name": "The Lift-On-Intent Rule",
+        "section": "elevation",
+        "body": "Surfaces are still at rest. They move only in response to the pointer, and the movement encodes direction: cards rise, timeline entries slide along their rail, the accent brightens. Rest state is never animated."
+      },
+      {
+        "name": "The Three-Radius Rule",
+        "section": "shapes",
+        "body": "Content surfaces use 10px, 14px, or 18px — nothing between. If a new component seems to need 16px, it is either a small tile (14px) or a card (18px)."
+      },
+      {
+        "name": "The Pill Rule",
+        "section": "shapes",
+        "body": "Round to 999px only when the element is a discrete, tappable, or countable unit: a button, a tag, a skill pill, a level indicator. Never pill a container that holds prose."
+      }
+    ],
+    "dos": [
+      "Do treat Phosphor Teal as the one light in the room — mark state and signal with it, and audit that it stays near one element in ten.",
+      "Do name a surface’s tier before you build it: Tier 1 true glass, Tier 2 tonal pane, Tier 3 recessed well.",
+      "Do put exactly one 1px hairline at rgba(255,255,255,0.12) on every raised surface.",
+      "Do set measured values — dates, periods, counts, tags, endpoints — in the mono instrument voice, and load JetBrains Mono in index.html when you do.",
+      "Do stay on the five-step radius scale: 10px, 14px, 18px, 999px, 50%.",
+      "Do let repeat(auto-fit, minmax(<floor>, 1fr)) do the responsive work; add a media query only for the two breakpoints that already exist (960px, 640px).",
+      "Do keep motion as feedback: reveal at 600ms, hover at 250ms, hover lifts between 2px and 8px, and extend the existing prefers-reduced-motion block to cover anything new.",
+      "Do show live state where you can — real local time, real weather, real reachable endpoints. The instrument reports; it does not describe.",
+      "Do keep the accent glow tinted on teal elements and dark everywhere else.",
+      "Do theme the surfaces you did not draw — selection, focus ring, scrollbar — from the palette.",
+      "Do animate transform and opacity only. The nav underline sweeps with scaleX, not width."
+    ],
+    "donts": [
+      "Don’t introduce a second accent color. No status green, no warning amber, no per-category hue.",
+      "Don’t add backdrop-filter to a new surface. Two blurred layers already exist and the page paints three fixed background layers beneath them.",
+      "Don’t use pure #000 or pure #fff. The darkest value is #07080c; the lightest is Mist (#f8fafc).",
+      "Don’t pill a container that holds prose.",
+      "Don’t add radius values between the scale steps — no 12px, 16px, 20px, 22px, 26px on new work.",
+      "Don’t drift toward the template dev portfolio: no purple-to-blue gradient hero, no floating 3D blobs, no typewriter effect on the role line, no animated counting stat numbers.",
+      "Don’t drift toward corporate SaaS marketing: no illustrated people, no \"Trusted by\" logo wall, no testimonial cards, no trust badges. PRODUCT.md records that none of that evidence exists and it must never be fabricated to fill a layout.",
+      "Don’t drift toward the over-animated showcase: no scroll-jacking, no parallax, no cursor followers, no magnetic buttons, no page transitions.",
+      "Don’t drift toward the corporate résumé document: no serif headings, no letterhead layout, no dense two-column body text.",
+      "Don’t add a sidebar, sticky rail, split-screen section, or full-bleed breakout.",
+      "Don’t accent something categorical. Tags, skill pills, icon wells and section rails are neutral; distinguish them with type, weight or position.",
+      "Don’t ship a link that goes nowhere, and don’t count a private subdomain as a live demo. Every demo value was removed on 2026-09-01 — three were \"#\" placeholders and the fourth pointed at a host that returns NXDOMAIN publicly. Verify a target resolves from outside the network before a control is allowed to promise it."
+    ]
+  }
+}
