@@ -461,7 +461,10 @@ function HomePage({ data, initials, avatarOk, setAvatarOk }) {
         </div>
         <div className="timeline">
           {(data.experience || []).map((exp, index) => (
-            <div key={`${exp.title}-${index}`} className="timeline-item reveal">
+            <div
+              key={`${exp.title}-${index}`}
+              className={`timeline-item reveal ${(exp.period || '').includes('Present') ? 'timeline-item--current' : ''}`}
+            >
               <div className="timeline-content">
                 <div className="timeline-header">
                   <h3 className="timeline-title">{exp.title}</h3>

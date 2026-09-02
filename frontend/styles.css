@@ -12,6 +12,7 @@
   --slate-200: #d5dae3;
   --slate-400: #9aa4b2;
   --teal: #2dd4bf;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --teal-dark: #0f766e;
   --glass: rgba(255, 255, 255, 0.06);
   --glass-strong: rgba(255, 255, 255, 0.12);
@@ -20,6 +21,19 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  scrollbar-width: thin;
+}
+
+::selection {
+  background: rgba(45, 212, 191, 0.25);
+  color: var(--mist);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
 }
 
 body {
@@ -34,6 +48,18 @@ body {
 h1, h2, h3, h4 {
   font-family: 'Sora', system-ui, -apple-system, sans-serif;
   font-weight: 600;
+}
+
+/* Instrument voice: values that were measured, counted or dated. Never prose, never labels. */
+.stat-value,
+.timeline-period,
+.education-period,
+.badge-date,
+.language-level,
+.footer-widgets {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums slashed-zero;
+  letter-spacing: 0.02em;
 }
 
 .icon {
@@ -167,10 +193,12 @@ h1, h2, h3, h4 {
   position: absolute;
   left: 0;
   bottom: -6px;
-  width: 0;
+  width: 100%;
   height: 2px;
   background: var(--teal);
-  transition: width 0.25s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
 }
 
 .nav-link:hover,
@@ -180,7 +208,7 @@ h1, h2, h3, h4 {
 
 .nav-link:hover::after,
 .nav-link.active::after {
-  width: 100%;
+  transform: scaleX(1);
 }
 
 .nav-link-button {
@@ -465,7 +493,7 @@ h1, h2, h3, h4 {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: rgba(45, 212, 191, 0.45);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .timeline-item {
@@ -482,6 +510,12 @@ h1, h2, h3, h4 {
   width: 10px;
   height: 10px;
   border-radius: 50%;
+  background: var(--slate-400);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.06);
+}
+
+/* The one role still running is the only lit milestone on the rail. */
+.timeline-item--current::before {
   background: var(--teal);
   box-shadow: 0 0 0 6px rgba(45, 212, 191, 0.15);
 }
@@ -517,7 +551,8 @@ h1, h2, h3, h4 {
 }
 
 .timeline-subtitle {
-  color: var(--teal);
+  color: var(--mist);
+  font-weight: 500;
   margin-bottom: 8px;
 }
 
@@ -534,19 +569,20 @@ h1, h2, h3, h4 {
 
 .education-item {
   background: rgba(255, 255, 255, 0.03);
-  border-left: 2px solid rgba(45, 212, 191, 0.45);
-  border-radius: 0 14px 14px 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
   padding: 22px;
   transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .education-item:hover {
   background: rgba(255, 255, 255, 0.06);
-  border-left-color: var(--teal);
+  border-color: rgba(45, 212, 191, 0.4);
 }
 
 .education-school {
-  color: var(--teal);
+  color: var(--mist);
+  font-weight: 500;
 }
 
 .education-period {
@@ -566,14 +602,15 @@ h1, h2, h3, h4 {
   margin-top: 12px;
 }
 
-.education-skills span {
-  padding: 6px 10px;
+.education-skills span,
+.tag {
+  padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(45, 212, 191, 0.12);
-  border: 1px solid rgba(45, 212, 191, 0.25);
-  color: var(--teal);
-  font-size: 0.75rem;
-  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--slate-200);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 /* Projects */
@@ -612,16 +649,6 @@ h1, h2, h3, h4 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-}
-
-.tag {
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(45, 212, 191, 0.14);
-  border: 1px solid rgba(45, 212, 191, 0.3);
-  color: var(--teal);
-  font-size: 0.8rem;
-  font-weight: 600;
 }
 
 .project-links {
@@ -695,8 +722,8 @@ h1, h2, h3, h4 {
 .skill-pill {
   padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(45, 212, 191, 0.28);
-  background: rgba(45, 212, 191, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--slate-200);
   font-weight: 500;
   font-size: 0.85rem;
@@ -741,7 +768,7 @@ h1, h2, h3, h4 {
 }
 
 .language-level {
-  color: var(--teal);
+  color: var(--slate-400);
   font-size: 0.85rem;
 }
 
@@ -774,7 +801,7 @@ h1, h2, h3, h4 {
   width: 62px;
   height: 62px;
   border-radius: 14px;
-  background: rgba(45, 212, 191, 0.12);
+  background: rgba(255, 255, 255, 0.06);
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -793,7 +820,7 @@ h1, h2, h3, h4 {
 .badge-image .icon {
   width: 28px;
   height: 28px;
-  color: var(--teal);
+  color: var(--slate-400);
 }
 
 .badge-info {
@@ -843,11 +870,11 @@ h1, h2, h3, h4 {
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: rgba(45, 212, 191, 0.15);
+  background: rgba(255, 255, 255, 0.06);
   display: grid;
   place-items: center;
   font-weight: 700;
-  color: var(--teal);
+  color: var(--slate-200);
   flex-shrink: 0;
 }
 
@@ -897,7 +924,7 @@ h1, h2, h3, h4 {
 
 .repo-language {
   font-size: 0.8rem;
-  color: var(--teal);
+  color: var(--slate-400);
 }
 
 .repo-description {
@@ -991,15 +1018,15 @@ h1, h2, h3, h4 {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: none;
-  background: var(--teal);
-  color: #081017;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--ink-700);
+  color: var(--mist);
   font-size: 1.4rem;
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
   transition: all 0.25s ease;
-  box-shadow: 0 12px 28px rgba(45, 212, 191, 0.4);
+  box-shadow: 0 12px 28px var(--shadow);
   z-index: 999;
 }
 
@@ -1010,6 +1037,8 @@ h1, h2, h3, h4 {
 
 .scroll-top:hover {
   transform: translateY(-4px);
+  border-color: rgba(45, 212, 191, 0.5);
+  color: var(--teal);
 }
 
 /* Reveal Animation */
