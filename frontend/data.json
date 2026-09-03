@@ -2,6 +2,10 @@
   "name": "Jose Danilo Narvaez Arias",
   "role": "AI & Automation Developer | LLM, RAG & Python Backends | VoIP & DevOps",
   "location": "Bogotá, Colombia",
+  "headline": {
+    "text": "I build automation on infrastructure I",
+    "emphasis": "actually run"
+  },
   "bio": "6+ years at Emtelco, now building AI and automation systems after years of scaling VoIP platforms with Asterisk, Kamailio, and SIP. Python and Bash first, with RAG pipelines, FastAPI services, and containerized deployments. Self-hoster and privacy advocate, with a completed AI specialization.",
   "profileOverview": "Systems Engineer building AI and automation systems on a base of VoIP infrastructure and cloud DevOps.",
   "avatarUrl": "/IMG_2164.jpg?v=7",
@@ -80,6 +84,23 @@
     "ai_data": ["Machine Learning", "TensorFlow", "FastAPI", "LLMOps", "MCP", "RAG", "pgvector", "SQLite", "PostgreSQL"],
     "tools": ["Git", "Forgejo", "Vaultwarden", "Raspberry Pi"]
   },
+  "capabilities": [
+    {
+      "title": "AI & automation",
+      "description": "RAG pipelines and LLM-backed services for contact center and telephony operations, built with Python and FastAPI and shipped through Docker and CI/CD.",
+      "groups": ["ai_data", "languages"]
+    },
+    {
+      "title": "Telephony & real-time",
+      "description": "Enterprise SIP telephony and WebRTC contact center platforms on Asterisk and Kamailio, with SBC configuration and Genesys Cloud BYOC integrations.",
+      "groups": ["telephony"]
+    },
+    {
+      "title": "Infrastructure & DevOps",
+      "description": "Linux hosts, Nginx reverse proxies, containers and WireGuard, provisioned with Ansible and Terraform and monitored with Prometheus and Grafana.",
+      "groups": ["infrastructure", "cloud_devops", "tools"]
+    }
+  ],
   "languages": [
     { "language": "Spanish", "level": "Native" },
     { "language": "English", "level": "Intermediate (B1)" }
