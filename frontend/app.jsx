@@ -22,9 +22,9 @@ const SECTIONS = [
 ];
 
 /* The homelab is the strongest evidence on this CV and the one thing that
-   cannot be linked — both service subdomains are NXDOMAIN in public DNS. So it
-   is drawn, from the achievement's own words, and never turned into a link. */
-const LAB_CONTAINERS = ['Forgejo', 'Vaultwarden', 'Immich', 'MinIO', 'AdGuard', 'Uptime Kuma', 'PostgreSQL'];
+   cannot be linked — the service subdomains are NXDOMAIN in public DNS. So it is
+   drawn rather than linked, and kept deliberately short on network detail. */
+const LAB_CONTAINERS = ['Forgejo', 'Vaultwarden', 'Immich', 'PostgreSQL'];
 
 const fallbackData = {
   name: '', role: '', headline: null, location: '', bio: '', avatarUrl: '', resumeUrl: '',
@@ -340,7 +340,7 @@ function Experience({ experience }) {
       <div className="wrap stack-16">
         <SectionHeader
           eyebrow="Experience"
-          headline="Thirteen years in IT, most of them"
+          headline="Fourteen years in IT, most of them"
           emphasis="at one operator"
           lede="Depth in one domain rather than breadth across many. Every role below is at the same telephony operator unless stated otherwise."
         />
@@ -382,7 +382,7 @@ function Homelab({ achievements }) {
           eyebrow="Infrastructure"
           headline="The site is deployed by the same hands that"
           emphasis="run the rack"
-          lede="Nothing here is publicly reachable, by design — every vhost is guarded and the only way in is the tunnel. So it is drawn rather than linked."
+          lede="Nothing here is publicly reachable, by design. So it is drawn rather than linked."
         />
         <div className="lab">
           <Reveal>
@@ -407,19 +407,19 @@ function Homelab({ achievements }) {
 
                 <div className="lab__node">
                   <span className="lab__node-name">Raspberry Pi 4</span>
-                  <span className="lab__node-role">arm64 · 8 GB · Ubuntu 22.04</span>
+                  <span className="lab__node-role">arm64 · self-provisioned with Ansible</span>
                 </div>
 
                 <span className="lab__link" aria-hidden="true" />
 
                 <div className="lab__node">
                   <span className="lab__node-name">nginx</span>
-                  <span className="lab__node-role">reverse proxy · allow 10.0.5.0/24, deny all</span>
+                  <span className="lab__node-role">reverse proxy · default deny</span>
                 </div>
 
                 <div className="lab__containers">
                   {LAB_CONTAINERS.map((name) => <span className="tag" key={name}>{name}</span>)}
-                  <span className="tag">+8 more</span>
+                  <span className="tag">and a few more</span>
                 </div>
               </div>
             </div>

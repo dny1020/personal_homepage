@@ -6,13 +6,14 @@
     "text": "I build automation on infrastructure I",
     "emphasis": "actually run"
   },
-  "bio": "6+ years at Emtelco, now building AI and automation systems after years of scaling VoIP platforms with Asterisk, Kamailio, and SIP. Python and Bash first, with RAG pipelines, FastAPI services, and containerized deployments. Self-hoster and privacy advocate, with a completed AI specialization.",
+  "bio": "Fourteen years in IT, six of them at Emtelco. Started in telephony, moved into the Linux and container infrastructure underneath it, then into automating that infrastructure, and now into the AI systems built on top. Python and Bash first. Self-hoster and privacy advocate, with a completed AI specialization.",
   "profileOverview": "Systems Engineer building AI and automation systems on a base of VoIP infrastructure and cloud DevOps.",
   "avatarUrl": "/IMG_2164.jpg?v=7",
   "resumeUrl": "/resume.pdf",
   "stats": [
-    { "label": "Years in IT", "value": "13+" },
-    { "label": "Years in VoIP Engineering", "value": "6+" },
+    { "label": "Years in IT", "value": "14+" },
+    { "label": "Years in Telephony & VoIP", "value": "6+" },
+    { "label": "Years at EMTELCO", "value": "6+" },
     { "label": "Open-Source Projects", "value": "6" }
   ],
   "experience": [
@@ -78,10 +79,10 @@
   ],
   "skills": {
     "languages": ["Python", "Bash", "JavaScript", "SQL"],
-    "infrastructure": ["Docker", "Kubernetes", "Nginx", "Traefik", "WireGuard", "Linux", "Ansible", "GitHub Actions"],
+    "infrastructure": ["Docker", "Nginx", "WireGuard", "Linux", "Ansible", "GitHub Actions"],
     "telephony": ["Asterisk", "Kamailio", "SIP", "WebRTC", "SRTP", "PJSIP", "Genesys Cloud", "SBC"],
-    "cloud_devops": ["AWS", "Azure", "Prometheus", "Grafana", "CI/CD", "Systemd", "Crontab"],
-    "ai_data": ["Machine Learning", "TensorFlow", "FastAPI", "LLMOps", "MCP", "RAG", "pgvector", "SQLite", "PostgreSQL"],
+    "cloud_devops": ["AWS", "Terraform", "Prometheus", "Grafana", "CI/CD", "Systemd"],
+    "ai_data": ["FastAPI", "RAG", "LLMOps", "MCP", "pgvector", "PostgreSQL"],
     "tools": ["Git", "Forgejo", "Vaultwarden", "Raspberry Pi"]
   },
   "capabilities": [
@@ -147,7 +148,7 @@
   "achievements": [
     {
       "title": "Self-Hosting Purist",
-      "description": "Runs personal infrastructure on a Raspberry Pi 4: fifteen containers behind nginx, including Forgejo, Vaultwarden, Immich, MinIO and AdGuard, reachable only over WireGuard."
+      "description": "Runs personal infrastructure on a single Raspberry Pi 4: a handful of self-hosted services behind nginx, provisioned with Ansible and reachable only from inside the tunnel."
     }
   ],
   "projects": [
@@ -177,7 +178,7 @@
     },
     {
       "name": "RAG Without LLM",
-      "description": "Local RAG pipeline that answers extractively with citations, no generative LLM involved. Hybrid retrieval combines PostgreSQL pgvector similarity search with local Hugging Face embeddings and cross-encoder reranking; served via FastAPI with a Streamlit UI.",
+      "description": "Retrieval and ranking pipeline that answers by quoting its sources, with no generative model in the loop. Hybrid search combines PostgreSQL pgvector similarity with local Hugging Face embeddings and cross-encoder reranking; served via FastAPI with a Streamlit UI.",
       "tags": ["FastAPI", "PostgreSQL", "pgvector", "Hugging Face", "Streamlit"],
       "github": "https://github.com/dny1020/rag_without_llm"
     },
@@ -190,7 +191,7 @@
   ],
   "contact": {
     "text": "Open to collaborations in telephony, DevOps, and AI automation. Let's build something together.",
-    "email": "jnarvaar@icloud.com",
+    "email": "jnarvaar@danilocloud.me",
     "linkedin": "https://www.linkedin.com/in/jose-danilo-narvaez-arias-26488025a/",
     "github": "https://github.com/dny1020"
   }
