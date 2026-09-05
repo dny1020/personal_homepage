@@ -7,7 +7,6 @@
     "emphasis": "actually run"
   },
   "bio": "Fourteen years in IT, six of them at Emtelco. Started in telephony, moved into the Linux and container infrastructure underneath it, then into automating that infrastructure, and now into the AI systems built on top. Python and Bash first. Self-hoster and privacy advocate, with a completed AI specialization.",
-  "profileOverview": "Systems Engineer building AI and automation systems on a base of VoIP infrastructure and cloud DevOps.",
   "avatarUrl": "/IMG_2164.jpg?v=7",
   "resumeUrl": "/resume.pdf",
   "stats": [
@@ -45,13 +44,13 @@
       "title": "Back Office Employee",
       "company": "Vodafone (via Teleperformance)",
       "period": "Jan 2019 - Dec 2019",
-      "description": "Remote technical support for Vodafone customers. Router configuration, troubleshooting connectivity issues, and Linux system optimization for network services."
+      "description": "Back office for Vodafone, one tier behind the front line. Router provisioning, connectivity faults, and the Linux hosts running the service."
     },
     {
       "title": "Help Desk Specialist",
       "company": "Claro Colombia (via Atento)",
       "period": "Feb 2012 - Nov 2018",
-      "description": "6+ years providing specialized remote support for Claro Hogar. Fixed IP configuration, DMZ and NAT setups, network optimization, and customer troubleshooting for broadband and telephony services."
+      "description": "Front line for Claro Hogar subscribers. Static IP, DMZ and NAT on home routers, and the escalated faults across broadband and voice. Where the networking came from."
     }
   ],
   "education": [
@@ -59,22 +58,19 @@
       "degree": "Specialization in Artificial Intelligence",
       "school": "UNIR | Universidad Internacional de La Rioja",
       "period": "Jun 2025 - Jun 2026",
-      "description": "Postgraduate specialization focused on Python, TensorFlow, containerized LLM environments, and DevOps for AI pipelines.",
-      "skills": ["Artificial Intelligence", "TensorFlow", "Python", "LLMOps", "DevOps"]
+      "description": "Postgraduate specialization focused on Python, TensorFlow, containerized LLM environments, and DevOps for AI pipelines."
     },
     {
       "degree": "Systems Engineering (B.Eng.)",
       "school": "Fundación Universitaria del Área Andina",
       "period": "Jan 2019 - Jul 2024",
-      "description": "Bachelor degree in Systems Engineering. Core focus on telecommunications, cloud computing, cybersecurity, and backend development with Python and Linux.",
-      "skills": ["Cloud Computing", "Cybersecurity", "Linux Administration", "Python", "Networking"]
+      "description": "Bachelor degree in Systems Engineering. Core focus on telecommunications, cloud computing, cybersecurity, and backend development with Python and Linux."
     },
     {
       "degree": "Diploma in CyberOps (Cisco)",
       "school": "Fundación Universitaria del Área Andina",
       "period": "Nov 2023 - Feb 2024",
-      "description": "Specialized diploma in cybersecurity operations and Cisco network defense. Training focused on CyberOps, threat analysis, and incident response.",
-      "skills": ["Cyber Operations", "Cisco Networking", "Security Monitoring"]
+      "description": "Specialized diploma in cybersecurity operations and Cisco network defense. Training focused on CyberOps, threat analysis, and incident response."
     }
   ],
   "skills": {
