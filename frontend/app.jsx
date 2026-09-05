@@ -150,9 +150,16 @@ function LocalReading({ reading }) {
 
 function TopNav({ name, resumeUrl, current }) {
   const [stuck, setStuck] = useState(false);
+  /* The hero already offers the CV. The header only takes the offer over once
+     the hero's own button has scrolled away, so the two never sit on screen
+     together. It stays in the DOM either way, so the bar does not reflow. */
+  const [showResume, setShowResume] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setStuck(window.scrollY > 40);
+    const onScroll = () => {
+      setStuck(window.scrollY > 40);
+      setShowResume(window.scrollY > window.innerHeight * 0.6);
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
@@ -178,7 +185,9 @@ function TopNav({ name, resumeUrl, current }) {
         </a>
         <nav className="header__nav" aria-label="Sections">{links}</nav>
         {resumeUrl ? (
-          <Button href={resumeUrl} icon="download" download>Download CV</Button>
+          <div className={`header__cta ${showResume ? 'is-shown' : ''}`}>
+            <Button href={resumeUrl} icon="download" download>Download CV</Button>
+          </div>
         ) : null}
       </div>
       <nav className="header__rail" aria-label="Sections">{links}</nav>
@@ -251,9 +260,9 @@ function Capabilities({ capabilities, skills }) {
       <div className="wrap stack-16">
         <SectionHeader
           eyebrow="What I work on"
-          headline="Three stacks, one"
-          emphasis="operator"
-          lede="Six years of telephony underneath, automation and AI on top, and the infrastructure to run both. The tags are the same skill list the CV carries."
+          headline="Three stacks that"
+          emphasis="hold each other up"
+          lede="Telephony taught me the systems. Running the infrastructure under them taught me to reproduce them. Automation and AI are the layer I work in now."
         />
         <div className="grid-3">
           {capabilities.map((capability, index) => {

@@ -88,17 +88,17 @@
   "capabilities": [
     {
       "title": "AI & automation",
-      "description": "RAG pipelines and LLM-backed services for contact center and telephony operations, built with Python and FastAPI and shipped through Docker and CI/CD.",
+      "description": "Retrieval pipelines and LLM-backed services that plug into systems already in production. Most of the work is the data, the retrieval quality and the eval loop, not the model call.",
       "groups": ["ai_data", "languages"]
     },
     {
       "title": "Telephony & real-time",
-      "description": "Enterprise SIP telephony and WebRTC contact center platforms on Asterisk and Kamailio, with SBC configuration and Genesys Cloud BYOC integrations.",
+      "description": "Call paths debugged end to end, from signalling and SDP down through NAT traversal to the media itself. Platforms where a dropped call is an incident, not a bug report.",
       "groups": ["telephony"]
     },
     {
       "title": "Infrastructure & DevOps",
-      "description": "Linux hosts, Nginx reverse proxies, containers and WireGuard, provisioned with Ansible and Terraform and monitored with Prometheus and Grafana.",
+      "description": "Every host reproducible from a repository. Nothing configured by hand, nothing deployed from a laptop, and a dashboard for anything worth being woken up for.",
       "groups": ["infrastructure", "cloud_devops", "tools"]
     }
   ],
@@ -190,7 +190,7 @@
     }
   ],
   "contact": {
-    "text": "Open to collaborations in telephony, DevOps, and AI automation. Let's build something together.",
+    "text": "Contract, full-time or a short consulting block. Email gets the fastest answer.",
     "email": "jnarvaar@danilocloud.me",
     "linkedin": "https://www.linkedin.com/in/jose-danilo-narvaez-arias-26488025a/",
     "github": "https://github.com/dny1020"
