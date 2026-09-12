@@ -25,6 +25,9 @@ ACCOUNT = "dny1020"
 IGNORED = {
     "dny1020": "GitHub profile README, not a project",
     "personal_homepage": "the site itself",
+    "bot_whatsapp": "made private 2026-09-12, deliberately not shown on the site",
+    "rag_without_llm": "made private 2026-09-12, deliberately not shown on the site",
+    "prometheus_ocupation": "made private 2026-09-12, deliberately not shown on the site",
 }
 
 # A repo's GitHub language should show up somewhere in the entry's tags. These map

@@ -10,7 +10,7 @@ web
 
 Primary: **technical peers — VoIP, DevOps, and infrastructure engineers**, typically arriving from GitHub, a community thread, or a shared link. They are not screening a candidate against a job description; they are judging whether the work is real. They read code, follow repo links, poke at live endpoints, and lose interest fast at anything that smells like a template CV.
 
-Recruiters and prospective consulting clients also land here, but the page is not tuned for the recruiter skim. They are served by the same evidence, plus the downloadable CV.
+Recruiters and hiring managers also land here, but the page is not tuned for the recruiter skim. They are served by the same evidence, plus the downloadable CV.
 
 ## Product Purpose
 
@@ -60,7 +60,7 @@ Content: 13+ years in IT, 6+ in VoIP engineering, all at the same telephony oper
 
 Real and verifiable:
 
-- **Five public GitHub repos** under `github.com/dny1020` — `doction` (MIT-licensed FastAPI/PostgreSQL/MCP wiki), `pulse_bogota` (FastAPI/PostgreSQL activity scoring with Alembic, scheduler, OSM imports), `bot_whatsapp` (RAG + Llama 3 via Groq + Twilio), `coffee-tracker` (FastAPI/SQLite), `rag_without_llm` (pgvector + HF embeddings + cross-encoder reranking, Streamlit UI). The source is the proof — a peer reads it.
+- **Three public GitHub repos** under `github.com/dny1020` — `doction` (MIT-licensed FastAPI/PostgreSQL/MCP wiki), `pulse_bogota` (FastAPI/PostgreSQL activity scoring with Alembic, scheduler, OSM imports), `coffee-tracker` (Fastify/Prisma/SQLite). These three are what the site shows, and every link resolves. `rag_without_llm`, `prometheus_ocupation` and `bot_whatsapp` were made private by the owner on 2026-09-12 and were removed from the site the same day — a private repo is a 404, not evidence. `scripts/github_drift.py` guards this weekly: do not re-list a project without checking the repo is public.
 - **Self-hosted services** that exist but are **not publicly reachable**: the WebRTC webchat stack (`webrtc.danilocloud.me`) and the Coffee Tracker API (`coffee.danilocloud.me/api/v1`). Both are NXDOMAIN in public DNS as of 2026-09-01. They are real and they are the strongest available evidence, but until the DNS records are public they cannot be linked or embedded — a link to either is a broken promise, not a demonstration. Exposing one is the single highest-value change available to this product.
 - **The homelab itself** — a Raspberry Pi 4 (arm64, 8 GB, Ubuntu 22.04) running fifteen containers behind nginx: Forgejo, Vaultwarden, Immich, MinIO, AdGuard, Uptime Kuma, doction and its Postgres, WireGuard. Every nginx vhost is guarded `allow 10.0.5.0/24; allow 10.13.13.0/24; deny all`, so nothing is publicly reachable by design. TLS is a Let's Encrypt wildcard for `*.danilocloud.me`, renewed by certbot over the Cloudflare DNS-01 challenge. It must be *shown* (described, diagrammed, evidenced), never linked to something that 404s.
 - **Credly badges** with live issuer URLs: AWS Cloud Essentials, Cisco CyberOps Associate, Introduction to Cybersecurity, Networking Academy Learn-A-Thon 2023.

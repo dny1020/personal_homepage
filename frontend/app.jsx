@@ -545,7 +545,7 @@ function ContactBand({ contact, location }) {
           <div className="stack-8" style={{ alignItems: 'center' }}>
             <div className="stack-4" style={{ alignItems: 'center' }}>
               <h2 className="h2">
-                Open to work in telephony,<br />DevOps and <span className="em">AI automation</span>
+                Telephony, DevOps and<br /><span className="em">AI automation</span>, in the open
               </h2>
               {contact.text ? <p className="lead">{contact.text}</p> : null}
               {location ? <p className="mono">{location}</p> : null}

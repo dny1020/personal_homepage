@@ -13,20 +13,20 @@
     { "label": "Years in IT", "value": "14+" },
     { "label": "Years in Telephony & VoIP", "value": "6+" },
     { "label": "Years at EMTELCO", "value": "6+" },
-    { "label": "Open-Source Projects", "value": "6" }
+    { "label": "Open-Source Projects", "value": "3" }
   ],
   "experience": [
     {
       "title": "AI & Automation Developer",
       "company": "EMTELCO S.A.",
       "period": "Aug 2026 - Present",
-      "description": "Build AI and automation solutions for contact center and telephony operations. Develop RAG pipelines and LLM-backed services with Python and FastAPI. Automate internal processes and third-party integrations, packaged with Docker and shipped through CI/CD."
+      "description": "Build AI and automation tooling for contact center and telephony operations. Develop RAG pipelines and LLM-backed internal services with Python and FastAPI. Automate internal processes and third-party integrations, packaged with Docker and shipped through CI/CD."
     },
     {
       "title": "Telephony Engineer",
       "company": "EMTELCO S.A.",
       "period": "Jun 2024 - Aug 2026",
-      "description": "Design and implement enterprise SIP telephony solutions. Build WebRTC contact center platforms with Asterisk and Kamailio. Automate VoIP provisioning and monitoring with Python, Bash, and Docker. Manage Linux infrastructure, Nginx reverse proxies, and CI/CD pipelines."
+      "description": "Design and implement enterprise SIP telephony platforms. Build WebRTC contact center platforms with Asterisk and Kamailio. Automate VoIP provisioning and monitoring with Python, Bash, and Docker. Manage Linux infrastructure, Nginx reverse proxies, and CI/CD pipelines."
     },
     {
       "title": "Telephony Analyst",
@@ -84,7 +84,7 @@
   "capabilities": [
     {
       "title": "AI & automation",
-      "description": "Retrieval pipelines and LLM-backed services that plug into systems already in production. Most of the work is the data, the retrieval quality and the eval loop, not the model call.",
+      "description": "Retrieval pipelines and LLM-backed services, built against systems already running in production. Most of the work is the data, the retrieval quality and the eval loop, not the model call.",
       "groups": ["ai_data", "languages"]
     },
     {
@@ -150,7 +150,7 @@
   "projects": [
     {
       "name": "doction",
-      "description": "Self-hosted, markdown-first wiki and knowledge base for humans and AI agents. PostgreSQL full-text search, optional local semantic search, per-page git history, a REST API, and a native MCP server for agent integration. MIT licensed.",
+      "description": "Self-hosted, markdown-first wiki and knowledge base for humans and AI agents. PostgreSQL full-text search, optional local semantic search, per-page git history, a REST API, and a native MCP server for agent integration. AGPL-3.0 licensed.",
       "tags": ["Python", "FastAPI", "PostgreSQL", "MCP", "Docker"],
       "github": "https://github.com/dny1020/doction"
     },
@@ -161,32 +161,14 @@
       "github": "https://github.com/dny1020/pulse_bogota"
     },
     {
-      "name": "WhatsApp ISP Support Bot",
-      "description": "Automated WhatsApp technical support bot for ISPs. Combines a local RAG (BM25) knowledge base with Llama 3 via Groq for fast responses, integrated with Twilio WhatsApp and deployed with Docker.",
-      "tags": ["Python", "FastAPI", "RAG", "Twilio", "Docker"],
-      "github": "https://github.com/dny1020/bot_whatsapp"
-    },
-    {
       "name": "Coffee Tracker API",
       "description": "Minimalist API for logging coffee intake by caffeine (mg) and drink type, consumable directly from iPhone Shortcuts. Fastify and Prisma over SQLite, with bearer-token auth, daily and aggregate stats endpoints, and OpenAPI docs.",
       "tags": ["Node.js", "Fastify", "Prisma", "SQLite", "REST API"],
       "github": "https://github.com/dny1020/coffee-tracker"
-    },
-    {
-      "name": "RAG Without LLM",
-      "description": "Retrieval and ranking pipeline that answers by quoting its sources, with no generative model in the loop. Hybrid search combines PostgreSQL pgvector similarity with local Hugging Face embeddings and cross-encoder reranking; served via FastAPI with a Streamlit UI.",
-      "tags": ["FastAPI", "PostgreSQL", "pgvector", "Hugging Face", "Streamlit"],
-      "github": "https://github.com/dny1020/rag_without_llm"
-    },
-    {
-      "name": "prometheus_ocupation",
-      "description": "Exporter that queries Prometheus with custom PromQL and writes the results to structured CSV at hourly resolution. Retry logic and structured logging make it usable as an unattended reporting job.",
-      "tags": ["Python", "Prometheus", "PromQL", "CSV", "Automation"],
-      "github": "https://github.com/dny1020/prometheus_ocupation"
     }
   ],
   "contact": {
-    "text": "Contract, full-time or a short consulting block. Email gets the fastest answer.",
+    "text": "The repositories above are the fastest introduction. Email reaches me directly.",
     "email": "jnarvaar@danilocloud.me",
     "linkedin": "https://www.linkedin.com/in/jose-danilo-narvaez-arias-26488025a/",
     "github": "https://github.com/dny1020"

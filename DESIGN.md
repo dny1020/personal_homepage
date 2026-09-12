@@ -140,8 +140,9 @@ that is what `border-control` is for.
   resting on the paper, never as floating above it.
 - The circled chevron is the one recurring affordance: down for a download, up-right for
   anything that leaves the site, right for an internal jump.
-- Grids fill their rows. Three capability cards go 3 → 1, never 3 → 2 → orphan; six
-  projects sit in two clean rows of three.
+- Grids fill their rows. Three capability cards go 3 → 1, never 3 → 2 → orphan; the three
+  projects fill one row exactly. Adding a fourth means planning the second row, not letting
+  a card fall alone into it.
 
 ## Motion
 
