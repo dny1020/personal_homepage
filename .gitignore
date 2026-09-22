@@ -52,6 +52,11 @@ skills-lock.json
 openspec/
 
 # ====================
+# Local design previews (not part of the published site)
+# ====================
+docs/preview/
+
+# ====================
 # Impeccable working artifacts (review captures, decision-round state)
 # ====================
 .impeccable/review/
