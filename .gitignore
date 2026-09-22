@@ -43,6 +43,13 @@ Curriculum vitae_spanish.pdf
 # Claude Code
 # ====================
 CLAUDE.md
+.agents/
+skills-lock.json
+
+# ====================
+# OpenSpec (local planning artifacts)
+# ====================
+openspec/
 
 # ====================
 # Impeccable working artifacts (review captures, decision-round state)
