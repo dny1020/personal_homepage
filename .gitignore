@@ -20,14 +20,6 @@
 Thumbs.db
 
 # ====================
-# Terraform
-# ====================
-.terraform/
-*.tfstate
-*.tfstate.*
-crash.log
-
-# ====================
 # Media / misc
 # ====================
 *.mov

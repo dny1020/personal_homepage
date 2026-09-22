@@ -20,7 +20,7 @@ personal_homepage/
 │   ├── app.jsx       # Single-file React app
 │   ├── styles.css
 │   └── data.json     # All CV content lives here
-└── terraform/        # Legacy AWS hosting — destroyed and removed after the Pages cutover
+└── scripts/          # resume.pdf generator, GitHub drift check
 ```
 
 ## Update content
@@ -42,8 +42,6 @@ GitHub Pages serves everything with `Cache-Control: max-age=600` and does not al
 ## DNS
 
 Zone `danilocloud.me` on Cloudflare. `@` and `www` are CNAMEs to `dny1020.github.io`, **DNS only** (grey cloud) so GitHub can issue and renew the certificate. Everything else on the zone is Amazon SES mail (DKIM, SPF, DMARC) and is unrelated to hosting.
-
-`terraform/` still describes the retired AWS hosting (S3 bucket, IAM deploy user, budget alert). It is destroyed and deleted once the Pages setup is verified.
 
 ## Local preview
 
