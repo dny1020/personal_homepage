@@ -2,15 +2,14 @@
 
 ![JavaScript](https://img.shields.io/badge/javascript-ES6+-yellow.svg)
 
-CV portfolio hosted as a static site on AWS S3, served via Cloudflare.
+CV portfolio served as a static site from GitHub Pages on the apex `danilocloud.me`.
 
 ## Stack
 
 - **Frontend** — React 18 UMD + plain CSS. `app.jsx` is transpiled once by Babel CLI to `app.js`; there is no bundler.
 - **Data** — `frontend/data.json` (CV content) + open-meteo.com (live weather)
-- **Hosting** — S3 static website + Cloudflare proxy (HTTPS, CDN)
-- **IaC** — Terraform (`terraform/`) manages the S3 bucket and IAM deploy user
-- **CI/CD** — GitHub Actions deploys on push to `main`
+- **Hosting** — GitHub Pages, custom domain `danilocloud.me`, TLS issued by GitHub. Cloudflare holds the DNS zone (records are DNS only, not proxied)
+- **CI/CD** — GitHub Actions builds and publishes on push to `main`; no stored credentials
 
 ## Structure
 
@@ -21,35 +20,30 @@ personal_homepage/
 │   ├── app.jsx       # Single-file React app
 │   ├── styles.css
 │   └── data.json     # All CV content lives here
-└── terraform/        # S3 bucket, IAM user, budget alert
+└── terraform/        # Legacy AWS hosting — destroyed and removed after the Pages cutover
 ```
 
 ## Update content
 
-Edit `frontend/data.json` and push to `main` — CI/CD syncs to S3 automatically.
+Edit `frontend/data.json` and push to `main` — CI/CD publishes it automatically. Also regenerate `frontend/resume.pdf`, or the deploy fails.
 
 ## CI/CD
 
 Any push to `main` that touches `frontend/**` triggers the workflow:
 
-1. `aws s3 sync frontend/ s3://danilocloud.me/ --delete`
-2. Sets `no-cache` headers on `index.html` and `data.json`
-3. Sets `no-cache` headers on `index.html`, `data.json` and `app.js`
+1. Transpiles `app.jsx` → `app.js` with Babel CLI
+2. Fails if `frontend/resume.pdf` is stale against `data.json`
+3. Uploads `frontend/` (minus `app.jsx`) and deploys it to GitHub Pages
 
-Required secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`.
+No secrets: the deploy authenticates with the workflow's own OIDC token.
 
-The repository also holds `CF_DNS_API_TOKEN` and `CF_ZONE_ID` secrets. No workflow uses them; they are left over from a Cloudflare purge step that was never implemented.
+GitHub Pages serves everything with `Cache-Control: max-age=600` and does not allow per-file headers — the `?v=N` query strings in `index.html` handle asset cache busting.
 
-## Infrastructure
+## DNS
 
-```bash
-cd terraform
-terraform init -plugin-dir=<path-to-provider>
-terraform plan
-terraform apply
-```
+Zone `danilocloud.me` on Cloudflare. `@` and `www` are CNAMEs to `dny1020.github.io`, **DNS only** (grey cloud) so GitHub can issue and renew the certificate. Everything else on the zone is Amazon SES mail (DKIM, SPF, DMARC) and is unrelated to hosting.
 
-Provisions: S3 bucket (`danilocloud.me`), public read policy, website hosting, versioning, IAM user `homepage-deploy` with least-privilege S3 access, and a $2/month budget alert.
+`terraform/` still describes the retired AWS hosting (S3 bucket, IAM deploy user, budget alert). It is destroyed and deleted once the Pages setup is verified.
 
 ## Local preview
 

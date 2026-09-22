@@ -20,7 +20,7 @@ Success is **credibility, then follow**: a visiting engineer leaves convinced th
 
 ## Positioning
 
-The domain is itself the argument. `danilocloud.me` is not a hosting product's subdomain — it is a domain whose owner runs the infrastructure under it: a WebRTC contact-center stack on `webrtc.danilocloud.me`, an API on `coffee.danilocloud.me`, a Raspberry Pi homelab behind them, and the site itself deployed by Terraform-provisioned S3 + GitHub Actions.
+The domain is itself the argument. `danilocloud.me` is not a hosting product's subdomain — it is a domain whose owner runs the infrastructure under it: a WebRTC contact-center stack on `webrtc.danilocloud.me`, an API on `coffee.danilocloud.me`, a Raspberry Pi homelab behind them, and the site itself built and published by GitHub Actions onto GitHub Pages.
 
 **This argument is currently unverifiable from outside.** Both service subdomains return NXDOMAIN in public DNS (checked 2026-09-01 against 1.1.1.1); they resolve only on the owner's own network. The apex `danilocloud.me` is public and Cloudflare-fronted. Until those records exist publicly, the positioning rests on the repositories and the site's own deployment, not on reachable services.
 
@@ -37,7 +37,7 @@ Content: 13+ years in IT, 6+ in VoIP engineering, all at the same telephony oper
 
 **Confirmed content model.** All CV content lives in `frontend/data.json` and is fetched at runtime: name, role, bio, stats, experience, education, skills (6 categories), languages, certifications, Credly badges, achievements, projects, contact. `frontend/resume.pdf` is generated from it via `scripts/generate_resume.py`.
 
-**Buildless stack is binding.** Single-file `frontend/app.jsx` (React 18 UMD from CDN), transpiled once by Babel CLI to `app.js`, plus plain CSS. No bundler, no npm project, no framework migration. Static files served from S3 behind Cloudflare. Any future work must fit this shape.
+**Buildless stack is binding.** Single-file `frontend/app.jsx` (React 18 UMD from CDN), transpiled once by Babel CLI to `app.js`, plus plain CSS. No bundler, no npm project, no framework migration. Static files served from GitHub Pages on the apex domain. Any future work must fit this shape.
 
 **The webchat widget is removed, not abandoned.** `https://webrtc.danilocloud.me/webchat.js` used to load on every page. It is Danilo's own WebRTC contact-center stack, not a third-party chat tool, and it remains the intended live demonstration of the telephony work the CV describes. It was removed from `index.html` on 2026-09-01 because the subdomain does not resolve publicly, so every external visit fired a request that failed silently. Restore it — the commented placeholder in `index.html` marks the spot — once the DNS record is public.
 

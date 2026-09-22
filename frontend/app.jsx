@@ -401,8 +401,8 @@ function Homelab({ achievements }) {
               <p className="small">
                 TLS is a Let&rsquo;s Encrypt wildcard for the domain, renewed by certbot over
                 the Cloudflare DNS-01 challenge. The public apex you are reading now is a
-                separate path: S3 behind Cloudflare, provisioned with Terraform and deployed
-                by GitHub Actions.
+                separate path: a static build on GitHub Pages, published by GitHub Actions on
+                every push.
               </p>
             </div>
           </Reveal>

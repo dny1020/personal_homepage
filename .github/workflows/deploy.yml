@@ -1,4 +1,4 @@
-name: Deploy to S3
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -8,9 +8,19 @@ on:
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never interrupt a deploy that is already publishing.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
-  deploy:
-    name: Deploy to S3
+  build:
+    name: Build site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -34,37 +44,20 @@ jobs:
             exit 1
           fi
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v6
+      - name: Drop the JSX source
+        run: rm frontend/app.jsx
+
+      - uses: actions/upload-pages-artifact@v3
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          path: frontend
 
-      - name: Sync to S3
-        env:
-          BUCKET: danilocloud.me
-        run: |
-          # Static assets: long cache (styles.css?v=N / app.js?v=N handle cache busting)
-          # app.jsx is the source; only the transpiled app.js is deployed
-          aws s3 sync frontend/ s3://$BUCKET/ \
-            --delete \
-            --exclude "app.jsx" \
-            --cache-control "public, max-age=604800, immutable"
-
-          # index.html, data.json, app.js: always fresh (overrides headers from the sync above)
-          aws s3 cp s3://$BUCKET/index.html s3://$BUCKET/index.html \
-            --metadata-directive REPLACE \
-            --content-type "text/html; charset=utf-8" \
-            --cache-control "no-cache, no-store, must-revalidate"
-
-          aws s3 cp s3://$BUCKET/data.json s3://$BUCKET/data.json \
-            --metadata-directive REPLACE \
-            --content-type "application/json" \
-            --cache-control "no-cache, no-store, must-revalidate"
-
-          aws s3 cp s3://$BUCKET/app.js s3://$BUCKET/app.js \
-            --metadata-directive REPLACE \
-            --content-type "application/javascript" \
-            --cache-control "no-cache, no-store, must-revalidate"
-
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
