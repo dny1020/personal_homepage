@@ -333,6 +333,10 @@ a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness:
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-6); }
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6); }
 
+/* Grid items default to min-width: auto, so a card's min-content width can push
+   the track wider than the viewport. Below 375px that overflowed the page. */
+.grid-3 > *, .grid-2 > * { min-width: 0; }
+
 /* Three cards must never leave one orphaned on a second row. */
 @media (max-width: 1023px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
 
