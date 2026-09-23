@@ -231,7 +231,7 @@ function Hero({ data, reading, avatarOk, onAvatarError }) {
 
           {data.avatarUrl && avatarOk ? (
             <figure className="media">
-              <img src={data.avatarUrl} alt={data.name} onError={onAvatarError} />
+              <img src={data.avatarUrl} alt={data.name} width="900" height="738" onError={onAvatarError} />
             </figure>
           ) : null}
         </div>

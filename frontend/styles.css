@@ -658,6 +658,8 @@ a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness:
 @media (max-width: 767px) { .cta { padding: var(--s-16) var(--s-6); } }
 
 .cta .h2 { color: var(--ink-inverse); }
+/* .em keeps --ink-muted, which is 2.6:1 on the CTA's ink background. */
+.cta .em { color: rgba(250, 249, 246, .72); }
 .cta .lead { color: rgba(250, 249, 246, .72); margin-inline: auto; }
 .cta .mono { color: rgba(250, 249, 246, .62); }
 

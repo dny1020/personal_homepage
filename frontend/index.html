@@ -52,8 +52,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=13">
+    rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet">
+  </noscript>
+  <link rel="stylesheet" href="styles.css?v=14">
 </head>
 
 <body>
@@ -63,10 +68,11 @@
        asi que el script fallaba en silencio en cada visita externa. Restaurar cuando el
        subdominio sea publico. -->
 
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- defer, in order: React, ReactDOM, then the app. Nothing here blocks the first paint. -->
+  <script defer src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script defer src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <!-- app.js is pre-transpiled from app.jsx (see CLAUDE.md / deploy workflow) -->
-  <script src="app.js?v=13"></script>
+  <script defer src="app.js?v=14"></script>
 </body>
 
 </html>

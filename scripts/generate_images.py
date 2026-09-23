@@ -57,7 +57,7 @@ def main() -> None:
         raise SystemExit(f"Cannot read {SOURCE}: {exc}")
 
     # The hero crops to 4:5, so the slot needs vertical pixels, not just width.
-    portrait = ImageOps.contain(source, (1200, 1000), Image.LANCZOS)
+    portrait = ImageOps.contain(source, (900, 750), Image.LANCZOS)
     save_jpeg(portrait, FRONTEND / "portrait.jpg", 82)
 
     # Social cards are 1.91:1. Crop the portrait to that ratio around the face,
