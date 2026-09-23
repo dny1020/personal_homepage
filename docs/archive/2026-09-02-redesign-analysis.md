@@ -1,6 +1,10 @@
 # Frontend redesign — analysis and proposal
 
-Status: **proposal only.** No production code has been changed. Reference studied:
+> **Archived.** Written 2026-09-02 as a proposal; it shipped in `8f066a4`, and the live site has
+> moved on since. Kept for the reasoning behind the redesign, not as a description of the current
+> frontend — `DESIGN.md` is the source of truth for that.
+
+Status at the time of writing: **proposal only.** No production code had been changed. Reference studied:
 `https://secfi.com/?ref=landingfolio` (measured 2026-09-02, desktop 879px CSS viewport).
 
 The reference is used for design *principles* only. No Secfi copy, imagery, layout, brand,

@@ -91,8 +91,9 @@ motion:
 
 # Design
 
-The full analysis, the reference study, and the reasoning behind every token are in
-[`docs/redesign-analysis.md`](docs/redesign-analysis.md). This file is the short reference.
+The analysis and reference study that led here are archived in
+[`docs/archive/2026-09-02-redesign-analysis.md`](docs/archive/2026-09-02-redesign-analysis.md).
+This file is the current reference.
 
 ## The idea
 
