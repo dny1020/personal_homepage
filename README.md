@@ -15,17 +15,42 @@ CV portfolio served as a static site from GitHub Pages on the apex `danilocloud.
 
 ```
 personal_homepage/
-├── frontend/
+├── frontend/         # everything published, minus app.jsx
 │   ├── index.html
-│   ├── app.jsx       # Single-file React app
+│   ├── 404.html      # served by Pages for unknown paths
+│   ├── app.jsx       # Single-file React app (source, not published)
 │   ├── styles.css
-│   └── data.json     # All CV content lives here
-└── scripts/          # resume.pdf generator, GitHub drift check
+│   ├── data.json     # All CV content lives here
+│   ├── robots.txt
+│   ├── sitemap.xml
+│   └── *.jpg/.png/.ico/.svg  # generated, see "Images"
+├── assets/           # source photo, not published
+└── scripts/          # resume.pdf and image generators, GitHub drift check
 ```
 
 ## Update content
 
 Edit `frontend/data.json` and push to `main` — CI/CD publishes it automatically. Also regenerate `frontend/resume.pdf`, or the deploy fails.
+
+## Images
+
+`frontend/portrait.jpg`, `og-image.jpg`, `apple-touch-icon.png` and `favicon.ico` are generated from `assets/IMG_2164.jpg` and committed. Regenerate them when the source photo changes:
+
+```bash
+uv run --with pillow python scripts/generate_images.py
+```
+
+`favicon.svg` is hand-written. Nothing resizes images at deploy time.
+
+## Search Console
+
+The site is verified as a domain property, which needs no marker file in this repository:
+
+1. Search Console → Add property → **Domain** → `danilocloud.me`
+2. Add the `TXT` record it gives you to the Cloudflare zone, then Verify
+3. Sitemaps → submit `https://danilocloud.me/sitemap.xml`
+
+No analytics is installed, and none should be added here without a reason.
 
 ## CI/CD
 
