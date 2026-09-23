@@ -156,5 +156,5 @@ transforms are dropped.
 
 ## Note
 
-`.impeccable/design.json` still describes the retired distribution-frame system and is now
-stale. It is tool-owned; regenerate it rather than hand-editing.
+The design-tool state under `.impeccable/` is local and no longer tracked; it still describes
+the retired distribution-frame system. This file is the current source of truth.
