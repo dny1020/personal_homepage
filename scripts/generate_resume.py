@@ -18,7 +18,7 @@ from fpdf import FPDF
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_PATH = ROOT / "frontend" / "data.json"
-PHOTO_PATH = ROOT / "frontend" / "IMG_2164.jpg"
+PHOTO_PATH = ROOT / "assets" / "IMG_2164.jpg"
 OUTPUT_PATH = ROOT / "frontend" / "resume.pdf"
 
 NAVY = (35, 51, 69)
