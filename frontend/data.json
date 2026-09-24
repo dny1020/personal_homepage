@@ -13,7 +13,7 @@
     { "label": "Years in IT", "value": "14+" },
     { "label": "Years in Telephony & VoIP", "value": "6+" },
     { "label": "Years at EMTELCO", "value": "6+" },
-    { "label": "Open-Source Projects", "value": "3" }
+    { "label": "Open-Source Projects", "value": "5" }
   ],
   "experience": [
     {
@@ -165,6 +165,18 @@
       "description": "Minimalist API for logging coffee intake by caffeine (mg) and drink type, consumable directly from iPhone Shortcuts. Fastify and Prisma over SQLite, with bearer-token auth, daily and aggregate stats endpoints, and OpenAPI docs.",
       "tags": ["Node.js", "Fastify", "Prisma", "SQLite", "REST API"],
       "github": "https://github.com/dny1020/coffee-tracker"
+    },
+    {
+      "name": "realtime-session-api",
+      "description": "Lightweight FastAPI service for orchestrating outbound session events, with real-time WebSocket status tracking and REST control endpoints. JWT authentication, PostgreSQL persistence, rate limiting, and multi-arch Docker images shipped through GitHub Actions.",
+      "tags": ["Python", "FastAPI", "WebSocket", "PostgreSQL", "Docker"],
+      "github": "https://github.com/dny1020/realtime-session-api"
+    },
+    {
+      "name": "api_news_eventos",
+      "description": "FastAPI app that finds local news about events, concerts, and technology in Bogotá through NewsAPI, scrapes the full articles, and stores them in MongoDB with upserts. A background job refreshes the feed, served through Jinja2 HTML and JSON endpoints.",
+      "tags": ["Python", "FastAPI", "MongoDB", "Docker"],
+      "github": "https://github.com/dny1020/api_news_eventos"
     }
   ],
   "contact": {
