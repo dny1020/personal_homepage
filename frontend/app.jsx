@@ -18,7 +18,8 @@ const SECTIONS = [
   { id: 'work', label: 'Work' },
   { id: 'experience', label: 'Experience' },
   { id: 'homelab', label: 'Homelab' },
-  { id: 'credentials', label: 'Credentials' }
+  { id: 'credentials', label: 'Credentials' },
+  { id: 'contact', label: 'Contact' }
 ];
 
 /* The homelab is the strongest evidence on this CV and the one thing that
