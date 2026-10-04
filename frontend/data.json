@@ -113,6 +113,13 @@
   ],
   "badges": [
     {
+      "name": "AWS Certified Cloud Practitioner",
+      "issuer": "Amazon Web Services Training and Certification",
+      "issued": "2026-10-03",
+      "image": "https://images.credly.com/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png",
+      "url": "https://www.credly.com/org/amazon-web-services/badge/aws-certified-cloud-practitioner"
+    },
+    {
       "name": "AWS Knowledge: Cloud Essentials - Training Badge",
       "issuer": "Amazon Web Services Training and Certification",
       "issued": "2025-12-20",
