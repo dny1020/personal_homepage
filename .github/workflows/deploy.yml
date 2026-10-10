@@ -7,6 +7,7 @@ on:
       - 'frontend/**'
       # The build transpiles and checks resume.pdf with these, so they gate a deploy too.
       - 'scripts/generate_resume.py'
+      - 'scripts/render_static.py'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
@@ -45,6 +46,10 @@ jobs:
             echo "::error::frontend/resume.pdf is stale. Run: uv run --with fpdf2 python scripts/generate_resume.py"
             exit 1
           fi
+
+      - name: Render static content
+        # Non-JS fetchers (curl, unfurlers, LLM crawlers) only read the raw HTML.
+        run: uv run python scripts/render_static.py
 
       - name: Drop the JSX source
         run: rm frontend/app.jsx
