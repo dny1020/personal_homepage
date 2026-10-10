@@ -72,11 +72,15 @@ class ResumePDF(FPDF):
         self.line(PAD, y, SIDEBAR_W - PAD, y)
         self.ln(2.5)
 
-    def sidebar_text(self, text: str, size: float = 8, style: str = "", color=SIDEBAR_TEXT) -> None:
+    def sidebar_text(
+        self, text: str, size: float = 8, style: str = "", color=SIDEBAR_TEXT
+    ) -> None:
         self.set_x(PAD)
         self.set_font("helvetica", style, size)
         self.set_text_color(*color)
-        self.multi_cell(SIDEBAR_TEXT_W, 4.2, text, align="L", new_x="LMARGIN", new_y="NEXT")
+        self.multi_cell(
+            SIDEBAR_TEXT_W, 4.2, text, align="L", new_x="LMARGIN", new_y="NEXT"
+        )
 
     def sidebar_space(self, height: float) -> None:
         """Move to the next page's sidebar when the current one is full."""
@@ -144,7 +148,12 @@ def build_sidebar(pdf: ResumePDF, data: dict) -> None:
     photo_x = (SIDEBAR_W - diameter) / 2
     with pdf.elliptic_clip(photo_x, TOP, diameter, diameter):
         # The photo is landscape: scale it to the circle's height and centre it.
-        pdf.image(str(PHOTO_PATH), x=SIDEBAR_W / 2 - diameter * 2078 / 1704 / 2, y=TOP, h=diameter)
+        pdf.image(
+            str(PHOTO_PATH),
+            x=SIDEBAR_W / 2 - diameter * 2078 / 1704 / 2,
+            y=TOP,
+            h=diameter,
+        )
     pdf.set_y(TOP + diameter + 4)
 
     contact = data.get("contact", {})
@@ -209,15 +218,21 @@ def build_main(pdf: ResumePDF, data: dict) -> None:
     pdf.section_title("Professional Profile")
     pdf.set_font("helvetica", "", 9)
     pdf.set_text_color(*INK)
-    pdf.multi_cell(MAIN_W, 4.4, data.get("bio", ""), align="L", new_x="LMARGIN", new_y="NEXT")
+    pdf.multi_cell(
+        MAIN_W, 4.4, data.get("bio", ""), align="L", new_x="LMARGIN", new_y="NEXT"
+    )
 
     pdf.section_title("Professional Experience")
     for exp in data.get("experience", []):
-        pdf.entry(exp["title"], exp["company"], exp["period"], exp.get("description", ""))
+        pdf.entry(
+            exp["title"], exp["company"], exp["period"], exp.get("description", "")
+        )
 
     pdf.section_title("Education")
     for edu in data.get("education", []):
-        pdf.entry(edu["degree"], edu["school"], edu["period"], edu.get("description", ""))
+        pdf.entry(
+            edu["degree"], edu["school"], edu["period"], edu.get("description", "")
+        )
 
     projects = data.get("projects", [])
     if projects:
@@ -228,10 +243,23 @@ def build_main(pdf: ResumePDF, data: dict) -> None:
             pdf.set_text_color(*INK)
             pdf.cell(MAIN_W, 4.8, project["name"], new_x="LMARGIN", new_y="NEXT")
             pdf.set_font("helvetica", "", 8.5)
-            pdf.multi_cell(MAIN_W, 4.2, project["description"], align="L", new_x="LMARGIN", new_y="NEXT")
+            pdf.multi_cell(
+                MAIN_W,
+                4.2,
+                project["description"],
+                align="L",
+                new_x="LMARGIN",
+                new_y="NEXT",
+            )
             pdf.set_font("helvetica", "I", 7.5)
             pdf.set_text_color(*DEEP_TEAL)
-            pdf.cell(MAIN_W, 4.2, " \u00b7 ".join(project.get("tags", [])), new_x="LMARGIN", new_y="NEXT")
+            pdf.cell(
+                MAIN_W,
+                4.2,
+                " \u00b7 ".join(project.get("tags", [])),
+                new_x="LMARGIN",
+                new_y="NEXT",
+            )
             if project.get("github"):
                 pdf.set_font("helvetica", "", 7.5)
                 pdf.set_text_color(*GRAY)

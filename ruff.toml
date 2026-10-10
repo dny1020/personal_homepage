@@ -1,0 +1,2 @@
+# Scripts run on whatever Python uv picks, 3.10 locally; keep ruff from suggesting 3.11+ APIs.
+target-version = "py310"

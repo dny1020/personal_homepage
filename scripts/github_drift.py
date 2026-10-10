@@ -81,25 +81,37 @@ def find_drift(projects, repos):
 
         repo = by_name.get(name)
         if repo is None:
-            findings.append(("missing-repo", entry["name"], f"{url} is not a repo on this account"))
+            findings.append(
+                ("missing-repo", entry["name"], f"{url} is not a repo on this account")
+            )
             continue
 
         linked[name] = entry
         if repo["isArchived"]:
-            findings.append(("archived", entry["name"], f"{name} is archived on GitHub"))
+            findings.append(
+                ("archived", entry["name"], f"{name} is archived on GitHub")
+            )
         if repo["isPrivate"]:
-            findings.append(("private", entry["name"], f"{name} is private, so the link 404s for visitors"))
+            findings.append(
+                (
+                    "private",
+                    entry["name"],
+                    f"{name} is private, so the link 404s for visitors",
+                )
+            )
 
         language = (repo.get("primaryLanguage") or {}).get("name")
         expected = LANGUAGE_TAGS.get(language)
         if expected:
             tags = {t.lower() for t in entry.get("tags", [])}
             if not tags & expected:
-                findings.append((
-                    "language",
-                    entry["name"],
-                    f"GitHub reports {language}, but the tags are {sorted(entry.get('tags', []))}",
-                ))
+                findings.append(
+                    (
+                        "language",
+                        entry["name"],
+                        f"GitHub reports {language}, but the tags are {sorted(entry.get('tags', []))}",
+                    )
+                )
 
     for repo in repos:
         name = repo["name"]
@@ -107,7 +119,9 @@ def find_drift(projects, repos):
             continue
         if repo["isArchived"]:
             continue
-        findings.append(("unlisted", name, repo.get("description") or "no description on GitHub"))
+        findings.append(
+            ("unlisted", name, repo.get("description") or "no description on GitHub")
+        )
 
     return findings
 
@@ -133,7 +147,11 @@ def render(findings, markdown):
             continue
         lines.append(f"### {heading}" if markdown else f"{heading}:")
         for _, subject, detail in group:
-            lines.append(f"- **{subject}** — {detail}" if markdown else f"  - {subject}: {detail}")
+            lines.append(
+                f"- **{subject}** — {detail}"
+                if markdown
+                else f"  - {subject}: {detail}"
+            )
         lines.append("")
 
     if markdown:
@@ -146,7 +164,9 @@ def render(findings, markdown):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--markdown", action="store_true", help="format for a pull request body")
+    parser.add_argument(
+        "--markdown", action="store_true", help="format for a pull request body"
+    )
     args = parser.parse_args()
 
     logging.basicConfig(
@@ -160,7 +180,11 @@ def main():
         sys.exit(f"cannot read {DATA_PATH}: {exc}")
 
     repos = fetch_repos()
-    log.info("checked %d projects against %d repos", len(data.get("projects", [])), len(repos))
+    log.info(
+        "checked %d projects against %d repos",
+        len(data.get("projects", [])),
+        len(repos),
+    )
 
     findings = find_drift(data.get("projects", []), repos)
     print(render(findings, args.markdown))

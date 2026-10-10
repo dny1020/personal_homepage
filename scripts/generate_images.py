@@ -27,7 +27,9 @@ FONT_CANDIDATES = [
 
 
 def save_jpeg(image: Image.Image, path: Path, quality: int) -> None:
-    image.convert("RGB").save(path, "JPEG", quality=quality, optimize=True, progressive=True)
+    image.convert("RGB").save(
+        path, "JPEG", quality=quality, optimize=True, progressive=True
+    )
     print(f"Wrote {path.relative_to(ROOT)} ({path.stat().st_size // 1024} KB)")
 
 
@@ -67,11 +69,15 @@ def main() -> None:
 
     touch_icon = ImageOps.fit(source, (180, 180), Image.LANCZOS, centering=(0.5, 0.3))
     touch_icon.save(FRONTEND / "apple-touch-icon.png", "PNG", optimize=True)
-    print(f"Wrote frontend/apple-touch-icon.png ({(FRONTEND / 'apple-touch-icon.png').stat().st_size // 1024} KB)")
+    print(
+        f"Wrote frontend/apple-touch-icon.png ({(FRONTEND / 'apple-touch-icon.png').stat().st_size // 1024} KB)"
+    )
 
     mark = monogram(256)
     mark.save(FRONTEND / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)])
-    print(f"Wrote frontend/favicon.ico ({(FRONTEND / 'favicon.ico').stat().st_size // 1024} KB)")
+    print(
+        f"Wrote frontend/favicon.ico ({(FRONTEND / 'favicon.ico').stat().st_size // 1024} KB)"
+    )
 
 
 if __name__ == "__main__":
