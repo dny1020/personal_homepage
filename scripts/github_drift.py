@@ -28,6 +28,7 @@ IGNORED = {
     "bot_whatsapp": "made private 2026-09-12, deliberately not shown on the site",
     "rag_without_llm": "made private 2026-09-12, deliberately not shown on the site",
     "prometheus_ocupation": "made private 2026-09-12, deliberately not shown on the site",
+    "realtime-session-api": "Asterisk ARI call originator, removed 2026-10-28: no telephony repos on the site",
 }
 
 # A repo's GitHub language should show up somewhere in the entry's tags. These map

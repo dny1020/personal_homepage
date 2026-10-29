@@ -20,11 +20,13 @@ Success is **credibility, then follow**: a visiting engineer leaves convinced th
 
 ## Positioning
 
-The domain is itself the argument. `danilocloud.me` is not a hosting product's subdomain — it is a domain whose owner runs the infrastructure under it: a WebRTC contact-center stack on `webrtc.danilocloud.me`, an API on `coffee.danilocloud.me`, a Raspberry Pi homelab behind them, and the site itself built and published by GitHub Actions onto GitHub Pages.
+The domain is itself the argument. `danilocloud.me` is not a hosting product's subdomain — it is a domain whose owner runs the infrastructure under it: an API on `coffee.danilocloud.me`, a Raspberry Pi homelab behind it, and the site itself built and published by GitHub Actions onto GitHub Pages.
 
-**This argument is currently unverifiable from outside.** Both service subdomains return NXDOMAIN in public DNS (checked 2026-09-01 against 1.1.1.1); they resolve only on the owner's own network. The apex `danilocloud.me` is public and Cloudflare-fronted. Until those records exist publicly, the positioning rests on the repositories and the site's own deployment, not on reachable services.
+**This argument is currently unverifiable from outside.** The service subdomain returns NXDOMAIN in public DNS (checked 2026-09-01 against 1.1.1.1); it resolves only on the owner's own network. The apex `danilocloud.me` is public and Cloudflare-fronted. Until that record exists publicly, the positioning rests on the repositories and the site's own deployment, not on reachable services.
 
-Content: 13+ years in IT, 6+ in VoIP engineering, all at the same telephony operator (EMTELCO) — depth in one domain rather than breadth across many, now extending into AI. A neighboring portfolio can copy the layout; it cannot copy a working SIP/WebRTC stack the visitor can dial into.
+Content: 13+ years in IT, 6+ in VoIP engineering, all at the same telephony operator (EMTELCO) — depth in one domain rather than breadth across many, now extending into AI.
+
+**A portfolio, not a storefront.** The owner is employed at EMTELCO. The site must never read as offering services: no "hire me", no pricing, no client language, and no telephony, contact-center or messaging-bot projects (Asterisk, WebRTC, WhatsApp). Telephony appears only as job experience and skills.
 
 ## Operating Context
 
@@ -39,7 +41,7 @@ Content: 13+ years in IT, 6+ in VoIP engineering, all at the same telephony oper
 
 **Buildless stack is binding.** Single-file `frontend/app.jsx` (React 18 UMD from CDN), transpiled once by Babel CLI to `app.js`, plus plain CSS. No bundler, no npm project, no framework migration. Static files served from GitHub Pages on the apex domain. Any future work must fit this shape.
 
-**The webchat widget is removed, not abandoned.** `https://webrtc.danilocloud.me/webchat.js` used to load on every page. It is Danilo's own WebRTC contact-center stack, not a third-party chat tool, and it remains the intended live demonstration of the telephony work the CV describes. It was removed from `index.html` on 2026-09-01 because the subdomain does not resolve publicly, so every external visit fired a request that failed silently. Restore it — the commented placeholder in `index.html` marks the spot — once the DNS record is public.
+**No webchat widget.** A WebRTC webchat used to load on every page; it was removed and must not return (see "A portfolio, not a storefront").
 
 **Third-party runtime dependencies** currently in the page: React UMD from unpkg, Google Fonts (Archivo, JetBrains Mono), Credly badge images, and the open-meteo weather API. There is no LinkedIn badge script.
 
@@ -60,7 +62,7 @@ Content: 13+ years in IT, 6+ in VoIP engineering, all at the same telephony oper
 
 Real and verifiable:
 
-- **Three public GitHub repos** under `github.com/dny1020` — `doction` (MIT-licensed FastAPI/PostgreSQL/MCP wiki), `pulse_bogota` (FastAPI/PostgreSQL activity scoring with Alembic, scheduler, OSM imports), `coffee-tracker` (Fastify/Prisma/SQLite). These three are what the site shows, and every link resolves. `rag_without_llm`, `prometheus_ocupation` and `bot_whatsapp` were made private by the owner on 2026-09-12 and were removed from the site the same day — a private repo is a 404, not evidence. `scripts/github_drift.py` guards this weekly: do not re-list a project without checking the repo is public.
+- **Four public GitHub repos** under `github.com/dny1020` — `doction` (AGPL-3.0 FastAPI/PostgreSQL/MCP wiki), `pulse_bogota` (FastAPI/PostgreSQL activity scoring with Alembic, scheduler, OSM imports), `coffee-tracker` (Fastify/Prisma/SQLite), `dotfiles` (Stow, Claude Code setup, local llama.cpp). These four are what the site shows, and every link resolves. `rag_without_llm`, `prometheus_ocupation` and `bot_whatsapp` were made private by the owner on 2026-09-12 and were removed from the site the same day — a private repo is a 404, not evidence. `realtime-session-api` (an Asterisk ARI call originator) and `api_news_eventos` were removed on 2026-10-28. `scripts/github_drift.py` guards this weekly: do not re-list a project without checking the repo is public.
 - **Self-hosted services** that exist but are **not publicly reachable**: the WebRTC webchat stack (`webrtc.danilocloud.me`) and the Coffee Tracker API (`coffee.danilocloud.me/api/v1`). Both are NXDOMAIN in public DNS as of 2026-09-01. They are real and they are the strongest available evidence, but until the DNS records are public they cannot be linked or embedded — a link to either is a broken promise, not a demonstration. Exposing one is the single highest-value change available to this product.
 - **The homelab itself** — a Raspberry Pi running roughly fifteen self-hosted containers behind nginx, reachable only from the owner's own network and VPN, with TLS automated end to end. Nothing is publicly reachable by design. It must be *shown* (described, diagrammed, evidenced), never linked to something that 404s. Addressing, host details and the access rules stay out of this repository: they are reconnaissance, not evidence.
 - **Credly badges** with live issuer URLs: AWS Cloud Essentials, Cisco CyberOps Associate, Introduction to Cybersecurity, Networking Academy Learn-A-Thon 2023.

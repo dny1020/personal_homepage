@@ -70,10 +70,6 @@
 <body>
   <div id="root"></div>
 
-  <!-- Webchat widget retirado: webrtc.danilocloud.me no resuelve en DNS publico (NXDOMAIN),
-       asi que el script fallaba en silencio en cada visita externa. Restaurar cuando el
-       subdominio sea publico. -->
-
   <!-- defer, in order: React, ReactDOM, then the app. Nothing here blocks the first paint. -->
   <script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
   <script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>

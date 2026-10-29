@@ -13,7 +13,7 @@
     { "label": "Years in IT", "value": "14+" },
     { "label": "Years in Telephony & VoIP", "value": "6+" },
     { "label": "Years at EMTELCO", "value": "6+" },
-    { "label": "Open-Source Projects", "value": "5" }
+    { "label": "Open-Source Projects", "value": "4" }
   ],
   "experience": [
     {
@@ -174,16 +174,10 @@
       "github": "https://github.com/dny1020/coffee-tracker"
     },
     {
-      "name": "realtime-session-api",
-      "description": "Lightweight FastAPI service for orchestrating outbound session events, with real-time WebSocket status tracking and REST control endpoints. JWT authentication, PostgreSQL persistence, rate limiting, and multi-arch Docker images shipped through GitHub Actions.",
-      "tags": ["Python", "FastAPI", "WebSocket", "PostgreSQL", "Docker"],
-      "github": "https://github.com/dny1020/realtime-session-api"
-    },
-    {
-      "name": "api_news_eventos",
-      "description": "FastAPI app that finds local news about events, concerts, and technology in Bogotá through NewsAPI, scrapes the full articles, and stores them in MongoDB with upserts. A background job refreshes the feed, served through Jinja2 HTML and JSON endpoints.",
-      "tags": ["Python", "FastAPI", "MongoDB", "Docker"],
-      "github": "https://github.com/dny1020/api_news_eventos"
+      "name": "dotfiles",
+      "description": "The workstation as code: Debian/WSL setup in one script, every config symlinked with GNU Stow, and a Claude Code setup with agents, skills and an MCP link to doction. A local llama.cpp model runs as a systemd user service, and a single verify gate runs the lint and tests.",
+      "tags": ["Bash", "GNU Stow", "Neovim", "Claude Code", "llama.cpp"],
+      "github": "https://github.com/dny1020/dotfiles"
     }
   ],
   "contact": {
